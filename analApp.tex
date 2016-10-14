@@ -1,0 +1,168 @@
+\section{Previsioni teoriche}
+Nei paragrafi successivi sono riportati due diversi approcci, uno analitico e uno computazionale, per tentare di stimare la percentuale di eventi passati in coincidenza attraverso due \emph{slab} di area uguale, pari a $S=L \cdot D = 1.83 \ \mbox{m} \cdot 0.2 \ \mbox{m} =0.366$ m$^2$, e distanti verticalmente di una quantità pari a $h$; tale parametro permette di scegliere la coppia di \emph{slab} di cui si vogliono valutare gli eventi in coincidenza, e nei conti che seguono si è assunto $h=0.08$ m, ovvero la distanza tra S1 e S2.
+
+Il conto è stato effettuato considerando le \emph{slab} monodimensionali, bidimensionali e, per la simulazione, anche tridimensionali, cioè considerandone lo spessore; i risultati ottenuti sono in buon accordo fra di loro e con i dati sperimentali.
+\subsection{Calcolo analitico del numero di coincidenze attese tra due \emph{slab} parallele}
+\subsubsection{Caso unidimensionale}
+La situazione è quella riportata nell'immagine che segue:
+\newline
+
+\begin{tikzpicture}
+	\newcommand\dz{0.2}
+	\newcommand\dpmt{0.03}
+	
+	\node at (1,\dz/2) {S2};
+	\draw[fill=black!25!white] (2,0-\dpmt) rectangle (10,\dz+\dpmt);
+	\node at (6,-0.4) {0};
+	\node at (8.7,-0.25) {x};
+
+	\node at (1,1+\dz/2) {S1};
+	\draw[fill=black!25!white] (2,1-\dpmt) rectangle (10,1+\dz+\dpmt);
+	
+	\draw (4,2) -- (8.7,\dz+\dpmt);
+	\draw (8.7, \dz+\dpmt) -- (8.7,2);
+	\draw (5, 1.63) -- (4.95, 1.73);
+	\draw (5, 1.63) -- (4.9, 1.58);
+	
+	
+	\draw [dashed] (2, 1-\dpmt) -- (8.7, \dz+\dpmt);
+	\draw [dashed] (8.7, \dz+\dpmt) -- (10,1);
+	
+	\node at (8.4,0.65) {$\theta$};
+	
+	\draw (8.7, 0.5) arc [radius=0.4, start angle=90, end angle= 141];
+	
+	\draw (6,-\dpmt) -- (6,-0.2);
+	\draw (8.7,-\dpmt) -- (8.7,-0.1);
+	
+	\draw [->] (1.5,-0.7) -- (11,-0.7);
+\end{tikzpicture}
+\newline
+
+Il numero di eventi passati per la \emph{slab} superiore è $$N = \alpha \cdot T \cdot \int_{-\frac{L}{2}}^{\frac{L}{2}} dx \cdot \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \cos ^2\theta d\theta $$e questo permette di fissare il valore della costante $$\alpha = \frac{2N}{\pi LT}$$
+dove $T$ è il tempo di acquisizione. Ora, si osserva che su un punto sulla \emph{slab} inferiore corrispondente a $0<x<\frac{L}{2}$ arrivano gli eventi compresi fra due angoli $$\theta = -\arctan \bigg(\frac{\frac{L}{2}-x}{h}\bigg) \equiv \theta_1$$ e $$\theta = \arctan \bigg(\frac{\frac{L}{2}+x}{h}\bigg) \equiv \theta_2\;.$$ 
+Data la simmetria del problema, si ottiene facilmente che la situazione è analoga per valori di $x$ negativi; si può allora scrivere che il numero di eventi passati per la \emph{slab} inferiore è $$N' =\alpha \cdot T \cdot \int_{-\frac{L}{2}}^{\frac{L}{2}} dx \int_{-\theta_1}^{\theta_2}  \cos ^2\theta d\theta$$ da cui si ricava subito $$\frac{N'}{N}=\frac{2}{\pi L} \int_{-\frac{L}{2}}^{\frac{L}{2}} dx \int_{-\theta_1}^{\theta_2}  \cos ^2 \theta d\theta \simeq 97.22 \%. $$ Tale valore è in ottimo accordo con la simulazione eseguita successivamente.
+
+\subsubsection{Caso bidimensionale}
+La situazione è ora quella riportata nelle due figure che seguono:
+\newline
+
+\begin{figure}[h]
+\subfloat[Visione laterale.]{
+
+\begin{tikzpicture}
+	\newcommand\dz{0.2}
+	\newcommand\dpmt{0.03}
+	
+	\node at (1.5,\dz/2) {S2};
+	\draw[fill=black!25!white] (2,0-\dpmt) rectangle (8,\dz+\dpmt);
+	
+	\node at (1.5,1+\dz/2) {S1};
+	\draw[fill=black!25!white] (2,1-\dpmt) rectangle (8,1+\dz+\dpmt);
+	
+	\draw (2,\dz+\dpmt) -- (2,1+\dz+\dpmt+0.7);
+	\draw (2, \dz+\dpmt) -- (8.3,1+\dz+\dpmt+0.4);
+	
+	\draw (6.45,1+\dz+\dpmt) circle[radius=2pt];
+	\fill (6.45,1+\dz+\dpmt) circle[radius=2pt];
+	
+	\draw (7.5,1+\dz+\dpmt+0.21) -- (7.55,1+\dz+\dpmt+0.29);
+	\draw (7.5,\dz+\dpmt+1.21) -- (7.6,1+\dz+\dpmt+0.195);
+	
+	\node at (2.52,0.75) {$\theta_\text{max}$};
+	
+	\draw (2.25,0.1+\dz+\dpmt) arc [radius=0.25, start angle=0, end angle= 85];
+		
+	\draw [->] (1,-0.5) -- (1,1+\dz+\dpmt+1);
+	
+	\node at (1.35,1+\dz+\dpmt+0.7) {z};
+\end{tikzpicture}}
+\hspace{0.4cm}
+\subfloat[Visione dall'alto.]{
+\begin{tikzpicture}
+	\newcommand\dz{0.2}
+	\newcommand\dpmt{0.03}
+	
+	\draw[fill=black!25!white] (2,0.5) rectangle (6.6,1+\dz+\dpmt+0.5);
+		
+	\draw (2,0.8) -- (5,1.3);
+	\draw (5,1.3) circle[radius=2pt];
+	\fill (5,1.3) circle[radius=2pt];
+	
+	\draw (2,0.8) -- (7,0.8);
+	
+	\node at (4,0.95) {$\phi$};
+	
+	\draw (3.8,0.8) arc [radius=0.8, start angle=0, end angle= 21];
+	
+	\draw [->] (1,0) -- (7.75,0);
+	\draw [->] (1,0) -- (1,2.7);
+	
+	\node at (7.25,0.3) {x};
+	\node at (1.3,2.45) {y};	
+	
+\end{tikzpicture}}
+\end{figure}
+
+L'origine del sistema di riferimento è stata presa nel punto centrale della \emph{slab}; il pallino nero indica il punto di incidenza del raggio cosmico.
+
+Come per il caso 1D, si fissa intanto la costante di proporzionalità, facendo attenzione al fatto che questa volta bisogna integrare sull'angolo solido, e $\theta\in(0,\frac{\pi}{2})$: 
+$$N = \alpha \cdot T \cdot L \cdot D \cdot 2\pi \cdot \int_{0}^{\frac{\pi}{2}} \cos^2\theta  \sin\theta d\theta$$
+che fornisce 
+$$\alpha = \frac{3N}{2\pi TLD}.$$ 
+A questo punto, per valutare il numero di eventi in coincidenza, si inizia l'analisi con $\phi\in(0, \frac{\pi}{2})$, che corrisponde all'evento mostrato nel disegno sopra. Un evento del genere passerà in coincidenza solo se la sua inclinazione è $$\theta \leq \arctan \bigg(\frac{\frac{L}{2}+x}{h\cdot \cos\phi}\bigg) \equiv \theta_1\;,$$ formula valida fino a quando il valore di $\phi$ non è tale da intersecare lo spigolo in basso a sinistra, ovvero $$\phi = \phi^{*} = \arctan \bigg(\frac{\frac{D}{2}+y}{\frac{L}{2}+x}\bigg)\;,$$ oltre il quale l'inclinazione massima è $$\theta = \arctan \bigg(\frac{\frac{D}{2}+y}{h\cdot \sin\phi}\bigg)  \equiv \theta_2\;.$$I raggi cosmici in coincidenza sono quindi dati da questo integrale, moltiplicato per 4, dato che $\phi\in(0, 2\pi)$ e il problema è simmetrico. Si ottiene quindi:
+\begin{multline*}
+\frac{N'}{N}=4\cdot \alpha \cdot T\cdot \bigg( \int_{-\frac{L}{2}}^{\frac{L}{2}} dx \int_{-\frac{D}{2}}^{\frac{D}{2}} dy \int_0^{\phi^{*}} d\phi \int_0^{\theta_1} \cos^2\theta \sin\theta d\theta +\\
++ \int_{-\frac{L}{2}}^{\frac{L}{2}} dx \int_{-\frac{D}{2}}^{\frac{D}{2}} dy \int_{\phi^{*}}^{\frac{\pi}{2}} d\phi \int_0^{\theta_2} \cos^2\theta \sin\theta d\theta\bigg)\simeq 73.89 \%\;.
+\end{multline*} 
+Anche questo valore è in buon accordo con i risultati della simulazione 2D.
+
+\subsection{Simulazione del numero di coincidenze}
+L'approccio seguito per ogni simulazione è il medesimo: si sono innanzitutto generati $N$ eventi come set di numeri (di cardinalità dipendente dalla dimensione), corrispondenti ai raggi cosmici passanti per la \emph{slab} soprastante, e quindi, con semplici considerazioni geometriche, si sono contati gli eventi passati anche per la \emph{slab} sottostante. Il numero $N$ è stato stimato come il numero di muoni cosmici attesi sulla \emph{slab} soprastante in un tempo di $T=100$ s, ovvero $N=S\cdot T\cdot 130=4758$, ove $130$ è il numero di muoni per metro quadro per secondo atteso a livello del mare, secondo il \emph{Particle Data Group}; tuttavia, volendo stimare una percentuale, si è osservato che il numero assoluto $N$ di eventi è ininfluente, purché sufficiente ad avere una buona statistica (ovvero $N>100$).
+
+Nel caso 3D si è invece variato leggermente l'approccio: dato che, di fatto, gli eventi incidenti sulla \emph{slab} superiore, considerata con il suo spessore di $2.7$ cm, possono attraversare il piano della \emph{slab} stessa in un qualunque punto, si sono generati $N=S\cdot T\cdot 130$ eventi su una superficie $S$ maggiore (e si sono effettuate simulazioni per diverse superfici), contando quelli passati per la \emph{slab} sopra, e la percentuale di questi passati in coincidenza anche attraverso la \emph{slab} sottostante.
+
+\subsubsection{Caso unidimensionale}
+L'evento è rappresentato da una coppia $(x, \theta)$, con $x$ distribuito uniformemente in (0, L) e $\theta$, ovvero l'angolo formato con la verticale, secondo il coseno quadrato in $(-\frac{\pi}{2}, \frac{\pi}{2})$; si simula quindi l'evento di raggio cosmico, andando a cercare la coincidenza verificando l'intersezione tra la retta passante per il punto $x$ e di pendenza nota.
+
+Impostando $N = 4758$, si ottiene che la percentuale in coincidenza, per un valore casuale del seme, è del 97\%; variando il seme, tale valore non si discosta molto da quello indicato. Il grafico della simulazione è riportato insieme a quello delle altre simulazioni al termine del paragrafo.
+
+\subsubsection{Caso bidimensionale}
+In questo caso, l'evento è rappresentato da una quaterna numeri $(x,y,\theta,\phi)$, con $x$ distribuito uniformemente in (0, L), $y$ distribuito uniformemente in (0, D), $\theta$, l'angolo azimuthale, distribuito secondo il coseno quadrato (moltiplicato per l'angolo solido) in $(0, \frac{\pi}{2})$, e $\phi$, l'angolo nel piano $xy$, distribuito uniformemente in $(0, 2\pi)$. Sfruttando sempre formule note di geometria analitica, si sono contati gli eventi in coincidenza, su un totale di 4758: in questo caso, si ottiene una percentuale intorno al 73.9\%.
+Si noti che in questo caso la distribuzione dell'angolo azimuthale è del tipo $\cos ^2\theta \cdot \sin\theta$, dato che per avere il numero totale di eventi si deve integrare su tutto l'angolo solido.
+
+\subsubsection{Caso tridimensionale}
+Volendo stimare se il numero di eventi passanti lateralmente influisse in qualche modo sulla percentuale delle coincidenze, si è infine effettuata una simulazione tridimensionale. L'approccio, come già accennato, è leggermente diverso: l'evento è sempre rappresentato da una quaterna $(x,y,\theta,\phi)$, con però $x\in (-\mbox{square}, L+\mbox{square})$ e $y\in (-\mbox{square}, D+\mbox{square})$, dove \emph{square} è un parametro che permette di considerare la superficie allargata attorno alla \emph{slab}; generando il numero di eventi corrispondenti a queste diverse superfici, si considerano tutti gli eventi passanti per la \emph{slab} soprastante, con considerazioni geometriche, per quindi contare quanti, tra questi, siano passati anche per la \emph{slab} sottostante.
+Si riempie, al variare del parametro \emph{square}, la seguente tabella:
+\begin{table}[h]
+	\caption{Risultati della simulazione 3D al variare della dimensione della superficie generatrice.}
+	\centering
+	\begin{tabular}{ccccc}
+		\toprule
+		Square [m]& Eventi totali&Eventi S1& \% coincidenza &\% laterali	\\	
+		\midrule
+		0.5	&	44148		&	5193	&	75.37\%	& 9\%	\\
+		1	&	109538	&	5208	&	74.73\%	& 9\% \\
+		2	&	318318	& 	5106	&	75.71\%	& 8\% \\
+		5	&	1568658	&	5062	&	75.09\%	& 9\% \\
+		10	&	5469958	&	4912	&	74.78\%	& 9\%\\
+		
+		\bottomrule
+	\end{tabular}
+	\label{3D_sim}
+\end{table}
+
+Si osserva che il numero di eventi passato lateralmente nella \emph{slab} superiore, dell'ordine del 9\%, non influisce particolarmente sulla percentuale degli eventi in coincidenza, che cresce leggermente fino al 75\%, ma non subisce notevoli variazioni rispetto al caso 2D; è anche possibile calcolare la percentuale di eventi in coincidenza passati lateralmente, ovvero chiedersi quanti degli eventi in coincidenza siano passati lateralmente nella \emph{slab} superiore: tale valore, non riportato in tabella per brevità, risulta sempre inferiore all'1\%. Inoltre, si nota che anche la dimensione della superficie su cui si generano gli eventi è ininfluente. Il grafico 3D riportato sotto considera un valore di \emph{square} $=10$ m.
+
+\begin{figure}[h]
+	\centerline{
+	\subfloat[1D]
+	{\includegraphics[scale=0.5]{img/1D.pdf}} 
+	\subfloat[2D]	
+	{\includegraphics[scale=0.5]{img/2D.pdf}}}
+	\centerline{\subfloat[3D]
+		{\includegraphics[scale=0.8]{img/3D.pdf}}} 
+	\caption{Grafici delle simulazioni.}
+	\label{nDsim_plots}
+\end{figure}
+

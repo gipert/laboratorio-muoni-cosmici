@@ -1,0 +1,55 @@
+ \subfloat[START.]
+ {\begin{circuitikz}
+      \draw 
+      (0.5,10.97)  to[short,o-] (1.5,10.97)
+      (0.5,11.53)  to[short, o-] (1.5,11.53)
+      (2.88,11.25) node[american and port] 
+		   node[left=6pt] {\tiny{AND}}
+      (0.5,10.97) node[below] {S2}
+      (0.5,11.53) node[above] {S1}
+      (3.03,11.25) to [short,-o] (5.3, 11.25)
+      (2.5,6.97)  to[short,o-] (3.5,6.97)
+      (2.3,7.25)  to[short,o-] (3.93,7.25)
+      (2.5,7.53)  to[short, o-] (3.5,7.53)
+      (2.5,6.97) node[below] {L}
+      (2.5,7.53) node[above] {R}
+      (2,7.25) node[] {S5}     
+      (4.88,7.25) node[american or port] {}
+                  node[left=6pt] {\tiny{OR}}
+      (5.03,7.25) to[short] (5.03, 11.25)
+      (4.85, 10.60) node[rotate=90] {\scriptsize{VETO}}
+           ;
+    \end{circuitikz}}
+    \hspace{1.5 cm}
+\subfloat[STOP.]
+{\begin{circuitikz}
+      \draw 
+      (0.5,10.97)  to[short,o-] (1.5,10.97)
+      (0.5,11.53)  to[short, o-] (1.5,11.53)
+      (2.88,11.25) node[american or port] {}
+		   node[left=6pt] {\tiny{OR}}
+      (3.4,9.15) node[american and port] {}
+		 node[left=6pt] {\tiny{AND}}
+      (1, 8.87) to[short] (1, 10.97)
+      (1, 8.87) to[short] (2.03, 8.87)
+      (1.3, 9.43) to[short] (1.3, 11.53)
+      (1.3, 9.43) to[short] (2.03, 9.43)
+      (3.55, 9.15) to[short] (4.2, 9.15)
+      (4.2, 9.15) to[short] (4.2,7.73)
+      (0.5,10.97) node[below] {S4}
+      (0.5,11.53) node[above] {S3}
+      (3.03,11.25) to [short,-o] (5.3, 11.25)
+      (2.5,6.97)  to[short,o-] (3.5,6.97)
+      (2.3,7.15)  to[short,o-] (3.93,7.15)
+      (2.3,7.35)  to[short,o-] (3.93,7.35)
+      (2.5,7.53)  to[short, o-] (3.5,7.53)
+      (2.5,6.97) node[below] {L}
+      (2.5,7.53) node[above] {R}
+      (1.9,7.07) node[] {S1}     
+      (1.9,7.43) node[] {S5}   
+      (4.88,7.25) node[american or port] {}
+		  node[left=6pt] {\tiny{OR}}
+      (5.03,7.25) to[short] (5.03, 11.25)
+      (4.85, 10.60) node[rotate=90] {\scriptsize{VETO}}
+           ;
+    \end{circuitikz}}
