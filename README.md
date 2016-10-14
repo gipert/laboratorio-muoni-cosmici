@@ -18,8 +18,8 @@ Ho creato due branches: `master` è la versione approvata e aggiornata della rel
 proposte di modifica tramite pull request. Potete lavorare su `master` e caricare le modifiche direttamente sulla
 versione finale oppure su `modifiche` per discuterne con gli altri.
 
-La prima cosa da fare (dopo aver configurato la propria identità con `git config --global --edit`) è copiare questa 
-repository in locale tramite `git clone`; per cominciare a lavorare:
+La prima cosa da fare (dopo aver letto la man di `gittutorial` e configurato la propria identità con `git config --global --edit`) 
+è copiare questa repository in locale tramite `git clone`; per cominciare a lavorare:
 
 * spostatevi sulla branch `modifiche` con `git checkout modifiche`;
 * fate le vostre modifiche e finalizzatele con `git commit -a`;
