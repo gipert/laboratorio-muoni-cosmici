@@ -10,3 +10,5 @@ Contents:
 * `draw.tex`:    schema dell'apparato sperimentale
 * `Scemi.tex`:   schemi dei circuiti
 * `img`:         immagini
+
+Ricordatevi di ignorare l'output di compilazione scrivendo il file `.gitignore`
