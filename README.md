@@ -30,7 +30,7 @@ La prima cosa da fare (dopo aver letto la man di `gittutorial` e configurato la 
 
 Nota Bene:
 
-* Ricordatevi di dire a git di ignorare file output di compilazione aggiungendoli al file `.gitignore`
+* Ricordatevi di dire a `git` di ignorare file output di compilazione aggiungendoli al file `.gitignore`
 * Ricordatevi di mantenere sincronizzato il vostro lavoro con quello presente sulla repository tramite `git pull`
 
 La procedura di cui sopra è un esempio dei tanti modi in cui si possono proporre modifiche ad un progetto, `git` è un
