@@ -38,3 +38,15 @@ programma molto esteso, sbizzarritevi! Potete creare più branches, potete lavor
 repo e poi proporne l'unione con il master ecc... Leggete la man di `git` per qualunque dubbio. 
 
 Provate a modificare questo README.md per esercitarvi!
+
+SSH config:
+----------
+
+Avete bisogno di una coppia di chiavi ssh, pubblica e privata (se non esiste il file `~/.ssh/id_rsa` allora non ce 
+l'avete). Per generarle:
+
+`ssh-keygen -t`
+
+e seguite le istruzioni (potete lasciare tutto default, la passphrase non è necessaria). Infine dovete dare a Bitbucket
+la vostra chiave pubblica, dimodochè la vostra macchina sia associata alla vostra identità, copiando il contenuto di
+`~/.ssh/id_rsa.pub` nell'apposito form tra le impostazioni del vostro account.
