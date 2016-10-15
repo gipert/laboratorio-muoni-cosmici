@@ -46,7 +46,7 @@ SSH config:
 Avete bisogno di una coppia di chiavi ssh, pubblica e privata (se non esiste il file `~/.ssh/id_rsa` allora non ce 
 l'avete). Per generarle:
 
-    ssh-keygen -t
+    ssh-keygen -t rsa
 
 e seguite le istruzioni (potete lasciare tutto default, la passphrase non è necessaria). Infine dovete dare a Bitbucket
 la vostra chiave pubblica, dimodochè la vostra macchina sia associata alla vostra identità, copiando il contenuto di
