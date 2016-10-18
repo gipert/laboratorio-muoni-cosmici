@@ -23,7 +23,8 @@ La prima cosa da fare (dopo aver letto la man di `gittutorial` e configurato la 
 
 * spostatevi sulla branch `modifiche` con `git checkout modifiche`;
 * fate le vostre modifiche e finalizzatele con `git commit -a`;
-* caricate tutto in remoto con `git push bitbucket modifiche`;
+* caricate tutto in remoto con `git push bitbucket modifiche` (può essere che voi dobbiate ridefinire l'alias
+  `bitbucket` con il comando `git remote add bitbucket git@bitbucket.org:luigipertoldi/relazionemuoni.git`);
 * andate sulla pagina della repository e create una pull request. Chiunque può lavorare su `modifiche` e caricare le
   proprie modifiche lasciando la pull request in sospeso. Una volta che si è d'accordo si unisce il contenuto di
   `modifiche` con quello di `master`.

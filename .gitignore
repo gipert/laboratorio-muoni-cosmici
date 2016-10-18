@@ -1,2 +1,9 @@
 log
-muon.pdf
+*.pdf
+*.aux
+*.toc
+*.lof
+*.log
+*.out
+*.gz
+*.lot
