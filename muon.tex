@@ -98,15 +98,21 @@ Il primo controllo eseguito è stato quello relativo alla sensibilità degli sci
 \end{figure}
 %
 \subsection{Studio dell'efficienza dei fotomoltiplicatori}
-Lo scopo di questa fase consiste nella determinazione dell'efficienza dei 14 fotomoltiplicatori presenti nell'apparato sperimentale. Il comportamento di un generico fotomoltiplicatore, infatti, dipende dalla tensione a cui lo stesso è alimentato: al crescere della tensione, l'efficienza di rivelazione aumenta sino a saturare ad un valore massimo, raggiungendo dunque il regime di \textit{plateau}. Una volta individuato in quale intervallo di tensioni ciascun fototubo satura, il \emph{set-up} sperimentale ottimale prevede che ciascuno di essi venga alimentato al valore minimo possibile della tensione. La condizione di \textit{plateau} è importante per assicurare la massima efficienza di rivelazione possibile, evitando di perdere alcuni eventi che, applicando tensioni troppo basse, non sarebbero rivelati; una volta raggiunto il \textit{plateau}, un aumento della tensione di alimentazione coincide solamente con un incremento di rumore. Risulta dunque importante applicare la minima tensione possibile, massimizzando di conseguenza il rapporto segnale-rumore. 
+Lo scopo di questa fase consiste nella determinazione dell'efficienza dei 14 fotomoltiplicatori presenti nell'apparato sperimentale. Il comportamento di un generico fotomoltiplicatore, infatti, dipende dalla tensione a cui lo stesso è alimentato: al crescere della tensione, l'efficienza di rivelazione aumenta sino a saturare ad un valore massimo, raggiungendo dunque il regime di \textit{plateau} rispetto ad un contatore di riferimento.
+Una volta individuato in quale intervallo di tensioni ciascun fototubo satura, il \emph{set-up} sperimentale ottimale prevede che ciascuno di essi venga alimentato al valore minimo possibile della tensione. 
+La condizione di \textit{plateau} è importante per assicurare la massima efficienza di rivelazione possibile; una volta raggiunto il \textit{plateau}, un aumento della tensione di alimentazione coincide solamente con un incremento di rumore.  
 
 L'efficienza di rivelazione corrisponde alla quantità
 \[\varepsilon = \frac{T\wedge PMT}{T}\;,\]
 dove $T$ corrisponde al numero di eventi rivelati dal cosiddetto \textit{telescopio}, o \textit{trigger}, mentre $T\wedge PMT$ corrisponde alla quantità di eventi rivelati dal fototubo in esame in coincidenza con il telescopio. Il \emph{trigger} prevede l'utilizzo di due \emph{slab} esterne \linebreak ($G$ = grande, $P$ = piccola) poste in coincidenza di volta in volta con alcuni fototubi dell'apparato, differenti da quello momentaneamente esaminato. 
 
-La disposizione del telescopio influenza notevolmente il numero di eventi $T$ tramite i quali si calcola l'efficienza dei diversi fotomoltiplicatori. Ai fini dell'esperimento, l'unica efficienza interessante è relativa alla rivelazione dei raggi cosmici tramite i consueti processi di eccitazione degli atomi del materiale plastico delle \emph{slab}. Tuttavia, questa procedura è stata disturbata dalla presenza delle guide di luce di raccordo tra un capo della \emph{slab} e il relativo fototubo, responsabili dell'insorgere di numerosi eventi di tipo Cherenkov, impossibili da eliminare del tutto a causa della geometria del sistema.
+La disposizione del telescopio influenza notevolmente il numero di eventi $T$ tramite i quali si calcola l'efficienza dei diversi fotomoltiplicatori. Ai fini dell'esperimento, l'unica efficienza interessante è relativa alla rivelazione dei raggi cosmici tramite i consueti processi di eccitazione degli atomi del materiale plastico delle \emph{slab}. 
+Tuttavia, questa procedura è stata disturbata dalla presenza delle guide di luce di raccordo tra un capo della \emph{slab} e il relativo fototubo: 
+avendo a disposizione solo 2 \emph{slab} per formare il telescopio, nel conteggio di trigger entrano, per questioni geometriche, anche quei muoni che attraversano una guida di luce e non le sole \emph{slab}.
 
-In virtù di queste considerazioni, i tracciatori esterni $G$ e $P$ sono stati posizionati sempre parallelamente alle \emph{slab} relative ai PMT esaminati\footnote{$G$ sopra la prima slab, $P$ appoggiata a terra.}: in questo modo, l'efficienza riguarda non solo la rivelazione di muoni cosmici, ma anche quella di eventi di tipo Cherenkov. In ogni caso, si è ritenuta comunque valida la procedura, in quanto la rivelazione di eventi estranei a quelli di interesse non modifica l'andamento della curva di efficienza, ma solamente i valori assunti dalla stessa, permettendo comunque di individuare il raggiungimento del regime di \emph{plateau}: ci si aspetta infatti un numero di fotoni Cherenkov indipendente dalla tensione di alimentazione dei PMT.
+In virtù di queste considerazioni, i tracciatori esterni $G$ e $P$ sono stati posizionati sempre parallelamente alle \emph{slab} relative ai PMT esaminati\footnote{$G$ sopra la prima slab, $P$ appoggiata a terra.}: la rivelazione di eventi estranei  
+a quelli di interesse \footnote{cioè non passanti per ambo le \emph{slab} ma attraverso una guida di luce} 
+non modifica l'andamento della curva di efficienza, ma solamente i valori assunti dalla stessa, permettendo comunque di individuare il raggiungimento del regime di \emph{plateau}.
 
 In base al PMT studiato, il telescopio corrisponde ad una delle seguenti configurazioni:
 %%%%%%%%%%%%%%%%%%
@@ -122,9 +128,15 @@ In base al PMT studiato, il telescopio corrisponde ad una delle seguenti configu
 %%%%%%%%%%%%%%%%%%%
 In appendice sono riportati i grafici relativi allo studio di tutti i 14 fotomoltiplicatori, sia per quanto riguarda la stima delle efficienze da vicino e da lontano, sia per quanto riguarda i conteggi da vicino.
 
-Menzione a parte merita la scelta di come calcolare l'errore relativo a queste efficienze. Si è concordato\footnote{C. Grupen, B. Shwartz, \textit{Particle Detectors, Second Edition}, Cambridge, pagina 65.} che l'opzione migliore fosse quella di considerare privo di errore il valore di eventi rilevati dal telescopio $T$, assumendo questo come il numero totale di prove effettuate dall'apparato; il numero di eventi in coincidenza $T\wedge PMT$ è invece ciò che contribuisce all'incertezza, secondo la distribuzione binomiale, di cui si conosce la formula della varianza. In altre parole, ci si domanda quale sia il numero di eventi favorevoli, ovvero rivelati dall'apparato in coincidenza, rispetto a quelli totali rivelati dal solo telescopio. Si ha allora che 
-\[\sigma_\varepsilon = \sqrt{T \cdot \varepsilon \cdot  (1-\varepsilon)}\]
+L'efficienza di rivelazione è definita come segue:
+$$\epsilon=\frac{T\wedge PMT}{T}$$
+Al numero di eventi in coincidenza $T\wedge PMT$ è assegnata un'incertezza seguente la distribuzione binomiale, di cui si conosce la formula della varianza.  
+Si ha allora che 
+\[\sigma_{T\wedge PMT} = \sqrt{T \cdot \varepsilon \cdot  (1-\varepsilon)}\]
 dove si è assunta come probabilità dell'evento favorevole il valore sperimentale dell'efficienza stessa $\varepsilon$.
+L'errore sull'efficienza è dunque:
+$$\sigma_\epsilon=\sqrt{ \left(\frac{\partial\epsilon}{\partial (T\wedge PMT)}\sigma_{T\wedge PMT}\right)^2 + \left(\frac{\partial \epsilon}{\partial T}\sigma_T\right)^2 }=\sqrt{\frac{\epsilon}{T}}$$
+dove $\sigma_T = \sqrt{T}$.
 
 %
 \subsection{Misure di differenze temporali}
@@ -215,7 +227,7 @@ Innanzitutto, si sono scelti i seguenti valori di tensione dei PMT:
 		14	&	1800	&	197	\\
 		\bottomrule
 	\end{tabular}
-	\caption{Tensione finale applicata ai fotomoltiplicatori, L'incertezza associata a ciascuna frequenza è di 1 Hz. Le tensioni scelte garantiscono la condizione di \emph{plateau} sia vicino sia distante rispetto al fototubo.}
+	\caption{Tensione finale applicata ai fotomoltiplicatori, L'incertezza associata a ciascuna frequenza è di 1 Hz. Le tensioni scelte garantiscono la condizione di \emph{plateau} da distante rispetto al fototubo.}
 	\label{HV_counts}
 \end{table}
 Si sono quindi raccolti i dati di varie coincidenze, prima senza e poi sovrapponedo il piombo, per testare la diminuzione di eventi rivelati in presenza delle lastre, e verificare che la geometria dell'apparato fosse consistente con il numero di eventi raccolti. I simboli L e R indicano rispettivamente L $= 14 \wedge 11 $ e R $= 12 \wedge 13$, e insieme alla coppia di PMT 3 e PMT 4 (cioè, S5) formano la cosiddetta \emph{scatola}, utile per i circuiti di START e STOP, analizzati nel paragrafo successivo.
@@ -251,7 +263,16 @@ Si sono quindi raccolti i dati di varie coincidenze, prima senza e poi sovrappon
 		S1 $\wedge \ (\overline{\mbox{S5}\vee \mbox{L} \vee \mbox{R}})$ (veto)	& $51.3 \pm 0.7$	& $43.2 \pm 0.7$	\\
 		\bottomrule
 	\end{tabular}
-	\caption{Coincidenze. Si noti che nell'ultima misura si è utilizzato il veto per negare il segnale, in quanto esso è risultato più efficiente dell'uscita negata dei discriminatori nell'individuare il segnale voluto.}
+	\caption{Coincidenze. 
+	Si noti che nell'ultima misura si è utilizzato il veto per negare il segnale, 
+	in quanto esso è risultato più efficiente dell'uscita negata dei discriminatori 
+	nell'individuare il segnale voluto: l'uscita negata dei discriminatori, 
+	infatti, in alcuni casi non negava il segnale stesso. Per ovviare a questo 
+	problema, con riferimento all'ultima coincidenza,
+	abbiamo messo il segnale $S5\vee L\vee R$ (opportunamente temporizzato)
+	nell'ingresso di veto del discriminatore del 
+	segnale $S1$: qualora il veto fosse attivo, l'output 
+	era nullo.}
 	\label{coincidenze}
 \end{table}
 %
@@ -290,7 +311,9 @@ L'analisi dati si svolge in base ai seguenti step:
 	\item si effettua il fit dell'istogramma risultante, ricavando i parametri relativi ai $\mu^-$.
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Questo procedimento presenta tuttavia degli aspetti critici, che sono stati valutati con attenzione. In primo luogo, il fit della regione relativa ai $\mu^+$ riguarda canali dell'istogramma con bassa statistica e questo provoca una notevole fluttuazione dei risultati, in particolare al variare del numero di bin: infatti, i valori della funzione derivante dal primo fit risultano, in molti casi, addirittura maggiori del contenuto dei canali dell'istogramma nella prima parte dello spettro. La conseguenza di ciò è che la successiva sottrazione provoca la formazione di un istogramma per i $\mu^-$ con canali a contenuto negativo, assolutamente privo di significato fisico. Tuttavia, lo scopo di questa parte del laboratorio è quello di impostare correttamente l'apparato sperimentale e di trovare una prima misura dei parametri fisici di interesse compatibile con i valori attesi: l'ottimizzazione delle misure sarà oggetto della seconda parte.
+Questo procedimento presenta tuttavia un aspetto critico, da mettere a punto nella seconda parte dell'esperienza. 
+Il fit della regione relativa ai $\mu^+$ riguarda canali dell'istogramma con bassa statistica e questo provoca una notevole fluttuazione dei risultati, in particolare al variare del numero di bin. 
+
 Per quanto riguarda il rapporto numerico $N^+/N^-$ tra le due popolazioni, la stima è stata ottenuta tramite la seguente formula: 
 \[\frac{A^+}{A^-}= \bigg ( \frac{\tau^+}{\tau^-} \bigg )  ^{-1} \frac{N^+}{N^-} \bigg ( \frac{\Gamma_d}{\Gamma_d+\Gamma_c} \bigg )^{-1}e^{t^*\left(\frac{1}{\tau^+}-\frac{1}{\tau^-}\right)}\]
 dove $\Gamma_d$ e $\Gamma_c$ sono rispettivamente le larghezze parziali di decadimento e cattura per entrambe le popolazioni, mentre il termine esponenziale è stato aggiunto per tenere conto del fatto che l'apparato è cieco per un tempo $t^* \sim 150$ ns precedente allo zero.
