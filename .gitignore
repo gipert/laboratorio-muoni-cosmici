@@ -7,3 +7,5 @@ log
 *.out
 *.gz
 *.lot
+code/efficiency/eff.workflow
+code/efficiency/*.pdf
