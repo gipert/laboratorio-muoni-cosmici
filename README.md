@@ -4,12 +4,18 @@ Decadimento dei muoni cosmici in alluminio
 Contents:
 --------
 
+`latex/`
 * `muon.tex`:    file principale
 * `analApp.tex`: appendici con i calcoli analitici e simulazioni
 * `imgEff.tex`:  appendice con i grafici dell'efficienza
 * `draw.tex`:    schema dell'apparato sperimentale
 * `Scemi.tex`:   schemi dei circuiti
 * `img`:         immagini
+
+`code/`
+* `efficiency/`
+* * `eff.cc`:    macro ROOT per il plot delle efficienze
+* * `*.txt`:     data files per ogni PMT
 
 Collaborative Git:
 -----------------
