@@ -1,6 +1,6 @@
 .DS_store
 log
-*.pdf
+./*.pdf
 *.aux
 *.toc
 *.lof
