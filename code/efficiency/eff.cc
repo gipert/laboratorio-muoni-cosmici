@@ -9,6 +9,12 @@
 //
 // Luigi Pertoldi, 13/04/2016
 //
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <sstream>
+
+using namespace std;
 
 void eff( std::string file_name ) {
     
