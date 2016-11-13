@@ -18,9 +18,9 @@ Contents:
 * `efficiency/`
     * `eff.cc`:    macro ROOT per il plot delle efficienze
     * `*.txt`:     data files per ogni PMT
-* 'calibration/'
+* `calibration/`
     * 'cal.C' :    macro ROOT per calibrare i TAC 
-* 'analysis/'
+* `analysis/`
     * lifetime2nocalib_Bkgr_sub.cc : macro ROOT per l'analisi finale
     * dati_semestre_1 : directory contenenti tutti i file usati nell'analisi del 1° semestre
 
