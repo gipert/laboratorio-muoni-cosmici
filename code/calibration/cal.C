@@ -39,7 +39,7 @@ void cal(string name)
 	Int_t v = 0;						// contatori caselle array (v = tensioni) (t = tempi) (c = canali)
 	Int_t t = 0;
 	Int_t c = 0;
-
+    float fwhm;
 	while(in>> l)
 	{
 		if (l=='V' || l=='v') 				// tensioni
@@ -66,7 +66,7 @@ void cal(string name)
 		}
 		if (l=='C' || l=='c')				// canali
 		{
-			in >> channel[c];
+			in >> channel[c] >> fwhm;
 			cout<<"C = " << channel[c] << endl;
 			c++;
 		}

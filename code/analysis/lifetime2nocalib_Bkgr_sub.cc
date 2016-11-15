@@ -1,25 +1,39 @@
-#define	m	1 //5.144E-03
-#define calib 5.144E-03
-#define sigmacalib 6.015E-6		// dati del fit di calibrazione canale - tempo (in microsecondi!)
-#define q	0-150 //7.734E-01-1.635	 
-#define fitMin  30 //30
-#define fitMax  2138
-#define Tauptrue 2.1969
-#define sTauptrue 0.0000021
-#define Taumtrue 0.88
-#define sTaumtrue 0.01
-#define RatioT 1.261
-#define sRatioT 0.009
-#define sigmaxstar 0 //incertezza sullo 0
+/* Macro per la prima rozza analisi dati (1° semestre)
+ * Authors: Mattia Faggin, Davide Piras, Luigi Pertoldi
+ *
+ * Usage: .x lifetime_nocalib_bkgr_sub( [inputFile] , [rebinFactor] , [midValue] )
+ *
+ * inputFile format: elenco dei file .txt con i dati, attenzione a non 
+ *                   aggiungere spazi oppure newline characters
+ *
+ * Valori ottimali: midValue = 1000
+ *                  rebin = 12
+ *
+ * BUGS: Con il mio root (v6.09/01) non riesco a far girare la macro una seconda volta (Luigi)
+ */
 
-// midValue ottimale = 1000
-// rebin ottimale = 12
+#define	m	            1          //5.144E-03
+#define calib           5.144E-03
+#define sigmacalib      6.015E-6   // dati del fit di calibrazione canale - tempo (in microsecondi!)
+#define q	            0-150      //7.734E-01-1.635	 
+#define fitMin          30          
+#define fitMax          2138
+#define Tauptrue        2.1969
+#define sTauptrue       0.0000021
+#define Taumtrue        0.88
+#define sTaumtrue       0.01
+#define RatioT          1.261
+#define sRatioT         0.009
+#define sigmaxstar      0          //incertezza sullo 0
 												
-void lifetime2nocalib_Bkgr_sub( char* fileName1 , char* fileName2 , char* fileName3 ,/*char* filename4 ,*/ int rebin = 1 , double midValue = 1000 ) {		
-	ifstream file1(fileName1);
-	ifstream file2(fileName2);
-	ifstream file3(fileName3);
-	//ifstream file4(filename4);
+void lifetime_nocalib_bkgr_sub( string filelist, int rebin = 1 , double midValue = 1000 ) {		
+	
+    ifstream file(filelist.c_str());
+    vector<ifstream> files;
+    string name;
+    while ( file >> name ) {
+        files.emplace_back(name);
+    }
 	
 	// definiamo gli estremi dell'istogramma
 	Double_t min = 0*m + q;
@@ -38,37 +52,35 @@ void lifetime2nocalib_Bkgr_sub( char* fileName1 , char* fileName2 , char* fileNa
 	can->cd(1);
 	gPad->SetGrid();
 
-	int height1, height2, height3/*, height4*/;
 	string line;
 	int totevents = 0;
+    int height = 0;
 
 	// data retrieving
-	for ( int i = 0 ; i < 8 ; i++ ) 
-	{ 
-		std::getline(file1,line); 
-		std::getline(file2,line); 
-		std::getline(file3,line); 
-		//std::getline(file4,line); 
-	} // skip first lines
-	for ( int i = 0 ; i < 4096 ; i++ ) {
+    for ( int j = 0 ; j < files.size() ; j++ ) {
+	    for ( int i = 0 ; i < 8 ; i++ ) 
+	    { 
+		    std::getline(files[j],line);
+	    } // skip first lines
+    }
+    
+    // initialize histogram
+    for ( int i = 0 ; i < 4096 ; i++ ) data->SetBinContent( i, 0 );
+    
+    // fill histograms
+    for ( int j = 0 ; j < files.size() ; j++ ) {
+	    for ( int i = 0 ; i < 4096 ; i++ ) {
 	
-		file1 >> height1;
-		file2 >> height2;
-		file3 >> height3;
-		//file4 >> height4;
-		data->SetBinContent( i , height1+ height2+ height3/*+ height4*/);
-		//totevents += height1+height2+height3+height4; // tot events
-	}
+		    files[j] >> height;
+		    data->SetBinContent( i , data->GetBinContent(i)+height );
+		    totevents += height; // tot events
+	    }
+    }
 /*
 	// compute mean background
 	int binThr = 2500-q; // lower level
 	double mean = 0;
-	for ( int i = binThr ; i < 4096 ; i++ ) {
-		
-		mean += data->GetBinContent(i);
-		
-
-		}
+	for ( int i = binThr ; i < 4096 ; i++ ) mean += data->GetBinContent(i);
 
 	mean      /= 4096 - binThr; // bkg subtraction for a single bin
 	double errmean = mean/ (sqrt(4096-binThr));
@@ -84,18 +96,21 @@ void lifetime2nocalib_Bkgr_sub( char* fileName1 , char* fileName2 , char* fileNa
 	}
 */
 
-	// dump number of events
+	// dump number of events in title
 	ostringstream convert;
 	convert << totevents;
-	string eventsstring = convert.str();
-
+	string eventsstring = "Spettro Globale (" + convert.str() + " eventi)";
+    data->SetTitle(eventsstring.c_str());
+    
+    /* // eventually dump as TText object
 	TText * text = new TText( 0.5 , 0.94 , (eventsstring + " events").c_str());
 	text->SetTextSize(0.04);
 	text->SetTextAlign(22);
 	text->SetNDC();
-	//text->Draw();
-	
-	//rebin
+    text->Draw();
+	*/
+
+	// REBIN
 	data->Rebin(rebin);
 	//data->Scale(1./rebinFactor);
 
@@ -104,8 +119,7 @@ void lifetime2nocalib_Bkgr_sub( char* fileName1 , char* fileName2 , char* fileNa
 	int binThr = data->GetSize()-2;
 	int k = 0;
 	double center = 3001;
-	while (center>3000)
-	{
+	while (center>3000) {
 		center = data->GetBinCenter(binThr);
 		binThr--;
 		k++;
@@ -113,9 +127,7 @@ void lifetime2nocalib_Bkgr_sub( char* fileName1 , char* fileName2 , char* fileNa
 
 	double mean = 0;
 	int j;
-	for(j = binThr; j < (data->GetSize()-2) ; j++)
-	{
-
+	for(j = binThr; j < (data->GetSize()-2) ; j++) {
 		mean += data->GetBinContent(j);	
 		//cout << "data->GetBinContent(j) = " << data->GetBinContent(j) << endl;
 		//cout << "mean = " << mean << endl;
@@ -129,7 +141,8 @@ void lifetime2nocalib_Bkgr_sub( char* fileName1 , char* fileName2 , char* fileNa
 	cout << "Sum = " << mean << endl;
 	mean = mean/k;
 	cout << "Bkgr = " << mean << endl;
-	// background subtraction
+	
+    // background subtraction
 	int newBinContent = 0;
 	for ( int i = 0 ; i < data->GetSize() - 2 ; i++ ) {
 
@@ -138,6 +151,8 @@ void lifetime2nocalib_Bkgr_sub( char* fileName1 , char* fileName2 , char* fileNa
 				
 
 	}
+
+// ==================== COMMENTARE MEGLIO PLS ====================================
 
 	// fit
 	//TF1 * fminu = new TF1( "fminu" , "[0]+[1]*x", 0 , 20);
@@ -226,7 +241,7 @@ void lifetime2nocalib_Bkgr_sub( char* fileName1 , char* fileName2 , char* fileNa
 	double Aminus = resultminu2->Value(0);
 	double sigmaAminus = sqrt(pow(resultminu2->Error(0), 2) + pow(Aminus*sigmaxstar / tauM2, 2)) / rebin;
 	double Nminus = Aminus * tauM2/ rebin;
-	double sigmaNminus = sqrt(pow(tauM2, 2)*pow(resultminu2->Error(0), 2) + pow(Aminus, 2)*pow(resultminu2->Error(1), 2) + pow(Aminus, 2)*pow(sigmaxstar, 2) + 2 * tauM2*Aminus*resultminu2->CovMatrix(0, 1))/rebin; //qui non si � tenuto conto dell'xstar
+	double sigmaNminus = sqrt(pow(tauM2, 2)*pow(resultminu2->Error(0), 2) + pow(Aminus, 2)*pow(resultminu2->Error(1), 2) + pow(Aminus, 2)*pow(sigmaxstar, 2) + 2 * tauM2*Aminus*resultminu2->CovMatrix(0, 1))/rebin; //qui non si è tenuto conto dell'xstar
 	double sigmataumcalib = sqrt(pow(calib, 2)*pow(resultminu2->Error(1), 2) + pow(resultminu2->Value(1), 2)*pow(sigmacalib, 2));
 
 	cout << "Stima finale di tau- (SX):\n";
