@@ -30,7 +30,7 @@ void lifetime_nocalib_bkgr_sub( string filelist, int rebin = 1 , double midValue
     vector<ifstream> files;
     string name;
     while ( file >> name ) {
-        files.emplace_back(name);
+        files.emplace_back(name.c_str());
     }
     
     // definiamo gli estremi dell'istogramma
