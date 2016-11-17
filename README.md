@@ -19,10 +19,13 @@ Contents:
     * `eff.cc`:    macro ROOT per il plot delle efficienze
     * `*.txt`:     data files per ogni PMT
 * `calibration/`
-    * `cal.C` :    macro ROOT per calibrare i TAC 
+    * `cal.C` :    macro ROOT per calibrare i TAC
+    * `TAC_437`:   dati calibrazione per il TAC nr. 437
+    * `TAC_467`:   dati calibrazione per il TAC nr. 467
 * `analysis/`
-    * `lifetime2nocalib_Bkgr_sub.cc` : macro ROOT per l'analisi finale
+    * `lifetime_nocalib_bkgr_sub.cc` : macro ROOT per l'analisi (parziale 1° semestre)
     * `dati_semestre_1` : directory contenenti tutti i file usati nell'analisi del 1° semestre
+    * `dati_semestre_2` : directory contenente tutti i file usati nell'analisi del 2° semestre
 
 Collaborative Git:
 -----------------
@@ -64,3 +67,9 @@ l'avete). Per generarle:
 e seguite le istruzioni (potete lasciare tutto default, la passphrase non è necessaria). Infine dovete dare a Bitbucket
 la vostra chiave pubblica, dimodochè la vostra macchina sia associata alla vostra identità, copiando il contenuto di
 `~/.ssh/id_rsa.pub` nell'apposito form tra le impostazioni del vostro account.
+
+`man` codici:
+-------------
+
+* `lifetime_nocalib_bkgr_sub.cc`: 
+	$ root -l .x lifetime_nocalib_bkgr_sub.cc( "[filelistName]" , [rebinFactor] = 12 , [midValue] = 1000 )
