@@ -73,4 +73,4 @@ la vostra chiave pubblica, dimodochè la vostra macchina sia associata alla vost
 -------------
 
 * `lifetime_nocalib_bkgr_sub.cc`: 
-	$ root -l .x lifetime_nocalib_bkgr_sub.cc( "[filelistName]" , [rebinFactor] = 12 , [midValue] = 1000 )
+	`$ root -l .x lifetime_nocalib_bkgr_sub.cc( "[filelistName]" , [rebinFactor] = 12 , [midValue] = 1000 )`
