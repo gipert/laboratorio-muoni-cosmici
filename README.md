@@ -27,6 +27,8 @@ Contents:
     * `dati_semestre_1` : directory contenenti tutti i file usati nell'analisi del 1° semestre
     * `dati_semestre_2` : directory contenente tutti i file usati nell'analisi del 2° semestre
 * `montecarlo/`
+    * `montecarlo.cc` : codice simulazione MC
+    * `montecarlo.out`: eseguibile simulazione MC
 
 Collaborative Git:
 -----------------
