@@ -4,6 +4,10 @@ Decadimento dei muoni cosmici in alluminio
 Contents:
 --------
 
+`README.md`
+`env.sh`: shell script da eseguire per rendere visibili gli eseguibili ovunque
+`Makefile`: Makefile generale per compilare tutto il progetto
+
 `latex/`
 
 * `muon.tex`:    file principale

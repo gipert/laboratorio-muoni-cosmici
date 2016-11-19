@@ -12,3 +12,4 @@ log
 code/efficiency/eff.workflow
 code/efficiency/*.pdf
 code/montecarlo/montecarlo
+code/montecarlo/lifetimeAnalysis
