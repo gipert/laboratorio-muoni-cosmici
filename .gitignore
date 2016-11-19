@@ -11,3 +11,4 @@ log
 *.lot
 code/efficiency/eff.workflow
 code/efficiency/*.pdf
+code/montecarlo/montecarlo
