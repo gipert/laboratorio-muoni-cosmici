@@ -48,7 +48,7 @@ int main ( int argc , char** argv ) {
     args.reserve(argc);
     for ( int i = 0; i < argc; i++ ) args[i] = argv[i];
 
-    if ( argc == 2 and args[1] == "--help" ) {
+    if ( argc == 2 && args[1] == "--help" ) {
         std::cout << std::endl
                   << "AnalisiDati per la misura della vita media dei muoni cosmici in alluminio." << std::endl
                   << "Autori: Mattia Faggin, Davide Piras, Luigi Pertoldi" << std::endl << std::endl
