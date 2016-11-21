@@ -30,7 +30,7 @@ int main( int argc, char* argv[] ) {
     // perchè lui li modifica
     std::vector<std::string> args;
     args.reserve(argc);
-    for ( int i = 0; i < argc; i++ ) args[i] = argv[i];
+    for ( int i = 0; i < argc; i++ ) args.push_back(argv[i]);
 
     if ( argc == 2 && args[1] == "--help" ) {
         std::cout << std::endl
