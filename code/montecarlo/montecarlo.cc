@@ -18,11 +18,29 @@
 #include "TRandom3.h"
 #include "TFitResult.h"
 #include "TFitResultPtr.h"
+#include "TF1.h"
 
 // questi valori andranno poi aggiustati (inizio istogramma, inizio baseline, fine istogramma)
-#define	Begin 160	// inizio istogramma
+#define	Begin     160	// inizio istogramma
 #define StartBase 2138	// punto dell'istogramma in cui comincia la baseline
-#define End 3904	// fine istogramma
+#define End       3904	// fine istogramma
+#define Nsim      100  // numero simulazioni
+
+TRandom3 r;
+int counts;
+
+    
+struct dataBase {
+    double media;
+    double fitL;
+    double fitC;
+
+    double errMedia;
+    double errFitL;
+    double errFitC;
+};
+
+dataBase simulateBase( float B, int rebin );
 
 int main( int argc, char* argv[] ) {
 
@@ -37,50 +55,83 @@ int main( int argc, char* argv[] ) {
                   << "MonteCarlo per la misura della vita media dei muoni cosmici in alluminio." << std::endl
                   << "Autori: Mattia Faggin, Davide Piras, Luigi Pertoldi" << std::endl << std::endl
                   << "Utilizzo:" << std::endl 
-                  << "    $ ./montecarlo [numeroConteggi] [semeGeneratore] [rebinFactor]" << std::endl << std::endl;
+                  << "    $ ./montecarlo [Baseline] [rebinFactor]" << std::endl << std::endl;
         return 0;
     }
 
-    if ( argc < 4 ) {
+    if ( argc < 3 ) {
         std::cout << "Pochi argomenti! Se non ti ricordi c'è l'opzione '--help'" << std::endl
                   << "Termino l'esecuzione..." << std::endl;
         return 0;
     }
 
-    int counts    = std::stoi(args[1]);
-    int seed      = std::stoi(args[2]);
-    int RebFactor = std::stoi(args[3]);
-    
-    TApplication Root("App",&argc,argv);   
-    TCanvas can("can","Simulazione MC",800,500);
+    float B       = std::stof(args[1]);
+    int RebFactor = std::stoi(args[2]);
+    counts = B*(End-Begin);
 
+    TApplication Root("App",&argc,argv); 
+
+    float sig = 2;
+    TH1D hMedia( "hMedia", "Media"     , 100, B-sig, B+sig );
+    TH1D hFitL ( "hFitL" , "Likelihood", 100, B-sig, B+sig );
+    TH1D hFitC ( "hFitC" , "Chi2"      , 100, B-sig, B+sig );
+
+    dataBase data;
+    for ( int i = 0; i < Nsim; i++ ) {        
+        r.SetSeed(i);
+        data = simulateBase( B, RebFactor );
+        hMedia.Fill(data.media);
+        hFitL.Fill(data.fitL);
+        hFitC.Fill(data.fitC);
+    }
+
+    std::string canName = "Simulazione MC (" + std::to_string(Nsim) + " simulazioni)"; 
+    TCanvas can( "can", canName.c_str(), 1 );
+    can.Divide(2,2);
+
+    // TLine ............
+
+    can.cd(1);
+        hMedia.Draw();
+        gPad->PaintLine(B,0,B,100);
+    can.cd(2);
+        hFitL.Draw();
+    can.cd(3);
+        hFitC.Draw();
+    can.cd(4);
+        //baseline.Draw();
+
+    std::cout << "Eventi totali: " << counts << std::endl;
+
+    Root.Run();
+
+    return 0;
+}
+
+dataBase simulateBase( float B, int rebin ) {
+  
     // simulazione della baseline
     TH1F baseline("baseline","baseline",4096,0,4096);
-    TRandom3 r;
-    r.SetSeed(seed);
-    int k=0;
-    int c=0;
-    while(k<counts)
+    for ( int k = 0; k < counts; k++ )
     {
-        c=r.Uniform(Begin,End);
-        baseline.Fill(c);
-	    if (c>StartBase) k++;	
+        baseline.Fill(r.Uniform(Begin,End));
+	    //if (c>StartBase) k++;	
 	    // 'counts' è l'integrale della baseline solo nella parte finale dello spettro
 	    // il contatore k è incrementato solo se il numero generato è oltre StartBase
     }
     // rebin dell'istogramma
-    baseline.Rebin(RebFactor); 
+    baseline.Rebin(rebin); 
 
     // 1 - metodo della MEDIA
     //vediamo quali bin compongono la baseline nello spettro vero
     int N = 0;
-    float Mean = 0;
-    float ErrMean = 0;
+    double Mean = 0;
+    double ErrMean = 0;
     // calcolo della media
     for(int j=1; j<=(baseline.GetNbinsX()); j++)
     {
-        float BinCenter = baseline.GetBinCenter(j);
-	    if( BinCenter>StartBase ) 
+        double BinCenter = baseline.GetBinCenter(j);
+	    if( BinCenter>StartBase && BinCenter<End) 
 	    {
 		    N++;
 		    Mean += baseline.GetBinContent(j);
@@ -95,21 +146,34 @@ int main( int argc, char* argv[] ) {
 		    ErrMean += pow(baseline.GetBinContent(i)-Mean,2);
 	    }
     }
-    ErrMean =ErrMean/(N-1);
-    ErrMean =sqrt(ErrMean/N); // la singola misura come errore ha lo scarto quadratico medio
+    ErrMean = ErrMean/(N-1);
+    ErrMean = sqrt(ErrMean/N); // la singola misura come errore ha lo scarto quadratico medio
 
     // 2 - metodo del FIT LIKELIHOOD
-    TFitResultPtr BaseLikePtr = baseline.Fit("pol0","LS","",StartBase,End);
+    TFitResultPtr BaseLikePtr = baseline.Fit("pol0","LSQ","",StartBase,End);
+    //TF1 retta("retta","[0]+[1]*x",0,4096);
+    //retta.FixParameter(1,0);
+    //TFitResultPtr BaseLikePtr = baseline.Fit("retta","LSQ","",StartBase,End);
     // 3 - metodo del FIT CHI2
-    TFitResultPtr BaseChi2Ptr = baseline.Fit("pol0","S","",StartBase,End);
-
-    std::cout <<"\n***RISULTATI***"
-              <<"\nMedia baseline = "          << Mean                      << " +- " << ErrMean
+    TFitResultPtr BaseChi2Ptr = baseline.Fit("pol0","SQ","",StartBase,End);
+    //TFitResultPtr BaseChi2Ptr = baseline.Fit("retta","SQ","",StartBase,End);
+/*
+    std::cout <<"\n=============== RISULTATI ================" //45
+              <<"\nMedia baseline          = " << Mean                      << " +- " << ErrMean
               <<"\nFit Likelihood baseline = " << BaseLikePtr->Parameter(0) << " +- " << BaseLikePtr->ParError(0)
-              <<"\nFit Chi2 baseline = "       << BaseChi2Ptr->Parameter(0) << " +- " << BaseChi2Ptr->ParError(0) << std::endl;
-
-    baseline.Draw();
-    Root.Run();
-
-    return 0;
+              <<"\nFit Chi2 baseline       = " << BaseChi2Ptr->Parameter(0) << " +- " << BaseChi2Ptr->ParError(0) << std::endl;
+*/    
+    dataBase data { 
+                    Mean, 
+                    BaseLikePtr->Parameter(0), 
+                    BaseChi2Ptr->Parameter(0), 
+                    ErrMean, 
+                    BaseLikePtr->ParError(0), 
+                    BaseChi2Ptr->ParError(0) 
+                    };
+    //TCanvas canvas("canvas","canvas",1);
+    //canvas.cd();
+    //baseline.Draw();
+    //canvas.SaveAs("can.C");                
+    return data;
 }
