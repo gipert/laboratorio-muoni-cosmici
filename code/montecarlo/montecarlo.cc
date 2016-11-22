@@ -12,6 +12,8 @@
 #include <cmath>
 #include <vector>
 #include <string>
+#include <chrono>
+
 #include "TApplication.h"
 #include "TH1.h"
 #include "TCanvas.h"
@@ -68,7 +70,8 @@ int main( int argc, char* argv[] ) {
     float B       = std::stof(args[1]);
     int RebFactor = std::stoi(args[2]);
     counts = B*(End-Begin);
-
+    std::cout << "Eventi totali: " << counts << std::endl;
+    
     TApplication Root("App",&argc,argv); 
 
     float sig = 2;
@@ -76,6 +79,7 @@ int main( int argc, char* argv[] ) {
     TH1D hFitL ( "hFitL" , "Likelihood", 100, B-sig, B+sig );
     TH1D hFitC ( "hFitC" , "Chi2"      , 100, B-sig, B+sig );
 
+    auto start = std::chrono::high_resolution_clock::now();
     dataBase data;
     for ( int i = 0; i < Nsim; i++ ) {        
         r.SetSeed(i);
@@ -84,6 +88,8 @@ int main( int argc, char* argv[] ) {
         hFitL.Fill(data.fitL);
         hFitC.Fill(data.fitC);
     }
+    auto time = std::chrono::high_resolution_clock::now() - start;
+    std::cout << "CPU time: " << std::chrono::duration_cast<std::chrono::milliseconds>(time).count() << " msec." << std::endl;
 
     std::string canName = "Simulazione MC (" + std::to_string(Nsim) + " simulazioni)"; 
     TCanvas can( "can", canName.c_str(), 1 );
@@ -100,8 +106,6 @@ int main( int argc, char* argv[] ) {
         hFitC.Draw();
     can.cd(4);
         //baseline.Draw();
-
-    std::cout << "Eventi totali: " << counts << std::endl;
 
     Root.Run();
 
