@@ -32,7 +32,7 @@ using namespace std;
 #define q               0-150      //7.734E-01-1.635     
 #define fitMin          30          
 #define fitMax          2138
-#define Tauptrue        2.1969
+#define Tauptrue        2.1969803
 #define sTauptrue       0.0000021
 #define Taumtrue        0.88
 #define sTaumtrue       0.01

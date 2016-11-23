@@ -4,17 +4,20 @@ CC      = c++
 INCLUDE = $(shell root-config --cflags)
 LIB     = $(shell root-config --libs)
 
-EXEC = code/montecarlo/montecarlo code/analysis/lifetimeAnalysis
+EXEC = code/montecarlo/semestre2/montecarlo code/analysis/lifetimeAnalysis code/calibration/openADC
 
 all : $(EXEC)
 
-code/montecarlo/montecarlo : code/montecarlo/montecarlo.cc
+code/montecarlo/semestre2/montecarlo : code/montecarlo/semestre2/montecarlo.cc
 	$(CC) $(INCLUDE) -o $@ $< $(LIB)
 
 code/analysis/lifetimeAnalysis : code/analysis/lifetime_nocalib_bkgr_sub.cc
 	$(CC) $(INCLUDE) -o $@ $< $(LIB)
 
+code/calibration/openADC : code/calibration/openADC.cc
+	$(CC) $(INCLUDE) -o $@ $< $(LIB)
+
 .PHONY : all clean
 
 clean :
-	rm code/montecarlo/montecarlo code/analysis/lifetimeAnalysis
+	rm $(EXEC)

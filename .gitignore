@@ -11,5 +11,7 @@ log
 *.lot
 code/efficiency/eff.workflow
 code/efficiency/*.pdf
-code/montecarlo/montecarlo
-code/montecarlo/lifetimeAnalysis
+code/montecarlo/semestre2/montecarlo
+code/montecarlo/semestre2/montecarlo_parallel
+code/montecarlo/semestre2/montecarlo_parallel.cc
+code/analysis/lifetimeAnalysis
