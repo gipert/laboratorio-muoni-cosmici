@@ -1,0 +1,238 @@
+Dato che la simulazione della singola baseline è solo per confrontare la dispersione delle sigma con il centroide, 
+è stato modificato il programma in locale e caricato questo file con i risultati della simulazione.
+Le prime tre prove sono a bassa statistica, ma con valori crescenti di numero di simulazioni: i valori non cambiano molto,
+ma preferisco mettere 500 perché altrimenti non si forma bene la gaussiana, a occhio.
+
+Valori in INPUT:
+        Baseline  5
+        tau       429
+        A         1000
+        RebFactor 1
+Simulazioni MC effettuate 100
+
+hFitBMean
+mean = 5.0037+-0.0197708(0.395123%)
+
+hFitBL
+mean = 5.00544+-0.0205338(0.41023%)
+
+hFitBC
+mean = 3.88069+-0.0253583(0.653449%)
+
+hFitErrBMean
+mean = 0.0660028+-0.000789363(1.19595%)
+
+hFitErrBL
+mean = 0.0532313+-9.91585e-05(0.186279%)
+
+hFitErrBC
+mean = 0.047017+-0.000145363(0.309172%)
+
+Valori in INPUT:
+        Baseline  5
+        tau       429
+        A         1000
+        RebFactor 1
+Simulazioni MC effettuate 300
+
+hFitBMean
+mean = 5.00313+-0.0022423(0.0448179%)
+
+hFitBL
+mean = 5.00311+-0.00223693(0.0447108%)
+
+hFitBC
+mean = 3.87892+-0.00433651(0.111797%)
+
+hFitErrBMean
+mean = 0.0661693+-5.41627e-05(0.0818547%)
+
+hFitErrBL
+mean = 0.0532366+-1.18816e-05(0.0223185%)
+
+hFitErrBC
+mean = 0.047054+-2.47362e-05(0.0525698%)
+
+Valori in INPUT:
+        Baseline  5
+        tau       429
+        A         1000
+        RebFactor 1
+Simulazioni MC effettuate 500
+
+hFitBMean
+mean = 5.0026+-0.00175537(0.0350891%)
+
+hFitBL
+mean = 5.00251+-0.00175063(0.034995%)
+
+hFitBC
+mean = 3.87872+-0.00270185(0.0696582%)
+
+hFitErrBMean
+mean = 0.0661436+-3.8015e-05(0.0574734%)
+
+hFitErrBL
+mean = 0.0532156+-9.12106e-06(0.0171398%)
+
+hFitErrBC
+mean = 0.0470275+-1.5909e-05(0.0338292%)
+
+Valori in INPUT:
+        Baseline  1
+        tau       429
+        A         1000
+        RebFactor 1
+Simulazioni MC effettuate 500
+
+hFitBMean
+mean = 1.00109+-0.000863006(0.0862063%)
+
+hFitBL
+mean = 1.00074+-0.000839099(0.0838478%)
+
+hFitBC
+mean = 1.30423+-0.000637904(0.0489104%)
+
+hFitErrBMean
+mean = 0.0250741+-2.78821e-05(0.111199%)
+
+hFitErrBL
+mean = 0.023813+-1.0434e-05(0.0438163%)
+
+hFitErrBC
+mean = 0.0341703+-1.68547e-05(0.0493256%)
+
+
+Valori in INPUT:
+        Baseline  5
+        tau       429
+        A         1000
+        RebFactor 1
+Simulazioni MC effettuate 500
+
+hFitBMean
+mean = 5.0026+-0.00175537(0.0350891%)
+
+hFitBL
+mean = 5.00251+-0.00175063(0.034995%)
+
+hFitBC
+mean = 3.87872+-0.00270185(0.0696582%)
+
+hFitErrBMean
+mean = 0.0661436+-3.8015e-05(0.0574734%)
+
+hFitErrBL
+mean = 0.0532156+-9.12106e-06(0.0171398%)
+
+hFitErrBC
+mean = 0.0470275+-1.5909e-05(0.0338292%)
+
+Valori in INPUT:
+        Baseline  10
+        tau       429
+        A         1000
+        RebFactor 1
+Simulazioni MC effettuate 500
+
+hFitBMean
+mean = 9.99443+-0.00286215(0.0286374%)
+
+hFitBL
+mean = 9.99444+-0.00285977(0.0286136%)
+
+hFitBC
+mean = 8.84094+-0.00430708(0.0487174%)
+
+hFitErrBMean
+mean = 0.108768+-5.22955e-05(0.0480801%)
+
+hFitErrBL
+mean = 0.0752463+-9.6874e-06(0.0128743%)
+
+hFitErrBC
+mean = 0.0707852+-1.52167e-05(0.0214971%)
+
+Valori in INPUT:
+        Baseline  20
+        tau       429
+        A         1000
+        RebFactor 1
+Simulazioni MC effettuate 500
+
+hFitBMean
+mean = 19.9936+-0.00449273(0.0224708%)
+
+hFitBL
+mean = 19.9935+-0.00451057(0.0225602%)
+
+hFitBC
+mean = 18.937+-0.00442294(0.023356%)
+
+hFitErrBMean
+mean = 0.189582+-5.92713e-05(0.0312642%)
+
+hFitErrBL
+mean = 0.106407+-1.18319e-05(0.0111195%)
+
+hFitErrBC
+mean = 0.103552+-1.36129e-05(0.0131459%)
+
+Valori in INPUT:
+        Baseline  50
+        tau       429
+        A         1000
+        RebFactor 1
+Simulazioni MC effettuate 500
+
+hFitBMean
+mean = 49.9873+-0.00716492(0.0143335%)
+
+hFitBL
+mean = 49.988+-0.00711598(0.0142354%)
+
+hFitBC
+mean = 48.9795+-0.00649422(0.0132591%)
+
+hFitErrBMean
+mean = 0.426895+-8.43554e-05(0.0197602%)
+
+hFitErrBL
+mean = 0.168248+-1.21604e-05(0.00722765%)
+
+hFitErrBC
+mean = 0.166535+-1.11141e-05(0.00667372%)
+
+Valori in INPUT:
+        Baseline  100
+        tau       429
+        A         1000
+        RebFactor 1
+Simulazioni MC effettuate 500
+
+hFitBMean
+mean = 99.9931+-0.0109264(0.0109271%)
+
+hFitBL
+mean = 99.9936+-0.0108715(0.0108722%)
+
+hFitBC
+mean = 99.0033+-0.00996072(0.010061%)
+
+hFitErrBMean
+mean = 0.82013+-9.62222e-05(0.0117326%)
+
+hFitErrBL
+mean = 0.23796+-1.33399e-05(0.00560594%)
+
+hFitErrBC
+mean = 0.236772+-1.16458e-05(0.00491855%)
+
+Sembra tutto in ordine: tralasciando sempre il fatto che il metodo Chi2 non va bene perché fa la media pesata,
+gli altri due danno sempre incertezze minori del centroide delle dispersioni corrispondenti, quindi non stiamo introducendo
+nessun bias sistematico.
+Nota che a mano a mano che la statistica si alza, diminuisce l'errore relativo BErr/Bmean (a prescindere dal metodo), 
+come uno si può aspettare.
+
+
