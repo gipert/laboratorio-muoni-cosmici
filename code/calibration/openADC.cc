@@ -9,8 +9,8 @@
 #include "TH1D.h"
 #include "TText.h"
 
-#define	m	5.121E-03
-#define q	-7.70E-01//-1.635	// dati del fit di calibrazione canale - tempo (in microsecondi!)
+#define	m	1//5.121E-03
+#define q	0//-7.70E-01//-1.635	// dati del fit di calibrazione canale - tempo (in microsecondi!)
 
 void openADC( std::string fileName , int rebin = 1 );
 

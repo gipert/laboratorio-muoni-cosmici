@@ -99,7 +99,9 @@ int main( int argc, char* argv[] ) {
     double A	  = std::stoi(args[3]);
     int RebFactor = std::stoi(args[4]);
 
-    TApplication Root("App",&argc,argv); 
+    TApplication Root("App",&argc,argv);
+    auto oldErrorIgnoreLevel = gErrorIgnoreLevel;
+    gErrorIgnoreLevel = kError;
 
 	counts = B*(End - Begin);
 	//counts = A*tau;
@@ -294,7 +296,7 @@ int main( int argc, char* argv[] ) {
     canErr.cd(2);
         hFitErrBL.Draw();
     canErr.cd(3);
-        hFitErrBL.Draw();
+        hFitErrBC.Draw();
   
 		/*can.Divide(2, 2);
 		can.cd(1);
@@ -452,8 +454,10 @@ void fitGaus(TH1D h){
    TFitResultPtr p = h.Fit("gaus","SQN","",min,max);
    double mean = p->Parameter(1);
    double err  = p->ParError(1);
+   double sigma = p->Parameter(2);
 
-   std::cout << "mean = " << mean << "+-" << err << "(" << err*100/mean << "%)" << std::endl;
+   std::cout << "mean = " << mean << "+-" << err<<std::endl 
+             << "sigma = "<< sigma << "(" << sigma*100/mean << "%)" << std::endl;
    return;
 }
 
