@@ -22,6 +22,7 @@
 #include "TFitResultPtr.h"
 #include "TF1.h"
 #include "TLine.h"
+#include "TGraphErrors.h"
 
 // questi valori andranno poi aggiustati (inizio istogramma, inizio baseline, fine istogramma)
 #define	Begin     160	// inizio istogramma
@@ -251,6 +252,7 @@ int main( int argc, char* argv[] ) {
     fitFunc2.SetParName(1,"tau");
     fitFunc2.SetParName(2,"B");
 
+    // ciclo delle simulazioni
     for(int k=0; k<Nsim; k++)
     {
 	std::cout<<"\nRun" << k+1;
@@ -303,6 +305,7 @@ int main( int argc, char* argv[] ) {
         vFitErrAL2.push_back(fitFunc2.GetParError(0));
         vFitErrTauL2.push_back(fitFunc2.GetParError(1));
     }
+
     // range distribuzioni METODO 1
     distRange rFitTauL    = getRange(vFitTauL);
     distRange rFitAL      = getRange(vFitAL);
