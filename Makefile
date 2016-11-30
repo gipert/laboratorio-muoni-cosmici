@@ -1,6 +1,6 @@
 # Makefile per la compilazione
 
-CC      = c++
+CC      = c++ -Wall -O3
 INCLUDE = $(shell root-config --cflags)
 LIB     = $(shell root-config --libs)
 
