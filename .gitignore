@@ -15,4 +15,6 @@ code/montecarlo/semestre2/montecarlo
 code/montecarlo/semestre2/montecarlo_modifiedforbaseline
 code/montecarlo/semestre2/montecarlo_parallel
 code/montecarlo/semestre2/montecarlo_parallel.cc
+code/montecarlo/semestre2/baselineStart
 code/analysis/lifetimeAnalysis
+code/montecarlo/semestre2/conf.txt
