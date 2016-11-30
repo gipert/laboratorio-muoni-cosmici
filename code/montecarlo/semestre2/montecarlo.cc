@@ -21,12 +21,13 @@
 #include "TFitResult.h"
 #include "TFitResultPtr.h"
 #include "TF1.h"
+#include "TLine.h"
 
 // questi valori andranno poi aggiustati (inizio istogramma, inizio baseline, fine istogramma)
 #define	Begin     160	// inizio istogramma
-#define StartBase 2138	// punto dell'istogramma in cui comincia la baseline
+#define StartBase 2538	// punto dell'istogramma in cui comincia la baseline
 #define End       3904	// fine istogramma
-#define Nsim      500    // numero simulazioni
+#define Nsim      100    // numero simulazioni
 
 #define beginFit  1500	// inizio fit esponenziale
 
@@ -100,8 +101,10 @@ int main( int argc, char* argv[] ) {
     int RebFactor = std::stoi(args[4]);
 
     TApplication Root("App",&argc,argv); 
+    gErrorIgnoreLevel = kError; // toglie i warning
 
-    counts = A*tau;
+
+    //counts = A*tau;
     //std::cout << "Eventi totali: " << counts << std::endl;
 
 
@@ -109,7 +112,7 @@ int main( int argc, char* argv[] ) {
 
 // nuova versione
 // I vari vector sono i numeri generati dalla funzione simulateExp. Successivamente, di questi numeri individuo il minimo e il massimo, in modo tale da poter poi definire correttamente il range degli istogrammi
-    std::vector<double> vFitTauL;
+/*  std::vector<double> vFitTauL;
     vFitTauL.reserve(Nsim);
     std::vector<double> vFitTauC;
     vFitTauC.reserve(Nsim);
@@ -126,19 +129,21 @@ int main( int argc, char* argv[] ) {
     std::vector<double> vFitErrAC;
     vFitErrAC.reserve(Nsim);
 
+
     // simulo le esponenziali, inserendo le stime dei parametri nei vector
+    dataBase base;
     dataExp data;
     for ( int i = 0; i < Nsim; i++ ) {        
         r.SetSeed(i);
         data = simulateExp( tau, A, RebFactor );
         vFitTauL.push_back(data.tauL);
-        vFitTauC.push_back(data.tauC);
+        //vFitTauC.push_back(data.tauC);
         vFitAL.push_back(data.AL);
- 	vFitAC.push_back(data.AC);
+ 	//vFitAC.push_back(data.AC);
 	vFitErrTauL.push_back(data.errTauL);
-	vFitErrTauC.push_back(data.errTauC);
+	//vFitErrTauC.push_back(data.errTauC);
 	vFitErrAL.push_back(data.errAL);
-	vFitErrAC.push_back(data.errAC);
+	//vFitErrAC.push_back(data.errAC);
     }
 
     // recupero minimo e massimo dei range 
@@ -170,7 +175,7 @@ int main( int argc, char* argv[] ) {
 	hFitErrAL.Fill(vFitErrAL.at(i));
 	hFitErrAC.Fill(vFitErrAC.at(i));
     }
-
+*/
 
 // vecchia versione
 /*
@@ -207,25 +212,220 @@ int main( int argc, char* argv[] ) {
     std::cout << "CPU time: " << std::chrono::duration_cast<std::chrono::milliseconds>(time).count() << " msec." << std::endl;
 */
 
+    // METODO 1
+    std::vector<double> vFitTauL;
+    vFitTauL.reserve(Nsim);
+    std::vector<double> vFitAL;
+    vFitAL.reserve(Nsim);
+    std::vector<double> vFitBL;
+    vFitBL.reserve(Nsim);
+    std::vector<double> vFitErrTauL;
+    vFitErrTauL.reserve(Nsim);
+    std::vector<double> vFitErrAL;
+    vFitErrAL.reserve(Nsim);
+    std::vector<double> vFitErrBL;
+    vFitErrBL.reserve(Nsim);
+    // METODO 2
+    std::vector<double> vFitTauL2;
+    vFitTauL2.reserve(Nsim);
+    std::vector<double> vFitAL2;
+    vFitAL2.reserve(Nsim);
+    std::vector<double> vFitBL2;
+    vFitBL2.reserve(Nsim);
+    std::vector<double> vFitErrTauL2;
+    vFitErrTauL2.reserve(Nsim);
+    std::vector<double> vFitErrAL2;
+    vFitErrAL2.reserve(Nsim);
+    std::vector<double> vFitErrBL2;
+    vFitErrBL2.reserve(Nsim);
+
+    // simulazione baseline+exp
+    TH1D total("total","total",4096,0,4096);
+
+    TF1 fitFunc("fitFunc","[0]*TMath::Exp(-x/[1])+[2]",Begin,End);
+    fitFunc.SetParName(0,"A");
+    fitFunc.SetParName(1,"tau");
+    fitFunc.SetParName(2,"B");
+    TF1 fitFunc2("fitFunc2","[0]*TMath::Exp(-x/[1])+[2]",Begin,End);
+    fitFunc2.SetParName(0,"A");
+    fitFunc2.SetParName(1,"tau");
+    fitFunc2.SetParName(2,"B");
+
+    for(int k=0; k<Nsim; k++)
+    {
+	std::cout<<"\nRun" << k+1;
+        r.SetSeed(1);
+    	// simulazione della baseline
+    	TH1D baseline("baseline","baseline",4096,0,4096);
+    	for ( int k = 0; k < B*(End-Begin); k++ )
+    	{
+        	baseline.Fill(r.Uniform(Begin,End));
+    	}
+    	// rebin 
+    	baseline.Rebin(RebFactor);
+    	//simulazione esponenziale
+   	TH1D exponential("exponential","exponential",4096,0,4096);
+    	for ( int k = 0; k < A*tau; k++ )
+    	{
+		exponential.Fill(r.Exp(tau));
+    	}
+    	// rebin 
+    	exponential.Rebin(RebFactor);
+ 
+    	total.Add(&baseline,&exponential);
+	total.Draw();
+        // METODO 1: funzione completa
+        // parameter setting
+	//fitFunc.SetParameter(0,A);
+	fitFunc.SetParameter(1,tau);
+	//fitFunc.SetParameter(2,B);
+        // fit unico 
+        total.Fit("fitFunc","RLQN");
+        vFitAL.push_back(fitFunc.GetParameter("A"));
+        vFitBL.push_back(fitFunc.GetParameter("B"));
+        vFitTauL.push_back(fitFunc.GetParameter("tau"));
+        vFitErrAL.push_back(fitFunc.GetParError(0));
+        vFitErrTauL.push_back(fitFunc.GetParError(1));
+        vFitErrBL.push_back(fitFunc.GetParError(2));
+        //std::cout<<"\nB = " << fitFunc.GetParameter("B") << " +- " << fitFunc.GetParError(2);
+
+        // METODO 2: pol0 per B, quindi B-fixing e fit con fitFunc
+	TFitResultPtr basePtr = total.Fit("pol0","LS","",StartBase,End);
+        std::cout << basePtr->Parameter(0) << std::endl;
+	vFitBL2.push_back(basePtr->Parameter(0));
+        std::cout << vFitBL2.at(k) << std::endl;
+	vFitErrBL2.push_back(basePtr->ParError(0));
+        fitFunc2.SetParameter(2,basePtr->Parameter(0));
+        fitFunc2.SetParameter(1,tau);
+        total.Fit("fitFunc2","RLQN");
+        vFitAL2.push_back(fitFunc2.GetParameter("A"));
+        vFitTauL2.push_back(fitFunc2.GetParameter("tau"));
+        vFitErrAL2.push_back(fitFunc2.GetParError(0));
+        vFitErrTauL2.push_back(fitFunc2.GetParError(1));
+    }
+    // range distribuzioni METODO 1
+    distRange rFitTauL    = getRange(vFitTauL);
+    distRange rFitAL      = getRange(vFitAL);
+    distRange rFitBL      = getRange(vFitBL);
+    distRange rFitErrTauL = getRange(vFitErrTauL);
+    distRange rFitErrAL   = getRange(vFitErrAL);
+    distRange rFitErrBL   = getRange(vFitErrBL);
+
+    // range distribuzioni METODO 2
+    distRange rFitTauL2    = getRange(vFitTauL2);
+    distRange rFitAL2      = getRange(vFitAL2);
+    distRange rFitBL2      = getRange(vFitBL2);
+    distRange rFitErrTauL2 = getRange(vFitErrTauL2);
+    distRange rFitErrAL2   = getRange(vFitErrAL2);
+    distRange rFitErrBL2   = getRange(vFitErrBL2);
+
+    // creo gli istogrammi delle distribuzioni METODO 1
+    TH1D hFitTauL 	( "hFitTauL" 	, "Likelihood (#tau)", 100, rFitTauL.minimo, rFitTauL.massimo );
+    TH1D hFitAL   	( "hFitAL"   	, "Likelihood (A)"   , 100, rFitAL.minimo, rFitAL.massimo );
+    TH1D hFitBL   	( "hFitBL"   	, "Likelihood (B)"   , 100, rFitBL.minimo, rFitBL.massimo );
+    TH1D hFitErrBL 	( "hFitErrBL"   , "Likelihood (B)"   , 100, rFitErrBL.minimo, rFitErrBL.massimo); 
+    TH1D hFitErrTauL 	( "hFitErrTauL" , "Likelihood (#tau)", 100, rFitErrTauL.minimo, rFitErrTauL.massimo); 
+    TH1D hFitErrAL   	( "hFitErrAL"   , "Likelihood (A)"   , 100, rFitErrAL.minimo, rFitErrAL.massimo); 
+
+    // creo gli istogrammi delle distribuzioni METODO 2
+    TH1D hFitTauL2 	( "hFitTauL2" 	 , "Likelihood (#tau)", 100, rFitTauL2.minimo, rFitTauL2.massimo );
+    TH1D hFitAL2   	( "hFitAL2"   	 , "Likelihood (A)"   , 100, rFitAL2.minimo, rFitAL2.massimo );
+    TH1D hFitBL2   	( "hFitBL2"   	 , "Likelihood (B)"   , 100, rFitBL2.minimo, rFitBL2.massimo );
+    TH1D hFitErrBL2 	( "hFitErrBL2"   , "Likelihood (B)"   , 100, rFitErrBL2.minimo, rFitErrBL2.massimo); 
+    TH1D hFitErrTauL2 	( "hFitErrTauL2" , "Likelihood (#tau)", 100, rFitErrTauL2.minimo, rFitErrTauL2.massimo); 
+    TH1D hFitErrAL2   	( "hFitErrAL2"   , "Likelihood (A)"   , 100, rFitErrAL2.minimo, rFitErrAL2.massimo); 
+
+    // riempio gli istogrammi METODO 1
+    for ( int i = 0; i < Nsim; i++ ) {        
+        hFitTauL.Fill(vFitTauL.at(i));
+        hFitAL.Fill(vFitAL.at(i));
+        hFitBL.Fill(vFitBL.at(i));
+	hFitErrTauL.Fill(vFitErrTauL.at(i));
+	hFitErrAL.Fill(vFitErrAL.at(i));
+        hFitErrBL.Fill(vFitErrBL.at(i));
+    }
+    // riempio gli istogrammi METODO 2
+    for ( int i = 0; i < Nsim; i++ ) {        
+        hFitTauL2.Fill(vFitTauL2.at(i));
+        hFitAL2.Fill(vFitAL2.at(i));
+        hFitBL2.Fill(vFitBL2.at(i));
+	hFitErrTauL2.Fill(vFitErrTauL2.at(i));
+	hFitErrAL2.Fill(vFitErrAL2.at(i));
+        hFitErrBL2.Fill(vFitErrBL2.at(i));
+    }
 
 
-
-    //(data.hExp)->Draw();
     std::cout << std::endl 
 	      << "---------------------------------------------------------------------------------" 
 	      << "\n./montecarlo.out " << B << " " << tau << " " << A << " " << RebFactor <<std::endl 
-	      << "\nEventi totali esponenziale " << counts
+	      << "\nEventi totali " << B*(End-Begin) + A*tau
+	      << "\nEventi baseline " << B*(End-Begin)
+	      << "\nEventi exp      " << A*tau
 	      << "\nValori in INPUT:"
 	      << "\n	Baseline  " << B
 	      << "\n	tau       " << tau
 	      << "\n	A	  " << A
 	      << "\n	RebFactor " << RebFactor
               << "\nSimulazioni MC effettuate " << Nsim
-	      << "\nIntervallo di fit dell'esponenziale [" << beginFit << "," << StartBase << "]" << std::endl;
+	      << "\nIntervallo di fit METODO 1 [" << Begin << "," << End << "]" 
+	      << "\nIntervallo di fit baseline METODO 2 [" << StartBase << "," << End << "]"
+	      << "\nIntervallo di fit complessivo (B fixed) METODO 2 [" << Begin << "," << End << "]"<< std::endl;
     std::string canName = "Simulazione MC (" + std::to_string(Nsim) + " simulazioni)";
 
-    // fit gaussiani delle distribuzioni
+    // fit gaussiani delle distribuzioni METODO 1
+    std::cout<<"\n METODO 1" << std::endl;
     fitGaus(hFitTauL);
+    fitGaus(hFitAL);
+    fitGaus(hFitBL);
+    fitGaus(hFitErrTauL);
+    fitGaus(hFitErrAL);
+    fitGaus(hFitErrBL);
+    TCanvas can( "METODO1", (canName + " METODO 1").c_str(), 1 );
+    can.Divide(3,2);
+    can.cd(1);
+        hFitTauL.Draw();
+        TLine lTau(tau,0,tau,hFitTauL.GetMaximum());
+	lTau.SetLineColor(kRed);
+        lTau.Draw();
+    can.cd(2);
+        hFitAL.Draw();
+    can.cd(3);
+        hFitBL.Draw();
+    can.cd(4);
+        hFitErrTauL.Draw();
+    can.cd(5);
+        hFitErrAL.Draw();
+    can.cd(6);
+        hFitErrBL.Draw();
+
+    // fit gaussiani delle distribuzioni METODO 2
+    std::cout<<"\n METODO 2" << std::endl;
+    fitGaus(hFitTauL2);
+    fitGaus(hFitAL2);
+    fitGaus(hFitBL2);
+    fitGaus(hFitErrTauL2);
+    fitGaus(hFitErrAL2);
+    fitGaus(hFitErrBL2);
+    TCanvas can2( "METODO2", (canName + " METODO 2").c_str(), 1 );
+    can2.Divide(3,2);
+    can2.cd(1);
+        hFitTauL2.Draw();
+        TLine lTau2(tau,0,tau,hFitTauL2.GetMaximum());
+	lTau2.SetLineColor(kRed);
+        lTau2.Draw();
+    can2.cd(2);
+        hFitAL2.Draw();
+    can2.cd(3);
+        hFitBL2.Draw();
+    can2.cd(4);
+        hFitErrTauL2.Draw();
+    can2.cd(5);
+        hFitErrAL2.Draw();
+    can2.cd(6);
+        hFitErrBL2.Draw();
+
+
+/*    fitGaus(hFitTauL);
     fitGaus(hFitTauC);
     fitGaus(hFitAL);
     fitGaus(hFitAC);
@@ -253,7 +453,7 @@ int main( int argc, char* argv[] ) {
     canErr.cd(3);
         hFitErrAL.Draw();
     canErr.cd(4);
-        hFitErrAC.Draw();
+        hFitErrAC.Draw();*/
 
     Root.Run();
 
@@ -392,14 +592,18 @@ void fitGaus(TH1D h){
    TFitResultPtr p = h.Fit("gaus","SQN","",min,max);
    double mean = p->Parameter(1);
    double err  = p->ParError(1);
+   double sigma = p->Parameter(2);
+   double errsigma = p->ParError(2);
 
-   std::cout << "mean = " << mean << "+-" << err << "(" << err*100/mean << "%)" << std::endl;
+   std::cout << "mean = " << mean << " +- " << err << std::endl
+	     << "sigma = " << sigma << " +- "<< errsigma << std::endl
+             << "mean/sigma = "<< "(" << sigma*100/mean << "%)" << std::endl;
    return;
 }
 
 
 distRange getRange(std::vector<double> v){
-   double min = 0;
+   /*double min = 0;
    double max = 0;
    double entry;
    int N = v.size();
@@ -408,8 +612,10 @@ distRange getRange(std::vector<double> v){
         entry = v.at(k);
 	if(min==0 || min>entry )	min = entry;
 	if(max==0 || max<entry )	max = entry;
-   }
-   distRange d {min,max};
+   }*/
+   auto min = std::min_element(v.begin(),v.end());
+   auto max = std::max_element(v.begin(),v.end());
+   distRange d {*min,*max};
    return d;
 }
 

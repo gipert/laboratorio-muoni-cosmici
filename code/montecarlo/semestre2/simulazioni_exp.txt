@@ -11,28 +11,44 @@ Simulazioni MC effettuate 500
 Intervallo di fit dell'esponenziale [0,2138]
 
 hFitTauL
-mean = 429.078+-0.119326(0.0278098%)
+mean = 429.067 +- 0.119143
+sigma = 2.27081 +- 0.116051
+mean/sigma = (0.529243%)
 
 hFitTauC
-mean = 409.011+-0.129009(0.0315418%)
+mean = 409.003 +- 0.128968
+sigma = 2.52076 +- 0.125194
+mean/sigma = (0.616318%)
 
 hFitAL
-mean = 99.9861+-0.0286189(0.0286229%)
+mean = 99.9883 +- 0.0286361
+sigma = 0.528709 +- 0.0292721
+mean/sigma = (0.528772%)
 
 hFitAC
-mean = 100.496+-0.027553(0.027417%)
+mean = 100.498 +- 0.0275142
+sigma = 0.539004 +- 0.0257908
+mean/sigma = (0.536334%)
 
 hFitErrTauL
-mean = 2.28465+-0.000806834(0.0353154%)
+mean = 2.28458 +- 0.000808813
+sigma = 0.0153846 +- 0.000813712
+mean/sigma = (0.67341%)
 
 hFitErrTauC
-mean = 2.26615+-0.00109357(0.0482567%)
+mean = 2.26616 +- 0.00109109
+sigma = 0.0216458 +- 0.00100048
+mean/sigma = (0.955175%)
 
 hFitErrAL
-mean = 0.706159+-0.000190235(0.0269395%)
+mean = 0.706188 +- 0.000188945
+sigma = 0.00341627 +- 0.000183653
+mean/sigma = (0.483761%)
 
 hFitErrAC
-mean = 0.729331+-0.000237728(0.0325953%)
+mean = 0.729339 +- 0.000234144
+sigma = 0.00456219 +- 0.000211449
+mean/sigma = (0.625524%)
 ---------------------------------------------------------------------------------
 ./montecarlo.out 10 429 1000 1
 
@@ -46,493 +62,44 @@ Simulazioni MC effettuate 500
 Intervallo di fit dell'esponenziale [0,2138]
 
 hFitTauL
-mean = 429.089+-0.0415544(0.00968432%)
+mean = 429.088 +- 0.0414898
+sigma = 0.701174 +- 0.0514146
+mean/sigma = (0.16341%)
 
 hFitTauC
-mean = 424.649+-0.0404035(0.00951456%)
+mean = 424.649 +- 0.0404468
+sigma = 0.777535 +- 0.0395294
+mean/sigma = (0.183101%)
 
 hFitAL
-mean = 999.911+-0.0951816(0.00951901%)
+mean = 999.917 +- 0.0947453
+sigma = 1.79197 +- 0.0914516
+mean/sigma = (0.179212%)
 
 hFitAC
-mean = 1004.87+-0.0891042(0.00886722%)
+mean = 1004.88 +- 0.0892005
+sigma = 1.69087 +- 0.0930471
+mean/sigma = (0.168266%)
 
 hFitErrTauL
-mean = 0.722444+-9.08093e-05(0.0125697%)
+mean = 0.72244 +- 9.0616e-05
+sigma = 0.00165705 +- 9.31179e-05
+mean/sigma = (0.229369%)
 
 hFitErrTauC
-mean = 0.706981+-0.000135306(0.0191385%)
+mean = 0.706972 +- 0.000135529
+sigma = 0.00260353 +- 0.000128469
+mean/sigma = (0.368266%)
 
 hFitErrAL
-mean = 2.23408+-0.000181826(0.00813874%)
+mean = 2.23409 +- 0.00018106
+sigma = 0.00331334 +- 0.00019004
+mean/sigma = (0.148308%)
 
 hFitErrAC
-mean = 2.23585+-0.000219354(0.00981075%)
----------------------------------------------------------------------------------
-./montecarlo.out 10 429 10000 1
-
-Eventi totali esponenziale 4290000
-Valori in INPUT:
-	Baseline  10
-	tau       429
-	A	  10000
-	RebFactor 1
-Simulazioni MC effettuate 500
-Intervallo di fit dell'esponenziale [0,2138]
-
-hFitTauL
-mean = 429.017+-0.0113342(0.00264189%)
-
-hFitTauC
-mean = 428.602+-0.011343(0.0026465%)
-
-hFitAL
-mean = 9999.73+-0.253779(0.00253786%)
-
-hFitAC
-mean = 10004+-0.253744(0.00253644%)
-
-hFitErrTauL
-mean = 0.228472+-9.04023e-06(0.00395682%)
-
-hFitErrTauC
-mean = 0.228066+-1.26466e-05(0.00554512%)
-
-hFitErrAL
-mean = 7.0649+-0.000175289(0.00248112%)
-
-hFitErrAC
-mean = 7.06578+-0.000251653(0.00356157%)
-
-
----------------------------------------------------------------------------------
-./montecarlo.out 10 429 100 1
-
-Eventi totali esponenziale 42900
-Valori in INPUT:
-	Baseline  10
-	tau       429
-	A	  100
-	RebFactor 1
-Simulazioni MC effettuate 500
-Intervallo di fit dell'esponenziale [100,2138]
-
-hFitTauL
-mean = 428.932+-0.127754(0.0297842%)
-
-hFitTauC
-mean = 407.062+-0.153406(0.0376862%)
-
-hFitAL
-mean = 99.9878+-0.0373397(0.0373442%)
-
-hFitAC
-mean = 101.455+-0.0433474(0.0427257%)
-
-hFitErrTauL
-mean = 2.60959+-0.000990472(0.0379551%)
-
-hFitErrTauC
-mean = 2.61219+-0.001373(0.0525615%)
-
-hFitErrAL
-mean = 0.907494+-0.000313664(0.0345638%)
-
-hFitErrAC
-mean = 0.962589+-0.000494761(0.051399%)
----------------------------------------------------------------------------------
-./montecarlo.out 10 429 1000 1
-
-Eventi totali esponenziale 429000
-Valori in INPUT:
-	Baseline  10
-	tau       429
-	A	  1000
-	RebFactor 1
-Simulazioni MC effettuate 500
-Intervallo di fit dell'esponenziale [100,2138]
-
-hFitTauL
-mean = 429.009+-0.0445841(0.0103923%)
-
-hFitTauC
-mean = 423.859+-0.0417677(0.00985416%)
-
-hFitAL
-mean = 999.945+-0.125719(0.0125726%)
-
-hFitAC
-mean = 1007.8+-0.122387(0.012144%)
-
-hFitErrTauL
-mean = 0.825777+-0.000116058(0.0140544%)
-
-hFitErrTauC
-mean = 0.805982+-0.000182864(0.0226884%)
-
-hFitErrAL
-mean = 2.8687+-0.000345469(0.0120427%)
-
-hFitErrAC
-mean = 2.87944+-0.000439345(0.015258%)
----------------------------------------------------------------------------------
-./montecarlo.out 10 429 10000 1
-
-Eventi totali esponenziale 4290000
-Valori in INPUT:
-	Baseline  10
-	tau       429
-	A	  10000
-	RebFactor 1
-Simulazioni MC effettuate 500
-Intervallo di fit dell'esponenziale [100,2138]
-
-hFitTauL
-mean = 428.994+-0.0138971(0.00323946%)
-
-hFitTauC
-mean = 428.523+-0.0134434(0.00313716%)
-
-hFitAL
-mean = 10000.4+-0.389114(0.00389099%)
-
-hFitAC
-mean = 10006.8+-0.424404(0.00424116%)
-
-hFitErrTauL
-mean = 0.261085+-1.15277e-05(0.0044153%)
-
-hFitErrTauC
-mean = 0.260568+-1.70087e-05(0.00652755%)
-
-hFitErrAL
-mean = 9.07136+-0.000351349(0.00387317%)
-
-hFitErrAC
-mean = 9.0746+-0.000453912(0.005002%)
-
-
----------------------------------------------------------------------------------
-./montecarlo.out 10 429 100 1
-
-Eventi totali esponenziale 42900
-Valori in INPUT:
-	Baseline  10
-	tau       429
-	A	  100
-	RebFactor 1
-Simulazioni MC effettuate 500
-Intervallo di fit dell'esponenziale [200,2138]
-
-hFitTauL
-mean = 429.049+-0.136867(0.0319001%)
-
-hFitTauC
-mean = 405.129+-0.185113(0.0456923%)
-
-hFitAL
-mean = 100.061+-0.0440905(0.0440636%)
-
-hFitAC
-mean = 102.462+-0.0668212(0.0652154%)
-
-hFitErrTauL
-mean = 2.99138+-0.00142074(0.0474944%)
-
-hFitErrTauC
-mean = 3.02906+-0.00184985(0.0610702%)
-
-hFitErrAL
-mean = 1.16324+-0.000612065(0.0526172%)
-
-hFitErrAC
-mean = 1.27175+-0.000889198(0.069919%)
----------------------------------------------------------------------------------
-./montecarlo.out 10 429 1000 1
-
-Eventi totali esponenziale 429000
-Valori in INPUT:
-	Baseline  10
-	tau       429
-	A	  1000
-	RebFactor 1
-Simulazioni MC effettuate 500
-Intervallo di fit dell'esponenziale [200,2138]
-
-hFitTauL
-mean = 428.981+-0.0483261(0.0112653%)
-
-hFitTauC
-mean = 423.139+-0.0533479(0.0126076%)
-
-hFitAL
-mean = 999.904+-0.191094(0.0191112%)
-
-hFitAC
-mean = 1011.77+-0.203719(0.0201349%)
-
-hFitErrTauL
-mean = 0.946258+-0.000164577(0.0173924%)
-
-hFitErrTauC
-mean = 0.92109+-0.000260981(0.0283339%)
-
-hFitErrAL
-mean = 3.67536+-0.000673738(0.0183312%)
-
-hFitErrAC
-mean = 3.70569+-0.000679596(0.0183393%)
----------------------------------------------------------------------------------
-./montecarlo.out 10 429 10000 1
-
-Eventi totali esponenziale 4290000
-Valori in INPUT:
-	Baseline  10
-	tau       429
-	A	  10000
-	RebFactor 1
-Simulazioni MC effettuate 500
-Intervallo di fit dell'esponenziale [200,2138]
-
-hFitTauL
-mean = 428.975+-0.016937(0.00394825%)
-
-hFitTauC
-mean = 428.446+-0.0164046(0.00382887%)
-
-hFitAL
-mean = 10000.6+-0.529747(0.00529717%)
-
-hFitAC
-mean = 10010.6+-0.537708(0.00537139%)
-
-hFitErrTauL
-mean = 0.299197+-1.46707e-05(0.00490334%)
-
-hFitErrTauC
-mean = 0.298525+-2.22674e-05(0.00745915%)
-
-hFitErrAL
-mean = 11.6247+-0.000604695(0.0052018%)
-
-hFitErrAC
-mean = 11.6351+-0.000724904(0.00623031%)
-
-
----------------------------------------------------------------------------------
-./montecarlo.out 10 429 100 1
-
-Eventi totali esponenziale 42900
-Valori in INPUT:
-	Baseline  10
-	tau       429
-	A	  100
-	RebFactor 1
-Simulazioni MC effettuate 500
-Intervallo di fit dell'esponenziale [300,2138]
-
-hFitTauL
-mean = 428.944+-0.17171(0.0400308%)
-
-hFitTauC
-mean = 403.864+-0.199669(0.0494396%)
-
-hFitAL
-mean = 99.9142+-0.0724716(0.0725338%)
-
-hFitAC
-mean = 103.136+-0.0858883(0.0832766%)
-
-hFitErrTauL
-mean = 3.44076+-0.00249293(0.0724528%)
-
-hFitErrTauC
-mean = 3.53843+-0.00237008(0.066981%)
-
-hFitErrAL
-mean = 1.48466+-0.00118385(0.0797385%)
-
-hFitErrAC
-mean = 1.68005+-0.00178082(0.105998%)
----------------------------------------------------------------------------------
-./montecarlo.out 10 429 1000 1
-
-Eventi totali esponenziale 429000
-Valori in INPUT:
-	Baseline  10
-	tau       429
-	A	  1000
-	RebFactor 1
-Simulazioni MC effettuate 500
-Intervallo di fit dell'esponenziale [300,2138]
-
-hFitTauL
-mean = 428.947+-0.0585625(0.0136526%)
-
-hFitTauC
-mean = 422.207+-0.063298(0.0149922%)
-
-hFitAL
-mean = 1000.37+-0.260088(0.0259991%)
-
-hFitAC
-mean = 1017.07+-0.25269(0.0248448%)
-
-hFitErrTauL
-mean = 1.08771+-0.000218533(0.020091%)
-
-hFitErrTauC
-mean = 1.0553+-0.000312014(0.0295662%)
-
-hFitErrAL
-mean = 4.69483+-0.00112494(0.0239613%)
-
-hFitErrAC
-mean = 4.75772+-0.00123529(0.0259639%)
----------------------------------------------------------------------------------
-./montecarlo.out 10 429 10000 1
-
-Eventi totali esponenziale 4290000
-Valori in INPUT:
-	Baseline  10
-	tau       429
-	A	  10000
-	RebFactor 1
-Simulazioni MC effettuate 500
-Intervallo di fit dell'esponenziale [300,2138]
-
-hFitTauL
-mean = 429.024+-0.0189063(0.00440683%)
-
-hFitTauC
-mean = 428.399+-0.0206526(0.00482088%)
-
-hFitAL
-mean = 9999.41+-0.779321(0.00779367%)
-
-hFitAC
-mean = 10014.1+-0.675695(0.00674747%)
-
-hFitErrTauL
-mean = 0.343981+-2.31457e-05(0.00672878%)
-
-hFitErrTauC
-mean = 0.343111+-3.14452e-05(0.00916474%)
-
-hFitErrAL
-mean = 14.8433+-0.00122068(0.00822374%)
-
-hFitErrAC
-mean = 14.8654+-0.00128853(0.00866793%)
-
-
----------------------------------------------------------------------------------
-./montecarlo.out 10 429 100 1
-
-Eventi totali esponenziale 42900
-Valori in INPUT:
-	Baseline  10
-	tau       429
-	A	  100
-	RebFactor 1
-Simulazioni MC effettuate 500
-Intervallo di fit dell'esponenziale [400,2138]
-
-hFitTauL
-mean = 429.255+-0.209645(0.0488392%)
-
-hFitTauC
-mean = 403.47+-0.248022(0.0614722%)
-
-hFitAL
-mean = 99.8481+-0.101933(0.102088%)
-
-hFitAC
-mean = 103.298+-0.113564(0.109938%)
-
-hFitErrTauL
-mean = 3.96887+-0.00273892(0.06901%)
-
-hFitErrTauC
-mean = 4.17279+-0.00332231(0.0796183%)
-
-hFitErrAL
-mean = 1.88764+-0.00182885(0.0968854%)
-
-hFitErrAC
-mean = 2.20793+-0.00305967(0.138577%)
----------------------------------------------------------------------------------
-./montecarlo.out 10 429 1000 1
-
-Eventi totali esponenziale 429000
-Valori in INPUT:
-	Baseline  10
-	tau       429
-	A	  1000
-	RebFactor 1
-Simulazioni MC effettuate 500
-Intervallo di fit dell'esponenziale [400,2138]
-
-hFitTauL
-mean = 429.034+-0.0718347(0.0167434%)
-
-hFitTauC
-mean = 421.247+-0.0781049(0.0185414%)
-
-hFitAL
-mean = 999.961+-0.359398(0.0359412%)
-
-hFitAC
-mean = 1023.92+-0.44635(0.0435922%)
-
-hFitErrTauL
-mean = 1.2545+-0.000314471(0.0250674%)
-
-hFitErrTauC
-mean = 1.21403+-0.000377552(0.031099%)
-
-hFitErrAL
-mean = 5.97137+-0.00195736(0.0327791%)
-
-hFitErrAC
-mean = 6.0984+-0.00250381(0.0410569%)
----------------------------------------------------------------------------------
-./montecarlo.out 10 429 10000 1
-
-Eventi totali esponenziale 4290000
-Valori in INPUT:
-	Baseline  10
-	tau       429
-	A	  10000
-	RebFactor 1
-Simulazioni MC effettuate 500
-Intervallo di fit dell'esponenziale [400,2138]
-
-hFitTauL
-mean = 429.036+-0.0236834(0.00552013%)
-
-hFitTauC
-mean = 428.304+-0.0253271(0.00591333%)
-
-hFitAL
-mean = 10001.4+-1.08526(0.010851%)
-
-hFitAC
-mean = 10020.5+-1.08832(0.0108609%)
-
-hFitErrTauL
-mean = 0.396833+-3.25212e-05(0.00819519%)
-
-hFitErrTauC
-mean = 0.395807+-3.8699e-05(0.00977724%)
-
-hFitErrAL
-mean = 18.8818+-0.00221578(0.011735%)
-
-hFitErrAC
-mean = 18.9213+-0.00243761(0.0128829%)
-
-
+mean = 2.23583 +- 0.000221167
+sigma = 0.0042396 +- 0.000208169
+mean/sigma = (0.189621%)
 ---------------------------------------------------------------------------------
 ./montecarlo.out 10 429 100 1
 
@@ -546,28 +113,44 @@ Simulazioni MC effettuate 500
 Intervallo di fit dell'esponenziale [500,2138]
 
 hFitTauL
-mean = 428.727+-0.263821(0.0615359%)
+mean = 428.719 +- 0.264167
+sigma = 4.94034 +- 0.257652
+mean/sigma = (1.15235%)
 
 hFitTauC
-mean = 403.355+-0.286355(0.0709933%)
+mean = 403.344 +- 0.286192
+sigma = 5.63112 +- 0.281882
+mean/sigma = (1.39611%)
 
 hFitAL
-mean = 100.105+-0.136472(0.136329%)
+mean = 100.115 +- 0.136458
+sigma = 2.59317 +- 0.130706
+mean/sigma = (2.59019%)
 
 hFitAC
-mean = 103.493+-0.155885(0.150623%)
+mean = 103.612 +- 0.153688
+sigma = 2.98857 +- 0.158535
+mean/sigma = (2.8844%)
 
 hFitErrTauL
-mean = 4.59986+-0.00405944(0.0882514%)
+mean = 4.59973 +- 0.00405694
+sigma = 0.079597 +- 0.00382107
+mean/sigma = (1.73047%)
 
 hFitErrTauC
-mean = 4.98397+-0.00485825(0.0974775%)
+mean = 4.98384 +- 0.00484361
+sigma = 0.0986996 +- 0.00431993
+mean/sigma = (1.98039%)
 
 hFitErrAL
-mean = 2.39344+-0.00300762(0.125661%)
+mean = 2.39377 +- 0.00302084
+sigma = 0.0603181 +- 0.00274742
+mean/sigma = (2.5198%)
 
 hFitErrAC
-mean = 2.87772+-0.00527085(0.183161%)
+mean = 2.87883 +- 0.00533921
+sigma = 0.0999564 +- 0.00596506
+mean/sigma = (3.47212%)
 ---------------------------------------------------------------------------------
 ./montecarlo.out 10 429 1000 1
 
@@ -581,172 +164,44 @@ Simulazioni MC effettuate 500
 Intervallo di fit dell'esponenziale [500,2138]
 
 hFitTauL
-mean = 428.978+-0.0732493(0.0170753%)
+mean = 428.973 +- 0.0731512
+sigma = 1.41696 +- 0.0710337
+mean/sigma = (0.330314%)
 
 hFitTauC
-mean = 419.909+-0.0908524(0.0216362%)
+mean = 419.902 +- 0.0899722
+sigma = 1.6622 +- 0.0890747
+mean/sigma = (0.395855%)
 
 hFitAL
-mean = 999.813+-0.405534(0.0405609%)
+mean = 999.847 +- 0.402897
+sigma = 7.69426 +- 0.389819
+mean/sigma = (0.769543%)
 
 hFitAC
-mean = 1031.06+-0.441428(0.0428131%)
+mean = 1031.1 +- 0.437231
+sigma = 8.1922 +- 0.454106
+mean/sigma = (0.794509%)
 
 hFitErrTauL
-mean = 1.45422+-0.000389508(0.0267846%)
+mean = 1.45421 +- 0.000390857
+sigma = 0.00764834 +- 0.000372108
+mean/sigma = (0.525944%)
 
 hFitErrTauC
-mean = 1.39992+-0.000531919(0.0379964%)
+mean = 1.39991 +- 0.00053044
+sigma = 0.0100257 +- 0.000530644
+mean/sigma = (0.716169%)
 
 hFitErrAL
-mean = 7.56865+-0.00292081(0.0385909%)
+mean = 7.56876 +- 0.00291172
+sigma = 0.0567898 +- 0.00273182
+mean/sigma = (0.750319%)
 
 hFitErrAC
-mean = 7.80701+-0.00375425(0.0480882%)
----------------------------------------------------------------------------------
-./montecarlo.out 10 429 10000 1
-
-Eventi totali esponenziale 4290000
-Valori in INPUT:
-	Baseline  10
-	tau       429
-	A	  10000
-	RebFactor 1
-Simulazioni MC effettuate 500
-Intervallo di fit dell'esponenziale [500,2138]
-
-hFitTauL
-mean = 429.014+-0.0234214(0.00545935%)
-
-hFitTauC
-mean = 428.21+-0.0242013(0.00565173%)
-
-hFitAL
-mean = 9998.4+-1.24599(0.0124619%)
-
-hFitAC
-mean = 10025.4+-1.15484(0.0115192%)
-
-hFitErrTauL
-mean = 0.459916+-4.1523e-05(0.00902839%)
-
-hFitErrTauC
-mean = 0.458552+-4.95257e-05(0.0108005%)
-
-hFitErrAL
-mean = 23.947+-0.00282903(0.0118137%)
-
-hFitErrAC
-mean = 24.0152+-0.00298467(0.0124283%)
-
-
----------------------------------------------------------------------------------
-./montecarlo.out 10 429 100 1
-
-Eventi totali esponenziale 42900
-Valori in INPUT:
-	Baseline  10
-	tau       429
-	A	  100
-	RebFactor 1
-Simulazioni MC effettuate 500
-Intervallo di fit dell'esponenziale [750,2138]
-
-hFitTauL
-mean = 428.996+-0.356359(0.083068%)
-
-hFitTauC
-mean = 416.159+-0.474473(0.114012%)
-
-hFitAL
-mean = 99.8863+-0.218233(0.218481%)
-
-hFitAC
-mean = 94.0608+-0.301797(0.320853%)
-
-hFitErrTauL
-mean = 6.80873+-0.00969709(0.142421%)
-
-hFitErrTauC
-mean = 8.4627+-0.0139607(0.164967%)
-
-hFitErrAL
-mean = 4.31238+-0.010019(0.232331%)
-
-hFitErrAC
-mean = 5.18801+-0.0180269(0.347472%)
----------------------------------------------------------------------------------
-./montecarlo.out 10 429 1000 1
-
-Eventi totali esponenziale 429000
-Valori in INPUT:
-	Baseline  10
-	tau       429
-	A	  1000
-	RebFactor 1
-Simulazioni MC effettuate 500
-Intervallo di fit dell'esponenziale [750,2138]
-
-hFitTauL
-mean = 428.952+-0.127307(0.0296785%)
-
-hFitTauC
-mean = 416.237+-0.121696(0.0292373%)
-
-hFitAL
-mean = 1000.39+-0.777452(0.0777146%)
-
-hFitAC
-mean = 1061.18+-0.801878(0.0755646%)
-
-hFitErrTauL
-mean = 2.15161+-0.000979311(0.0455153%)
-
-hFitErrTauC
-mean = 2.04883+-0.0011663(0.0569248%)
-
-hFitErrAL
-mean = 13.653+-0.0104677(0.0766698%)
-
-hFitErrAC
-mean = 14.5473+-0.0127464(0.0876207%)
----------------------------------------------------------------------------------
-./montecarlo.out 10 429 10000 1
-
-Eventi totali esponenziale 4290000
-Valori in INPUT:
-	Baseline  10
-	tau       429
-	A	  10000
-	RebFactor 1
-Simulazioni MC effettuate 500
-Intervallo di fit dell'esponenziale [750,2138]
-
-hFitTauL
-mean = 429.032+-0.0368915(0.00859875%)
-
-hFitTauC
-mean = 427.849+-0.0353192(0.00825505%)
-
-hFitAL
-mean = 10001.7+-2.38957(0.0238918%)
-
-hFitAC
-mean = 10049.9+-2.36656(0.0235481%)
-
-hFitErrTauL
-mean = 0.680766+-9.6877e-05(0.0142306%)
-
-hFitErrTauC
-mean = 0.678346+-0.00010769(0.0158753%)
-
-hFitErrAL
-mean = 43.1382+-0.0116928(0.0271055%)
-
-hFitErrAC
-mean = 43.4035+-0.0110377(0.0254303%)
-
-
+mean = 7.80741 +- 0.00371808
+sigma = 0.0691436 +- 0.00351423
+mean/sigma = (0.885614%)
 ---------------------------------------------------------------------------------
 ./montecarlo.out 10 429 100 1
 
@@ -760,28 +215,44 @@ Simulazioni MC effettuate 500
 Intervallo di fit dell'esponenziale [1000,2138]
 
 hFitTauL
-mean = 429.983+-0.565156(0.131437%)
+mean = 429.986 +- 0.564474
+sigma = 10.8758 +- 0.576114
+mean/sigma = (2.52933%)
 
 hFitTauC
-mean = 474.073+-0.976597(0.206001%)
+mean = 474.093 +- 0.975002
+sigma = 18.4627 +- 0.962157
+mean/sigma = (3.89432%)
 
 hFitAL
-mean = 98.7431+-0.408725(0.413928%)
+mean = 98.7426 +- 0.410578
+sigma = 7.62809 +- 0.427281
+mean/sigma = (7.72523%)
 
 hFitAC
-mean = 62.5838+-0.406886(0.650146%)
+mean = 62.5775 +- 0.408358
+sigma = 7.62891 +- 0.411784
+mean/sigma = (12.1911%)
 
 hFitErrTauL
-mean = 10.6317+-0.0231411(0.217661%)
+mean = 10.6319 +- 0.0231705
+sigma = 0.437843 +- 0.0259467
+mean/sigma = (4.11819%)
 
 hFitErrTauC
-mean = 17.7392+-0.0576115(0.324769%)
+mean = 17.7396 +- 0.0575969
+sigma = 1.10876 +- 0.0516976
+mean/sigma = (6.25021%)
 
 hFitErrAL
-mean = 7.84233+-0.0340814(0.434582%)
+mean = 7.84217 +- 0.0341159
+sigma = 0.655447 +- 0.0340658
+mean/sigma = (8.35798%)
 
 hFitErrAC
-mean = 6.62167+-0.0456482(0.689377%)
+mean = 6.6105 +- 0.0464174
+sigma = 0.841479 +- 0.0435558
+mean/sigma = (12.7294%)
 ---------------------------------------------------------------------------------
 ./montecarlo.out 10 429 1000 1
 
@@ -795,172 +266,44 @@ Simulazioni MC effettuate 500
 Intervallo di fit dell'esponenziale [1000,2138]
 
 hFitTauL
-mean = 428.994+-0.17834(0.0415716%)
+mean = 428.981 +- 0.178828
+sigma = 3.33536 +- 0.188264
+mean/sigma = (0.777507%)
 
 hFitTauC
-mean = 410.985+-0.205427(0.049984%)
+mean = 410.985 +- 0.206204
+sigma = 3.77182 +- 0.219283
+mean/sigma = (0.917752%)
 
 hFitAL
-mean = 1000.73+-1.4619(0.146084%)
+mean = 1000.74 +- 1.46072
+sigma = 26.2439 +- 1.6288
+mean/sigma = (2.62246%)
 
 hFitAC
-mean = 1110.65+-1.74876(0.157453%)
+mean = 1110.64 +- 1.74936
+sigma = 32.9178 +- 1.65609
+mean/sigma = (2.96385%)
 
 hFitErrTauL
-mean = 3.34384+-0.00285573(0.0854028%)
+mean = 3.34383 +- 0.00285353
+sigma = 0.0500045 +- 0.00301431
+mean/sigma = (1.49543%)
 
 hFitErrTauC
-mean = 3.12892+-0.00280221(0.0895585%)
+mean = 3.12893 +- 0.00280309
+sigma = 0.0543653 +- 0.00297912
+mean/sigma = (1.73751%)
 
 hFitErrAL
-mean = 24.8909+-0.0376796(0.151379%)
+mean = 24.8902 +- 0.0375498
+sigma = 0.69166 +- 0.0373759
+mean/sigma = (2.77885%)
 
 hFitErrAC
-mean = 27.9792+-0.041653(0.148871%)
----------------------------------------------------------------------------------
-./montecarlo.out 10 429 10000 1
-
-Eventi totali esponenziale 4290000
-Valori in INPUT:
-	Baseline  10
-	tau       429
-	A	  10000
-	RebFactor 1
-Simulazioni MC effettuate 500
-Intervallo di fit dell'esponenziale [1000,2138]
-
-hFitTauL
-mean = 428.999+-0.0549777(0.0128154%)
-
-hFitTauC
-mean = 427.47+-0.0574362(0.0134363%)
-
-hFitAL
-mean = 9996.05+-3.91981(0.0392135%)
-
-hFitAC
-mean = 10084.5+-3.88202(0.038495%)
-
-hFitErrTauL
-mean = 1.05586+-0.000229312(0.021718%)
-
-hFitErrTauC
-mean = 1.05094+-0.00022912(0.0218013%)
-
-hFitErrAL
-mean = 78.6599+-0.0336206(0.0427417%)
-
-hFitErrAC
-mean = 79.5167+-0.0338745(0.0426005%)
-
-
----------------------------------------------------------------------------------
-./montecarlo.out 10 429 100 1
-
-Eventi totali esponenziale 42900
-Valori in INPUT:
-	Baseline  10
-	tau       429
-	A	  100
-	RebFactor 1
-Simulazioni MC effettuate 500
-Intervallo di fit dell'esponenziale [1250,2138]
-
-hFitTauL
-mean = 429.3+-0.870515(0.202775%)
-
-hFitTauC
-mean = 626.673+-1.84964(0.295153%)
-
-hFitAL
-mean = 99.7368+-0.747214(0.749186%)
-
-hFitAC
-mean = 26.9356+-0.208783(0.77512%)
-
-hFitErrTauL
-mean = 17.6055+-0.0619623(0.351948%)
-
-hFitErrTauC
-mean = 49.9581+-0.268815(0.538081%)
-
-hFitErrAL
-mean = 15.0689+-0.107661(0.714457%)
-
-hFitErrAC
-mean = 5.37042+-0.0467835(0.871133%)
----------------------------------------------------------------------------------
-./montecarlo.out 10 429 1000 1
-
-Eventi totali esponenziale 429000
-Valori in INPUT:
-	Baseline  10
-	tau       429
-	A	  1000
-	RebFactor 1
-Simulazioni MC effettuate 500
-Intervallo di fit dell'esponenziale [1250,2138]
-
-hFitTauL
-mean = 429.097+-0.304932(0.0710638%)
-
-hFitTauC
-mean = 403.698+-0.345322(0.0855396%)
-
-hFitAL
-mean = 997.887+-2.57529(0.258074%)
-
-hFitAC
-mean = 1195.38+-3.96153(0.331403%)
-
-hFitErrTauL
-mean = 5.57656+-0.00719712(0.12906%)
-
-hFitErrTauC
-mean = 5.10881+-0.00793749(0.155369%)
-
-hFitErrAL
-mean = 47.4885+-0.123269(0.259577%)
-
-hFitErrAC
-mean = 58.3338+-0.176831(0.303137%)
----------------------------------------------------------------------------------
-./montecarlo.out 10 429 10000 1
-
-Eventi totali esponenziale 4290000
-Valori in INPUT:
-	Baseline  10
-	tau       429
-	A	  10000
-	RebFactor 1
-Simulazioni MC effettuate 500
-Intervallo di fit dell'esponenziale [1250,2138]
-
-hFitTauL
-mean = 428.981+-0.081944(0.019102%)
-
-hFitTauC
-mean = 426.799+-0.0900148(0.0210907%)
-
-hFitAL
-mean = 10011.6+-7.70283(0.0769389%)
-
-hFitAC
-mean = 10143.3+-8.45274(0.0833334%)
-
-hFitErrTauL
-mean = 1.76021+-0.000679536(0.0386054%)
-
-hFitErrTauC
-mean = 1.75308+-0.000665441(0.0379584%)
-
-hFitErrAL
-mean = 150.092+-0.10711(0.0713625%)
-
-hFitErrAC
-mean = 152.969+-0.113284(0.0740568%)
-
-
+mean = 27.9786 +- 0.0416544
+sigma = 0.793419 +- 0.0417271
+mean/sigma = (2.8358%)
 ---------------------------------------------------------------------------------
 ./montecarlo.out 10 429 100 1
 
@@ -974,28 +317,44 @@ Simulazioni MC effettuate 500
 Intervallo di fit dell'esponenziale [1500,2138]
 
 hFitTauL
-mean = 427.463+-1.71168(0.400428%)
+mean = 428.76 +- 1.61237
+sigma = 30.8813 +- 1.63224
+mean/sigma = (7.20247%)
 
 hFitTauC
-mean = 912.92+-5.54947(0.607882%)
+mean = 912.78 +- 5.53115
+sigma = 104.495 +- 5.50508
+mean/sigma = (11.448%)
 
 hFitAL
-mean = 96.4813+-1.50966(1.56471%)
+mean = 98.8055 +- 1.53739
+sigma = 28.5376 +- 1.79703
+mean/sigma = (28.8826%)
 
 hFitAC
-mean = 11.1881+-0.156348(1.39746%)
+mean = 11.1843 +- 0.156675
+sigma = 2.87182 +- 0.160882
+mean/sigma = (25.6772%)
 
 hFitErrTauL
-mean = 33.2881+-0.2319(0.696646%)
+mean = 33.3549 +- 0.238645
+sigma = 4.51344 +- 0.238404
+mean/sigma = (13.5316%)
 
 hFitErrTauC
-mean = 184.516+-2.01088(1.08981%)
+mean = 184.494 +- 2.0068
+sigma = 36.782 +- 2.10822
+mean/sigma = (19.9366%)
 
 hFitErrAL
-mean = 31.5347+-0.495585(1.57155%)
+mean = 31.239 +- 0.47103
+sigma = 8.9299 +- 0.477993
+mean/sigma = (28.5858%)
 
 hFitErrAC
-mean = 4.42469+-0.0627602(1.41841%)
+mean = 4.42525 +- 0.0630192
+sigma = 1.12527 +- 0.068684
+mean/sigma = (25.4284%)
 ---------------------------------------------------------------------------------
 ./montecarlo.out 10 429 1000 1
 
@@ -1009,60 +368,41 @@ Simulazioni MC effettuate 500
 Intervallo di fit dell'esponenziale [1500,2138]
 
 hFitTauL
-mean = 429.176+-0.531098(0.123748%)
+mean = 429.287 +- 0.528713
+sigma = 9.93054 +- 0.553488
+mean/sigma = (2.31326%)
 
 hFitTauC
-mean = 393.24+-0.540327(0.137404%)
+mean = 393.26 +- 0.541202
+sigma = 10.582 +- 0.529827
+mean/sigma = (2.69083%)
 
 hFitAL
-mean = 1001.21+-4.28495(0.427978%)
+mean = 999.438 +- 4.27704
+sigma = 79.4092 +- 4.32364
+mean/sigma = (7.94539%)
 
 hFitAC
-mean = 1345.02+-8.08514(0.601117%)
+mean = 1344.71 +- 8.10098
+sigma = 158.783 +- 7.92921
+mean/sigma = (11.8079%)
 
 hFitErrTauL
-mean = 10.5605+-0.0242022(0.229178%)
+mean = 10.5629 +- 0.024193
+sigma = 0.445681 +- 0.0261552
+mean/sigma = (4.21931%)
 
 hFitErrTauC
-mean = 9.42645+-0.0304041(0.32254%)
+mean = 9.43658 +- 0.0295278
+sigma = 0.53661 +- 0.0305736
+mean/sigma = (5.68649%)
 
 hFitErrAL
-mean = 100.05+-0.46095(0.460719%)
+mean = 99.9383 +- 0.457806
+sigma = 8.86408 +- 0.461978
+mean/sigma = (8.86955%)
 
 hFitErrAC
-mean = 145.38+-0.953511(0.655876%)
----------------------------------------------------------------------------------
-./montecarlo.out 10 429 10000 1
-
-Eventi totali esponenziale 4290000
-Valori in INPUT:
-	Baseline  10
-	tau       429
-	A	  10000
-	RebFactor 1
-Simulazioni MC effettuate 500
-Intervallo di fit dell'esponenziale [1500,2138]
-
-hFitTauL
-mean = 429.175+-0.172751(0.0402518%)
-
-hFitTauC
-mean = 426.212+-0.184016(0.0431747%)
-
-hFitAL
-mean = 9991.07+-17.2235(0.172389%)
-
-hFitAC
-mean = 10235.3+-18.27(0.178499%)
-
-hFitErrTauL
-mean = 3.32525+-0.00270528(0.0813556%)
-
-hFitErrTauC
-mean = 3.31731+-0.00265771(0.0801164%)
-
-hFitErrAL
-mean = 316.475+-0.531588(0.167972%)
-
-hFitErrAC
-mean = 327.668+-0.545098(0.166357%)
+mean = 145.313 +- 0.954677
+sigma = 17.4834 +- 0.947646
+mean/sigma = (12.0315%)
