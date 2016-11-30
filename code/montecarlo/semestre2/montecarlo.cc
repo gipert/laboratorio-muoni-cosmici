@@ -256,8 +256,8 @@ int main( int argc, char* argv[] ) {
     std::cout << "Run: ";
     for(int k=0; k<Nsim; k++)
     {
-	if ( k % 10 == 0 ) std::cout << k+1 << std::flush;
-    else std::cout << "." << std::flush;
+	if ( k % 10 == 0 ) std::cout << k*100/Nsim << "%" << std::flush;
+        else std::cout << "." << std::flush;
         r.SetSeed(k+1);
     	// simulazione della baseline
     	TH1D baseline("baseline","baseline",4096,0,4096);
@@ -298,17 +298,13 @@ int main( int argc, char* argv[] ) {
 
 /////////// METODO 2: pol0 per B, quindi B-fixing e fit con fitFunc
 	TFitResultPtr basePtr = total.Fit("pol0","LSNQ","",StartBase,End);
-        
-        //std::cout << basePtr->Parameter(0) << std::endl;
-	vFitBL2.push_back(basePtr->Parameter(0));
-        //std::cout << vFitBL2.at(k) << std::endl;
-	vFitErrBL2.push_back(basePtr->ParError(0));
         fitFunc2.SetParameter(2,basePtr->Parameter(0));
         fitFunc2.SetParameter(1,tau);
 
 /////////// FIT RESIDUO ////////////////
         total.Fit("fitFunc2","RLQN","",beginFit,End);
-        
+        vFitBL2.push_back(fitFunc2.GetParameter(2));
+        vFitErrBL2.push_back(fitFunc2.GetParError(2));
         vFitAL2.push_back(fitFunc2.GetParameter("A"));
         vFitTauL2.push_back(fitFunc2.GetParameter("tau"));
         vFitErrAL2.push_back(fitFunc2.GetParError(0));
