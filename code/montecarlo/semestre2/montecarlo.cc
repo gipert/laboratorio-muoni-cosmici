@@ -27,7 +27,7 @@
 #define	Begin     160	// inizio istogramma
 #define StartBase 2538	// punto dell'istogramma in cui comincia la baseline
 #define End       3904	// fine istogramma
-#define Nsim      100    // numero simulazioni
+#define Nsim      500   // numero simulazioni
 
 #define beginFit  1500	// inizio fit esponenziale
 
@@ -254,7 +254,7 @@ int main( int argc, char* argv[] ) {
     for(int k=0; k<Nsim; k++)
     {
 	std::cout<<"\nRun" << k+1;
-        r.SetSeed(1);
+        r.SetSeed(k+1);
     	// simulazione della baseline
     	TH1D baseline("baseline","baseline",4096,0,4096);
     	for ( int k = 0; k < B*(End-Begin); k++ )
@@ -273,7 +273,7 @@ int main( int argc, char* argv[] ) {
     	exponential.Rebin(RebFactor);
  
     	total.Add(&baseline,&exponential);
-	total.Draw();
+	//total.Draw();
         // METODO 1: funzione completa
         // parameter setting
 	//fitFunc.SetParameter(0,A);
@@ -290,10 +290,10 @@ int main( int argc, char* argv[] ) {
         //std::cout<<"\nB = " << fitFunc.GetParameter("B") << " +- " << fitFunc.GetParError(2);
 
         // METODO 2: pol0 per B, quindi B-fixing e fit con fitFunc
-	TFitResultPtr basePtr = total.Fit("pol0","LS","",StartBase,End);
-        std::cout << basePtr->Parameter(0) << std::endl;
+	TFitResultPtr basePtr = total.Fit("pol0","LSNQ","",StartBase,End);
+        //std::cout << basePtr->Parameter(0) << std::endl;
 	vFitBL2.push_back(basePtr->Parameter(0));
-        std::cout << vFitBL2.at(k) << std::endl;
+        //std::cout << vFitBL2.at(k) << std::endl;
 	vFitErrBL2.push_back(basePtr->ParError(0));
         fitFunc2.SetParameter(2,basePtr->Parameter(0));
         fitFunc2.SetParameter(1,tau);
@@ -389,8 +389,14 @@ int main( int argc, char* argv[] ) {
         lTau.Draw();
     can.cd(2);
         hFitAL.Draw();
+        TLine lA(A,0,A,hFitAL.GetMaximum());
+	lA.SetLineColor(kRed);
+        lA.Draw();
     can.cd(3);
         hFitBL.Draw();
+        TLine lB(B,0,B,hFitBL.GetMaximum());
+	lB.SetLineColor(kRed);
+        lB.Draw();
     can.cd(4);
         hFitErrTauL.Draw();
     can.cd(5);
@@ -415,8 +421,14 @@ int main( int argc, char* argv[] ) {
         lTau2.Draw();
     can2.cd(2);
         hFitAL2.Draw();
+        TLine lA2(A,0,A,hFitAL2.GetMaximum());
+	lA2.SetLineColor(kRed);
+        lA2.Draw();
     can2.cd(3);
         hFitBL2.Draw();
+        TLine lB2(B,0,B,hFitBL2.GetMaximum());
+	lB2.SetLineColor(kRed);
+        lB2.Draw();
     can2.cd(4);
         hFitErrTauL2.Draw();
     can2.cd(5);
