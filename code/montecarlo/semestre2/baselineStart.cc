@@ -85,7 +85,7 @@ int main( int argc, char* argv[] ) {
     std::cout << "Run: ";
     for( int k = 0; k < Nsim; k++ ) {
 
-        r.SetSeed(k+1);
+        r.SetSeed(1);
     	
         // simulazione della baseline
     	TH1D baseline("baseline","baseline",4096,0,4096);
