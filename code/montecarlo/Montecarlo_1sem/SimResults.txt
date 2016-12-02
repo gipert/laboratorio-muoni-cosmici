@@ -1,0 +1,139 @@
+Slabs coincidence, H = 0.08 m, sp = 0.027 m, square = 1 m
+Il numero di eventi è: 4758
+Il numero di eventi in coincidenza è: 3993
+La percentuale in coincidenza è: 83.9218%
+Il numero di eventi totali controllato è: 103489
+Il numero totale buono di eventi è: 4758
+Il numero totale di eventi passato lateralmente è: 287
+
+Slabs coincidence, H = 0.08 m, sp = 0.027 m, square = 2 m
+Il numero di eventi è: 4758
+Il numero di eventi in coincidenza è: 4032
+La percentuale in coincidenza è: 84.7415%
+Il numero di eventi totali controllato è: 302891
+Il numero totale buono di eventi è: 4758
+Il numero totale di eventi passato lateralmente è: 259
+
+Slabs coincidence, H = 0.08 m, sp = 0.027 m, square = 5 m
+Il numero di eventi e': 4758
+Il numero di eventi in coincidenza e': 3968
+La percentuale in coincidenza e': 83.3964%
+Il numero di eventi totali controllato e': 1.45252e+006
+Il numero totale buono di eventi e': 4758
+Il numero totale di eventi passato lateralmente e': 274
+
+Slabs coincidence, H = 0.08 m, sp = 0.027 m, square = 10 m
+Il numero di eventi è: 4758
+Il numero di eventi in coincidenza è: 3955
+La percentuale in coincidenza è: 83.1232%
+Il numero di eventi totali controllato è: 5.36334e+006
+Il numero totale buono di eventi è: 4758
+Il numero totale di eventi passato lateralmente è: 247
+
+Slabs coincidence II, H = 0.08 m, sp = 0.027 m, square = 0.5 m
+Il numero di eventi è: 5193
+Il numero di eventi in coincidenza è: 3914
+La percentuale in coincidenza è: 75.3707%
+Il numero di eventi totali controllato è: 44148
+Il numero totale buono di eventi è: 5193
+Il numero totale di eventi passato lateralmente è: 464
+
+Slabs coincidence II, H = 0.08 m, sp = 0.027 m, square = 1 m
+Il numero di eventi è: 5208
+Il numero di eventi in coincidenza è: 3892
+La percentuale in coincidenza è: 74.7312%
+Il numero di eventi totali controllato è: 109538
+Il numero totale buono di eventi è: 5208
+Il numero totale di eventi passato lateralmente è: 450
+
+Slabs coincidence II, H = 0.08 m, sp = 0.027 m, square = 2 m
+Il numero di eventi è: 5106
+Il numero di eventi in coincidenza è: 3866
+La percentuale in coincidenza è: 75.7148%
+Il numero di eventi totali controllato è: 318318
+Il numero totale buono di eventi è: 5106
+Il numero totale di eventi passato lateralmente è: 432
+
+Slabs coincidence II, H = 0.08 m, sp = 0.027 m, square = 5 m
+Il numero di eventi è: 5062
+Il numero di eventi in coincidenza è: 3801
+La percentuale in coincidenza è: 75.0889%
+Il numero di eventi totali controllato è: 1568658
+Il numero totale buono di eventi è: 5062
+Il numero totale di eventi passato lateralmente è: 457
+
+Slabs coincidence II, H = 0.08 m, sp = 0.027 m, square = 10 m
+Il numero di eventi è: 4912
+Il numero di eventi in coincidenza è: 3673
+La percentuale in coincidenza è: 74.7761%
+Il numero di eventi totali controllato è: 5469958
+Il numero totale buono di eventi è: 4912
+Il numero totale di eventi passato lateralmente è: 430
+
+Slabs coincidence TER, H = 0.08 m, sp = 0.027 m, square = 1 m
+Il numero di eventi è: 6183
+Il numero di eventi in coincidenza è: 5176
+La percentuale in coincidenza è: 83.7134%
+Il numero di eventi totali controllato è: 134366
+Il numero totale buono di eventi è: 6183
+Il numero totale di eventi passato lateralmente è: 370
+
+Slabs coincidence TER, H = 0.08 m, sp = 0.027 m, square = 2 m
+Il numero di eventi è: 6183
+Il numero di eventi in coincidenza è: 5225
+La percentuale in coincidenza è: 84.5059%
+Il numero di eventi totali controllato è: 393575
+Il numero totale buono di eventi è: 6183
+Il numero totale di eventi passato lateralmente è: 330
+
+Slabs coincidence TER, H = 0.08 m, sp = 0.027 m, square = 5 m
+Il numero di eventi è: 6183
+Il numero di eventi in coincidenza è: 5177
+La percentuale in coincidenza è: 83.7296%
+Il numero di eventi totali controllato è: 1.90607e+006
+Il numero totale buono di eventi è: 6183
+Il numero totale di eventi passato lateralmente è: 362
+
+Slabs coincidence TER, H = 0.08 m, sp = 0.027 m, square = 10 m
+Il numero di eventi è: 6183
+Il numero di eventi in coincidenza è: 5152
+La percentuale in coincidenza è: 83.3252%
+Il numero di eventi totali controllato è: 6.99904e+006
+Il numero totale buono di eventi è: 6183
+Il numero totale di eventi passato lateralmente è: 326
+
+PROVE CON MOLTI EVENTI: 
+Slabs coincidence II, H = 0.08 m, sp = 0.027 m, square = 1 m
+Il numero di eventi è: 462203
+Il numero di eventi in coincidenza è: 386137
+La percentuale in coincidenza è: 83.5427%
+Il numero di eventi totali controllato è: 10000000
+Il numero totale buono di eventi è: 462203
+Il numero totale di eventi passato lateralmente è: 26666
+
+Slabs coincidence 2D, H = 0.08 m, sp = 0.027 m
+10000000 8.30192e+006 83.0192% (non riesce a fare il grafico) (seed = 1)
+10000000 8.30129e+006 83.0129% (non riesce a fare il grafico) (seed = 2)
+10000000 8.3016e+006 83.016%   (non riesce a fare il grafico) (seed = 3)
+10000000 8.30178e+006 83.0178% (non riesce a fare il grafico) (seed = 4)
+10000000 8.30117e+006 83.0117% (non riesce a fare il grafico) (seed = 5)
+
+5000 4125 82.5%
+5000 4127 82.54%
+5000 4155 83.1%
+5000 4121 82.42%
+
+1000 819 81.9%
+1000 854 85.4%
+1000 824 82.4%
+1000 839 83.9%
+
+100 83 83%
+100 86 86%
+100 88 88%
+100 89 89%
+
+10 8 80%
+10 7 70%
+10 10 100%
+10 9 90%
