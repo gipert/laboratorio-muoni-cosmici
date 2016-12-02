@@ -28,7 +28,7 @@
 #define	Begin     160	// inizio istogramma
 #define StartBase 2538	// punto dell'istogramma in cui comincia la baseline
 #define End       3904	// fine istogramma
-#define Nsim      500   // numero simulazioni
+#define Nsim      500  // numero simulazioni
 #define beginFit  160	// inizio fit esponenziale
 
 
@@ -85,20 +85,23 @@ int main( int argc, char* argv[] ) {
                   << "MonteCarlo per la misura della vita media dei muoni cosmici in alluminio." << std::endl
                   << "Autori: Mattia Faggin, Davide Piras, Luigi Pertoldi" << std::endl << std::endl
                   << "Utilizzo:" << std::endl 
-                  << "    $ ./montecarlo [Baseline] [tau] [A] [rebinFactor]" << std::endl << std::endl;
+                  << "    $ ./montecarlo [Baseline] [tau] [A] [taucorto] [R] [rebinFactor] " << std::endl << std::endl;
         return 0;
     }
 
-    if ( argc < 3 ) {
+    if ( argc < 7 ) {
         std::cout << "Pochi argomenti! Se non ti ricordi c'è l'opzione '--help'" << std::endl
                   << "Termino l'esecuzione..." << std::endl;
         return 0;
     }
 
-    float B       = std::stof(args[1]);
-    double tau	  = std::stoi(args[2]);
-    double A	  = std::stoi(args[3]);
-    int RebFactor = std::stoi(args[4]);
+    float B         = std::stof(args[1]);
+    double tau	    = std::stof(args[2]);
+    double A	    = std::stof(args[3]);
+	double taucorto = std::stof(args[4]);
+	double R        = std::stof(args[5]);
+	int RebFactor   = std::stoi(args[6]);
+	
 
     TApplication Root("App",&argc,argv); 
     gErrorIgnoreLevel = kError; // toglie i warning
@@ -177,41 +180,6 @@ int main( int argc, char* argv[] ) {
     }
 */
 
-// vecchia versione
-/*
-    // da sistemare al variare dei parametri
-    // se come estremi metto 0,0 l'istogramma è centrato in automatico
-    float sig = 4;
-    float sigerr = 0.05;
-    TH1D hFitTauL 	( "hFitTauL" 	, "Likelihood (#tau)", 100, 426, 432 );
-    TH1D hFitTauC 	( "hFitTauC" 	, "Chi2 (#tau)"      , 100, 422, 427 );
-    TH1D hFitAL   	( "hFitAL"   	, "Likelihood (A)"   , 100, 995, 1004 );
-    TH1D hFitAC   	( "hFitAC"   	, "Chi2 (A)"         , 100, 1000, 1010 );
-    TH1D hFitErrTauL 	( "hFitErrTauL" , "Likelihood (#tau)", 100, 0.719,0.727); //2.29-sigerr, 2.29+sigerr );
-    TH1D hFitErrTauC 	( "hFitErrTauC" , "Chi2 (#tau)"      , 100, 0.701,0.714); //2.27-sigerr, 2.27+sigerr );
-    TH1D hFitErrAL   	( "hFitErrAL"   , "Likelihood (A)"   , 100, 2.224,2.242); //0.707-sigerr,0.707+sigerr );
-    TH1D hFitErrAC   	( "hFitErrAC"   , "Chi2 (A)"         , 100, 2.226,2.244); //0.73-sigerr,0.73+sigerr );
-
-    auto start = std::chrono::high_resolution_clock::now();
-    dataExp data;
-
-    for ( int i = 0; i < Nsim; i++ ) {        
-        r.SetSeed(i);
-        data = simulateExp( tau, A, RebFactor );
-        hFitTauL.Fill(data.tauL);
-        hFitTauC.Fill(data.tauC);
-        hFitAL.Fill(data.AL);
- 	hFitAC.Fill(data.AC);
-	hFitErrTauL.Fill(data.errTauL);
-	hFitErrTauC.Fill(data.errTauC);
-	hFitErrAL.Fill(data.errAL);
-	hFitErrAC.Fill(data.errAC);
-    }
-
-    auto time = std::chrono::high_resolution_clock::now() - start;
-    std::cout << "CPU time: " << std::chrono::duration_cast<std::chrono::milliseconds>(time).count() << " msec." << std::endl;
-*/
-
     // METODO 1
     std::vector<double> vFitTauL;
     vFitTauL.reserve(Nsim);
@@ -242,6 +210,7 @@ int main( int argc, char* argv[] ) {
 
     // simulazione baseline+exp
     TH1D total("total","total",4096,0,4096);
+	TH1D total2("total2", "total2", 4096, 0, 4096);
 
     TF1 fitFunc("fitFunc","[0]*TMath::Exp(-x/[1])+[2]",beginFit,End);
     fitFunc.SetParName(0,"A");
@@ -256,8 +225,9 @@ int main( int argc, char* argv[] ) {
     std::cout << "Run: ";
     for(int k=0; k<Nsim; k++)
     {
-	if ( k % 10 == 0 ) std::cout << k*100/Nsim << "%" << std::flush;
-        else std::cout << "." << std::flush;
+	if ( k % (Nsim/10) == 0 ) std::cout << k*100/Nsim << "%" << std::flush;
+        else if ( k == Nsim - 1 ) std::cout << "100%" << std::flush;
+		else if ( k % (Nsim/50) == 0 ) std::cout << "." << std::flush;
         r.SetSeed(k+1);
     	// simulazione della baseline
     	TH1D baseline("baseline","baseline",4096,0,4096);
@@ -267,7 +237,7 @@ int main( int argc, char* argv[] ) {
     	}
     	// rebin 
     	baseline.Rebin(RebFactor);
-    	//simulazione esponenziale
+    	//simulazione primo esponenziale
    	TH1D exponential("exponential","exponential",4096,0,4096);
     	for ( int k = 0; k < A*tau; k++ )
     	{
@@ -276,19 +246,32 @@ int main( int argc, char* argv[] ) {
     	// rebin 
     	exponential.Rebin(RebFactor);
  
-    	total.Add(&baseline,&exponential);
-	//total.Draw();
-        // METODO 1: funzione completa
+		total.Add(&baseline, &exponential);
+
+		//simulazione secondo esponenziale
+		TH1D exponential2("exponential2", "exponential2", 4096, 0, 4096);
+		for (int k = 0; k < A*taucorto/R; k++)
+		{
+			exponential2.Fill(r.Exp(taucorto));
+		}
+		// rebin 
+		exponential2.Rebin(RebFactor);
+		
+		total2.Add(&total, &exponential2);
+		
+        
+	
+	// METODO 1: funzione completa
         // parameter setting
 	//fitFunc.SetParameter(0,A);
 	fitFunc.SetParameter(1,tau);
 	//fitFunc.SetParameter(2,B);
-
+	
 ////////////////// FIT UNICO //////////////////// 
         total.Fit("fitFunc","RLQN");
 /////////////////////////////////////////////////        
         
-        vFitAL.push_back(fitFunc.GetParameter("A"));
+		vFitAL.push_back(fitFunc.GetParameter("A"));
         vFitBL.push_back(fitFunc.GetParameter("B"));
         vFitTauL.push_back(fitFunc.GetParameter("tau"));
         vFitErrAL.push_back(fitFunc.GetParError(0));
@@ -310,7 +293,8 @@ int main( int argc, char* argv[] ) {
         vFitErrAL2.push_back(fitFunc2.GetParError(0));
         vFitErrTauL2.push_back(fitFunc2.GetParError(1));
     }
-
+	total2.Draw();
+	
     // range distribuzioni METODO 1
     distRange rFitTauL    = getRange(vFitTauL);
     distRange rFitAL      = getRange(vFitAL);
@@ -352,6 +336,7 @@ int main( int argc, char* argv[] ) {
 	    hFitErrAL.Fill(vFitErrAL.at(i));
         hFitErrBL.Fill(vFitErrBL.at(i));
     }
+
     // riempio gli istogrammi METODO 2
     for ( int i = 0; i < Nsim; i++ ) {        
         hFitTauL2.Fill(vFitTauL2.at(i));
@@ -365,15 +350,19 @@ int main( int argc, char* argv[] ) {
 
     std::cout << std::endl 
 	      << "---------------------------------------------------------------------------------" 
-	      << "\n./montecarlo.out " << B << " " << tau << " " << A << " " << RebFactor <<std::endl 
-	      << "\nEventi totali   " << B*(End-Begin) + A*tau
-	      << "\nEventi baseline " << B*(End-Begin)
-	      << "\nEventi exp      " << A*tau
+	      << "\n./montecarlo.out " << B << " " << tau << " " << A << " " << taucorto 
+		  << " " << R << " " << RebFactor <<std::endl 
+	      << "\nEventi totali    " << B*(End-Begin) + A*tau + A*taucorto/R
+	      << "\nEventi baseline  " << B*(End-Begin)
+	      << "\nEventi exp lungo " << A*tau
+		  << "\nEventi exp corto " << A*taucorto/R
 	      << "\nValori in INPUT:"
 	      << "\n	Baseline  " << B
 	      << "\n	tau       " << tau
-	      << "\n	A	  " << A
-	      << "\n	RebFactor " << RebFactor << std::endl
+	      << "\n	A	      " << A
+		  << "\n	taucorto  " << taucorto
+		  << "\n	R         " << R
+		  << "\n	RebFactor " << RebFactor << std::endl
           << "\nSimulazioni MC effettuate:                         "  << Nsim
 	      << "\nIntervallo di generazione:                         [" << Begin     << ", " << End << "]"
           << "\nIntervallo di fit METODO 1:                        [" << beginFit  << ", " << End << "]" 
@@ -624,7 +613,7 @@ void fitGaus(TH1D h){
 
 
 distRange getRange(std::vector<double> v){
-   /*double min = 0;
+   double min = 0;
    double max = 0;
    double entry;
    int N = v.size();
@@ -633,10 +622,10 @@ distRange getRange(std::vector<double> v){
         entry = v.at(k);
 	if(min==0 || min>entry )	min = entry;
 	if(max==0 || max<entry )	max = entry;
-   }*/
-   auto min = std::min_element(v.begin(),v.end());
-   auto max = std::max_element(v.begin(),v.end());
-   distRange d {*min,*max};
+   }
+   //auto min = std::min_element(v.begin(),v.end());
+   //auto max = std::max_element(v.begin(),v.end());
+   distRange d {min,max};
    return d;
 }
 
