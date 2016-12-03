@@ -6,7 +6,7 @@
 // ./montecarlo --help
 //
 
-// nel codice utilizziamo 3 metodi per stimare la baseline: 1-media, 2-fit likelihood, 3-fit chi2
+// nel codice generiamo due esponenziali e la baseline, cercando quindi il metodo migliore per stimare i loro parametri
 
 #include <iostream>
 #include <cmath>
@@ -26,10 +26,10 @@
 
 // questi valori andranno poi aggiustati (inizio istogramma, inizio baseline, fine istogramma)
 #define	Begin     160	// inizio istogramma
-#define StartBase 2538	// punto dell'istogramma in cui comincia la baseline
+#define StartBase 2700	// punto dell'istogramma in cui comincia la baseline
 #define End       3904	// fine istogramma
 #define Nsim      500  // numero simulazioni
-#define beginFit  160	// inizio fit esponenziale
+#define beginFit  860	// inizio fit esponenziale
 
 
 TRandom3 r;
@@ -85,7 +85,7 @@ int main( int argc, char* argv[] ) {
                   << "MonteCarlo per la misura della vita media dei muoni cosmici in alluminio." << std::endl
                   << "Autori: Mattia Faggin, Davide Piras, Luigi Pertoldi" << std::endl << std::endl
                   << "Utilizzo:" << std::endl 
-                  << "    $ ./montecarlo [Baseline] [tau] [A] [taucorto] [R] [rebinFactor] " << std::endl << std::endl;
+                  << "    $ ./montecarlo [Baseline] [tau] [Integrale] [taucorto] [R] [rebinFactor] " << std::endl << std::endl;
         return 0;
     }
 
@@ -95,12 +95,13 @@ int main( int argc, char* argv[] ) {
         return 0;
     }
 
-    float B         = std::stof(args[1]);
-    double tau	    = std::stof(args[2]);
-    double A	    = std::stof(args[3]);
-	double taucorto = std::stof(args[4]);
-	double R        = std::stof(args[5]);
-	int RebFactor   = std::stoi(args[6]);
+    float B          = std::stof(args[1]); // valore tipico per 1 settimana: 2 (circa)
+    double tau	     = std::stof(args[2]); // valore vero = 429 canali
+	double integrale = std::stof(args[3]); // valore tipico per 1 settimana: 70000 (circa)
+	double taucorto  = std::stof(args[4]); // valore vero = 172 canali (circa)
+	double R         = std::stof(args[5]); // valore vero: 1.261
+	int RebFactor    = std::stoi(args[6]);
+	double A         = (integrale - B*(End - Begin)) / (tau + taucorto / R);
 	
 
     TApplication Root("App",&argc,argv); 
@@ -225,10 +226,7 @@ int main( int argc, char* argv[] ) {
     std::cout << "Run: ";
     for(int k=0; k<Nsim; k++)
     {
-	if ( k % (Nsim/10) == 0 ) std::cout << k*100/Nsim << "%" << std::flush;
-        else if ( k == Nsim - 1 ) std::cout << "100%" << std::flush;
-		else if ( k % (Nsim/50) == 0 ) std::cout << "." << std::flush;
-        r.SetSeed(k+1);
+	        r.SetSeed(k+1);
     	// simulazione della baseline
     	TH1D baseline("baseline","baseline",4096,0,4096);
     	for ( int k = 0; k < B*(End-Begin); k++ )
@@ -264,10 +262,9 @@ int main( int argc, char* argv[] ) {
 	// METODO 1: funzione completa
         // parameter setting
 	//fitFunc.SetParameter(0,A);
-	fitFunc.SetParameter(1,tau);
+	fitFunc.SetParLimits(1, tau-20, tau+20);
 	//fitFunc.SetParameter(2,B);
-	
-////////////////// FIT UNICO //////////////////// 
+	////////////////// FIT UNICO //////////////////// 
         total.Fit("fitFunc","RLQN");
 /////////////////////////////////////////////////        
         
@@ -292,6 +289,11 @@ int main( int argc, char* argv[] ) {
         vFitTauL2.push_back(fitFunc2.GetParameter("tau"));
         vFitErrAL2.push_back(fitFunc2.GetParError(0));
         vFitErrTauL2.push_back(fitFunc2.GetParError(1));
+
+		if (k == 0) std::cout << std::endl;
+		if (k % (Nsim / 10) == 0) std::cout << k * 100 / Nsim << "%" << std::flush;
+		else if (k == Nsim - 1) std::cout << "100%" << std::flush;
+		else if (k % (Nsim / 50) == 0) std::cout << "." << std::flush;
     }
 	total2.Draw();
 	
@@ -350,19 +352,20 @@ int main( int argc, char* argv[] ) {
 
     std::cout << std::endl 
 	      << "---------------------------------------------------------------------------------" 
-	      << "\n./montecarlo.out " << B << " " << tau << " " << A << " " << taucorto 
+	      << "\n./montecarlo.out " << B << " " << tau << " " << integrale << " " << taucorto 
 		  << " " << R << " " << RebFactor <<std::endl 
-	      << "\nEventi totali    " << B*(End-Begin) + A*tau + A*taucorto/R
+	        << "\nEventi totali    " << integrale
 	      << "\nEventi baseline  " << B*(End-Begin)
 	      << "\nEventi exp lungo " << A*tau
 		  << "\nEventi exp corto " << A*taucorto/R
 	      << "\nValori in INPUT:"
 	      << "\n	Baseline  " << B
 	      << "\n	tau       " << tau
-	      << "\n	A	      " << A
+	      << "\n	integrale " << integrale
 		  << "\n	taucorto  " << taucorto
 		  << "\n	R         " << R
-		  << "\n	RebFactor " << RebFactor << std::endl
+		  << "\n	RebFactor " << RebFactor
+		  << "\n	A         " << A << std::endl
           << "\nSimulazioni MC effettuate:                         "  << Nsim
 	      << "\nIntervallo di generazione:                         [" << Begin     << ", " << End << "]"
           << "\nIntervallo di fit METODO 1:                        [" << beginFit  << ", " << End << "]" 
