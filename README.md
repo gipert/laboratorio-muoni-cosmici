@@ -31,8 +31,12 @@ Contents:
     * `dati_semestre_1` : directory contenenti tutti i file usati nell'analisi del 1° semestre
     * `dati_semestre_2` : directory contenente tutti i file usati nell'analisi del 2° semestre
 * `montecarlo/`
-    * `montecarlo.cc` : codice simulazione MC
-
+    * `semestre1` : macro e notebooks di Mathematica per la simulazione MonteCarlo delle coincidenze
+    * `semestre2`
+        * `baselineStart.cc` : studio della stima della baseline con fit "pol0" al variare del punto iniziale
+                               nello spettro simulato exp+cost
+        * `montecarlo.cc` :    simulazione montecarlo completa
+        * `montecarlo_modifiedforbaseline.cc` : confronto metodi di fit della baseline
 
 Collaborative Git:
 -----------------
@@ -56,6 +60,11 @@ Nota Bene:
 
 * Ricordatevi di dire a `git` di ignorare file output di compilazione aggiungendoli al file `.gitignore`
 * Ricordatevi di mantenere sincronizzato il vostro lavoro con quello presente sulla repository tramite `git pull`
+* `git pull` semplicemente aggiunge ciò che trova nel remote al vostro lavoro, se volete essere certi di avere una 
+  lo stesso identico codice che si trova nella branch di riferimento nella repository dovete:
+
+  `$ git fetch bitbucket` : fa un download di quello che c'è nella repo senza fare il merge con il locale
+  `$ git reset --hard bitbucket/my_branch` : effettivamente rimpiazza ciò che avete in locale
 
 La procedura di cui sopra è un esempio dei tanti modi in cui si possono proporre modifiche ad un progetto, `git` è un
 programma molto esteso, sbizzarritevi! Potete creare più branches, potete lavorare sulla vostra versione nella vostra
@@ -74,9 +83,3 @@ l'avete). Per generarle:
 e seguite le istruzioni (potete lasciare tutto default, la passphrase non è necessaria). Infine dovete dare a Bitbucket
 la vostra chiave pubblica, dimodochè la vostra macchina sia associata alla vostra identità, copiando il contenuto di
 `~/.ssh/id_rsa.pub` nell'apposito form tra le impostazioni del vostro account.
-
-`man` codici:
--------------
-
-* `lifetime_nocalib_bkgr_sub.cc`: 
-	`$ root -l .x lifetime_nocalib_bkgr_sub.cc( "[filelistName]" , [rebinFactor] = 12 , [midValue] = 1000 )`

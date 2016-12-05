@@ -24,6 +24,8 @@
 #include "TLine.h"
 #include "TGraphErrors.h"
 
+#include "../../ProgressBar/progressbar.h"
+
 // questi valori andranno poi aggiustati (inizio istogramma, inizio baseline, fine istogramma)
 #define	Begin     160	// inizio istogramma
 #define StartBase 2700	// punto dell'istogramma in cui comincia la baseline
@@ -107,80 +109,6 @@ int main( int argc, char* argv[] ) {
     TApplication Root("App",&argc,argv); 
     gErrorIgnoreLevel = kError; // toglie i warning
 
-
-    //counts = A*tau;
-    //std::cout << "Eventi totali: " << counts << std::endl;
-
-
-
-
-// nuova versione
-// I vari vector sono i numeri generati dalla funzione simulateExp. Successivamente, di questi numeri individuo il minimo e il massimo, in modo tale da poter poi definire correttamente il range degli istogrammi
-/*  std::vector<double> vFitTauL;
-    vFitTauL.reserve(Nsim);
-    std::vector<double> vFitTauC;
-    vFitTauC.reserve(Nsim);
-    std::vector<double> vFitAL;
-    vFitAL.reserve(Nsim);
-    std::vector<double> vFitAC;
-    vFitAC.reserve(Nsim);
-    std::vector<double> vFitErrTauL;
-    vFitErrTauL.reserve(Nsim);
-    std::vector<double> vFitErrTauC;
-    vFitErrTauC.reserve(Nsim);
-    std::vector<double> vFitErrAL;
-    vFitErrAL.reserve(Nsim);
-    std::vector<double> vFitErrAC;
-    vFitErrAC.reserve(Nsim);
-
-
-    // simulo le esponenziali, inserendo le stime dei parametri nei vector
-    dataBase base;
-    dataExp data;
-    for ( int i = 0; i < Nsim; i++ ) {        
-        r.SetSeed(i);
-        data = simulateExp( tau, A, RebFactor );
-        vFitTauL.push_back(data.tauL);
-        //vFitTauC.push_back(data.tauC);
-        vFitAL.push_back(data.AL);
- 	//vFitAC.push_back(data.AC);
-	vFitErrTauL.push_back(data.errTauL);
-	//vFitErrTauC.push_back(data.errTauC);
-	vFitErrAL.push_back(data.errAL);
-	//vFitErrAC.push_back(data.errAC);
-    }
-
-    // recupero minimo e massimo dei range 
-    distRange rFitTauL = getRange(vFitTauL);
-    distRange rFitTauC = getRange(vFitTauC);
-    distRange rFitAL = getRange(vFitAL);
-    distRange rFitAC = getRange(vFitAC);
-    distRange rFitErrTauL = getRange(vFitErrTauL);
-    distRange rFitErrTauC = getRange(vFitErrTauC);
-    distRange rFitErrAL = getRange(vFitErrAL);
-    distRange rFitErrAC = getRange(vFitErrAC);
-    // creo gli istogrammi
-    TH1D hFitTauL 	( "hFitTauL" 	, "Likelihood (#tau)", 100, rFitTauL.minimo, rFitTauL.massimo );
-    TH1D hFitTauC 	( "hFitTauC" 	, "Chi2 (#tau)"      , 100, rFitTauC.minimo, rFitTauC.massimo );
-    TH1D hFitAL   	( "hFitAL"   	, "Likelihood (A)"   , 100, rFitAL.minimo, rFitAL.massimo );
-    TH1D hFitAC   	( "hFitAC"   	, "Chi2 (A)"         , 100, rFitAC.minimo, rFitAC.massimo );
-    TH1D hFitErrTauL 	( "hFitErrTauL" , "Likelihood (#tau)", 100, rFitErrTauL.minimo, rFitErrTauL.massimo); 
-    TH1D hFitErrTauC 	( "hFitErrTauC" , "Chi2 (#tau)"      , 100, rFitErrTauC.minimo, rFitErrTauC.massimo); //2.27-sigerr, 2.27+sigerr );
-    TH1D hFitErrAL   	( "hFitErrAL"   , "Likelihood (A)"   , 100, rFitErrAL.minimo, rFitErrAL.massimo); //0.707-sigerr,0.707+sigerr );
-    TH1D hFitErrAC   	( "hFitErrAC"   , "Chi2 (A)"         , 100, rFitErrAC.minimo, rFitErrAC.massimo); //0.73-sigerr,0.73+sigerr );
-    // riempio gli istogrammi
-    for ( int i = 0; i < Nsim; i++ ) {        
-        hFitTauL.Fill(vFitTauL.at(i));
-        hFitTauC.Fill(vFitTauC.at(i));
-        hFitAL.Fill(vFitAL.at(i));
- 	hFitAC.Fill(vFitAC.at(i));
-	hFitErrTauL.Fill(vFitErrTauL.at(i));
-	hFitErrTauC.Fill(vFitErrTauC.at(i));
-	hFitErrAL.Fill(vFitErrAL.at(i));
-	hFitErrAC.Fill(vFitErrAC.at(i));
-    }
-*/
-
     // METODO 1
     std::vector<double> vFitTauL;
     vFitTauL.reserve(Nsim);
@@ -222,10 +150,14 @@ int main( int argc, char* argv[] ) {
     fitFunc2.SetParName(1,"tau");
     fitFunc2.SetParName(2,"B");
 
+    // ProgressBar
+    ProgressBar bar(Nsim);
+    bar.Init();
     // ciclo delle simulazioni
-    std::cout << "Run: ";
     for(int k=0; k<Nsim; k++)
     {
+
+        bar.Update(k);
 	        r.SetSeed(k+1);
     	// simulazione della baseline
     	TH1D baseline("baseline","baseline",4096,0,4096);
@@ -290,10 +222,6 @@ int main( int argc, char* argv[] ) {
         vFitErrAL2.push_back(fitFunc2.GetParError(0));
         vFitErrTauL2.push_back(fitFunc2.GetParError(1));
 
-		if (k == 0) std::cout << std::endl;
-		if (k % (Nsim / 10) == 0) std::cout << k * 100 / Nsim << "%" << std::flush;
-		else if (k == Nsim - 1) std::cout << "100%" << std::flush;
-		else if (k % (Nsim / 50) == 0) std::cout << "." << std::flush;
     }
 	total2.Draw();
 	
