@@ -25,6 +25,8 @@
 #include "TLine.h"
 #include "TText.h"
 #include "TGraphErrors.h"
+#include "TProfile.h"
+#include "../../ProgressBar/progressbar.h"
 
 // ----> VALORI CON CUI GIOCARE <----
 #define midValue  2538  // =5tau
@@ -32,7 +34,7 @@
 
 #define	Begin     160	// inizio istogramma
 #define End       3904	// fine istogramma
-#define Nsim      100   // numero punti nel plot
+#define Nsim      500   // numero punti nel plot
 #define beginFit  160	// inizio fit esponenziale
 
 TRandom3 r;
@@ -49,23 +51,26 @@ int main( int argc, char* argv[] ) {
 
     if ( argc == 2 && args[1] == "--help" ) {
         std::cout << std::endl
-                  << "MonteCarlo per la misura della vita media dei muoni cosmici in alluminio. Analisi del punto startBase." << std::endl
+                  << "MonteCarlo per la misura della vita media dei muoni cosmici in alluminio." << std::endl
                   << "Autori: Mattia Faggin, Davide Piras, Luigi Pertoldi" << std::endl << std::endl
                   << "Utilizzo:" << std::endl 
-                  << "    $ ./montecarlo [Baseline] [tau] [A]" << std::endl << std::endl;
+                  << "$ ./baselineStart [Baseline] [tau] [Integrale] [taucorto] [R] [rebinFactor] " << std::endl << std::endl;
         return 0;
     }
 
-    if ( argc < 3 ) {
+    if ( argc < 7 ) {
         std::cout << "Pochi argomenti! Se non ti ricordi c'è l'opzione '--help'" << std::endl
                   << "Termino l'esecuzione..." << std::endl;
         return 0;
     }
 
-    float B       = std::stof(args[1]);
-    double tau	  = std::stoi(args[2]);
-    double A	  = std::stoi(args[3]);
-    //int RebFactor = std::stoi(args[4]);
+    float B          = std::stof(args[1]); // valore tipico per 1 settimana: 2 (circa)
+    double tau	     = std::stof(args[2]); // valore vero = 429 canali
+	double integrale = std::stof(args[3]); // valore tipico per 1 settimana: 70000 (circa)
+	double taucorto  = std::stof(args[4]); // valore vero = 172 canali (circa)
+	double R         = std::stof(args[5]); // valore vero: 1.261
+	int RebFactor    = std::stoi(args[6]);
+	double A         = (integrale - B*(End - Begin)) / (tau + taucorto / R);
 
     TApplication Root("App",&argc,argv); 
 
@@ -78,45 +83,70 @@ int main( int argc, char* argv[] ) {
 
     int StartBase = midValue;
     StartBase    -= range/2;
+    
+    TProfile profileB("profileB","TProfile baseline pol0",range,midValue-range/2,midValue+range/2,"s");
+    TProfile profileErrB("profileErrB","TProfile #sigma_{B} pol0",range,midValue-range/2,midValue+range/2,"s");
+    profileB.SetMinimum(B-1);
+    profileB.SetMaximum(B+1);
 
     if ( midValue-range/2 < 0 || midValue+range/2 > 4096 ) { std::cout << "Hai esagerato. Termino..." << std::endl; return 0; }
 
     // ciclo delle simulazioni
     std::cout << "Run: ";
-    for( int k = 0; k < Nsim; k++ ) {
-
-        r.SetSeed(1);
+    ProgressBar bar(Nsim);
+    bar.Init();
+    for(int j=0; j<Nsim; j++)
+    {
+        bar.Update(j);
+        for( int i = 0; i < Nsim; i++ ) {
+            
+            r.SetSeed(i+1);
     	
-        // simulazione della baseline
-    	TH1D baseline("baseline","baseline",4096,0,4096);
-    	for ( int k = 0; k < B*(End-Begin); k++ ) baseline.Fill(r.Uniform(Begin,End));
-        // rebin 
-    	//baseline.Rebin(RebFactor);
+         // simulazione della baseline
+    	    TH1D baseline("baseline","baseline",4096,0,4096);
+    	    for ( int k = 0; k < B*(End-Begin); k++ ) baseline.Fill(r.Uniform(Begin,End));
+            // rebin 
+    	    //baseline.Rebin(RebFactor);
     	
-        //simulazione esponenziale
-   	    TH1D exponential("exponential","exponential",4096,0,4096);
-    	double val;
-        for ( int k = 0; k < A*tau; k++ ) {
-            val = r.Exp(tau);
-            if ( val > Begin && val < End ) exponential.Fill(val);
+         //simulazione esponenziale
+   	        TH1D exponential("exponential","exponential",4096,0,4096);
+    	    double val;
+            for ( int k = 0; k < A*tau; k++ ) {
+                val = r.Exp(tau);
+                while (val<Begin || val>End)    val = r.Exp(tau);
+                /*if ( val > Begin && val < End )*/ exponential.Fill(val);
+            }
+    	    // rebin eventuale
+    	    //exponential.Rebin(RebFactor);
+        
+            // sommo le due distribuzioni
+    	    total.Add( &baseline , &exponential );
+        
+            // prendo i risultati del fit, METODO 2: 'pol0' per fittare la baseline
+	        TFitResultPtr basePtr = total.Fit("pol0","LSNQ","",StartBase,End);
+	        profileB.Fill(StartBase,basePtr->Parameter(0));
+	        profileErrB.Fill(StartBase,basePtr->ParError(0));
         }
-    	// rebin eventuale
-    	//exponential.Rebin(RebFactor);
+            /*vFitBL2.push_back(basePtr->Parameter(0));
+            vFitErrBL2.push_back(basePtr->ParError(0));
+            vStartBase.push_back(StartBase);*/
         
-        // sommo le due distribuzioni
-    	total.Add( &baseline , &exponential );
-        
-        // prendo i risultati del fit, METODO 2: 'pol0' per fittare la baseline
-	    TFitResultPtr basePtr = total.Fit("pol0","LSNQ","",StartBase,End);
-        
-        vFitBL2.push_back(basePtr->Parameter(0));
-        vFitErrBL2.push_back(basePtr->ParError(0));
-        vStartBase.push_back(StartBase);
-        
-        StartBase += range/Nsim;
+            StartBase += range/Nsim;
     }
     
-    TCanvas can("can", "StartBase Analisys",1200,900);
+    total.Draw();
+    
+    TCanvas c("c", "Simulations",1200,900);
+    c.Divide(1,2);
+    c.cd(1);
+    profileB.Draw();
+    TLine l10( profileB.GetXaxis()->GetXmin(), B, profileB.GetXaxis()->GetXmax(), B );
+    l10.SetLineColor(kRed);
+    l10.Draw();
+    c.cd(2);
+    profileErrB.Draw();
+    
+    /*TCanvas can("can", "StartBase Analisys",1200,900);
     can.Divide(1,2);
 
     // definisco il grafico
@@ -155,7 +185,24 @@ int main( int argc, char* argv[] ) {
     can.cd(2);
     total.Draw();
     hSel.Draw("SAME");
-    lTick2.Draw();
+    lTick2.Draw();*/
+
+    std::cout << std::endl 
+	      << "---------------------------------------------------------------------------------" 
+	      << "\n./montecarlo.out " << B << " " << tau << " " << integrale << " " << taucorto 
+		  << " " << R << " " << RebFactor <<std::endl 
+	        << "\nEventi totali    " << integrale
+	      << "\nEventi baseline  " << B*(End-Begin)
+	      << "\nEventi exp lungo " << A*tau
+		  << "\nEventi exp corto " << A*taucorto/R
+	      << "\nValori in INPUT:"
+	      << "\n	Baseline  " << B
+	      << "\n	tau       " << tau
+	      << "\n	integrale " << integrale
+		  << "\n	taucorto  " << taucorto
+		  << "\n	R         " << R
+		  << "\n	RebFactor " << RebFactor
+		  << "\n	A         " << A << std::endl;
 
     Root.Run();
     return 0;
