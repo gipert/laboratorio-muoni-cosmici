@@ -3,13 +3,14 @@
 CC      = c++ -Wall -O3
 INCLUDE = $(shell root-config --cflags)
 LIB     = $(shell root-config --libs)
+BARPATH = code/ProgressBar/
 
 EXEC = code/montecarlo/semestre2/montecarlo code/analysis/lifetimeAnalysis code/calibration/openADC code/montecarlo/semestre2/montecarlo_modifiedforbaseline code/montecarlo/semestre2/baselineStart
 
 all : $(EXEC)
 
-code/montecarlo/semestre2/montecarlo : code/montecarlo/semestre2/montecarlo.cc code/ProgressBar/progressbar.cc
-	$(CC) $(INCLUDE) -Icode/ProgressBar/ -o $@ $^ $(LIB)
+code/montecarlo/semestre2/montecarlo : code/montecarlo/semestre2/montecarlo.cc $(BARPATH)progressbar.cc
+	$(CC) $(INCLUDE) -I$(BARPATH) -o $@ $^ $(LIB)
 
 code/montecarlo/semestre2/montecarlo_modifiedforbaseline : code/montecarlo/semestre2/montecarlo_modifiedforbaseline.cc
 	$(CC) $(INCLUDE) -o $@ $^ $(LIB)
@@ -20,8 +21,8 @@ code/analysis/lifetimeAnalysis : code/analysis/lifetime_nocalib_bkgr_sub.cc
 code/calibration/openADC : code/calibration/openADC.cc
 	$(CC) $(INCLUDE) -o $@ $^ $(LIB)
 
-code/montecarlo/semestre2/baselineStart : code/montecarlo/semestre2/baselineStart.cc
-	$(CC) $(INCLUDE) -o $@ $^ $(LIB)
+code/montecarlo/semestre2/baselineStart : code/montecarlo/semestre2/baselineStart.cc $(BARPATH)progressbar.cc
+	$(CC) $(INCLUDE) -I$(BARPATH) -o $@ $^ $(LIB)
 
 .PHONY : all clean
 
