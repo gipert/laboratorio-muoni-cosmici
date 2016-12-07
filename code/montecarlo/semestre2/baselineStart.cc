@@ -32,10 +32,10 @@
 #define midValue  2538  // =5tau
 #define range     1000*2// intervallo di valori attorno a midValue (canali)
 
-#define	Begin     160	// inizio istogramma
+#define	Begin     0	// inizio istogramma
 #define End       3904	// fine istogramma
-#define Nsim      500   // numero punti nel plot
-#define beginFit  160	// inizio fit esponenziale
+#define Nsim      100   // numero punti nel plot
+#define beginFit  860	// inizio fit esponenziale
 
 TRandom3 r;
 int counts;

@@ -30,7 +30,7 @@
 #define	Begin     0	// inizio istogramma
 #define StartBase 2600	// punto dell'istogramma in cui comincia la baseline --> FISSATO dai test su fit pol0 della baseline (baselineStart.cc)
 #define End       3904	// fine istogramma
-#define Nsim      100   // numero simulazioni
+#define Nsim      500   // numero simulazioni
 #define beginFit  860	// inizio fit esponenziale dei muoni lunghi
 
 
@@ -204,11 +204,7 @@ int main( int argc, char* argv[] ) {
         fitFunc.SetParameter("tauLong",fitFunc2.GetParameter("tau"));
         fitFunc.SetParameter("B",fitFunc2.GetParameter("B"));
         // FIT totale su total2 con fitfunc (ambedue le exp)
-        total2.Fit("fitFunc","LQN","",Begin+1,End);
-        
-        /*std::cout << "\nfitFunc2.GetParameter(\"A\") (1o fit)     = " << fitFunc2.GetParameter("A")
-                  << "\nfitFunc.GetParameter(\"Aplus\")           = " << fitFunc.GetParameter("Aplus")
-                  << "\nfitFunc.GetParameter(\"Aminus\")          = " << fitFunc.GetParameter("Aminus") << std::endl;*/ 
+        total2.Fit("fitFunc","LQN","",Begin,End);
         
         ratio    = fitFunc.GetParameter("Aplus")/fitFunc.GetParameter("Aminus");
         errRatio = sqrt( pow(fitFunc.GetParError(2),2)+pow(ratio*fitFunc.GetParError(0),2) )/fitFunc.GetParameter("Aminus");
@@ -221,12 +217,11 @@ int main( int argc, char* argv[] ) {
         vFitErrBL2.push_back(fitFunc.GetParError(4));
         vFitRL2.push_back(ratio);
         vFitErrRL2.push_back(errRatio);
-        //std::cout << "\ntau primo fit =" << fitFunc2.GetParameter("tau") << std::endl;
-    }
+            }
     
     //histo drawing
-	total2.Draw();
-	fitFunc.Draw("same");
+	//total2.Draw();
+	//fitFunc.Draw("same");
 	//std::cout << "\ntau primo fit =" << fitFunc2.GetParameter("tau") << std::endl;
 	/*std::cout << "Aminus =" << fitFunc.GetParameter("Aminus")
 	          << "tau-   =" << fitFunc.GetParameter("tauShort")
@@ -284,8 +279,8 @@ int main( int argc, char* argv[] ) {
 		  << "\n	taucorto  " << taucorto
 		  << "\n	R         " << R
 		  << "\n	RebFactor " << RebFactor
-		  << "\nA+        " << A 
-		  << "\nA-        " << Aminus << std::endl
+		  << "\n	A+        " << A 
+		  << "\n	A-        " << Aminus << std::endl
           << "\nSimulazioni MC effettuate:                         "  << Nsim
 	      << "\nIntervallo di generazione:                         [" << Begin     << ", " << End << "]" 
 	      << "\nIntervallo di fit baseline METODO 2:               [" << StartBase << ", " << End << "]"
