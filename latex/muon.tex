@@ -44,6 +44,15 @@
 \usepackage{circuitikz}					% Pacchetti per i disegni dei circuiti
 
 \usepackage{amsmath, amsthm, amssymb, amsfonts}		% Matematica
+
+\usepackage{listings}					% Inserimento di codice
+\lstset{language=C++}					% Tutti i codici riconosciuti come c++
+\lstset{basicstyle=\small\ttfamily,
+keywordstyle=\color{blue}\bfseries,
+commentstyle=\color{darkgray},
+stringstyle=\color{orange}}				% Colori delle righe di codice
+
+
 \renewcommand{\epsilon}{\varepsilon}			% Varianti lettere greche usate in Europa
 \renewcommand{\theta}{\vartheta}			%
 \renewcommand{\rho}{\varrho}				%
@@ -61,7 +70,7 @@
 \begin{abstract}
 	Lo scopo dell'esperienza di laboratorio è di caratterizzare e ottimizzare un apparato sperimentale per la rivelazione dei muoni cosmici, consistente nei suoi componenti fondamentali di scintillatori plastici e fotomoltiplicatori, e di studiare il loro decadimento in alluminio anche tramite lo sviluppo di modelli analitici e computazionali. Vengono infine riportati i valori sperimentali delle costanti di decadimento $\tau^+$ e $\tau^-$ delle rispettive particelle muoniche, nonchè il rapporto numerico tra le due popolazioni $N^+/N^-$.
 \end{abstract}
-\vspace{6.5cm}
+\vspace{5cm}
 Mattia Faggin \;\,[1122479] \texttt{mattia.faggin.1@studenti.unipd.it} \\
 Davide Piras \;\;\;\:[1114287] \texttt{davide.piras@studenti.unipd.it} \\
 Luigi Pertoldi \;\,\,[1128283] \texttt{luigi.pertoldi@studenti.unipd.it}
@@ -288,7 +297,7 @@ Il segnale di STOP corrisponde invece all'avvenuto decadimento e rivelazione del
 	\label{scemi}
 \end{figure}
 
-\section{Analisi dati}
+\section{Analisi dati preliminare}
 Dopo aver impostato il circuito come illustrato precedentemente, si è proceduto all'acquisizione dei dati relativi al ritardo che intercorre tra il passaggio del muone cosmico attraverso l'apparato di START e l'uscita dell'elettrone di decadimento attraverso lo STOP.
 
 I dati consistono di tre acquisizioni, per un totale di circa 75000 eventi, riguardanti due popolazioni differenti di muoni\footnote{Dati presi da K.A. Olive \emph{et al.} (Particle Data Group), Chin. Phys. C, \textbf{38}, 090001 (2014) and 2015 update.}:
@@ -342,9 +351,8 @@ In figura \ref{fig::histo} viene riportato il grafico degli eventi raccolti, dov
 	\caption{Risultati dei fit (rebin 12).}
 	\label{results}
 \end{table}
-
+\include{semestre2}
 %Un'ultima nota riguarda un fatto di cui, per il momento, non si è riusciti a dare una spiegazione: si è infatti raccolto un quarto file di dati, che, pur dando valori dei parametri consistenti con quelli presentati in tabella \ref{results}, non risultano invece compatibili con gli altri 3 set di misure. A questo dubbio si potrà dare una risposta solo una volta tornati in laboratorio.
-
 %
 %
 %
