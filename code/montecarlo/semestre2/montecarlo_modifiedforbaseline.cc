@@ -21,6 +21,7 @@
 #include "TFitResult.h"
 #include "TFitResultPtr.h"
 #include "TF1.h"
+#include "TLine.h"
 
 // questi valori andranno poi aggiustati (inizio istogramma, inizio baseline, fine istogramma)
 #define	Begin     160	// inizio istogramma
@@ -281,21 +282,38 @@ int main( int argc, char* argv[] ) {
     fitGaus(hFitErrAL);
     fitGaus(hFitErrAC); */
 
+    TLine line(B,0,B,20);
+    line.SetLineColor(kRed);
     TCanvas can( "can", canName.c_str(), 1 );
-    can.Divide(2,2);
+    can.Divide(3,2);
     can.cd(1);
+        hFitBMean.GetXaxis()->SetTitle("B");
+        hFitBMean.GetYaxis()->SetTitle("counts");
         hFitBMean.Draw();
+        line.Draw("same");
     can.cd(2);
+        hFitBL.GetXaxis()->SetTitle("B");
+        hFitBL.GetYaxis()->SetTitle("counts");
         hFitBL.Draw();
+        line.Draw("same");
     can.cd(3);
+        hFitBC.GetXaxis()->SetTitle("B");
+        hFitBC.GetYaxis()->SetTitle("counts");
         hFitBC.Draw();
-      TCanvas canErr( "canErr", (canName + "ERRORI").c_str() , 1 );
-    canErr.Divide(2,2);
-    canErr.cd(1);
+        line.Draw("same");
+   //   TCanvas canErr( "canErr", (canName + "ERRORI").c_str() , 1 );
+    //canErr.Divide(2,2);
+    can.cd(4);
+        hFitErrBMean.GetXaxis()->SetTitle("#sigma_{B}");
+        hFitErrBMean.GetYaxis()->SetTitle("counts");
         hFitErrBMean.Draw();
-    canErr.cd(2);
+    can.cd(5);
+        hFitErrBL.GetXaxis()->SetTitle("#sigma_{B}");
+        hFitErrBL.GetYaxis()->SetTitle("counts");
         hFitErrBL.Draw();
-    canErr.cd(3);
+    can.cd(6);
+        hFitErrBC.GetXaxis()->SetTitle("#sigma_{B}");
+        hFitErrBC.GetYaxis()->SetTitle("counts");
         hFitErrBC.Draw();
   
 		/*can.Divide(2, 2);
