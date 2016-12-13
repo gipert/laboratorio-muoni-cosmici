@@ -1,7 +1,7 @@
 *.swp
 .DS_store
 log
-./latex/*.pdf
+latex/*.pdf
 *.aux
 *.toc
 *.lof

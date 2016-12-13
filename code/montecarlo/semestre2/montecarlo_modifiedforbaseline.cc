@@ -104,7 +104,7 @@ int main( int argc, char* argv[] ) {
     auto oldErrorIgnoreLevel = gErrorIgnoreLevel;
     gErrorIgnoreLevel = kError;
 
-	counts = B*(End - Begin);
+    counts = B*(End - Begin);
 	//counts = A*tau;
     //std::cout << "Eventi totali: " << counts << std::endl;
 
