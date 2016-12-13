@@ -34,7 +34,6 @@
 #define Nsim      100   // numero simulazioni
 #define beginFit  860	// inizio fit esponenziale dei muoni lunghi
 
-
 TRandom3 r;
 int counts;
 
@@ -42,35 +41,7 @@ struct distRange{
     double minimo;
     double massimo;
 };
-    
-struct dataBase {
-    double media;
-    double fitL;
-    double fitC;
 
-    double errMedia;
-    double errFitL;
-    double errFitC;
-
-    TH1D hBase;
-};
-
-struct dataExp{
-    double tauL;
-    double tauC;
-    double AL;
-    double AC;
-
-    double errTauL;
-    double errTauC;
-    double errAL;
-    double errAC;
-
-    TH1D* hExp;
-};
-
-dataBase simulateBase( float B, int rebin );
-dataExp  simulateExp( double tau, double A, int rebin );
 void fitGaus(TH1D h);
 distRange getRange(std::vector<double> v);
 
@@ -108,7 +79,7 @@ int main( int argc, char* argv[] ) {
 	double Aminus    = A/R;	
 
     TApplication Root("App",&argc,argv); 
-    gErrorIgnoreLevel = kError; // toglie i warning
+    //gErrorIgnoreLevel = kError; // toglie i warning
     gStyle->SetOptStat(0);
 
     // METODO 2
@@ -197,7 +168,7 @@ int main( int argc, char* argv[] ) {
         // fite preliminare per settare tau+ e tau- la 1a volta
         TFitResultPtr ptr = total2.Fit("expo","SNQ");
         double tauSet = -1/(ptr->Parameter(1));
-        std::cout << "\ntauSet " << tauSet << std::endl;
+        //std::cout << "\ntauSet " << tauSet << std::endl;
 
         // METODO 2: pol0 per B, quindi B-setting e fit con fitFunc2, quindi fit complessivo
 	    TFitResultPtr basePtr = total2.Fit("pol0","LSNQ","",StartBase,End);
