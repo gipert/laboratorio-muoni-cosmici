@@ -65,7 +65,7 @@ Nota Bene:
 * `git pull` semplicemente aggiunge ciò che trova nel remote al vostro lavoro, se volete essere certi di avere una 
   lo stesso identico codice che si trova nella branch di riferimento nella repository dovete:
     * `$ git fetch bitbucket` : fa un download di quello che c'è nella repo senza fare il merge con il locale
-    * `$ git reset --hard bitbucket/my_branch` : effettivamente rimpiazza ciò che avete in locale
+    * `$ git reset --hard bitbucket/branch_name` : effettivamente rimpiazza ciò che avete in locale
 * Quando c'è una nuova branch nel remote e volete averla in locale dovete prima crearla e associarla a quella remota.
   Solo dopo potete fare pull:
     * `$ git checkout -b newlocalbranchname bitbucket/branch-name`
