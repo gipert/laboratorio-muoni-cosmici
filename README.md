@@ -64,15 +64,15 @@ Nota Bene:
 * Ricordatevi di mantenere sincronizzato il vostro lavoro con quello presente sulla repository tramite `git pull`
 * `git pull` semplicemente aggiunge ciò che trova nel remote al vostro lavoro, se volete essere certi di avere una 
   lo stesso identico codice che si trova nella branch di riferimento nella repository dovete:
-  `$ git fetch bitbucket` : fa un download di quello che c'è nella repo senza fare il merge con il locale
-  `$ git reset --hard bitbucket/my_branch` : effettivamente rimpiazza ciò che avete in locale
+    * `$ git fetch bitbucket` : fa un download di quello che c'è nella repo senza fare il merge con il locale
+    * `$ git reset --hard bitbucket/my_branch` : effettivamente rimpiazza ciò che avete in locale
 * Quando c'è una nuova branch nel remote e volete averla in locale dovete prima crearla e associarla a quella remota.
   Solo dopo potete fare pull:
-  `$ git checkout -b newlocalbranchname bitbucket/branch-name`
-  `$ git pull`
+    * `$ git checkout -b newlocalbranchname bitbucket/branch-name`
+    * `$ git pull`
 * Se vi siete accorti che avete fatto una cazzata nell'ultimo commit e volete tornare indietro potete:
-  `$ git reset HEAD~` : annulla il commit
-  `$ git revert HEAD~` : crea un nuovo commit in cui eliminate le modifiche dell'ultimo
+    * `$ git reset HEAD~` : annulla il commit
+    * `$ git revert HEAD~` : crea un nuovo commit in cui eliminate le modifiche dell'ultimo
 
 La procedura di cui sopra è un esempio dei tanti modi in cui si possono proporre modifiche ad un progetto, `git` è un
 programma molto esteso, sbizzarritevi! Potete creare più branches, potete lavorare sulla vostra versione nella vostra
