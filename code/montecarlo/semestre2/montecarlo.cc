@@ -31,7 +31,7 @@
 #define	Begin     0	// inizio istogramma
 #define StartBase 2600	// punto dell'istogramma in cui comincia la baseline --> FISSATO dai test su fit pol0 della baseline (baselineStart.cc)
 #define End       3904	// fine istogramma
-#define Nsim      100   // numero simulazioni
+#define Nsim      500   // numero simulazioni
 #define beginFit  860	// inizio fit esponenziale dei muoni lunghi
 
 
@@ -42,36 +42,8 @@ struct distRange{
     double minimo;
     double massimo;
 };
-    
-struct dataBase {
-    double media;
-    double fitL;
-    double fitC;
 
-    double errMedia;
-    double errFitL;
-    double errFitC;
-
-    TH1D hBase;
-};
-
-struct dataExp{
-    double tauL;
-    double tauC;
-    double AL;
-    double AC;
-
-    double errTauL;
-    double errTauC;
-    double errAL;
-    double errAC;
-
-    TH1D* hExp;
-};
-
-dataBase simulateBase( float B, int rebin );
-dataExp  simulateExp( double tau, double A, int rebin );
-void fitGaus(TH1D h);
+double fitGaus(TH1D h);
 distRange getRange(std::vector<double> v);
 
 //--------------- main ---------------------
@@ -197,7 +169,7 @@ int main( int argc, char* argv[] ) {
         // fite preliminare per settare tau+ e tau- la 1a volta
         TFitResultPtr ptr = total2.Fit("expo","SNQ");
         double tauSet = -1/(ptr->Parameter(1));
-        std::cout << "\ntauSet " << tauSet << std::endl;
+        //std::cout << "\ntauSet " << tauSet << std::endl;
 
         // METODO 2: pol0 per B, quindi B-setting e fit con fitFunc2, quindi fit complessivo
 	    TFitResultPtr basePtr = total2.Fit("pol0","LSNQ","",StartBase,End);
@@ -295,17 +267,14 @@ int main( int argc, char* argv[] ) {
 	      << "\nIntervallo di fit (exp-)+(exp+)+base METODO 2:     [" << Begin     << ", " << End << "]" << std::endl;
     std::string canName = "Simulazione MC (" + std::to_string(Nsim) + " simulazioni)";
 
-    // fit gaussiani delle distribuzioni METODO 2
-    std::cout<<"\n METODO 2" << std::endl;
-    fitGaus(hFitTauL2);
-    fitGaus(hFitTauShortL2);
-    fitGaus(hFitBL2);
-    fitGaus(hFitRL2);
+    std::cout << "IN  " << tau << "  " << B << "  " << taucorto << "  " << R << std::endl;
     
-    fitGaus(hFitErrTauL2);
-    fitGaus(hFitErrTauShortL2);
-    fitGaus(hFitErrBL2);
-    fitGaus(hFitErrRL2);
+    // fit gaussiani delle distribuzioni METODO 2
+    //std::cout<<"\n METODO 2" << std::endl;
+    std::cout << "OUT  " << fitGaus(hFitTauL2) << " +- " << fitGaus(hFitErrTauL2) << "  "
+                         << fitGaus(hFitBL2) << " +- " << fitGaus(hFitErrBL2) << "  "
+                         << fitGaus(hFitTauShortL2) << " +- " << fitGaus(hFitErrTauShortL2) << "  "
+                         << fitGaus(hFitRL2) << " +- " << fitGaus(hFitErrRL2) << std::endl;
     
     TCanvas can2( "METODO2", (canName + " METODO 2").c_str(), 1200 , 700 );
     can2.Divide(4,2);
@@ -344,17 +313,17 @@ int main( int argc, char* argv[] ) {
 }
 //--------------- fine main ----------------------
  
-void fitGaus(TH1D h){
+double fitGaus(TH1D h){
    int dim = h.GetNbinsX();
 
    std::string name = h.GetName();
-   std::cout << std::endl << name <<std::endl;
+   //std::cout << std::endl << name <<std::endl;
    if (h.GetBinContent(0)>10 || h.GetBinContent(dim+1)>10)
    {
 	std::cout <<"Underflow " << h.GetBinContent(0)
 		  <<"\nOverflow  " << h.GetBinContent(dim+1)
 		  <<"\nTroppi dati fuori range: fit non fatto" << std::endl;;
-	return;
+	return -1;
    }
    double min = h.GetBinCenter(1);
    double max = h.GetBinCenter(dim);
@@ -364,10 +333,10 @@ void fitGaus(TH1D h){
    double sigma = p->Parameter(2);
    double errsigma = p->ParError(2);
 
-   std::cout << "mean = "       << mean  << " +- " << err << std::endl
-	         << "sigma = "      << sigma << " +- "<< errsigma << std::endl
-             << "mean/sigma = " << "("   << sigma*100/mean << "%)" << std::endl;
-   return;
+   //std::cout << "mean = "       << mean  << " +- " << err << std::endl
+//	         << "sigma = "      << sigma << " +- "<< errsigma << std::endl
+  //           << "mean/sigma = " << "("   << sigma*100/mean << "%)" << std::endl;
+   return mean;
 }
 
 
