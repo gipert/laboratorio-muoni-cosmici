@@ -22,6 +22,7 @@
 #include "TFitResultPtr.h"
 #include "TF1.h"
 #include "TLine.h"
+#include "TStyle.h"
 
 // questi valori andranno poi aggiustati (inizio istogramma, inizio baseline, fine istogramma)
 #define	Begin     160	// inizio istogramma
@@ -103,6 +104,7 @@ int main( int argc, char* argv[] ) {
     TApplication Root("App",&argc,argv);
     auto oldErrorIgnoreLevel = gErrorIgnoreLevel;
     gErrorIgnoreLevel = kError;
+    gStyle->SetOptStat(0);
 
     counts = B*(End - Begin);
 	//counts = A*tau;

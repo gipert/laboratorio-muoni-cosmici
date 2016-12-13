@@ -23,6 +23,7 @@
 #include "TF1.h"
 #include "TLine.h"
 #include "TGraphErrors.h"
+#include "TStyle.h"
 
 #include "../../ProgressBar/progressbar.h"
 
@@ -30,9 +31,8 @@
 #define	Begin     0	// inizio istogramma
 #define StartBase 2600	// punto dell'istogramma in cui comincia la baseline --> FISSATO dai test su fit pol0 della baseline (baselineStart.cc)
 #define End       3904	// fine istogramma
-#define Nsim      500   // numero simulazioni
+#define Nsim      100   // numero simulazioni
 #define beginFit  860	// inizio fit esponenziale dei muoni lunghi
-
 
 TRandom3 r;
 int counts;
@@ -41,35 +41,7 @@ struct distRange{
     double minimo;
     double massimo;
 };
-    
-struct dataBase {
-    double media;
-    double fitL;
-    double fitC;
 
-    double errMedia;
-    double errFitL;
-    double errFitC;
-
-    TH1D hBase;
-};
-
-struct dataExp{
-    double tauL;
-    double tauC;
-    double AL;
-    double AC;
-
-    double errTauL;
-    double errTauC;
-    double errAL;
-    double errAC;
-
-    TH1D* hExp;
-};
-
-dataBase simulateBase( float B, int rebin );
-dataExp  simulateExp( double tau, double A, int rebin );
 void fitGaus(TH1D h);
 distRange getRange(std::vector<double> v);
 
@@ -107,7 +79,8 @@ int main( int argc, char* argv[] ) {
 	double Aminus    = A/R;	
 
     TApplication Root("App",&argc,argv); 
-    gErrorIgnoreLevel = kError; // toglie i warning
+    //gErrorIgnoreLevel = kError; // toglie i warning
+    gStyle->SetOptStat(0);
 
     // METODO 2
     std::vector<double> vFitTauL2;
@@ -192,14 +165,19 @@ int main( int argc, char* argv[] ) {
 		// somma istogrammi exp+ e baseline (già in total) e exp-
 		total2.Add(&total, &exponential2);
 
+        // fite preliminare per settare tau+ e tau- la 1a volta
+        TFitResultPtr ptr = total2.Fit("expo","SNQ");
+        double tauSet = -1/(ptr->Parameter(1));
+        //std::cout << "\ntauSet " << tauSet << std::endl;
+
         // METODO 2: pol0 per B, quindi B-setting e fit con fitFunc2, quindi fit complessivo
 	    TFitResultPtr basePtr = total2.Fit("pol0","LSNQ","",StartBase,End);
         fitFunc2.SetParameter(2,basePtr->Parameter(0));
-        fitFunc2.SetParameter(1,tau);
+        fitFunc2.SetParameter(1,tauSet);
 
         // FIT (exp+)+Base direttamente su total2 con fitfunc2 (solo 1 exp) 
         total2.Fit("fitFunc2","LQN","",beginFit,End);
-        fitFunc.SetParameter("tauShort",taucorto);
+        fitFunc.SetParameter("tauShort",tauSet);
         //fitFunc.SetParameter("Aplus",fitFunc2.GetParameter("A"));
         fitFunc.SetParameter("tauLong",fitFunc2.GetParameter("tau"));
         fitFunc.SetParameter("B",fitFunc2.GetParameter("B"));
@@ -246,7 +224,7 @@ int main( int argc, char* argv[] ) {
     TH1D hFitBL2   	        ( "hFitBL2"   	        , "Likelihood (B)"          , 100, rFitBL2.minimo, rFitBL2.massimo );
     TH1D hFitRL2            ( "hFitRL2"             , "Likelihood (R)"          , 100, rFitRL2.minimo, rFitRL2.massimo );   
  
-    TH1D hFitErrTauL2 	    ( "hFitErrTauL2"        , "Likelihood (#tau-{+})"   , 100, rFitErrTauL2.minimo, rFitErrTauL2.massimo); 
+    TH1D hFitErrTauL2 	    ( "hFitErrTauL2"        , "Likelihood (#tau_{+})"   , 100, rFitErrTauL2.minimo, rFitErrTauL2.massimo); 
     TH1D hFitErrTauShortL2  ( "hFitErrTauShortL2"   , "Likelihood (#tau_{-})"   , 100, rFitErrTauShortL2.minimo, rFitErrTauShortL2.massimo); 
     TH1D hFitErrBL2 	    ( "hFitErrBL2"          , "Likelihood (B)"          , 100, rFitErrBL2.minimo, rFitErrBL2.massimo);
     TH1D hFitErrRL2 	    ( "hFitErrRL2"          , "Likelihood (R)"          , 100, rFitErrRL2.minimo, rFitErrRL2.massimo);

@@ -97,10 +97,10 @@ int main( int argc, char* argv[] ) {
 
 	// ciclo delle simulazioni
 	double val = 0;
-	double entina = 0;    // gigi, digita "Valentina Nappi" su google e vedi cosa esce...
+	double entina = 0;
 	double ratio = 0;
 	double errRatio = 0;
-    std::cout << "Run: ";
+
     ProgressBar bar(Nsim);
     bar.Init();
     for(int j=0; j<Nsim; j++)
