@@ -23,6 +23,7 @@
 #include "TF1.h"
 #include "TLine.h"
 #include "TGraphErrors.h"
+#include "TStyle.h"
 
 #include "../../ProgressBar/progressbar.h"
 
@@ -108,6 +109,7 @@ int main( int argc, char* argv[] ) {
 
     TApplication Root("App",&argc,argv); 
     gErrorIgnoreLevel = kError; // toglie i warning
+    gStyle->SetOptStat(0);
 
     // METODO 2
     std::vector<double> vFitTauL2;
