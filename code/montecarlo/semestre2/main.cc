@@ -40,29 +40,28 @@ int main( int argc, char* argv[] ) {
 */
     
    std::vector<bool> vOut;
-   std::vector<int>  vCounter;
+   std::vector<int>  vCounter(4,0);
    //std::vector<std::vector<std::vector<std::vector<bool>>>> matrixBool;
    // matrixBool[i]         taulungo
    //             [j]       taucorto
    //               [l]     R
    //                 [k]   Integrale
     
-    ProgressBar bar(81);
-    bar.Init();
     int progress = 1;
 
     for ( int tauL = 250; tauL < 650; tauL+=180 ) {
         for ( int tauS = 100; tauS < 250; tauS+=72 ) {
             for ( double R = 0.621; R < 2; R+=0.6 ) {
                 for ( int I = 80000; I < 410000; I+=160000 ) {
-                
-                    bar.Update(progress);
+                    
+                    std::cout << "Simulazione " << progress << "/81 " << std::flush;
                     
                     int B = I/80000;
                     vOut = montecarlo( B, tauL, I, tauS, R, 1 );
                     for ( int i = 0; i < 4; i++ ) vCounter[i] += vOut[i]; 
 
                     progress++;
+                    std::cout << std::endl;
                 }
             }
         }
