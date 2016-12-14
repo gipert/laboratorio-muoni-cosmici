@@ -5,11 +5,11 @@ INCLUDE = $(shell root-config --cflags)
 LIB     = $(shell root-config --libs)
 BARPATH = code/ProgressBar/
 
-EXEC = code/montecarlo/semestre2/montecarlo code/analysis/lifetimeAnalysis code/calibration/openADC code/montecarlo/semestre2/montecarlo_modifiedforbaseline code/montecarlo/semestre2/baselineStart
+EXEC = code/montecarlo/semestre2/main code/analysis/lifetimeAnalysis code/calibration/openADC code/montecarlo/semestre2/montecarlo_modifiedforbaseline code/montecarlo/semestre2/baselineStart
 
 all : $(EXEC)
 
-code/montecarlo/semestre2/montecarlo : code/montecarlo/semestre2/montecarlo.cc $(BARPATH)progressbar.cc
+code/montecarlo/semestre2/main : code/montecarlo/semestre2/main.cc code/montecarlo/semestre2/montecarlo.cc $(BARPATH)progressbar.cc
 	$(CC) $(INCLUDE) -I$(BARPATH) -o $@ $^ $(LIB)
 
 code/montecarlo/semestre2/montecarlo_modifiedforbaseline : code/montecarlo/semestre2/montecarlo_modifiedforbaseline.cc

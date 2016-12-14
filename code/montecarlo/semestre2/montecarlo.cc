@@ -31,7 +31,7 @@
 #define	Begin     0	// inizio istogramma
 #define StartBase 2600	// punto dell'istogramma in cui comincia la baseline --> FISSATO dai test su fit pol0 della baseline (baselineStart.cc)
 #define End       3904	// fine istogramma
-#define Nsim      100   // numero simulazioni
+#define Nsim      500   // numero simulazioni
 #define beginFit  860	// inizio fit esponenziale dei muoni lunghi
 
 TRandom3 r;
@@ -42,64 +42,29 @@ struct distRange{
     double massimo;
 };
 
-void fitGaus(TH1D h);
+TFitResultPtr fitGaus(TH1D h);
 distRange getRange(std::vector<double> v);
 
 //--------------- main ---------------------
-int main( int argc, char* argv[] ) {
+std::vector<bool> montecarlo( float B, double tau, double integrale, double taucorto, double R, int RebFactor  ) {
 
-    // salvo gli argomenti prima di darli in pasto al TApplication
-    // perchè lui li modifica
-    std::vector<std::string> args;
-    args.reserve(argc);
-    for ( int i = 0; i < argc; i++ ) args.push_back(argv[i]);
+    double A      = (integrale - B*(End - Begin)) / (tau + taucorto / R);
+	double Aminus = A/R;	
 
-    if ( argc == 2 && args[1] == "--help" ) {
-        std::cout << std::endl
-                  << "MonteCarlo per la misura della vita media dei muoni cosmici in alluminio." << std::endl
-                  << "Autori: Mattia Faggin, Davide Piras, Luigi Pertoldi" << std::endl << std::endl
-                  << "Utilizzo:" << std::endl 
-                  << "    $ ./montecarlo [Baseline] [tau] [Integrale] [taucorto] [R] [rebinFactor] " << std::endl << std::endl;
-        return 0;
-    }
-
-    if ( argc < 7 ) {
-        std::cout << "Pochi argomenti! Se non ti ricordi c'è l'opzione '--help'" << std::endl
-                  << "Termino l'esecuzione..." << std::endl;
-        return 0;
-    }
-
-    float B          = std::stof(args[1]); // valore tipico per 1 settimana: 2 (circa)
-    double tau	     = std::stof(args[2]); // valore vero = 429 canali
-	double integrale = std::stof(args[3]); // valore tipico per 1 settimana: 70000 (circa)
-	double taucorto  = std::stof(args[4]); // valore vero = 172 canali (circa)
-	double R         = std::stof(args[5]); // valore vero: 1.261
-	int RebFactor    = std::stoi(args[6]);
-	double A         = (integrale - B*(End - Begin)) / (tau + taucorto / R);
-	double Aminus    = A/R;	
-
-    TApplication Root("App",&argc,argv); 
+    //TApplication Root("App",&argc,argv); 
     //gErrorIgnoreLevel = kError; // toglie i warning
-    gStyle->SetOptStat(0);
+    //gStyle->SetOptStat(0);
 
     // METODO 2
     std::vector<double> vFitTauL2;
-    vFitTauL2.reserve(Nsim);
     std::vector<double> vFitTauShortL2;
-    vFitTauShortL2.reserve(Nsim);
     std::vector<double> vFitBL2;
-    vFitBL2.reserve(Nsim);
     std::vector<double> vFitRL2;
-    vFitRL2.reserve(Nsim);
     
     std::vector<double> vFitErrTauL2;
-    vFitErrTauL2.reserve(Nsim);
     std::vector<double> vFitErrTauShortL2;
-    vFitErrTauShortL2.reserve(Nsim);
     std::vector<double> vFitErrBL2;
-    vFitErrBL2.reserve(Nsim);
     std::vector<double> vFitErrRL2;
-    vFitErrRL2.reserve(Nsim);
 
     // simulazione baseline+exp
     TH1D total("total","total",4096,0,4096);
@@ -117,18 +82,25 @@ int main( int argc, char* argv[] ) {
     fitFunc2.SetParName(2,"B");
 
     // ProgressBar
-    ProgressBar bar(Nsim);
-    bar.Init();
+    //ProgressBar bar(Nsim);
+    //bar.Init();
     // ciclo delle simulazioni
     double val      = 0;
-    double entina   = 0;    // gigi, digita "Valentina Nappi" su google e vedi cosa esce...
+    double entina   = 0;
     double ratio    = 0;
     double errRatio = 0;
+
+
+    int countTauPlus = 0;
+    int countTauMin = 0;
+    int countR = 0;
+    int countTot = 0;
+
     for(int k=0; k<Nsim; k++)
     {
 
-        bar.Update(k);
-	    r.SetSeed(k+1);
+        //bar.Update(k);
+	    r.SetSeed(0);
     	// simulazione della baseline
     	TH1D baseline("baseline","baseline",4096,0,4096);
     	for ( int k = 0; k < B*(End-Begin); k++ )
@@ -187,15 +159,36 @@ int main( int argc, char* argv[] ) {
         ratio    = fitFunc.GetParameter("Aplus")/fitFunc.GetParameter("Aminus");
         errRatio = sqrt( pow(fitFunc.GetParError(2),2)+pow(ratio*fitFunc.GetParError(0),2) )/fitFunc.GetParameter("Aminus");
         
-        vFitTauShortL2.push_back(fitFunc.GetParameter("tauShort"));
-        vFitErrTauShortL2.push_back(fitFunc.GetParError(1)); 
-        vFitTauL2.push_back(fitFunc.GetParameter("tauLong"));
-        vFitErrTauL2.push_back(fitFunc.GetParError(3));       
-        vFitBL2.push_back(fitFunc.GetParameter("B"));
-        vFitErrBL2.push_back(fitFunc.GetParError(4));
-        vFitRL2.push_back(ratio);
-        vFitErrRL2.push_back(errRatio);
-            }
+        double compTauPlus = TMath::Abs(fitFunc.GetParameter("tauLong") - tau)/fitFunc.GetParError(3);
+        double compTauMin = TMath::Abs(fitFunc.GetParameter("tauShort") - taucorto)/fitFunc.GetParError(1);
+        double compR = TMath::Abs(ratio - R)/errRatio;
+
+        double errRelTauPlus = fitFunc.GetParError(3)/fitFunc.GetParameter("tauLong");
+        double errRelTauMin = fitFunc.GetParError(1)/fitFunc.GetParameter("tauShort");
+        double errRelR = errRatio/ratio;
+
+        int compLimit = 3;
+        double errLimit = 0.2;
+
+        // pushback
+        if ( compTauPlus > compLimit || errRelTauPlus > errLimit ) countTauPlus++; 
+        if ( compTauMin  > compLimit || errRelTauMin  > errLimit ) countTauMin++; 
+        if ( compR       > compLimit || errRelR       > errLimit ) countR++;
+
+        if ( compTauPlus > compLimit || errRelTauPlus > errLimit ||
+             compTauMin  > compLimit || errRelTauMin  > errLimit ||
+             compR       > compLimit || errRelR       > errLimit ) countTot++;
+        else {
+            vFitTauShortL2.push_back(fitFunc.GetParameter("tauShort"));
+            vFitErrTauShortL2.push_back(fitFunc.GetParError(1)); 
+            vFitTauL2.push_back(fitFunc.GetParameter("tauLong"));
+            vFitErrTauL2.push_back(fitFunc.GetParError(3));       
+            vFitBL2.push_back(fitFunc.GetParameter("B"));
+            vFitErrBL2.push_back(fitFunc.GetParError(4));
+            vFitRL2.push_back(ratio);
+            vFitErrRL2.push_back(errRatio);
+        }
+    }
     
     //histo drawing
 	//total2.Draw();
@@ -213,10 +206,10 @@ int main( int argc, char* argv[] ) {
     distRange rFitBL2           = getRange(vFitBL2);
     distRange rFitRL2           = getRange(vFitRL2);
     
-    distRange rFitErrTauL2          = getRange(vFitErrTauL2);
-    distRange rFitErrTauShortL2     = getRange(vFitErrTauShortL2);
-    distRange rFitErrBL2            = getRange(vFitErrBL2);
-    distRange rFitErrRL2            = getRange(vFitErrRL2); 
+    distRange rFitErrTauL2      = getRange(vFitErrTauL2);
+    distRange rFitErrTauShortL2 = getRange(vFitErrTauShortL2);
+    distRange rFitErrBL2        = getRange(vFitErrBL2);
+    distRange rFitErrRL2        = getRange(vFitErrRL2); 
 
     // creo gli istogrammi delle distribuzioni METODO 2
     TH1D hFitTauL2 	        ( "hFitTauL2" 	        , "Likelihood (#tau_{+})"   , 100, rFitTauL2.minimo, rFitTauL2.massimo );
@@ -230,7 +223,7 @@ int main( int argc, char* argv[] ) {
     TH1D hFitErrRL2 	    ( "hFitErrRL2"          , "Likelihood (R)"          , 100, rFitErrRL2.minimo, rFitErrRL2.massimo);
 
     // riempio gli istogrammi METODO 2
-    for ( int i = 0; i < Nsim; i++ ) {        
+    for ( int i = 0; i < vFitTauL2.size(); i++ ) {        
         hFitTauL2.Fill(vFitTauL2.at(i));
         hFitTauShortL2.Fill(vFitTauShortL2.at(i));
         hFitBL2.Fill(vFitBL2.at(i));
@@ -241,7 +234,7 @@ int main( int argc, char* argv[] ) {
         hFitErrBL2.Fill(vFitErrBL2.at(i));
         hFitErrRL2.Fill(vFitErrRL2.at(i));
     }
-
+/*
     std::cout << std::endl 
 	      << "---------------------------------------------------------------------------------" 
 	      << "\n./montecarlo.out " << B << " " << tau << " " << integrale << " " << taucorto 
@@ -263,21 +256,50 @@ int main( int argc, char* argv[] ) {
 	      << "\nIntervallo di generazione:                         [" << Begin     << ", " << End << "]" 
 	      << "\nIntervallo di fit baseline METODO 2:               [" << StartBase << ", " << End << "]"
 	      << "\nIntervallo di fit (exp+)+base METODO 2:            [" << beginFit  << ", " << End << "]"
-	      << "\nIntervallo di fit (exp-)+(exp+)+base METODO 2:     [" << Begin     << ", " << End << "]" << std::endl;
-    std::string canName = "Simulazione MC (" + std::to_string(Nsim) + " simulazioni)";
+	      << "\nIntervallo di fit (exp-)+(exp+)+base METODO 2:     [" << Begin     << ", " << End << "]"
+          << "\nEfficienza tau: "         << (Nsim-countTauPlus)*100./Nsim << "%"
+          << "\nEfficienza taucorto: "    << (Nsim-countTauMin)*100./Nsim  << "%"
+          << "\nEfficienza R: "           << (Nsim-countR)*100./Nsim       << "%"
+          << "\nEfficienza complessiva: " << (Nsim-countTot)*100./Nsim     << "%" << std::endl;
 
+    std::string canName = "Simulazione MC (" + std::to_string(Nsim) + " simulazioni)";
+*/
     // fit gaussiani delle distribuzioni METODO 2
-    std::cout<<"\n METODO 2" << std::endl;
-    fitGaus(hFitTauL2);
-    fitGaus(hFitTauShortL2);
-    fitGaus(hFitBL2);
-    fitGaus(hFitRL2);
     
-    fitGaus(hFitErrTauL2);
-    fitGaus(hFitErrTauShortL2);
-    fitGaus(hFitErrBL2);
-    fitGaus(hFitErrRL2);
+    double errLimit = 0.2;
+    int compLimit = 3;
+    int factorLimit = 2;
+
+    std::vector<bool> vBool(4, true);
     
+    TFitResultPtr p, pErr;
+
+    p    = fitGaus(hFitTauL2);
+    pErr = fitGaus(hFitErrTauL2);
+
+    if ( pErr->Parameter(1)/p->Parameter(1) > errLimit || 
+         TMath::Abs(p->Parameter(1)-tau)/pErr->Parameter(1) > compLimit ||
+         p->Parameter(2) > factorLimit*pErr->Parameter(1) ) vBool[0] = false;
+ 
+    p    = fitGaus(hFitTauShortL2);
+    pErr = fitGaus(hFitErrTauShortL2);
+
+    if ( pErr->Parameter(1)/p->Parameter(1) > errLimit || 
+         TMath::Abs(p->Parameter(1)-tau)/pErr->Parameter(1) > compLimit ||
+         p->Parameter(2) > factorLimit*pErr->Parameter(1) ) vBool[1] = false;
+    
+    p    = fitGaus(hFitRL2);
+    pErr = fitGaus(hFitErrRL2);
+
+    if ( pErr->Parameter(1)/p->Parameter(1) > errLimit || 
+         TMath::Abs(p->Parameter(1)-tau)/pErr->Parameter(1) > compLimit ||
+         p->Parameter(2) > factorLimit*pErr->Parameter(1) ) vBool[2] = false;
+
+    if ( vBool[0] == false || vBool[1] == false || vBool[2] == false ) vBool[3] = false;
+ 
+    p = fitGaus(hFitBL2); 
+    pErr = fitGaus(hFitErrBL2);
+/*    
     TCanvas can2( "METODO2", (canName + " METODO 2").c_str(), 1200 , 700 );
     can2.Divide(4,2);
     can2.cd(1);
@@ -310,23 +332,23 @@ int main( int argc, char* argv[] ) {
         hFitErrRL2.Draw();
         
     Root.Run();
-
-    return 0;
+*/
+    return vBool;
 }
 //--------------- fine main ----------------------
  
-void fitGaus(TH1D h){
+TFitResultPtr fitGaus(TH1D h){
    int dim = h.GetNbinsX();
 
    std::string name = h.GetName();
-   std::cout << std::endl << name <<std::endl;
-   if (h.GetBinContent(0)>10 || h.GetBinContent(dim+1)>10)
+   //std::cout << std::endl << name <<std::endl;
+   /*if (h.GetBinContent(0)>10 || h.GetBinContent(dim+1)>10)
    {
 	std::cout <<"Underflow " << h.GetBinContent(0)
 		  <<"\nOverflow  " << h.GetBinContent(dim+1)
 		  <<"\nTroppi dati fuori range: fit non fatto" << std::endl;;
-	return;
-   }
+	return 0;
+   }*/
    double min = h.GetBinCenter(1);
    double max = h.GetBinCenter(dim);
    TFitResultPtr p = h.Fit("gaus","SQN","",min,max);
@@ -335,10 +357,10 @@ void fitGaus(TH1D h){
    double sigma = p->Parameter(2);
    double errsigma = p->ParError(2);
 
-   std::cout << "mean = "       << mean  << " +- " << err << std::endl
-	         << "sigma = "      << sigma << " +- "<< errsigma << std::endl
-             << "mean/sigma = " << "("   << sigma*100/mean << "%)" << std::endl;
-   return;
+//   std::cout << "mean = "       << mean  << " +- " << err << std::endl
+//	         << "sigma = "      << sigma << " +- "<< errsigma << std::endl
+//             << "mean/sigma = " << "("   << sigma*100/mean << "%)" << std::endl;
+   return p;
 }
 
 
