@@ -53,13 +53,14 @@ int main( int argc, char* argv[] ) {
         for ( int tauS = 100; tauS < 250; tauS+=72 ) {
             for ( double R = 0.621; R < 2; R+=0.6 ) {
                 for ( int I = 80000; I < 410000; I+=160000 ) {
-                    
+                    int B = I/80000;
+                    std::cout << "\nB=" << B << "   tauL=" << tauL << "   tauS=" << tauS << "   I=" << I << "   R=" << R << std::endl;
                     std::cout << "Simulazione " << progress << "/81 " << std::flush;
                     
-                    int B = I/80000;
+                    
                     vOut = montecarlo( B, tauL, I, tauS, R, 1 );
                     for ( int i = 0; i < 4; i++ ) vCounter[i] += vOut[i]; 
-
+                    std::cout << "vOut={" << vOut[0] << "," << vOut[1] << "," << vOut[2] << "," << vOut[3] << std::endl;
                     progress++;
                     std::cout << std::endl;
                 }
