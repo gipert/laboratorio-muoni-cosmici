@@ -60,7 +60,7 @@ int main( int argc, char* argv[] ) {
                     
                     vOut = montecarlo( B, tauL, I, tauS, R, 1 );
                     for ( int i = 0; i < 4; i++ ) vCounter[i] += vOut[i]; 
-                    std::cout << "\nvOut={" << vOut[0] << "," << vOut[1] << "," << vOut[2] << "," << vOut[3] << std::endl;
+                    std::cout << "\nvOut={" << vOut[0] << "," << vOut[1] << "," << vOut[2] << "," << vOut[3] << "}" << std::endl;
                     progress++;
                     std::cout << std::endl;
                 }
