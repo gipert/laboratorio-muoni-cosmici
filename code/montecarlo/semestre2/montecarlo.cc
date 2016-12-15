@@ -261,41 +261,97 @@ std::vector<bool> montecarlo( float B, double tau, double integrale, double tauc
     p    = fitGaus(hFitTauL2);
     pErr = fitGaus(hFitErrTauL2);
     
-    if ( p->IsZombie() || pErr->IsZombie() ) 
+    std::cout << "\np " << p << "   pErr " << pErr << std::endl;
+    
+    if ( p == -1 || pErr == -1 ) // il valore -1 emerge quando il fit non converge 
     {
         std::cout << "\nTau+ fit failed. Bool set to 'false'." << std::endl;
         vBool[0] = false;
     }
-    if ( !(p->IsZombie() || pErr->IsZombie()) &&
+/*
+    if ( !(p == -1 || pErr == -1) &&
           (pErr->Parameter(1)/p->Parameter(1) > errLimit || 
            TMath::Abs(p->Parameter(1)-tau)/pErr->Parameter(1) > compLimit ||
-           p->Parameter(2) > factorLimit*pErr->Parameter(1)                 ) ) vBool[0] = false;
+           p->Parameter(2) > factorLimit*pErr->Parameter(1)                 ) ) vBool[0] = false;*/
+    if ( !(p == -1 || pErr == -1) && pErr->Parameter(1)/p->Parameter(1) > errLimit)
+    {
+        std::cout << "Errore relativo troppo grande (" << pErr->Parameter(1)/p->Parameter(1) << ">" << errLimit << ")" << std::endl;
+        vBool[0] = false;
+    } 
+    if ( !(p == -1 || pErr == -1) && TMath::Abs(p->Parameter(1)-tau)/pErr->Parameter(1) > compLimit)
+    {
+        std::cout << "Compatibilità troppo grande (" << TMath::Abs(p->Parameter(1)-tau)/pErr->Parameter(1) << ">" << compLimit << ")" << std::endl;
+        vBool[0] = false;
+    }  
+    if ( !(p == -1 || pErr == -1) && p->Parameter(2) > factorLimit*pErr->Parameter(1))
+    {
+        std::cout << "Sigma troppo grande rispetto all'errore (" << p->Parameter(2) << ">" << factorLimit*pErr->Parameter(1) << ")" << std::endl;
+        vBool[0] = false;
+    }   
  
     p    = fitGaus(hFitTauShortL2);
     pErr = fitGaus(hFitErrTauShortL2);
     
-    if ( p->IsZombie() || pErr->IsZombie() ) 
+    std::cout << "\np " << p << "   pErr " << pErr << std::endl;    
+    
+    if ( p == -1 || pErr == -1 ) 
     {
         std::cout << "\nTau- fit failed. Bool set to 'false'." << std::endl;
         vBool[1] = false;
     }
-    if ( !(p->IsZombie() || pErr->IsZombie()) &&
+/*    
+    if ( !(p == -1 || pErr == -1) &&
           (pErr->Parameter(1)/p->Parameter(1) > errLimit || 
            TMath::Abs(p->Parameter(1)-tau)/pErr->Parameter(1) > compLimit ||
            p->Parameter(2) > factorLimit*pErr->Parameter(1)                ) ) vBool[1] = false;
-    
+*/
+    if ( !(p == -1 || pErr == -1) && pErr->Parameter(1)/p->Parameter(1) > errLimit)
+    {
+        std::cout << "Errore relativo troppo grande (" << pErr->Parameter(1)/p->Parameter(1) << ">" << errLimit << ")" << std::endl;
+        vBool[1] = false;
+    } 
+    if ( !(p == -1 || pErr == -1) && TMath::Abs(p->Parameter(1)-taucorto)/pErr->Parameter(1) > compLimit)
+    {
+        std::cout << "Compatibilità troppo grande (" << TMath::Abs(p->Parameter(1)-taucorto)/pErr->Parameter(1) << ">" << compLimit << ")" << std::endl;
+        vBool[1] = false;
+    }  
+    if ( !(p == -1 || pErr == -1) && p->Parameter(2) > factorLimit*pErr->Parameter(1))
+    {
+        std::cout << "Sigma troppo grande rispetto all'errore (" << p->Parameter(2) << ">" << factorLimit*pErr->Parameter(1) << ")" << std::endl;
+        vBool[1] = false;
+    }
+
     p    = fitGaus(hFitRL2);
     pErr = fitGaus(hFitErrRL2);
     
-    if ( p->IsZombie() || pErr->IsZombie() ) 
+    std::cout << "\np " << p << "   pErr " << pErr << std::endl;
+    
+    if ( p == -1 || pErr == -1 ) 
     {
         std::cout << "\nR fit failed. Bool set to 'false." << std::endl;
         vBool[2] = false;
     }
-    if ( !(p->IsZombie() || pErr->IsZombie()) &&
+/*
+    if ( !(p == -1 || pErr == -1) &&
           (pErr->Parameter(1)/p->Parameter(1) > errLimit || 
            TMath::Abs(p->Parameter(1)-tau)/pErr->Parameter(1) > compLimit ||
            p->Parameter(2) > factorLimit*pErr->Parameter(1)                ) ) vBool[2] = false;
+*/
+    if ( !(p == -1 || pErr == -1) && pErr->Parameter(1)/p->Parameter(1) > errLimit)
+    {
+        std::cout << "Errore relativo troppo grande (" << pErr->Parameter(1)/p->Parameter(1) << ">" << errLimit << ")" << std::endl;
+        vBool[2] = false;
+    } 
+    if ( !(p == -1 || pErr == -1) && TMath::Abs(p->Parameter(1)-R)/pErr->Parameter(1) > compLimit)
+    {
+        std::cout << "Compatibilità troppo grande (" << TMath::Abs(p->Parameter(1)-R)/pErr->Parameter(1) << ">" << compLimit << ")" << std::endl;
+        vBool[2] = false;
+    }  
+    if ( !(p == -1 || pErr == -1) && p->Parameter(2) > factorLimit*pErr->Parameter(1))
+    {
+        std::cout << "Sigma troppo grande rispetto all'errore (" << p->Parameter(2) << ">" << factorLimit*pErr->Parameter(1) << ")" << std::endl;
+        vBool[2] = false;
+    }
 
     if ( vBool[0] == false || vBool[1] == false || vBool[2] == false ) vBool[3] = false;
  
