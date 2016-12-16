@@ -69,9 +69,9 @@ int main( int argc, char* argv[] ) {
         }
     }
     
-    std::cout << "Efficienza tau+: " << 100 - vCounter[0]*100./progress << "%" << std::endl
-              << "Efficienza tau-: " << 100 - vCounter[1]*100./progress << "%" << std::endl
-              << "Efficienza R   : " << 100 - vCounter[2]*100./progress << "%" << std::endl
+    std::cout << "Efficienza tau+: " << vCounter[0]*100./progress << "%" << std::endl
+              << "Efficienza tau-: " << vCounter[1]*100./progress << "%" << std::endl
+              << "Efficienza R   : " << vCounter[2]*100./progress << "%" << std::endl
               << "Efficienza Tot : " << vCounter[3]*100./progress << "%" << std::endl;
     
     return 0;
