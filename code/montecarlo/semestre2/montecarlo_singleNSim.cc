@@ -13,6 +13,7 @@
 #include <vector>
 #include <string>
 #include <chrono>
+#include "math.h"
 
 #include "TH1.h"
 #include "TCanvas.h"
@@ -104,6 +105,7 @@ int main( int argc, char* argv[] ) {
         fitFunc2.SetParName(0,"A");
         fitFunc2.SetParName(1,"tau");
         fitFunc2.SetParName(2,"B");
+    //TF1 prelFit ("prelFit","[0]*TMath::Exp([1]*x)+[2]*TMath::Exp([3]*x)",Begin,End); // funzione per fit preliminare       
     
     double val      = 0;
     double entina   = 0;
@@ -163,17 +165,29 @@ int main( int argc, char* argv[] ) {
 		total2.Add(&total, &exponential2);
 
         // fit preliminare per settare tau+ e tau- la 1a volta
-        TFitResultPtr ptr = total2.Fit("expo","SNQ");
+        TFitResultPtr ptr     = total2.Fit("expo","SNQ");
+        //prelFit.SetParameter(1,ptr->Parameter(1));
+        //prelFit.SetParameter(2,exp(ptr->Parameter(0)));
+        //prelFit.SetParameter(3,ptr->Parameter(1));
+       // TFitResultPtr prelPtr = total2.Fit("prelFit", "SNQR");
+        
         double tauSet = -1/(ptr->Parameter(1));
+        //double tauPlusSet = -1/(prelPtr->Parameter(1));
+        //double tauMinSet  = -1/(prelPtr->Parameter(3));
+        
+        
+                
 
         // METODO 2: pol0 per B, quindi B-setting e fit con fitFunc2, quindi fit complessivo
 	    TFitResultPtr basePtr = total2.Fit("pol0","LSNQ","",StartBase,End);
         fitFunc2.SetParameter(2,basePtr->Parameter(0));
         fitFunc2.SetParameter(1,tauSet);
+        //fitFunc2.SetParameter(1,tauPlusSet);
 
         // FIT (exp+)+Base direttamente su total2 con fitfunc2 (solo 1 exp) 
         total2.Fit("fitFunc2","LQN","",beginFit,End);
         fitFunc.SetParameter("tauShort",tauSet);
+        //fitFunc.SetParameter("tauShort",tauMinSet);
         fitFunc.SetParameter("tauLong",fitFunc2.GetParameter("tau"));
         fitFunc.SetParameter("B",fitFunc2.GetParameter("B"));
 

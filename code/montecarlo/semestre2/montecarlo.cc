@@ -14,9 +14,12 @@
 #include <string>
 #include <chrono>
 
+#include <sstream>
+
 #include "TH1.h"
 #include "TCanvas.h"
 #include "TRandom3.h"
+#include "TFile.h"
 #include "TFitResult.h"
 #include "TFitResultPtr.h"
 #include "TF1.h"
@@ -133,17 +136,19 @@ std::vector<bool> montecarlo( float B, double tau, double integrale, double tauc
 		total2.Add(&total, &exponential2);
 
         // fit preliminare per settare tau+ e tau- la 1a volta
-        TFitResultPtr ptr = total2.Fit("expo","SNQ");
-        double tauSet = -1/(ptr->Parameter(1));
+        //TFitResultPtr ptr = total2.Fit("expo","SNQ");
+        //double tauSet = -1/(ptr->Parameter(1));
 
         // METODO 2: pol0 per B, quindi B-setting e fit con fitFunc2, quindi fit complessivo
 	    TFitResultPtr basePtr = total2.Fit("pol0","LSNQ","",StartBase,End);
         fitFunc2.SetParameter(2,basePtr->Parameter(0));
-        fitFunc2.SetParameter(1,tauSet);
+        //fitFunc2.SetParameter(1,tauSet);
+        fitFunc2.SetParameter(1,tau);
 
         // FIT (exp+)+Base direttamente su total2 con fitfunc2 (solo 1 exp) 
         total2.Fit("fitFunc2","LQN","",beginFit,End);
-        fitFunc.SetParameter("tauShort",tauSet);
+        //fitFunc.SetParameter("tauShort",tauSet);
+        fitFunc.SetParameter("tauShort",taucorto);
         fitFunc.SetParameter("tauLong",fitFunc2.GetParameter("tau"));
         fitFunc.SetParameter("B",fitFunc2.GetParameter("B"));
 
@@ -265,7 +270,7 @@ std::vector<bool> montecarlo( float B, double tau, double integrale, double tauc
     
     if ( p == -1 || pErr == -1 ) // il valore -1 emerge quando il fit non converge 
     {
-        std::cout << "\nTau+ fit failed. Bool set to 'false'." << std::endl;
+        std::cout << "Tau+ fit failed. Bool set to 'false'." << std::endl;
         vBool[0] = false;
     }
 /*
@@ -292,11 +297,11 @@ std::vector<bool> montecarlo( float B, double tau, double integrale, double tauc
     p    = fitGaus(hFitTauShortL2);
     pErr = fitGaus(hFitErrTauShortL2);
     
-    std::cout << "\np " << p << "   pErr " << pErr << std::endl;    
+    std::cout << "p " << p << "   pErr " << pErr << std::endl;    
     
     if ( p == -1 || pErr == -1 ) 
     {
-        std::cout << "\nTau- fit failed. Bool set to 'false'." << std::endl;
+        std::cout << "Tau- fit failed. Bool set to 'false'." << std::endl;
         vBool[1] = false;
     }
 /*    
@@ -324,11 +329,11 @@ std::vector<bool> montecarlo( float B, double tau, double integrale, double tauc
     p    = fitGaus(hFitRL2);
     pErr = fitGaus(hFitErrRL2);
     
-    std::cout << "\np " << p << "   pErr " << pErr << std::endl;
+    std::cout << "p " << p << "   pErr " << pErr << std::endl;
     
     if ( p == -1 || pErr == -1 ) 
     {
-        std::cout << "\nR fit failed. Bool set to 'false." << std::endl;
+        std::cout << "R fit failed. Bool set to 'false." << std::endl;
         vBool[2] = false;
     }
 /*
@@ -359,8 +364,15 @@ std::vector<bool> montecarlo( float B, double tau, double integrale, double tauc
     pErr = fitGaus(hFitErrBL2);
     
     // DRAW
+    TFile f("matrix_canvas.root","UPDATE");
+    
+    std::ostringstream strs;
+    strs << B << tau << integrale << taucorto << R << RebFactor;
+    std::string str = strs.str();
+    
+    std::string set = "set" + str;
     std::string canName = "Simulazione MC (" + std::to_string(Nsim) + " simulazioni)";
-    TCanvas can2( "METODO2", (canName + " METODO 2").c_str(), 1200 , 700 );
+    TCanvas can2( ("METODO2_"+set).c_str(), (canName + " METODO 2").c_str(), 1200 , 700 );
     can2.Divide(4,2);
     can2.cd(1);
         hFitTauL2.Draw();
@@ -390,7 +402,10 @@ std::vector<bool> montecarlo( float B, double tau, double integrale, double tauc
         hFitErrBL2.Draw();
     can2.cd(8);
         hFitErrRL2.Draw();
-
+        
+    // save can2 into ROOT file
+    f.WriteTObject(&can2);
+    f.Close();
     // save .pdf
     can2.SaveAs("plot.pdf");
    

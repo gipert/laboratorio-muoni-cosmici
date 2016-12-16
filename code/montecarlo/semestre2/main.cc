@@ -1,6 +1,9 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <chrono>
+
+#include "TFile.h"
 
 #include "../../ProgressBar/progressbar.h"
 
@@ -46,33 +49,39 @@ int main( int argc, char* argv[] ) {
    //             [j]       taucorto
    //               [l]     R
    //                 [k]   Integrale
+   
+   
+    TFile f("matrix_canvas.root","UPDATE");
+    f.Close();
     
     int progress = 1;
+    std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
+    std::chrono::steady_clock::time_point end;
 
-    for ( int tauL = 250; tauL < 650; tauL+=180 ) {
-        for ( int tauS = 100; tauS < 250; tauS+=72 ) {
+    for ( int tauL = 320; tauL < 800; tauL+=200 ) {
+        for ( int tauS = 50; tauS < 250; tauS+=70 ) {
             for ( double R = 0.621; R < 2; R+=0.6 ) {
                 for ( int I = 80000; I < 410000; I+=160000 ) {
                     int B = I/80000;
                     std::cout << "\nB=" << B << "   tauL=" << tauL << "   tauS=" << tauS << "   I=" << I << "   R=" << R << std::endl;
                     std::cout << "Simulazione " << progress << "/81 " << std::flush;
-                    
-                    
+
                     vOut = montecarlo( B, tauL, I, tauS, R, 1 );
                     for ( int i = 0; i < 4; i++ ) vCounter[i] += vOut[i]; 
-                    std::cout << "\nvOut    ={" << vOut[0] << "," << vOut[1] << "," << vOut[2] << "," << vOut[3] << "}";
+                    std::cout << "vOut    ={" << vOut[0] << "," << vOut[1] << "," << vOut[2] << "," << vOut[3] << "}";
                     std::cout << "\nvCounter={" << vCounter[0] << "," << vCounter[1] << "," << vCounter[2] << "," << vCounter[3] << "}" << std::endl;
                     progress++;
-                    //std::cout << std::endl;
+                    end = std::chrono::steady_clock::now();
+                    std::cout << "Time = " << (double)std::chrono::duration_cast<std::chrono::seconds>(end - start).count()/60 << " minuti"<< std::endl;
                 }
             }
         }
     }
     
-    std::cout << "Efficienza tau+: " << vCounter[0]*100./progress << "%" << std::endl
-              << "Efficienza tau-: " << vCounter[1]*100./progress << "%" << std::endl
-              << "Efficienza R   : " << vCounter[2]*100./progress << "%" << std::endl
-              << "Efficienza Tot : " << vCounter[3]*100./progress << "%" << std::endl;
+    std::cout << "Efficienza tau+: " << vCounter[0]*100./(progress-1) << "%" << std::endl
+              << "Efficienza tau-: " << vCounter[1]*100./(progress-1) << "%" << std::endl
+              << "Efficienza R   : " << vCounter[2]*100./(progress-1) << "%" << std::endl
+              << "Efficienza Tot : " << vCounter[3]*100./(progress-1) << "%" << std::endl;
     
     return 0;
 }
