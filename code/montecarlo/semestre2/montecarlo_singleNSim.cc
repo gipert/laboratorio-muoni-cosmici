@@ -280,7 +280,7 @@ int main( int argc, char* argv[] ) {
 	      << "\nIntervallo di fit baseline METODO 2:               [" << StartBase << ", " << End << "]"
 	      << "\nIntervallo di fit (exp+)+base METODO 2:            [" << beginFit  << ", " << End << "]"
 	      << "\nIntervallo di fit (exp-)+(exp+)+base METODO 2:     [" << Begin     << ", " << End << "]"
-          << "\nEfficienza tau: "         << (Nsim-countTauPlus)*100./Nsim << "%"
+          << "\n\nEfficienza tau: "         << (Nsim-countTauPlus)*100./Nsim << "%"
           << "\nEfficienza taucorto: "    << (Nsim-countTauMin)*100./Nsim  << "%"
           << "\nEfficienza R: "           << (Nsim-countR)*100./Nsim       << "%"
           << "\nEfficienza complessiva: " << (Nsim-countTot)*100./Nsim     << "%" << std::endl;
@@ -325,12 +325,7 @@ int main( int argc, char* argv[] ) {
         hFitErrBL2.Draw();
     can2.cd(8);
         hFitErrRL2.Draw();
-        
-    std::cout   << "\nEfficienza tau+   " << (Nsim-countTauPlus)*100./Nsim << "%"
-                << "\nEfficienza tau-   " << (Nsim-countTauMin)*100./Nsim  << "%"
-                << "\nEfficienza R      " << (Nsim-countR)*100./Nsim       << "%"
-                << "\nEfficienza totale " << (Nsim-countTot)*100./Nsim     << "%" << std::endl;
-        
+                
     Root.Run();
 	
 	return 0;
@@ -338,21 +333,20 @@ int main( int argc, char* argv[] ) {
 //----------- fine main ---------------
 
 void fitGaus(TH1D h){
+   
    int dim = h.GetNbinsX();
-
-   std::string name = h.GetName();
-
    double min = h.GetBinCenter(1);
    double max = h.GetBinCenter(dim);
    TFitResultPtr p = h.Fit("gaus","SQN","",min,max);
-   /*double mean = p->Parameter(1);
+   double mean = p->Parameter(1);
    double err  = p->ParError(1);
    double sigma = p->Parameter(2);
    double errsigma = p->ParError(2);
 
+   std::cout << h.GetName() << std::endl;
    std::cout << "mean = "       << mean  << " +- " << err << std::endl
 	         << "sigma = "      << sigma << " +- "<< errsigma << std::endl
-             << "mean/sigma = " << "("   << sigma*100/mean << "%)" << std::endl;*/
+             << "mean/sigma = " << "("   << sigma*100/mean << "%)" << std::endl << std::endl;
    return;
 }
 
@@ -372,4 +366,3 @@ distRange getRange(std::vector<double> v){
    distRange d {min,max};
    return d;
 }
-
