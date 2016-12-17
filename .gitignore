@@ -14,6 +14,7 @@ code/efficiency/*.pdf
 code/calibration/openADC
 code/montecarlo/semestre2/plot.pdf
 code/montecarlo/semestre2/montecarlo
+code/montecarlo/semestre2/montecarloSingle
 code/montecarlo/semestre2/main
 code/montecarlo/semestre2/montecarlo_modifiedforbaseline
 code/montecarlo/semestre2/montecarlo_parallel
