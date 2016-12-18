@@ -57,7 +57,10 @@ int main( int argc, char* argv[] ) {
                   << "MonteCarlo per la misura della vita media dei muoni cosmici in alluminio." << std::endl
                   << "Autori: Mattia Faggin, Davide Piras, Luigi Pertoldi" << std::endl << std::endl
                   << "Utilizzo:" << std::endl 
-                  << "    $ ./montecarlo [Baseline] [tau] [Integrale] [taucorto] [R] [rebinFactor] [--save-fit]" << std::endl << std::endl;
+                  << "    $ ./montecarlo [Baseline] [tau] [Integrale] [taucorto] [R] [rebinFactor] [OPZIONI]" << std::endl << std::endl
+                  << "OPZIONI:" << std::endl
+                  << "    --save-fit      : Salva i risultati grafici dei singoli Nsim fit in un file savedfits.root" << std::endl 
+                  << "    --no-comp-check : Non effettua i controlli di compatibilità" << std::endl << std::endl;
         return 0;
     }
 
@@ -70,7 +73,21 @@ int main( int argc, char* argv[] ) {
     bool saveFits = false;
     if ( argc == 8 && args[7] == "--save-fit" ) {
         saveFits = true;
-        std::cout << "Fit graphic result saving activated." << std::endl;
+        std::cout << "Salvo i grafici dei singoli fit in savedfits.root." << std::endl;
+    }
+    
+    bool compCheck = true;
+    if ( argc == 8 && args[7] == "--no-comp-check" ) {
+        compCheck = false;
+        std::cout << "Non faccio i controlli di compatibilità." << std::endl;
+    }
+
+    if ( argc == 9 && (( args[7] == "--save-fit" && args[8] == "--no-comp-check" ) || 
+                       ( args[8] == "--save-fit" && args[7] == "--no-comp-check" )) ) {
+        saveFits = true;
+        compCheck = false;
+        std::cout << "Salvo i grafici dei singoli fit in savedfits.root." << std::endl;
+        std::cout << "Non faccio i controlli di compatibilità." << std::endl;
     }
 
     float B          = std::stof(args[1]); // valore tipico per 1 settimana: 1 (circa)
@@ -84,7 +101,7 @@ int main( int argc, char* argv[] ) {
 	
 	TApplication Root("App",&argc,argv);
 	
-    gErrorIgnoreLevel = kError; // toglie i warning
+    //gErrorIgnoreLevel = kError; // toglie i warning
     //gStyle->SetOptStat(0);
 
     // METODO 2
@@ -131,10 +148,14 @@ int main( int argc, char* argv[] ) {
     // ProgressBar
     ProgressBar bar(Nsim);
     bar.Init();
-
-    TFile file("savedfits.root","RECREATE");
-    TCanvas c("c2","c2",1);
-    c.cd();
+    
+    TFile * file;
+    TCanvas * c;
+    if (saveFits) {
+        file = new TFile("savedfits.root","RECREATE");
+        c = new TCanvas("c2","c2",1);
+        c->cd();
+    }
 
 ////////////// CICLO MENSILE ////////////////
     for( int k = 0; k < Nsim; k++ ) {
@@ -202,35 +223,48 @@ int main( int argc, char* argv[] ) {
         if (saveFits) {
             total2.Draw();
             fitFunc.Draw("SAME");
-            c.Write();
+            c->Write();
         }
 
         ratio    = fitFunc.GetParameter("Aplus")/fitFunc.GetParameter("Aminus");
         errRatio = sqrt( pow(fitFunc.GetParError(2),2)+pow(ratio*fitFunc.GetParError(0),2) )/fitFunc.GetParameter("Aminus");
-       
-        // calcolo errori relativi e compatibilità       
-        double compTauPlus = TMath::Abs(fitFunc.GetParameter("tauLong") - tau)/fitFunc.GetParError(3);
-        double compTauMin  = TMath::Abs(fitFunc.GetParameter("tauShort") - taucorto)/fitFunc.GetParError(1);
-        double compR       = TMath::Abs(ratio - R)/errRatio;
+    
+        if (compCheck) {       
+            // calcolo errori relativi e compatibilità       
+            double compTauPlus = TMath::Abs(fitFunc.GetParameter("tauLong") - tau)/fitFunc.GetParError(3);
+            double compTauMin  = TMath::Abs(fitFunc.GetParameter("tauShort") - taucorto)/fitFunc.GetParError(1);
+            double compR       = TMath::Abs(ratio - R)/errRatio;
 
-        double errRelTauPlus = fitFunc.GetParError(3)/fitFunc.GetParameter("tauLong");
-        double errRelTauMin  = fitFunc.GetParError(1)/fitFunc.GetParameter("tauShort");
-        double errRelR       = errRatio/ratio;
+            double errRelTauPlus = fitFunc.GetParError(3)/fitFunc.GetParameter("tauLong");
+            double errRelTauMin  = fitFunc.GetParError(1)/fitFunc.GetParameter("tauShort");
+            double errRelR       = errRatio/ratio;
         
-        // limiti di rigetto
-        int compLimit = 3;
-        double errLimit = 0.2;
+            // limiti di rigetto
+            int compLimit = 3;
+            double errLimit = 0.2;
 
-        // pushback se compatibili e con errori piccoli
-        if ( compTauPlus > compLimit || errRelTauPlus > errLimit ) countTauPlus++; 
-        if ( compTauMin  > compLimit || errRelTauMin  > errLimit ) countTauMin++; 
-        if ( compR       > compLimit || errRelR       > errLimit ) countR++;
+            // pushback se compatibili e con errori piccoli
+            if ( compTauPlus > compLimit || errRelTauPlus > errLimit ) countTauPlus++; 
+            if ( compTauMin  > compLimit || errRelTauMin  > errLimit ) countTauMin++; 
+            if ( compR       > compLimit || errRelR       > errLimit ) countR++;
 
-        if ( compTauPlus > compLimit || errRelTauPlus > errLimit ||
-             compTauMin  > compLimit || errRelTauMin  > errLimit ||
-             compR       > compLimit || errRelR       > errLimit ) countTot++;
+            if ( compTauPlus > compLimit || errRelTauPlus > errLimit ||
+                 compTauMin  > compLimit || errRelTauMin  > errLimit ||
+                 compR       > compLimit || errRelR       > errLimit ) countTot++;
+            
+            else {
+                vFitTauShortL2.push_back(fitFunc.GetParameter("tauShort"));
+                vFitErrTauShortL2.push_back(fitFunc.GetParError(1)); 
+                vFitTauL2.push_back(fitFunc.GetParameter("tauLong"));
+                vFitErrTauL2.push_back(fitFunc.GetParError(3));       
+                vFitBL2.push_back(fitFunc.GetParameter("B")/RebFactor);
+                vFitErrBL2.push_back(fitFunc.GetParError(4)/RebFactor);
+                vFitRL2.push_back(ratio);
+                vFitErrRL2.push_back(errRatio);
+            }
+        }
         else {
-            vFitTauShortL2.push_back(fitFunc.GetParameter("tauShort")*RebFactor);
+            vFitTauShortL2.push_back(fitFunc.GetParameter("tauShort"));
             vFitErrTauShortL2.push_back(fitFunc.GetParError(1)); 
             vFitTauL2.push_back(fitFunc.GetParameter("tauLong"));
             vFitErrTauL2.push_back(fitFunc.GetParError(3));       
@@ -240,45 +274,54 @@ int main( int argc, char* argv[] ) {
             vFitErrRL2.push_back(errRatio);
         }
     }
-    
+///////////// FINE CICLO MENSILE //////////////////
+    if (saveFits) { 
+        file->Close();
+        delete file;
+        delete c;
+    }
+	
     // range distribuzioni METODO 2
     distRange rFitTauL2         = getRange(vFitTauL2);
+        std::cout << "\nhFitTauL2:         [" << rFitTauL2.minimo << ", " << rFitTauL2.massimo << "]" << std::endl;
     distRange rFitTauShortL2    = getRange(vFitTauShortL2);
+        std::cout << "hFitTauShortL2:    [" << rFitTauShortL2.minimo << ", " << rFitTauShortL2.massimo << "]" << std::endl;
     distRange rFitBL2           = getRange(vFitBL2);
+        std::cout << "hFitBL2:           [" << rFitBL2.minimo << ", " << rFitBL2.massimo << "]" << std::endl;
     distRange rFitRL2           = getRange(vFitRL2);
+        std::cout << "hFitRL2:           [" << rFitRL2.minimo << ", " << rFitRL2.massimo << "]" << std::endl;
     
     distRange rFitErrTauL2      = getRange(vFitErrTauL2);
+        std::cout << "hFitErrTauL2:      [" << rFitErrTauL2.minimo << ", " << rFitErrTauL2.massimo << "]" << std::endl;
     distRange rFitErrTauShortL2 = getRange(vFitErrTauShortL2);
+        std::cout << "hFitErrTauShortL2: [" << rFitErrTauShortL2.minimo << ", " << rFitErrTauShortL2.massimo << "]" << std::endl;
     distRange rFitErrBL2        = getRange(vFitErrBL2);
+        std::cout << "hFitErrBL2:        [" << rFitErrBL2.minimo << ", " << rFitErrBL2.massimo << "]" << std::endl;
     distRange rFitErrRL2        = getRange(vFitErrRL2); 
+        std::cout << "hFitErrRL2:        [" << rFitErrRL2.minimo << ", " << rFitErrRL2.massimo << "]" << std::endl;
 
     // creo gli istogrammi delle distribuzioni METODO 2
-    TH1D hFitTauL2 	       ( "hFitTauL2" 	     , "#tau_{+}" , 100, rFitTauL2.minimo     , rFitTauL2.massimo );
-    TH1D hFitTauShortL2    ( "hFitTauShortL2"    , "#tau_{-}" , 100, rFitTauShortL2.minimo, rFitTauShortL2.massimo );
-    TH1D hFitBL2   	       ( "hFitBL2"   	     , "B"        , 100, rFitBL2.minimo       , rFitBL2.massimo );
-    TH1D hFitRL2           ( "hFitRL2"           , "R"        , 100, rFitRL2.minimo       , rFitRL2.massimo );   
+    TH1D hFitTauL2 	       ( "hFitTauL2" 	     , "#tau_{+}"          , 100, rFitTauL2.minimo        , rFitTauL2.massimo*1.01 );
+    TH1D hFitTauShortL2    ( "hFitTauShortL2"    , "#tau_{-}"          , 100, rFitTauShortL2.minimo   , rFitTauShortL2.massimo*1.01 );
+    TH1D hFitBL2   	       ( "hFitBL2"   	     , "B"                 , 100, rFitBL2.minimo          , rFitBL2.massimo*1.01 );
+    TH1D hFitRL2           ( "hFitRL2"           , "R"                 , 100, rFitRL2.minimo          , rFitRL2.massimo*1.01 );   
  
-    TH1D hFitErrTauL2 	   ( "hFitErrTauL2"      , "#tau_{+} - errori" , 100, rFitErrTauL2.minimo     , rFitErrTauL2.massimo); 
-    TH1D hFitErrTauShortL2 ( "hFitErrTauShortL2" , "#tau_{-} - errori" , 100, rFitErrTauShortL2.minimo, rFitErrTauShortL2.massimo); 
-    TH1D hFitErrBL2 	   ( "hFitErrBL2"        , "B - errori"        , 100, rFitErrBL2.minimo       , rFitErrBL2.massimo);
-    TH1D hFitErrRL2 	   ( "hFitErrRL2"        , "R - errori"        , 100, rFitErrRL2.minimo       , rFitErrRL2.massimo);
+    TH1D hFitErrTauL2 	   ( "hFitErrTauL2"      , "#tau_{+} - errori" , 100, rFitErrTauL2.minimo     , rFitErrTauL2.massimo*1.01); 
+    TH1D hFitErrTauShortL2 ( "hFitErrTauShortL2" , "#tau_{-} - errori" , 100, rFitErrTauShortL2.minimo, rFitErrTauShortL2.massimo*1.01); 
+    TH1D hFitErrBL2 	   ( "hFitErrBL2"        , "B - errori"        , 100, rFitErrBL2.minimo       , rFitErrBL2.massimo*1.01);
+    TH1D hFitErrRL2 	   ( "hFitErrRL2"        , "R - errori"        , 100, rFitErrRL2.minimo       , rFitErrRL2.massimo*1.01);
 
     // riempio gli istogrammi METODO 2
-    for ( int i = 0; i < vFitTauL2.size(); i++ ) {        
-        hFitTauL2.Fill(vFitTauL2.at(i));
-        hFitTauShortL2.Fill(vFitTauShortL2.at(i));
-        hFitBL2.Fill(vFitBL2.at(i));
-        hFitRL2.Fill(vFitRL2.at(i));
-        
-	    hFitErrTauL2.Fill(vFitErrTauL2.at(i));
-	    hFitErrTauShortL2.Fill(vFitErrTauShortL2.at(i));
-        hFitErrBL2.Fill(vFitErrBL2.at(i));
-        hFitErrRL2.Fill(vFitErrRL2.at(i));
-    }
-///////////// FINE CICLO MENSILE //////////////////
-    if (saveFits) file.Close();
-    c.~TCanvas();
-	
+    for ( int i = 0; i < vFitTauL2.size(); i++ )       hFitTauL2.Fill(vFitTauL2[i]);
+    for ( int i = 0; i < vFitTauShortL2.size(); i++ )  hFitTauShortL2.Fill(vFitTauShortL2[i]);
+    for ( int i = 0; i < vFitBL2.size(); i++ )         hFitBL2.Fill(vFitBL2[i]);
+    for ( int i = 0; i < vFitRL2.size(); i++ )         hFitRL2.Fill(vFitRL2[i]);
+       
+    for ( int i = 0; i < vFitErrTauL2.size(); i++ )      hFitErrTauL2.Fill(vFitErrTauL2[i]);
+    for ( int i = 0; i < vFitErrTauShortL2.size(); i++ ) hFitErrTauShortL2.Fill(vFitErrTauShortL2[i]);
+    for ( int i = 0; i < vFitErrBL2.size(); i++ )        hFitErrBL2.Fill(vFitErrBL2[i]);
+    for ( int i = 0; i < vFitErrRL2.size(); i++ )        hFitErrRL2.Fill(vFitErrRL2[i]);
+    
     std::cout << std::endl 
 	      << "---------------------------------------------------------------------------------" 
 	      << "\n./montecarlo.out " << B << " " << tau << " " << integrale << " " << taucorto 
@@ -303,12 +346,15 @@ int main( int argc, char* argv[] ) {
 	      << "\nIntervallo di fit (exp-)+(exp+)+base METODO 2:     [" << Begin     << ", " << End << "]" << std::endl << std::endl;
 
     // fit gaussiano delle distribuzioni
-	fitGaus(hFitTauL2);
+    fitGaus(hFitTauL2);
     fitGaus(hFitErrTauL2);
-	fitGaus(hFitTauShortL2);
+	
+    fitGaus(hFitTauShortL2);
     fitGaus(hFitErrTauShortL2);
+    
     fitGaus(hFitRL2);
     fitGaus(hFitErrRL2);
+    
     fitGaus(hFitBL2); 
     fitGaus(hFitErrBL2);
 	
@@ -358,35 +404,45 @@ int main( int argc, char* argv[] ) {
 
 void fitGaus(TH1D h){
    
-   int dim = h.GetNbinsX();
-   double min = h.GetBinCenter(1);
-   double max = h.GetBinCenter(dim);
-   TFitResultPtr p = h.Fit("gaus","SQN","",min,max);
-   double mean = p->Parameter(1);
-   double err  = p->ParError(1);
-   double sigma = p->Parameter(2);
-   double errsigma = p->ParError(2);
+    int dim = h.GetNbinsX();
+    double min = h.GetBinCenter(1);
+    double max = h.GetBinCenter(dim);
+    //TF1 *f = new TF1( "gaus_abs", "[0]*exp(-0.5*((TMath::Abs(x)-[1])/[2])**2)",0,1000);
+    TFitResultPtr p = h.Fit("gaus","SQN","",min,max);
 
-   std::cout << h.GetName() << std::endl;
-   std::cout << "mean = "       << mean  << " +- " << err << std::endl
-	         << "sigma = "      << sigma << " +- "<< errsigma << std::endl
-             << "mean/sigma = " << "("   << sigma*100/mean << "%)" << std::endl << std::endl;
-   return;
+    std::cout << h.GetName() << std::endl;
+    if ( p!= -1 ) {
+        double mean     = p->Parameter(1);
+        double err      = p->ParError(1);
+        double sigma    = p->Parameter(2);
+        double errsigma = p->ParError(2);
+
+        std::cout << "mean = "       << mean  << " +- " << err << std::endl
+	              << "sigma = "      << sigma << " +- "<< errsigma << std::endl
+                  << "mean/sigma = " << "("   << sigma*100/mean << "%)" << std::endl << std::endl;
+    }
+    
+    else std::cout << "Fit fallito." << std::endl << std::endl;
+
+    return;
 }
 
 distRange getRange(std::vector<double> v){
-   double min = 0;
+   double min = 10000;
    double max = 0;
    double entry;
    int N = v.size();
-   for(int k=0; k<N; k++)
-   {
-        entry = v.at(k);
-	if(min==0 || min>entry )	min = entry;
-	if(max==0 || max<entry )	max = entry;
+   for ( int k = 0; k < N; k++ ) {
+        entry = v[k];
+	    if( min > entry ) min = entry;
+	    if( max < entry ) max = entry;
    }
-   //auto min = std::min_element(v.begin(),v.end());
-   //auto max = std::max_element(v.begin(),v.end());
+   
+   if ( (min == 10000 && max == 0) || min >= max ) {
+       min = 0;
+       max = 10;
+   }
+   
    distRange d {min,max};
    return d;
 }
