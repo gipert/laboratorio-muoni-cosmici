@@ -25,6 +25,7 @@
 #include "TGraphErrors.h"
 #include "TStyle.h"
 #include "TApplication.h"
+#include "TFile.h"
 
 #include "../../ProgressBar/progressbar.h"
 
@@ -56,7 +57,7 @@ int main( int argc, char* argv[] ) {
                   << "MonteCarlo per la misura della vita media dei muoni cosmici in alluminio." << std::endl
                   << "Autori: Mattia Faggin, Davide Piras, Luigi Pertoldi" << std::endl << std::endl
                   << "Utilizzo:" << std::endl 
-                  << "    $ ./montecarlo [Baseline] [tau] [Integrale] [taucorto] [R] [rebinFactor] " << std::endl << std::endl;
+                  << "    $ ./montecarlo [Baseline] [tau] [Integrale] [taucorto] [R] [rebinFactor] [--save-fit]" << std::endl << std::endl;
         return 0;
     }
 
@@ -64,6 +65,12 @@ int main( int argc, char* argv[] ) {
         std::cout << "Pochi argomenti! Se non ti ricordi c'è l'opzione '--help'" << std::endl
                   << "Termino l'esecuzione..." << std::endl;
         return 0;
+    }
+    
+    bool saveFits = false;
+    if ( argc == 8 && args[7] == "--save-fit" ) {
+        saveFits = true;
+        std::cout << "Fit graphic result saving activated." << std::endl;
     }
 
     float B          = std::stof(args[1]); // valore tipico per 1 settimana: 1 (circa)
@@ -77,7 +84,7 @@ int main( int argc, char* argv[] ) {
 	
 	TApplication Root("App",&argc,argv);
 	
-	//gErrorIgnoreLevel = kError; // toglie i warning
+    gErrorIgnoreLevel = kError; // toglie i warning
     //gStyle->SetOptStat(0);
 
     // METODO 2
@@ -96,6 +103,7 @@ int main( int argc, char* argv[] ) {
 		total.Rebin(RebFactor);
 	TH1D total2("total2", "total2", 4096, 0, 4096);
 		total2.Rebin(RebFactor);
+        total2.SetStats(kFALSE);
 
     TF1 fitFunc("fitFunc","[0]*TMath::Exp(-x/[1])+[2]*TMath::Exp(-x/[3])+[4]",Begin,End);
         fitFunc.SetParName(0,"Aminus");
@@ -123,6 +131,10 @@ int main( int argc, char* argv[] ) {
     // ProgressBar
     ProgressBar bar(Nsim);
     bar.Init();
+
+    TFile file("savedfits.root","RECREATE");
+    TCanvas c("c2","c2",1);
+    c.cd();
 
 ////////////// CICLO MENSILE ////////////////
     for( int k = 0; k < Nsim; k++ ) {
@@ -187,6 +199,12 @@ int main( int argc, char* argv[] ) {
         // FIT totale su total2 con fitfunc (ambedue le exp)
         total2.Fit("fitFunc","LQN","",Begin,End);
         
+        if (saveFits) {
+            total2.Draw();
+            fitFunc.Draw("SAME");
+            c.Write();
+        }
+
         ratio    = fitFunc.GetParameter("Aplus")/fitFunc.GetParameter("Aminus");
         errRatio = sqrt( pow(fitFunc.GetParError(2),2)+pow(ratio*fitFunc.GetParError(0),2) )/fitFunc.GetParameter("Aminus");
        
@@ -257,6 +275,9 @@ int main( int argc, char* argv[] ) {
         hFitErrBL2.Fill(vFitErrBL2.at(i));
         hFitErrRL2.Fill(vFitErrRL2.at(i));
     }
+///////////// FINE CICLO MENSILE //////////////////
+    if (saveFits) file.Close();
+    c.~TCanvas();
 	
     std::cout << std::endl 
 	      << "---------------------------------------------------------------------------------" 
@@ -279,13 +300,9 @@ int main( int argc, char* argv[] ) {
 	      << "\nIntervallo di generazione:                         [" << Begin     << ", " << End << "]" 
 	      << "\nIntervallo di fit baseline METODO 2:               [" << StartBase << ", " << End << "]"
 	      << "\nIntervallo di fit (exp+)+base METODO 2:            [" << beginFit  << ", " << End << "]"
-	      << "\nIntervallo di fit (exp-)+(exp+)+base METODO 2:     [" << Begin     << ", " << End << "]"
-          << "\n\nEfficienza tau: "         << (Nsim-countTauPlus)*100./Nsim << "%"
-          << "\nEfficienza taucorto: "    << (Nsim-countTauMin)*100./Nsim  << "%"
-          << "\nEfficienza R: "           << (Nsim-countR)*100./Nsim       << "%"
-          << "\nEfficienza complessiva: " << (Nsim-countTot)*100./Nsim     << "%" << std::endl;
+	      << "\nIntervallo di fit (exp-)+(exp+)+base METODO 2:     [" << Begin     << ", " << End << "]" << std::endl << std::endl;
 
-	// fit gaussiano delle distribuzioni
+    // fit gaussiano delle distribuzioni
 	fitGaus(hFitTauL2);
     fitGaus(hFitErrTauL2);
 	fitGaus(hFitTauShortL2);
@@ -294,8 +311,15 @@ int main( int argc, char* argv[] ) {
     fitGaus(hFitErrRL2);
     fitGaus(hFitBL2); 
     fitGaus(hFitErrBL2);
-	std::string canName = "Simulazione MC (" + std::to_string(Nsim) + " simulazioni)";
-    TCanvas can2( "METODO2", (canName + " - Likelihood").c_str(), 1200 , 700 );
+	
+    std::cout <<   "Efficienza tau:          " << Nsim-countTauPlus << "/" << Nsim << " [" << (Nsim-countTauPlus)*100./Nsim << "%]"
+              << "\nEfficienza taucorto:     " << Nsim-countTauMin  << "/" << Nsim << " [" << (Nsim-countTauMin)*100./Nsim  << "%]"
+              << "\nEfficienza R:            " << Nsim-countR       << "/" << Nsim << " [" << (Nsim-countR)*100./Nsim       << "%]"
+              << "\nEfficienza complessiva:  " << Nsim-countTot     << "/" << Nsim << " [" << (Nsim-countTot)*100./Nsim     << "%]" << std::endl;
+
+    // DRAW SECTION   
+   std::string canName = "Simulazione MC (" + std::to_string(Nsim) + " simulazioni)";
+   TCanvas can2( "METODO2", (canName + " - Likelihood").c_str(), 1200 , 700 );
     can2.Divide(4,2);
     can2.cd(1);
         hFitTauL2.Draw();
@@ -325,9 +349,9 @@ int main( int argc, char* argv[] ) {
         hFitErrBL2.Draw();
     can2.cd(8);
         hFitErrRL2.Draw();
-                
+                 
     Root.Run();
-	
+
 	return 0;
 }
 //----------- fine main ---------------
