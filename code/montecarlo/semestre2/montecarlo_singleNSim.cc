@@ -42,7 +42,7 @@ struct distRange{
 };
 
 void fitGaus(TH1D& h);
-distRange getRange(std::vector<double> v);
+distRange getRange(std::vector<double>& v);
 
 int main( int argc, char* argv[] ) {
 
@@ -140,10 +140,19 @@ int main( int argc, char* argv[] ) {
     double errRatio = 0;
 
     TRandom3 r;
-    int countTauPlus = 0;   // contatori per i successi dell'intero codice (con questi contatori contiamo gli eventi falsi)
-    int countTauMin = 0;
-    int countR = 0;
+    int countTauPlusErr = 0;   // contatori per i fit con errore grande
+    int countTauMinErr = 0;
+    int countRErr = 0;
+    
+    int countTauPlusComp = 0;   // contatori per i fit incompatibili
+    int countTauMinComp = 0;
+    int countRComp = 0;
+    
     int countTot = 0;
+       
+    // limiti di rigetto
+    int compLimit = 3;
+    double errLimit = 0.2;
 
     // ProgressBar
     ProgressBar bar(Nsim);
@@ -238,15 +247,14 @@ int main( int argc, char* argv[] ) {
             double errRelTauPlus = fitFunc.GetParError(3)/fitFunc.GetParameter("tauLong");
             double errRelTauMin  = fitFunc.GetParError(1)/fitFunc.GetParameter("tauShort");
             double errRelR       = errRatio/ratio;
-        
-            // limiti di rigetto
-            int compLimit = 3;
-            double errLimit = 0.2;
 
             // pushback se compatibili e con errori piccoli
-            if ( compTauPlus > compLimit || errRelTauPlus > errLimit ) countTauPlus++; 
-            if ( compTauMin  > compLimit || errRelTauMin  > errLimit ) countTauMin++; 
-            if ( compR       > compLimit || errRelR       > errLimit ) countR++;
+            if ( compTauPlus   > compLimit ) countTauPlusComp++;
+            if ( errRelTauPlus > errLimit  ) countTauPlusErr++; 
+            if ( compTauMin    > compLimit ) countTauMinComp++;
+            if ( errRelTauMin  > errLimit  ) countTauMinErr++; 
+            if ( compR         > compLimit ) countRComp++;
+            if ( errRelR       > errLimit  ) countRErr++;
 
             if ( compTauPlus > compLimit || errRelTauPlus > errLimit ||
                  compTauMin  > compLimit || errRelTauMin  > errLimit ||
@@ -358,10 +366,15 @@ int main( int argc, char* argv[] ) {
     fitGaus(hFitBL2); 
     fitGaus(hFitErrBL2);
 	
-    std::cout <<   "Efficienza tau:          " << Nsim-countTauPlus << "/" << Nsim << " [" << (Nsim-countTauPlus)*100./Nsim << "%]"
-              << "\nEfficienza taucorto:     " << Nsim-countTauMin  << "/" << Nsim << " [" << (Nsim-countTauMin)*100./Nsim  << "%]"
-              << "\nEfficienza R:            " << Nsim-countR       << "/" << Nsim << " [" << (Nsim-countR)*100./Nsim       << "%]"
-              << "\nEfficienza complessiva:  " << Nsim-countTot     << "/" << Nsim << " [" << (Nsim-countTot)*100./Nsim     << "%]" << std::endl;
+    std::cout << "Valori con errore relativo < " << errLimit*100 << "% :" << std::endl
+              << "tauLong:  " << Nsim-countTauPlusErr << "/" << Nsim << " [" << (Nsim-countTauPlusErr)*100./Nsim << "%]" << std::endl
+              << "tauShort: " << Nsim-countTauMinErr  << "/" << Nsim << " [" << (Nsim-countTauMinErr)*100./Nsim  << "%]" << std::endl
+              << "R:        " << Nsim-countRErr       << "/" << Nsim << " [" << (Nsim-countRErr)*100./Nsim       << "%]" << std::endl << std::endl
+              << "Valori con compatibilità < " << compLimit << " :" << std::endl
+              << "tauLong:  " << Nsim-countTauPlusComp << "/" << Nsim << " [" << (Nsim-countTauPlusComp)*100./Nsim << "%]" << std::endl
+              << "tauShort: " << Nsim-countTauMinComp  << "/" << Nsim << " [" << (Nsim-countTauMinComp)*100./Nsim  << "%]" << std::endl
+              << "R:        " << Nsim-countRComp       << "/" << Nsim << " [" << (Nsim-countRComp)*100./Nsim       << "%]" << std::endl << std::endl
+              << "Efficienza complessiva:  " << Nsim-countTot << "/" << Nsim << " [" << (Nsim-countTot)*100./Nsim  << "%]" << std::endl;
 
     // DRAW SECTION   
    std::string canName = "Simulazione MC (" + std::to_string(Nsim) + " simulazioni)";
@@ -434,7 +447,7 @@ void fitGaus(TH1D& h){
     return;
 }
 
-distRange getRange(std::vector<double> v){
+distRange getRange(std::vector<double>& v){
    double min = 10000;
    double max = 0;
    double entry;
