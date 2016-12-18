@@ -4,9 +4,9 @@ Decadimento dei muoni cosmici in alluminio
 Contents:
 --------
 
-`README.md`
-`env.sh`: shell script da eseguire per rendere visibili gli eseguibili ovunque
-`Makefile`: Makefile generale per compilare tutto il progetto
+* `README.md`
+* `env.sh`: shell script da eseguire per rendere visibili gli eseguibili ovunque
+* `Makefile`: Makefile generale per compilare tutto il progetto
 
 `latex/`
 
@@ -35,10 +35,12 @@ Contents:
     * `semestre2`
         * `baselineStart.cc` : studio della stima della baseline con fit "pol0" al variare del punto iniziale
                                nello spettro simulato exp+cost
-        * `fitexpStart.cc` :   studio della bontà del fit esponenziale al variare del punto iniziale nello spettro
-                               simulato exp+exp+cost
+        * `fitexpStart.cc` : studio della bontà del fit esponenziale al variare del punto iniziale nello spettro
+                             simulato exp+exp+cost
         * `montecarlo_modifiedforbaseline.cc` : confronto metodi di fit della baseline
-        * `montecarlo.cc` :    simulazione montecarlo completa
+	* `montecarlo_SingleNsim.cc` : simulazione montecarlo completa
+        * `montecarlo.cc` : funzione-simulazione montecarlo completa adatta all'iterazione in `main.cc`
+	* `main.cc` : matrice di simulazioni
 
 Collaborative Git:
 -----------------

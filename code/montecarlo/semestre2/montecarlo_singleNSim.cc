@@ -41,7 +41,7 @@ struct distRange{
     double massimo;
 };
 
-void fitGaus(TH1D h);
+void fitGaus(TH1D& h);
 distRange getRange(std::vector<double> v);
 
 int main( int argc, char* argv[] ) {
@@ -370,22 +370,26 @@ int main( int argc, char* argv[] ) {
     can2.cd(1);
         hFitTauL2.Draw();
         TLine lTau2(tau,0,tau,hFitTauL2.GetMaximum());
-	    lTau2.SetLineColor(kRed);
+	    lTau2.SetLineColor(kGreen+3);
+	    lTau2.SetLineWidth(3);
         lTau2.Draw();
     can2.cd(2);
         hFitTauShortL2.Draw();
         TLine lTauShort2(taucorto,0,taucorto,hFitTauShortL2.GetMaximum());
-	    lTauShort2.SetLineColor(kRed);
+	    lTauShort2.SetLineColor(kGreen+3);
+	    lTauShort2.SetLineWidth(3);
         lTauShort2.Draw();
     can2.cd(3);
         hFitBL2.Draw();
         TLine lB2(B,0,B,hFitBL2.GetMaximum());
-	    lB2.SetLineColor(kRed);
+	    lB2.SetLineColor(kGreen+3);
+	    lB2.SetLineWidth(3);
         lB2.Draw();
     can2.cd(4);
         hFitRL2.Draw();
         TLine lR2(R,0,R,hFitRL2.GetMaximum());
-	    lR2.SetLineColor(kRed);
+	    lR2.SetLineColor(kGreen+3);
+	    lR2.SetLineWidth(3);
         lR2.Draw();
     can2.cd(5);
         hFitErrTauL2.Draw();
@@ -402,13 +406,16 @@ int main( int argc, char* argv[] ) {
 }
 //----------- fine main ---------------
 
-void fitGaus(TH1D h){
+void fitGaus(TH1D& h){
    
     int dim = h.GetNbinsX();
     double min = h.GetBinCenter(1);
     double max = h.GetBinCenter(dim);
-    //TF1 *f = new TF1( "gaus_abs", "[0]*exp(-0.5*((TMath::Abs(x)-[1])/[2])**2)",0,1000);
-    TFitResultPtr p = h.Fit("gaus","SQN","",min,max);
+    //TF1 f( "gaus", "[0]*exp(-0.5*((TMath::Abs(x)-[1])/[2])**2)",0,1000);
+    //    f.SetParameter(1,(max+min)/2);
+    //    f.SetParameter(2,(max-min)/2);
+
+    TFitResultPtr p = h.Fit("gaus","SQ","",min,max);
 
     std::cout << h.GetName() << std::endl;
     if ( p!= -1 ) {
