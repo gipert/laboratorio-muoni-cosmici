@@ -58,8 +58,8 @@ int main( int argc, char* argv[] ) {
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
     std::chrono::steady_clock::time_point end;
 
-    for ( int tauL = 320; tauL < 800; tauL+=200 ) {
-        for ( int tauS = 50; tauS < 250; tauS+=70 ) {
+    for ( int tauL = 350; tauL < 550; tauL+=80 ) {
+        for ( int tauS = 122; tauS < 250; tauS+=50 ) {
             for ( double R = 0.621; R < 2; R+=0.6 ) {
                 for ( int I = 80000; I < 410000; I+=160000 ) {
                     int B = I/80000;

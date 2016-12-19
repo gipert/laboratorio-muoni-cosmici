@@ -210,8 +210,14 @@ int main( int argc, char* argv[] ) {
 
         // fit preliminare per settare tau+ e tau- la 1a volta
         TFitResultPtr ptr = total2.Fit("expo","SNQ");
-        
         double tauSet = -1/(ptr->Parameter(1));
+        // fittiamo con 1 expo da Begin a beginFit e con un'altra expo da beginFit a StartBase
+        //TFitResultPtr ptr1 = total2.Fit("expo","SNQL","",Begin,beginFit);
+        //TFitResultPtr ptr2 = total2.Fit("expo","SNQL","",beginFit,StartBase);
+        //double tauMinSet   = -1/(ptr1->Parameter(1));
+        //double tauPlusSet  = -1/(ptr2->Parameter(1));
+        //double RSet        = exp(ptr2->Parameter(0)-ptr1->Parameter(0));
+        //std::cout << "\ntauMinSet=" << tauMinSet << "   tauPlusSet=" << tauPlusSet << "RSet=" << RSet << std::endl;
         
         // METODO 2: pol0 per B, quindi B-setting e fit con fitFunc2, quindi fit complessivo
 	    TFitResultPtr basePtr = total2.Fit("pol0","LSNQ","",StartBase,End);
@@ -225,9 +231,13 @@ int main( int argc, char* argv[] ) {
         //fitFunc.SetParameter("tauShort",tauMinSet);
         fitFunc.SetParameter("tauLong",fitFunc2.GetParameter("tau"));
         fitFunc.SetParameter("B",fitFunc2.GetParameter("B"));
+        
+        // senza questi set sulle A diventa brutto l'errore relativo su R
+        //fitFunc.SetParameter("Aplus",fitFunc2.GetParameter("A"));           // SETTATO A+ ---> brutta compatibilità per le tau
+        //fitFunc.SetParameter("Aminus",fitFunc2.GetParameter("A")/RSet);     // SETTATO A- ---> brutta compatibilità per le tau
 
         // FIT totale su total2 con fitfunc (ambedue le exp)
-        total2.Fit("fitFunc","LQN","",Begin,End);
+        total2.Fit("fitFunc","LQN","",Begin,End);    
         
         if (saveFits) {
             total2.Draw();
@@ -247,6 +257,7 @@ int main( int argc, char* argv[] ) {
             double errRelTauPlus = fitFunc.GetParError(3)/fitFunc.GetParameter("tauLong");
             double errRelTauMin  = fitFunc.GetParError(1)/fitFunc.GetParameter("tauShort");
             double errRelR       = errRatio/ratio;
+            //std::cout << "\nerrRelR=" << errRelR;
 
             // pushback se compatibili e con errori piccoli
             if ( compTauPlus   > compLimit ) countTauPlusComp++;

@@ -41,8 +41,8 @@ struct distRange{
     double massimo;
 };
 
-TFitResultPtr fitGaus(TH1D h);
-distRange getRange(std::vector<double> v);
+TFitResultPtr fitGaus(TH1D& h);
+distRange getRange(std::vector<double>& v);
 
 //--------------- main ---------------------
 std::vector<bool> montecarlo( float B, double tau, double integrale, double taucorto, double R, int RebFactor  ) {
@@ -86,10 +86,20 @@ std::vector<bool> montecarlo( float B, double tau, double integrale, double tauc
     double errRatio = 0;
 
     TRandom3 r;
-    int countTauPlus = 0;   // contatori per i successi dell'intero codice
-    int countTauMin = 0;
-    int countR = 0;
+    int countTauPlusErr = 0;   // contatori per i fit con errore grande
+    int countTauMinErr = 0;
+    int countRErr = 0;
+    
+    int countTauPlusComp = 0;   // contatori per i fit incompatibili
+    int countTauMinComp = 0;
+    int countRComp = 0;
+    
     int countTot = 0;
+       
+    // limiti di rigetto
+    int compLimit = 3;
+    double errLimit = 0.2;
+    int factorLimit = 2;
 
     // ProgressBar
     ProgressBar bar(Nsim);
@@ -138,19 +148,19 @@ std::vector<bool> montecarlo( float B, double tau, double integrale, double tauc
 		total2.Add(&total, &exponential2);
 
         // fit preliminare per settare tau+ e tau- la 1a volta
-        //TFitResultPtr ptr = total2.Fit("expo","SNQ");
-        //double tauSet = -1/(ptr->Parameter(1));
+        TFitResultPtr ptr = total2.Fit("expo","SNQ");
+        double tauSet = -1/(ptr->Parameter(1));
 
         // METODO 2: pol0 per B, quindi B-setting e fit con fitFunc2, quindi fit complessivo
 	    TFitResultPtr basePtr = total2.Fit("pol0","LSNQ","",StartBase,End);
         fitFunc2.SetParameter(2,basePtr->Parameter(0));
-        //fitFunc2.SetParameter(1,tauSet);
-        fitFunc2.SetParameter(1,tau);
+        fitFunc2.SetParameter(1,tauSet);
+        //fitFunc2.SetParameter(1,tau);
 
         // FIT (exp+)+Base direttamente su total2 con fitfunc2 (solo 1 exp) 
         total2.Fit("fitFunc2","LQN","",beginFit,End);
-        //fitFunc.SetParameter("tauShort",tauSet);
-        fitFunc.SetParameter("tauShort",taucorto);
+        fitFunc.SetParameter("tauShort",tauSet);
+        //fitFunc.SetParameter("tauShort",taucorto);
         fitFunc.SetParameter("tauLong",fitFunc2.GetParameter("tau"));
         fitFunc.SetParameter("B",fitFunc2.GetParameter("B"));
 
@@ -170,17 +180,20 @@ std::vector<bool> montecarlo( float B, double tau, double integrale, double tauc
         double errRelR       = errRatio/ratio;
         
         // limiti di rigetto
-        int compLimit = 3;
-        double errLimit = 0.2;
+        //int compLimit = 3;
+        //double errLimit = 0.2;
 
-        // pushback se compatibili e con errori piccoli
-        if ( compTauPlus > compLimit || errRelTauPlus > errLimit ) countTauPlus++; 
-        if ( compTauMin  > compLimit || errRelTauMin  > errLimit ) countTauMin++; 
-        if ( compR       > compLimit || errRelR       > errLimit ) countR++;
+            // pushback se compatibili e con errori piccoli
+            if ( compTauPlus   > compLimit ) countTauPlusComp++;
+            if ( errRelTauPlus > errLimit  ) countTauPlusErr++; 
+            if ( compTauMin    > compLimit ) countTauMinComp++;
+            if ( errRelTauMin  > errLimit  ) countTauMinErr++; 
+            if ( compR         > compLimit ) countRComp++;
+            if ( errRelR       > errLimit  ) countRErr++;
 
-        if ( compTauPlus > compLimit || errRelTauPlus > errLimit ||
-             compTauMin  > compLimit || errRelTauMin  > errLimit ||
-             compR       > compLimit || errRelR       > errLimit ) countTot++;
+            if ( compTauPlus > compLimit || errRelTauPlus > errLimit ||
+                 compTauMin  > compLimit || errRelTauMin  > errLimit ||
+                 compR       > compLimit || errRelR       > errLimit ) countTot++;
         else {
             vFitTauShortL2.push_back(fitFunc.GetParameter("tauShort"));
             vFitErrTauShortL2.push_back(fitFunc.GetParError(1)); 
@@ -195,43 +208,49 @@ std::vector<bool> montecarlo( float B, double tau, double integrale, double tauc
     
     // range distribuzioni METODO 2
     distRange rFitTauL2         = getRange(vFitTauL2);
+        std::cout << "\nhFitTauL2:         [" << rFitTauL2.minimo << ", " << rFitTauL2.massimo << "]" << std::endl;
     distRange rFitTauShortL2    = getRange(vFitTauShortL2);
+        std::cout << "hFitTauShortL2:    [" << rFitTauShortL2.minimo << ", " << rFitTauShortL2.massimo << "]" << std::endl;
     distRange rFitBL2           = getRange(vFitBL2);
+        std::cout << "hFitBL2:           [" << rFitBL2.minimo << ", " << rFitBL2.massimo << "]" << std::endl;
     distRange rFitRL2           = getRange(vFitRL2);
+        std::cout << "hFitRL2:           [" << rFitRL2.minimo << ", " << rFitRL2.massimo << "]" << std::endl;
     
     distRange rFitErrTauL2      = getRange(vFitErrTauL2);
+        std::cout << "hFitErrTauL2:      [" << rFitErrTauL2.minimo << ", " << rFitErrTauL2.massimo << "]" << std::endl;
     distRange rFitErrTauShortL2 = getRange(vFitErrTauShortL2);
+        std::cout << "hFitErrTauShortL2: [" << rFitErrTauShortL2.minimo << ", " << rFitErrTauShortL2.massimo << "]" << std::endl;
     distRange rFitErrBL2        = getRange(vFitErrBL2);
+        std::cout << "hFitErrBL2:        [" << rFitErrBL2.minimo << ", " << rFitErrBL2.massimo << "]" << std::endl;
     distRange rFitErrRL2        = getRange(vFitErrRL2); 
+        std::cout << "hFitErrRL2:        [" << rFitErrRL2.minimo << ", " << rFitErrRL2.massimo << "]" << std::endl; 
 
     // creo gli istogrammi delle distribuzioni METODO 2
-    TH1D hFitTauL2 	       ( "hFitTauL2" 	     , "#tau_{+}" , 100, rFitTauL2.minimo     , rFitTauL2.massimo );
-    TH1D hFitTauShortL2    ( "hFitTauShortL2"    , "#tau_{-}" , 100, rFitTauShortL2.minimo, rFitTauShortL2.massimo );
-    TH1D hFitBL2   	       ( "hFitBL2"   	     , "B"        , 100, rFitBL2.minimo       , rFitBL2.massimo );
-    TH1D hFitRL2           ( "hFitRL2"           , "R"        , 100, rFitRL2.minimo       , rFitRL2.massimo );   
+    TH1D hFitTauL2 	       ( "hFitTauL2" 	     , "#tau_{+}" , 100, rFitTauL2.minimo     , rFitTauL2.massimo*1.01 );
+    TH1D hFitTauShortL2    ( "hFitTauShortL2"    , "#tau_{-}" , 100, rFitTauShortL2.minimo, rFitTauShortL2.massimo*1.01 );
+    TH1D hFitBL2   	       ( "hFitBL2"   	     , "B"        , 100, rFitBL2.minimo       , rFitBL2.massimo*1.01 );
+    TH1D hFitRL2           ( "hFitRL2"           , "R"        , 100, rFitRL2.minimo       , rFitRL2.massimo*1.01 );   
  
-    TH1D hFitErrTauL2 	   ( "hFitErrTauL2"      , "#tau_{+} - errori" , 100, rFitErrTauL2.minimo     , rFitErrTauL2.massimo); 
-    TH1D hFitErrTauShortL2 ( "hFitErrTauShortL2" , "#tau_{-} - errori" , 100, rFitErrTauShortL2.minimo, rFitErrTauShortL2.massimo); 
-    TH1D hFitErrBL2 	   ( "hFitErrBL2"        , "B - errori"        , 100, rFitErrBL2.minimo       , rFitErrBL2.massimo);
-    TH1D hFitErrRL2 	   ( "hFitErrRL2"        , "R - errori"        , 100, rFitErrRL2.minimo       , rFitErrRL2.massimo);
+    TH1D hFitErrTauL2 	   ( "hFitErrTauL2"      , "#tau_{+} - errori" , 100, rFitErrTauL2.minimo     , rFitErrTauL2.massimo*1.01); 
+    TH1D hFitErrTauShortL2 ( "hFitErrTauShortL2" , "#tau_{-} - errori" , 100, rFitErrTauShortL2.minimo, rFitErrTauShortL2.massimo*1.01); 
+    TH1D hFitErrBL2 	   ( "hFitErrBL2"        , "B - errori"        , 100, rFitErrBL2.minimo       , rFitErrBL2.massimo*1.01);
+    TH1D hFitErrRL2 	   ( "hFitErrRL2"        , "R - errori"        , 100, rFitErrRL2.minimo       , rFitErrRL2.massimo*1.01);
 
     // riempio gli istogrammi METODO 2
-    for ( int i = 0; i < vFitTauL2.size(); i++ ) {        
-        hFitTauL2.Fill(vFitTauL2.at(i));
-        hFitTauShortL2.Fill(vFitTauShortL2.at(i));
-        hFitBL2.Fill(vFitBL2.at(i));
-        hFitRL2.Fill(vFitRL2.at(i));
-        
-	    hFitErrTauL2.Fill(vFitErrTauL2.at(i));
-	    hFitErrTauShortL2.Fill(vFitErrTauShortL2.at(i));
-        hFitErrBL2.Fill(vFitErrBL2.at(i));
-        hFitErrRL2.Fill(vFitErrRL2.at(i));
-    }
-
+    for ( int i = 0; i < vFitTauL2.size(); i++ )       hFitTauL2.Fill(vFitTauL2[i]);
+    for ( int i = 0; i < vFitTauShortL2.size(); i++ )  hFitTauShortL2.Fill(vFitTauShortL2[i]);
+    for ( int i = 0; i < vFitBL2.size(); i++ )         hFitBL2.Fill(vFitBL2[i]);
+    for ( int i = 0; i < vFitRL2.size(); i++ )         hFitRL2.Fill(vFitRL2[i]);
+       
+    for ( int i = 0; i < vFitErrTauL2.size(); i++ )      hFitErrTauL2.Fill(vFitErrTauL2[i]);
+    for ( int i = 0; i < vFitErrTauShortL2.size(); i++ ) hFitErrTauShortL2.Fill(vFitErrTauShortL2[i]);
+    for ( int i = 0; i < vFitErrBL2.size(); i++ )        hFitErrBL2.Fill(vFitErrBL2[i]);
+    for ( int i = 0; i < vFitErrRL2.size(); i++ )        hFitErrRL2.Fill(vFitErrRL2[i]);
+    
     // fit gaussiani delle distribuzioni METODO 2
-    double errLimit = 0.2;
-    int compLimit = 3;
-    int factorLimit = 2;
+    //double errLimit = 0.2;
+    //int compLimit = 3;
+    //int factorLimit = 2;
 
     // recupero risultati fit e controllo errori e campatibilità
     std::vector<bool> vBool(4, true);
@@ -387,7 +406,7 @@ std::vector<bool> montecarlo( float B, double tau, double integrale, double tauc
 }
 //--------------- fine main ----------------------
  
-TFitResultPtr fitGaus(TH1D h){
+TFitResultPtr fitGaus(TH1D& h){
    int dim = h.GetNbinsX();
 
    std::string name = h.GetName();
@@ -403,22 +422,28 @@ TFitResultPtr fitGaus(TH1D h){
 //   std::cout << "mean = "       << mean  << " +- " << err << std::endl
 //	         << "sigma = "      << sigma << " +- "<< errsigma << std::endl
 //             << "mean/sigma = " << "("   << sigma*100/mean << "%)" << std::endl;
+
+   if (p==-1)   std::cout << "Fit fallito(p=-1)." << std::endl << std::endl;
+   
    return p;
 }
 
-distRange getRange(std::vector<double> v){
-   double min = 0;
+distRange getRange(std::vector<double>& v){
+   double min = 10000;
    double max = 0;
    double entry;
    int N = v.size();
-   for(int k=0; k<N; k++)
-   {
-        entry = v.at(k);
-	if(min==0 || min>entry )	min = entry;
-	if(max==0 || max<entry )	max = entry;
+   for ( int k = 0; k < N; k++ ) {
+        entry = v[k];
+	    if( min > entry ) min = entry;
+	    if( max < entry ) max = entry;
    }
-   //auto min = std::min_element(v.begin(),v.end());
-   //auto max = std::max_element(v.begin(),v.end());
+   
+   if ( (min == 10000 && max == 0) || min >= max ) {
+       min = 0;
+       max = 10;
+   }
+   
    distRange d {min,max};
    return d;
 }
