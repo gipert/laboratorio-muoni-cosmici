@@ -2,7 +2,7 @@
  * Mattia Faggin, Davide Piras, Luigi Pertoldi
  * Created: 20 dic 2016
  *
- * Usage: 
+ * Usage: ./analisiFinale [filelist] [rebin] 
  *
  * inputFile format: elenco dei file .txt con i dati, attenzione a non 
  *                   aggiungere spazi oppure newline characters
@@ -101,7 +101,7 @@ int main ( int argc , char** argv ) {
     // REBIN
     data.Rebin(rebin);
 
-    TApplication app("app", &argc, argv);
+    //TApplication app("app", &argc, argv);
     TCanvas c( "c", "Analisi Dati", 1200 , 700);
     c.cd();
     c.SetGrid();
@@ -176,17 +176,18 @@ int main ( int argc , char** argv ) {
     tauShortErr *= m;
 
     // dump results:
-    std::cout << std::endl << "========== Risultati ==========" << std::endl << std::endl
+    std::cout << std::endl << "=========== Risultati Fit ===========" << std::endl << std::endl
               << "Tau+ = ( " << tauLong  << " +- " << tauLongErr  << " ) us" << std::endl
               << "Tau- = ( " << tauShort << " +- " << tauShortErr << " ) us" << std::endl
-              << "A+   = " << Aplus    << " +- " << AplusErr    << std::endl
-              << "A-   = " << Aminus   << " +- " << AminusErr   << std::endl
-              << "R    = " << R        << " +- " << RErr        << std::endl
-              << "B    = " << B        << " +- " << BErr        << std::endl;
+              << "A+   = "   << Aplus    << " +- " << AplusErr               << std::endl
+              << "A-   = "   << Aminus   << " +- " << AminusErr              << std::endl
+              << "R    = "   << R        << " +- " << RErr                   << std::endl
+              << "B    = "   << B        << " +- " << BErr                   << std::endl
+              << std::endl << "=====================================" << std::endl << std::endl;
 
     data.Draw();
-
-    app.Run();
+    c.SaveAs("spectrumFit.pdf");
+    //app.Run();
 
     return 0;
 }
