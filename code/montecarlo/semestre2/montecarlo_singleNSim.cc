@@ -102,7 +102,7 @@ int main( int argc, char* argv[] ) {
 	TApplication Root("App",&argc,argv);
 	
     //gErrorIgnoreLevel = kError; // toglie i warning
-    //gStyle->SetOptStat(0);
+    gStyle->SetOptStat(0);
 
     // METODO 2
     std::vector<double> vFitTauL2;
@@ -320,15 +320,15 @@ int main( int argc, char* argv[] ) {
         std::cout << "hFitErrRL2:        [" << rFitErrRL2.minimo << ", " << rFitErrRL2.massimo << "]" << std::endl;
 
     // creo gli istogrammi delle distribuzioni METODO 2
-    TH1D hFitTauL2 	       ( "hFitTauL2" 	     , "#tau_{+}"          , 100, rFitTauL2.minimo        , rFitTauL2.massimo*1.01 );
-    TH1D hFitTauShortL2    ( "hFitTauShortL2"    , "#tau_{-}"          , 100, rFitTauShortL2.minimo   , rFitTauShortL2.massimo*1.01 );
-    TH1D hFitBL2   	       ( "hFitBL2"   	     , "B"                 , 100, rFitBL2.minimo          , rFitBL2.massimo*1.01 );
-    TH1D hFitRL2           ( "hFitRL2"           , "R"                 , 100, rFitRL2.minimo          , rFitRL2.massimo*1.01 );   
+    TH1D hFitTauL2 	       ( "hFitTauL2" 	     , "#tau_{+}"          , 40, rFitTauL2.minimo        , rFitTauL2.massimo*1.01 );
+    TH1D hFitTauShortL2    ( "hFitTauShortL2"    , "#tau_{-}"          , 40, rFitTauShortL2.minimo   , rFitTauShortL2.massimo*1.01 );
+    TH1D hFitBL2   	       ( "hFitBL2"   	     , "B"                 , 40, rFitBL2.minimo          , rFitBL2.massimo*1.01 );
+    TH1D hFitRL2           ( "hFitRL2"           , "R"                 , 40, rFitRL2.minimo          , rFitRL2.massimo*1.01 );   
  
-    TH1D hFitErrTauL2 	   ( "hFitErrTauL2"      , "#tau_{+} - errori" , 100, rFitErrTauL2.minimo     , rFitErrTauL2.massimo*1.01); 
-    TH1D hFitErrTauShortL2 ( "hFitErrTauShortL2" , "#tau_{-} - errori" , 100, rFitErrTauShortL2.minimo, rFitErrTauShortL2.massimo*1.01); 
-    TH1D hFitErrBL2 	   ( "hFitErrBL2"        , "B - errori"        , 100, rFitErrBL2.minimo       , rFitErrBL2.massimo*1.01);
-    TH1D hFitErrRL2 	   ( "hFitErrRL2"        , "R - errori"        , 100, rFitErrRL2.minimo       , rFitErrRL2.massimo*1.01);
+    TH1D hFitErrTauL2 	   ( "hFitErrTauL2"      , "#tau_{+} - errori" , 40, rFitErrTauL2.minimo     , rFitErrTauL2.massimo*1.01); 
+    TH1D hFitErrTauShortL2 ( "hFitErrTauShortL2" , "#tau_{-} - errori" , 40, rFitErrTauShortL2.minimo, rFitErrTauShortL2.massimo*1.01); 
+    TH1D hFitErrBL2 	   ( "hFitErrBL2"        , "B - errori"        , 40, rFitErrBL2.minimo       , rFitErrBL2.massimo*1.01);
+    TH1D hFitErrRL2 	   ( "hFitErrRL2"        , "R - errori"        , 40, rFitErrRL2.minimo       , rFitErrRL2.massimo*1.01);
 
     // riempio gli istogrammi METODO 2
     for ( int i = 0; i < vFitTauL2.size(); i++ )       hFitTauL2.Fill(vFitTauL2[i]);
@@ -342,27 +342,27 @@ int main( int argc, char* argv[] ) {
     for ( int i = 0; i < vFitErrRL2.size(); i++ )        hFitErrRL2.Fill(vFitErrRL2[i]);
     
     std::cout << std::endl 
-	      << "---------------------------------------------------------------------------------" 
-	      << "\n./montecarlo.out " << B << " " << tau << " " << integrale << " " << taucorto 
-		  << " " << R << " " << RebFactor <<std::endl 
-	        << "\nEventi totali    " << integrale
-	      << "\nEventi baseline  " << B*(End-Begin)
-	      << "\nEventi exp lungo " << A*tau
-		  << "\nEventi exp corto " << A*taucorto/R
-	      << "\nValori in INPUT:"
-	      << "\n	Baseline  " << B
-	      << "\n	tau       " << tau
-	      << "\n	integrale " << integrale
-		  << "\n	taucorto  " << taucorto
-		  << "\n	R         " << R
-		  << "\n	RebFactor " << RebFactor
-		  << "\n	A+        " << A 
-		  << "\n	A-        " << Aminus << std::endl
-          << "\nSimulazioni MC effettuate:                         "  << Nsim
-	      << "\nIntervallo di generazione:                         [" << Begin     << ", " << End << "]" 
-	      << "\nIntervallo di fit baseline METODO 2:               [" << StartBase << ", " << End << "]"
-	      << "\nIntervallo di fit (exp+)+base METODO 2:            [" << beginFit  << ", " << End << "]"
-	      << "\nIntervallo di fit (exp-)+(exp+)+base METODO 2:     [" << Begin     << ", " << End << "]" << std::endl << std::endl;
+              << "---------------------------------------------------------------------------------" 
+              << "\n./montecarlo.out " << B << " " << tau << " " << integrale << " " << taucorto 
+              << " " << R << " " << RebFactor <<std::endl 
+              << "\nEventi totali    " << integrale
+              << "\nEventi baseline  " << B*(End-Begin)
+              << "\nEventi exp lungo " << A*tau
+              << "\nEventi exp corto " << A*taucorto/R
+              << "\nValori in INPUT:"
+              << "\n\tBaseline  " << B
+              << "\n\ttau       " << tau
+              << "\n\tintegrale " << integrale
+              << "\n\ttaucorto  " << taucorto
+              << "\n\tR         " << R
+              << "\n\tRebFactor " << RebFactor
+              << "\n\tA+        " << A 
+              << "\n\tA-        " << Aminus << std::endl
+              << "\nSimulazioni MC effettuate:                         "  << Nsim
+              << "\nIntervallo di generazione:                         [" << Begin     << ", " << End << "]" 
+              << "\nIntervallo di fit baseline METODO 2:               [" << StartBase << ", " << End << "]"
+              << "\nIntervallo di fit (exp+)+base METODO 2:            [" << beginFit  << ", " << End << "]"
+              << "\nIntervallo di fit (exp-)+(exp+)+base METODO 2:     [" << Begin     << ", " << End << "]" << std::endl << std::endl;
 
     // fit gaussiano delle distribuzioni
     fitGaus(hFitTauL2);
