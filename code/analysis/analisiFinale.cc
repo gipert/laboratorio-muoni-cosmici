@@ -22,6 +22,14 @@
 #include "TFitResultPtr.h"
 #include "TF1.h"
 #include "TApplication.h"
+#include "TLegend.h"
+
+// calibration parameters
+double m = 5.12162E-03;
+double q = -7.6994e-07;
+// min & max histogram
+double min = 0*m + q;
+double max = 4096*m + q;
 
 int main ( int argc , char** argv ) {
 
@@ -53,7 +61,7 @@ int main ( int argc , char** argv ) {
     int rebin = std::stoi(args[2]);
 
     // definiamo gli estremi dell'istogramma
-    TH1D data( "data" , "data" , 4096 , 0 , 4096);
+    TH1D data( "data" , "data" , 4096 , 0, 4096);
         //data.SetTitle("Spettro globale");
         data.SetYTitle("dN/dx");
         data.SetXTitle("Delay (canali)");
@@ -167,8 +175,6 @@ int main ( int argc , char** argv ) {
     double RErr = R * sqrt( AplusErr*AplusErr/(Aplus*Aplus) + AminusErr*AminusErr/(Aminus*Aminus));
 
     // calibration
-    double m = 5.12162E-03;
-
     tauLong *= m;
     tauShort *= m;
  
@@ -185,8 +191,39 @@ int main ( int argc , char** argv ) {
               << "B    = "   << B        << " +- " << BErr                   << std::endl
               << std::endl << "=====================================" << std::endl << std::endl;
 
+    // histogram calibration
+    TH1D histo_cal("histo_cal" , "#mu^{#pm} spectrum" , 4096 , min, max);
+    histo_cal.SetYTitle("dN/dx");
+    histo_cal.SetXTitle("Delay (#mus)");
+    histo_cal.SetStats(false);
+    for(int k=1; k<=4096; k++)
+    {
+        histo_cal.SetBinContent(k,data.GetBinContent(k));
+    }    
     data.Draw();
     c.SaveAs("spectrumFit.pdf");
+    TF1 drawFit1 ("drawFit1", "[0]*TMath::Exp(-x/[1])+[2]*TMath::Exp(-x/[3])+[4]", begin*m +q, midExp*m +q);
+    drawFit1.SetParameter(0,Aminus);
+    drawFit1.SetParameter(1,tauShort);
+    drawFit1.SetParameter(2,Aplus);
+    drawFit1.SetParameter(3,tauLong);
+    drawFit1.SetParameter(4,B);
+    drawFit1.SetLineColor(kRed);
+    TF1 drawFit2 ("drawFit2", "[0]*TMath::Exp(-x/[1])+[2]*TMath::Exp(-x/[3])+[4]", midExp*m +q, midBase*m +q);
+    drawFit2.SetParameter(0,Aminus);
+    drawFit2.SetParameter(1,tauShort);
+    drawFit2.SetParameter(2,Aplus);
+    drawFit2.SetParameter(3,tauLong);
+    drawFit2.SetParameter(4,B);
+    drawFit2.SetLineColor(kYellow);
+    histo_cal.Draw();
+    drawFit1.Draw("same");
+    drawFit2.Draw("same");
+    TLegend leg (0.5,0.7,0.9,0.9);
+    leg.AddEntry("drawFit1","A_{-}e^{-t/#tau_{-}}+A_{+}e^{-t/#tau_{+}}+B per #mu^{-}");
+    leg.AddEntry("drawFit2","A_{-}e^{-t/#tau_{-}}+A_{+}e^{-t/#tau_{+}}+B per #mu^{+}");
+    leg.Draw("same");
+    c.SaveAs("spectrumFit_cal.pdf");
     //app.Run();
 
     return 0;
