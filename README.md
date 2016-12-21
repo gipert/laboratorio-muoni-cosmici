@@ -4,9 +4,9 @@ Decadimento dei muoni cosmici in alluminio
 Contents:
 --------
 
-`README.md`
-`env.sh`: shell script da eseguire per rendere visibili gli eseguibili ovunque
-`Makefile`: Makefile generale per compilare tutto il progetto
+* `README.md`
+* `env.sh`: shell script da eseguire per rendere visibili gli eseguibili ovunque
+* `Makefile`: Makefile generale per compilare tutto il progetto
 
 `latex/`
 
@@ -24,21 +24,24 @@ Contents:
     * `*.txt`:     data files per ogni PMT
 * `calibration/`
     * `cal.C` :    macro ROOT per calibrare i TAC
-    * `TAC_437`:   dati calibrazione per il TAC nr. 437
-    * `TAC_467`:   dati calibrazione per il TAC nr. 467
+    * `TAC_437/`:   dati calibrazione per il TAC nr. 437
+    * `TAC_467/`:   dati calibrazione per il TAC nr. 467
 * `analysis/`
-    * `lifetime_nocalib_bkgr_sub.cc` : macro ROOT per l'analisi (parziale 1° semestre)
-    * `dati_semestre_1` : directory contenenti tutti i file usati nell'analisi del 1° semestre
-    * `dati_semestre_2` : directory contenente tutti i file usati nell'analisi del 2° semestre
+    * `lifetime_nocalib_bkgr_sub.cc` : programma per l'analisi (parziale 1° semestre)
+    * `analisiFinale.cc` : programma per l'analisi (finale 2° semestre)
+    * `dati_semestre_1/` : directory contenenti tutti i file usati nell'analisi del 1° semestre
+    * `dati_semestre_2/` : directory contenente tutti i file usati nell'analisi del 2° semestre
 * `montecarlo/`
-    * `semestre1` : macro e notebooks di Mathematica per la simulazione MonteCarlo delle coincidenze
-    * `semestre2`
+    * `semestre1/` : macro e notebooks di Mathematica per la simulazione MonteCarlo delle coincidenze
+    * `semestre2/`
         * `baselineStart.cc` : studio della stima della baseline con fit "pol0" al variare del punto iniziale
                                nello spettro simulato exp+cost
-        * `fitexpStart.cc` :   studio della bontà del fit esponenziale al variare del punto iniziale nello spettro
-                               simulato exp+exp+cost
+        * `fitexpStart.cc` : studio della bontà del fit esponenziale al variare del punto iniziale nello spettro
+                             simulato exp+exp+cost
         * `montecarlo_modifiedforbaseline.cc` : confronto metodi di fit della baseline
-        * `montecarlo.cc` :    simulazione montecarlo completa
+	* `montecarlo_SingleNsim.cc` : simulazione montecarlo completa
+        * `montecarlo.cc` : funzione-simulazione montecarlo completa adatta all'iterazione in `main.cc`
+	* `main.cc` : matrice di simulazioni
 
 Collaborative Git:
 -----------------

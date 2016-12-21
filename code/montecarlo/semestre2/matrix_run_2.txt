@@ -1,0 +1,923 @@
+B=1   tauL=250   tauS=100   I=80000   R=0.621
+Simulazione 1/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={1,1,1,1}
+Time = 1.53333 minuti
+
+B=3   tauL=250   tauS=100   I=240000   R=0.621
+Simulazione 2/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={2,2,2,2}
+Time = 3.28333 minuti
+
+B=5   tauL=250   tauS=100   I=400000   R=0.621
+Simulazione 3/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={3,3,3,3}
+Time = 5.16667 minuti
+
+B=1   tauL=250   tauS=100   I=80000   R=1.221
+Simulazione 4/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={4,4,4,4}
+Time = 6.66667 minuti
+
+B=3   tauL=250   tauS=100   I=240000   R=1.221
+Simulazione 5/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={5,5,5,5}
+Time = 8.41667 minuti
+
+B=5   tauL=250   tauS=100   I=400000   R=1.221
+Simulazione 6/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={6,6,6,6}
+Time = 10.2833 minuti
+
+B=1   tauL=250   tauS=100   I=80000   R=1.821
+Simulazione 7/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={7,7,7,7}
+Time = 11.8167 minuti
+
+B=3   tauL=250   tauS=100   I=240000   R=1.821
+Simulazione 8/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={8,8,8,8}
+Time = 13.6333 minuti
+
+B=5   tauL=250   tauS=100   I=400000   R=1.821
+Simulazione 9/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={9,9,9,9}
+Time = 15.55 minuti
+
+B=1   tauL=250   tauS=172   I=80000   R=0.621
+Simulazione 10/81 [##################################################] 100%
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+vOut    ={0,0,0,0}
+vCounter={9,9,9,9}
+Time = 18.6333 minuti
+
+B=3   tauL=250   tauS=172   I=240000   R=0.621
+Simulazione 11/81 [##################################################] 100%
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+vOut    ={0,0,0,0}
+vCounter={9,9,9,9}
+Time = 21.6667 minuti
+
+B=5   tauL=250   tauS=172   I=400000   R=0.621
+Simulazione 12/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+Compatibilità troppo grande (7.74345>3)
+vOut    ={1,1,0,0}
+vCounter={10,10,9,9}
+Time = 25.4667 minuti
+
+B=1   tauL=250   tauS=172   I=80000   R=1.221
+Simulazione 13/81 [##################################################] 100%
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+vOut    ={0,0,0,0}
+vCounter={10,10,9,9}
+Time = 28.6 minuti
+
+B=3   tauL=250   tauS=172   I=240000   R=1.221
+Simulazione 14/81 [##################################################] 100%
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+vOut    ={0,0,0,0}
+vCounter={10,10,9,9}
+Time = 31.5833 minuti
+
+B=5   tauL=250   tauS=172   I=400000   R=1.221
+Simulazione 15/81 [##################################################] 100%
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+vOut    ={0,0,0,0}
+vCounter={10,10,9,9}
+Time = 34.55 minuti
+
+B=1   tauL=250   tauS=172   I=80000   R=1.821
+Simulazione 16/81 [##################################################] 100%
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+vOut    ={0,0,0,0}
+vCounter={10,10,9,9}
+Time = 37.9 minuti
+
+B=3   tauL=250   tauS=172   I=240000   R=1.821
+Simulazione 17/81 [##################################################] 100%
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+vOut    ={0,0,0,0}
+vCounter={10,10,9,9}
+Time = 41.2 minuti
+
+B=5   tauL=250   tauS=172   I=400000   R=1.821
+Simulazione 18/81 [##################################################] 100%
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+vOut    ={0,0,0,0}
+vCounter={10,10,9,9}
+Time = 44.3833 minuti
+
+B=1   tauL=250   tauS=244   I=80000   R=0.621
+Simulazione 19/81 [##################################################] 100%
+p 0   pErr 0
+Sigma troppo grande rispetto all'errore (134.007>26.0652)
+p 0   pErr 0
+Sigma troppo grande rispetto all'errore (97.4373>20.3092)
+p 0   pErr 0
+Sigma troppo grande rispetto all'errore (2.06243>1.1772)
+vOut    ={0,0,0,0}
+vCounter={10,10,9,9}
+Time = 47.3667 minuti
+
+B=3   tauL=250   tauS=244   I=240000   R=0.621
+Simulazione 20/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={11,11,10,10}
+Time = 50.0167 minuti
+
+B=5   tauL=250   tauS=244   I=400000   R=0.621
+Simulazione 21/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 4
+Errore relativo troppo grande (0.700451>0.2)
+vOut    ={1,1,0,0}
+vCounter={12,12,10,10}
+Time = 52.5167 minuti
+
+B=1   tauL=250   tauS=244   I=80000   R=1.221
+Simulazione 22/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={13,13,11,11}
+Time = 54.85 minuti
+
+B=3   tauL=250   tauS=244   I=240000   R=1.221
+Simulazione 23/81 [##################################################] 100%
+p 0   pErr 0
+Sigma troppo grande rispetto all'errore (11.1415>-2.48108)
+p 0   pErr 0
+Compatibilità troppo grande (3.40166>3)
+Sigma troppo grande rispetto all'errore (17.8216>1.7525)
+p 0   pErr 0
+Sigma troppo grande rispetto all'errore (0.218362>-0.105731)
+vOut    ={0,0,0,0}
+vCounter={13,13,11,11}
+Time = 57.15 minuti
+
+B=5   tauL=250   tauS=244   I=400000   R=1.221
+Simulazione 24/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+Compatibilità troppo grande (10.9671>3)
+Sigma troppo grande rispetto all'errore (61.4869>23.0975)
+p 0   pErr 0
+Sigma troppo grande rispetto all'errore (0.176401>-0.150653)
+vOut    ={1,0,0,0}
+vCounter={14,13,11,11}
+Time = 59.5167 minuti
+
+B=1   tauL=250   tauS=244   I=80000   R=1.821
+Simulazione 25/81 [##################################################] 100%
+p 0   pErr 0
+Sigma troppo grande rispetto all'errore (25.8541>22.4821)
+p 0   pErr 0
+p 0   pErr 0
+Sigma troppo grande rispetto all'errore (0.184599>-0.102492)
+vOut    ={0,1,0,0}
+vCounter={14,14,11,11}
+Time = 62.0667 minuti
+
+B=3   tauL=250   tauS=244   I=240000   R=1.821
+Simulazione 26/81 [##################################################] 100%
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+Error in <TPad::Range>: illegal world coordinates range: x1=0.000000, y1=-0.131250, x2=0.000000, y2=1.181250
+Error in <TPad::RangeAxis>: illegal axis coordinates range: xmin=0.000000, ymin=0.000000, xmax=0.000000, ymax=1.050000
+vOut    ={0,0,0,0}
+vCounter={14,14,11,11}
+Time = 64.75 minuti
+
+B=5   tauL=250   tauS=244   I=400000   R=1.821
+Simulazione 27/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+Compatibilità troppo grande (7.96965>3)
+vOut    ={1,1,0,0}
+vCounter={15,15,11,11}
+Time = 67.8667 minuti
+
+B=1   tauL=430   tauS=100   I=80000   R=0.621
+Simulazione 28/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={16,16,12,12}
+Time = 69.3 minuti
+
+B=3   tauL=430   tauS=100   I=240000   R=0.621
+Simulazione 29/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={17,17,13,13}
+Time = 70.9667 minuti
+
+B=5   tauL=430   tauS=100   I=400000   R=0.621
+Simulazione 30/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={18,18,14,14}
+Time = 72.7833 minuti
+
+B=1   tauL=430   tauS=100   I=80000   R=1.221
+Simulazione 31/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={19,19,15,15}
+Time = 74.25 minuti
+
+B=3   tauL=430   tauS=100   I=240000   R=1.221
+Simulazione 32/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={20,20,16,16}
+Time = 75.8667 minuti
+
+B=5   tauL=430   tauS=100   I=400000   R=1.221
+Simulazione 33/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={21,21,17,17}
+Time = 77.65 minuti
+
+B=1   tauL=430   tauS=100   I=80000   R=1.821
+Simulazione 34/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={22,22,18,18}
+Time = 79.0833 minuti
+
+B=3   tauL=430   tauS=100   I=240000   R=1.821
+Simulazione 35/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={23,23,19,19}
+Time = 80.7167 minuti
+
+B=5   tauL=430   tauS=100   I=400000   R=1.821
+Simulazione 36/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={24,24,20,20}
+Time = 82.5333 minuti
+
+B=1   tauL=430   tauS=172   I=80000   R=0.621
+Simulazione 37/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={25,25,21,21}
+Time = 84.1667 minuti
+
+B=3   tauL=430   tauS=172   I=240000   R=0.621
+Simulazione 38/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={26,26,22,22}
+Time = 86.05 minuti
+
+B=5   tauL=430   tauS=172   I=400000   R=0.621
+Simulazione 39/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={27,27,23,23}
+Time = 88.0333 minuti
+
+B=1   tauL=430   tauS=172   I=80000   R=1.221
+Simulazione 40/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={28,28,24,24}
+Time = 89.6167 minuti
+
+B=3   tauL=430   tauS=172   I=240000   R=1.221
+Simulazione 41/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={29,29,25,25}
+Time = 91.4 minuti
+
+B=5   tauL=430   tauS=172   I=400000   R=1.221
+Simulazione 42/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={30,30,26,26}
+Time = 93.35 minuti
+
+B=1   tauL=430   tauS=172   I=80000   R=1.821
+Simulazione 43/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={31,31,27,27}
+Time = 94.9667 minuti
+
+B=3   tauL=430   tauS=172   I=240000   R=1.821
+Simulazione 44/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={32,32,28,28}
+Time = 96.8167 minuti
+
+B=5   tauL=430   tauS=172   I=400000   R=1.821
+Simulazione 45/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={33,33,29,29}
+Time = 98.7667 minuti
+
+B=1   tauL=430   tauS=244   I=80000   R=0.621
+Simulazione 46/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={34,34,30,30}
+Time = 101.017 minuti
+
+B=3   tauL=430   tauS=244   I=240000   R=0.621
+Simulazione 47/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={35,35,31,31}
+Time = 103.5 minuti
+
+B=5   tauL=430   tauS=244   I=400000   R=0.621
+Simulazione 48/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={36,36,32,32}
+Time = 106.117 minuti
+
+B=1   tauL=430   tauS=244   I=80000   R=1.221
+Simulazione 49/81 [##################################################] 100%
+p 0   pErr 0
+Compatibilità troppo grande (9.71383>3)
+Sigma troppo grande rispetto all'errore (26.8001>4.6831)
+p 0   pErr 0
+p 0   pErr 0
+Sigma troppo grande rispetto all'errore (2.1492>0.793709)
+vOut    ={0,1,0,0}
+vCounter={36,37,32,32}
+Time = 108.333 minuti
+
+B=3   tauL=430   tauS=244   I=240000   R=1.221
+Simulazione 50/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={37,38,33,33}
+Time = 110.6 minuti
+
+B=5   tauL=430   tauS=244   I=400000   R=1.221
+Simulazione 51/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={38,39,34,34}
+Time = 112.983 minuti
+
+B=1   tauL=430   tauS=244   I=80000   R=1.821
+Simulazione 52/81 [##################################################] 100%
+p 0   pErr 0
+Sigma troppo grande rispetto all'errore (16.6932>15.5749)
+p 0   pErr 0
+p 0   pErr 0
+Sigma troppo grande rispetto all'errore (1.35333>1.19408)
+vOut    ={0,1,0,0}
+vCounter={38,40,34,34}
+Time = 115.267 minuti
+
+B=3   tauL=430   tauS=244   I=240000   R=1.821
+Simulazione 53/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={39,41,35,35}
+Time = 117.567 minuti
+
+B=5   tauL=430   tauS=244   I=400000   R=1.821
+Simulazione 54/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={40,42,36,36}
+Time = 119.983 minuti
+
+B=1   tauL=610   tauS=100   I=80000   R=0.621
+Simulazione 55/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={41,43,37,37}
+Time = 121.483 minuti
+
+B=3   tauL=610   tauS=100   I=240000   R=0.621
+Simulazione 56/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={42,44,38,38}
+Time = 123.167 minuti
+
+B=5   tauL=610   tauS=100   I=400000   R=0.621
+Simulazione 57/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={43,45,39,39}
+Time = 125 minuti
+
+B=1   tauL=610   tauS=100   I=80000   R=1.221
+Simulazione 58/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={44,46,40,40}
+Time = 126.533 minuti
+
+B=3   tauL=610   tauS=100   I=240000   R=1.221
+Simulazione 59/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={45,47,41,41}
+Time = 128.25 minuti
+
+B=5   tauL=610   tauS=100   I=400000   R=1.221
+Simulazione 60/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={46,48,42,42}
+Time = 130.117 minuti
+
+B=1   tauL=610   tauS=100   I=80000   R=1.821
+Simulazione 61/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={47,49,43,43}
+Time = 131.667 minuti
+
+B=3   tauL=610   tauS=100   I=240000   R=1.821
+Simulazione 62/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={48,50,44,44}
+Time = 133.383 minuti
+
+B=5   tauL=610   tauS=100   I=400000   R=1.821
+Simulazione 63/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={49,51,45,45}
+Time = 135.233 minuti
+
+B=1   tauL=610   tauS=172   I=80000   R=0.621
+Simulazione 64/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={50,52,46,46}
+Time = 136.867 minuti
+
+B=3   tauL=610   tauS=172   I=240000   R=0.621
+Simulazione 65/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={51,53,47,47}
+Time = 138.683 minuti
+
+B=5   tauL=610   tauS=172   I=400000   R=0.621
+Simulazione 66/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={52,54,48,48}
+Time = 140.65 minuti
+
+B=1   tauL=610   tauS=172   I=80000   R=1.221
+Simulazione 67/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={53,55,49,49}
+Time = 142.25 minuti
+
+B=3   tauL=610   tauS=172   I=240000   R=1.221
+Simulazione 68/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={54,56,50,50}
+Time = 144.05 minuti
+
+B=5   tauL=610   tauS=172   I=400000   R=1.221
+Simulazione 69/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={55,57,51,51}
+Time = 146 minuti
+
+B=1   tauL=610   tauS=172   I=80000   R=1.821
+Simulazione 70/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={56,58,52,52}
+Time = 147.633 minuti
+
+B=3   tauL=610   tauS=172   I=240000   R=1.821
+Simulazione 71/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={57,59,53,53}
+Time = 149.45 minuti
+
+B=5   tauL=610   tauS=172   I=400000   R=1.821
+Simulazione 72/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={58,60,54,54}
+Time = 151.35 minuti
+
+B=1   tauL=610   tauS=244   I=80000   R=0.621
+Simulazione 73/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={59,61,55,55}
+Time = 153.267 minuti
+
+B=3   tauL=610   tauS=244   I=240000   R=0.621
+Simulazione 74/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={60,62,56,56}
+Time = 155.4 minuti
+
+B=5   tauL=610   tauS=244   I=400000   R=0.621
+Simulazione 75/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={61,63,57,57}
+Time = 157.867 minuti
+
+B=1   tauL=610   tauS=244   I=80000   R=1.221
+Simulazione 76/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={62,64,58,58}
+Time = 159.7 minuti
+
+B=3   tauL=610   tauS=244   I=240000   R=1.221
+Simulazione 77/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={63,65,59,59}
+Time = 161.783 minuti
+
+B=5   tauL=610   tauS=244   I=400000   R=1.221
+Simulazione 78/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={64,66,60,60}
+Time = 163.967 minuti
+
+B=1   tauL=610   tauS=244   I=80000   R=1.821
+Simulazione 79/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={65,67,61,61}
+Time = 165.767 minuti
+
+B=3   tauL=610   tauS=244   I=240000   R=1.821
+Simulazione 80/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={66,68,62,62}
+Time = 167.75 minuti
+
+B=5   tauL=610   tauS=244   I=400000   R=1.821
+Simulazione 81/81 [##################################################] 100%
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={67,69,63,63}
+Time = 169.85 minuti
+Efficienza tau+: 82.716%
+Efficienza tau-: 85.1852%
+Efficienza R   : 77.7778%
+Efficienza Tot : 77.7778%
