@@ -15,6 +15,7 @@
 #include <cstdio>
 #include <vector>
 #include <string>
+#include "math.h"
 
 #include "TH1D.h"
 #include "TCanvas.h"
@@ -26,10 +27,20 @@
 
 // calibration parameters
 double m = 5.12162E-03;
-double q = -7.6994e-07;
+double q = -7.6994E-07;
 // min & max histogram
 double min = 0*m + q;
 double max = 4096*m + q;
+
+// true values
+double TauPlus      = 2.1969811;
+double errTauPlus   = 0.0000022; 
+double TauMinus     = 0.88;
+double errTauMinus  = 0.01; 
+double trueR        = 1.261;
+double errTrueR     = 0.009; 
+
+int shift = 150;
 
 int main ( int argc , char** argv ) {
 
@@ -94,7 +105,6 @@ int main ( int argc , char** argv ) {
     }
 
     // shift data to left
-    int shift = 150;
     for ( int i = 1; i <= 4096; i++ ) {
         if ( i <= 4096-shift ) data.SetBinContent(i, data.GetBinContent(i+shift));
         if ( i >  4096-shift ) data.SetBinContent(i, 0);
@@ -134,6 +144,7 @@ int main ( int argc , char** argv ) {
         fitFunc2.SetParName(2,"Aplus");
         fitFunc2.SetParName(3,"tauLong");
         fitFunc2.SetParName(4,"B");
+        
 
     // fit preliminare per settare tau+ e tau
     TFitResultPtr ptrL = data.Fit("expo","SNQ", "", midExp, midBase);
@@ -150,13 +161,14 @@ int main ( int argc , char** argv ) {
 
     // exp + B
     data.Fit("fitFunc1", "LQN", "", midExp, end);
+
     // set par for next fit
     fitFunc2.SetParameter("tauShort", tauSetS);
     fitFunc2.SetParameter("tauLong",  fitFunc1.GetParameter("tau"));
     fitFunc2.SetParameter("B",        fitFunc1.GetParameter("B"));
  
     // exp + exp + B
-    data.Fit("fitFunc2", "LQ", "", begin, end);
+     data.Fit("fitFunc2", "LQ", "", begin, end);
 
     // retrieve fit results
     double tauLong  = fitFunc2.GetParameter("tauLong");     // tau+
@@ -171,9 +183,9 @@ int main ( int argc , char** argv ) {
     double AplusErr    = fitFunc2.GetParError(2)/rebin;
     double BErr        = fitFunc2.GetParError(4)/rebin;
 
-    double R = Aplus/Aminus;
-    double RErr = R * sqrt( AplusErr*AplusErr/(Aplus*Aplus) + AminusErr*AminusErr/(Aminus*Aminus));
-
+    double R           = Aplus/Aminus;
+    double RErr        = R * sqrt( AplusErr*AplusErr/(Aplus*Aplus) + AminusErr*AminusErr/(Aminus*Aminus));
+    
     // calibration
     tauLong *= m;
     tauShort *= m;
@@ -181,13 +193,17 @@ int main ( int argc , char** argv ) {
     tauLongErr *= m;
     tauShortErr *= m;
 
+    double compTauPlus  = fabs(tauLong-TauPlus)/sqrt( pow(tauLongErr,2) + pow(errTauPlus,2) );
+    double compTauMinus = fabs(tauShort-TauMinus)/sqrt( pow(tauShortErr,2) + pow(errTauMinus,2) );
+    double compR        = fabs(R-trueR)/sqrt( pow(RErr,2) + pow(errTrueR,2) );
+
     // dump results:
     std::cout << std::endl << "=========== Risultati Fit ===========" << std::endl << std::endl
-              << "Tau+ = ( " << tauLong  << " +- " << tauLongErr  << " ) us" << std::endl
-              << "Tau- = ( " << tauShort << " +- " << tauShortErr << " ) us" << std::endl
+              << "Tau+ = ( " << tauLong  << " +- " << tauLongErr  << " ) us (" << tauLongErr*100./tauLong << "%), compatibilità " << compTauPlus << std::endl
+              << "Tau- = ( " << tauShort << " +- " << tauShortErr << " ) us (" << tauShortErr*100./tauShort << "%), compatibilità " << compTauMinus<< std::endl
               << "A+   = "   << Aplus    << " +- " << AplusErr               << std::endl
               << "A-   = "   << Aminus   << " +- " << AminusErr              << std::endl
-              << "R    = "   << R        << " +- " << RErr                   << std::endl
+              << "R    = "   << R        << " +- " << RErr                   << ", compatibilità " << compR << std::endl
               << "B    = "   << B        << " +- " << BErr                   << std::endl
               << std::endl << "=====================================" << std::endl << std::endl;
 
@@ -208,6 +224,7 @@ int main ( int argc , char** argv ) {
     drawFit1.SetParameter(2,Aplus);
     drawFit1.SetParameter(3,tauLong);
     drawFit1.SetParameter(4,B);
+    //histo_cal.Fit("drawFit1","LQ");
     drawFit1.SetLineColor(kRed);
     TF1 drawFit2 ("drawFit2", "[0]*TMath::Exp(-x/[1])+[2]*TMath::Exp(-x/[3])+[4]", midExp*m +q, midBase*m +q);
     drawFit2.SetParameter(0,Aminus);
@@ -215,6 +232,7 @@ int main ( int argc , char** argv ) {
     drawFit2.SetParameter(2,Aplus);
     drawFit2.SetParameter(3,tauLong);
     drawFit2.SetParameter(4,B);
+    //histo_cal.Fit("drawFit2","LQ");
     drawFit2.SetLineColor(kYellow);
     histo_cal.Draw();
     drawFit1.Draw("same");
