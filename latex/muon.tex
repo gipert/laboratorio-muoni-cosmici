@@ -395,7 +395,9 @@ Per la costruzione delle distribuzioni si è scelto di generare indipendentement
   \item Fit di tipo \lstinline{pol0} della parte finale dello spettro per la stima di $b$, utilizzata in secondo luogo per inizializzare il fit con la funzione completa;
   \item Fit di tipo \lstinline{pol0} della parte finale dello spettro per la stima di $b$, sottrazione della componente costante della distribuzione e successivo fit puramente esponenziale.
 \end{enumerate}
-Dei tre metodi il secondo si è rivelato il più stabile; un fit a tre parametri, infatti, necessita di valori di partenza che siano sufficientemente vicini al valore vero affinchè l'algoritmo di minimizzazione vada a convergenza correttamente, e ciò ci porta a scartare il primo metodo, nel quale tutti i parametri
+Dei tre metodi il secondo si è rivelato il più stabile; un fit a tre parametri, infatti, necessita di valori di partenza che siano sufficientemente vicini al valore vero affinchè l'algoritmo di minimizzazione vada a convergenza correttamente, e ciò ci porta a scartare il primo metodo, poco stabile con valori iniziali distanti dal valore vero. Anche il terzo metodo presenta delle criticità aggiuntive rispetto al secondo: in primo luogo una sottrazione di dati a bassa statisca può facilmente portare ad avere canali a contenuto negativo (privo di significato fisico), in secondo luogo\dots
+
+L'adozione del secondo metodo richiede la scelta del canale (valore di ritardo temporale) dal quale far iniziare il fit della porzione di \textit{baseline}, si è quindi proceduto a eseguire uno studio sistematico dei risultati al variare di questo estremo inferiore.
 %
 %
 \appendix
