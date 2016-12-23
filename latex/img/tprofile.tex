@@ -1,3 +1,4 @@
+\begin{adjustbox}{width=\linewidth}
 \begin{tikzpicture}
 \pgfdeclareplotmark{cross} {
 \pgfpathmoveto{\pgfpoint{-0.3\pgfplotmarksize}{\pgfplotmarksize}}
@@ -544,7 +545,7 @@
 \definecolor{c}{rgb}{1,0,0};
 \draw [c,line width=0.9] (2.16,8.82409) -- (17.84,8.82409);
 \definecolor{c}{rgb}{0,0,0};
-\draw (10,13.5108) node[scale=0.706039, color=c, rotate=0]{Ricostruzione baseline b (TProfile)};
+\draw (10,13.5108) node[scale=0.706039, color=c, rotate=0]{Ricostruzione baseline b (\texttt{TProfile})};
 \definecolor{c}{rgb}{1,1,1};
 \draw [color=c, fill=c] (0.2,0.138731) rectangle (19.8,6.79783);
 \draw [color=c, fill=c] (2.16,0.804641) rectangle (17.84,6.13192);
@@ -1001,5 +1002,6 @@
 \draw [anchor= east] (2.062,4.32725) node[scale=0.520239, color=c, rotate=0]{0.04};
 \draw [anchor= east] (2.062,5.20791) node[scale=0.520239, color=c, rotate=0]{0.045};
 \draw [anchor= east] (2.062,6.08856) node[scale=0.520239, color=c, rotate=0]{0.05};
-\draw (10,6.54417) node[scale=0.817519, color=c, rotate=0]{$Incertezza \sigma_{b} (TProfile)$};
+\draw (10,6.54417) node[scale=0.817519, color=c, rotate=0]{Incertezza $\sigma_{b}$ (\texttt{TProfile})};
 \end{tikzpicture}
+\end{adjustbox}
