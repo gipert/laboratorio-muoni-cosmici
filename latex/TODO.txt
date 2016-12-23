@@ -1,0 +1,29 @@
+********************************
+SCALETTA RELAZIONE - SIMULAZIONE
+********************************
+ - Lasciare invariata la parte e continuare con la parte di simulazione.
+ - 	Introduzione : "lo scopo di questa parte è sviluppare una simulazione MC con cui alla fine stabilire un metodo di analisi dati"
+					- tutto fatto con Root
+					- (centinaia di) molte simulazioni 
+					- spettro utile di circa 3900 canali
+	Sezione1: baseline -> media, fit chi2, fit Likelihood (2 metodi)
+			- Numeri simulati uniformemente da Begin a End
+			- Stima di B come: media aritmetica, pol0 chi2 e pol0 Likelihood(opzione "L")
+			- Confronto tra le distribuzioni di B e ErrB con i 3 metodi 
+	Sezione2: baseline + exp -> fit Likelihood (metodo 2), test inizio fit baseline con pol0
+			- Numeri simulati con TRandom3::Exp + numeri simulati uniformemente entrambi tra Begin e End, quindi somma delle due distribuzioni
+			- Spiegazione dei metodi:
+								- metodo 1: fit con exp+baseline con SetParameter su tau 
+								- metodo 2: prima un fit di B con pol0 e utilizzare questo valore per settare B nella funzione exp+baseline
+								- metodo 3: fit pol0 di B, quindi sottrazione della baseline e fit exp --> metodo scartato perchè pol0 per B restituisce
+											valori sempre sovrastimati (grafico)
+			- Test dei metodi con SetParameter falso su tau --> metodo2 più stabile (metodo 1 scartato)
+	Sezione3: baseline + exp + exp -> test inizio fit esponenziale long
+			- Numeri simulati 2 volte con TRandom3::Exp + numeri simulati uniformemente entrambi tra Begin e End, quindi somma delle tre distribuzioni
+			- Con la funzione exp-, exp+ e baseline, la baseline si fitta nel range stabilito in sezione 2, quindi ora testiamo qual è l'estremo inferiore 
+			  per il fit di exp_long per ottenere stime buone di tau_long da settare nel fit finale
+	Sezione4: modifica dei parametri (NO REBIN) ... matrice dei parametri...
+				1) SetParameter con valori falsi, input veri
+				2) SetParameter con valori veri, input falsi
+	Sezione5: fittare gli spettri raccolti in 5 settimane 
+ - Discutere i risultati ottenuti
