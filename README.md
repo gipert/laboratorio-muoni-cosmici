@@ -1,6 +1,28 @@
 Decadimento dei muoni cosmici in alluminio
 =========================================
 
+```                             
+                             |
+                             | p
+                             |
+                             *
+                            / \
+                         π /   \ π
+                          /     \
+                         /\      \
+                        /  \      \
+                       /    \ ν    \
+                      /      \      \
+                     /        \      \
+                    /                /\
+                µ  /                /  \
+                  /              γ /    \ γ
+                 /                /      \
+                /                /\
+               /             e  /  \ e
+                               /    \
+                                     \
+```
 Contents:
 --------
 
@@ -39,9 +61,9 @@ Contents:
         * `fitexpStart.cc` : studio della bontà del fit esponenziale al variare del punto iniziale nello spettro
                              simulato exp+exp+cost
         * `montecarlo_modifiedforbaseline.cc` : confronto metodi di fit della baseline
-	* `montecarlo_SingleNsim.cc` : simulazione montecarlo completa
+        * `montecarlo_SingleNsim.cc` : simulazione montecarlo completa
         * `montecarlo.cc` : funzione-simulazione montecarlo completa adatta all'iterazione in `main.cc`
-	* `main.cc` : matrice di simulazioni
+        * `main.cc` : matrice di simulazioni
 
 Collaborative Git:
 -----------------
