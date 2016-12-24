@@ -390,7 +390,7 @@ Gli spettri relativi agli errori statistici sulla \textit{baseline} sono utili p
 \subsection{Simulazione del fondo e del primo esponenziale}
 Una seconda versione del Metodo Montecarlo prevede di studiare una distribuzione contenente un termine costante e un termine esponenziale. 
 \[Ae^{-\frac{t}{\tau}}+b\]
-Per la costruzione delle distribuzioni si è scelto di generare indipendentemente la distribuzione uniforme (\lstinline{TRandom3::Uniform}) e la distribuzione esponenziale (\lstinline{TRandom3::Exp}) per poi sommarle. Avendo stabilito che il metodo della maximum likelihood è il più stabile e predittivo si sono studiati diversi approcci al fit della distribuzione:
+Per la costruzione delle distribuzioni si è scelto di generare indipendentemente la distribuzione uniforme con \lstinline{TRandom3::Uniform} e la distribuzione esponenziale con \lstinline{TRandom3::Exp} per poi sommarle. Avendo stabilito che il metodo della maximum likelihood è il più stabile e predittivo si sono studiati diversi approcci al fit della distribuzione:
 \begin{enumerate}
   \item Fit diretto con la funzione completa;
   \item Fit di tipo \lstinline{pol0} della parte finale dello spettro per la stima di $b$, utilizzata in secondo luogo per inizializzare il fit con la funzione completa;
@@ -398,9 +398,13 @@ Per la costruzione delle distribuzioni si è scelto di generare indipendentement
 \end{enumerate}
 Dei tre metodi il secondo si è rivelato il più stabile; un fit a tre parametri, infatti, necessita di valori di partenza che siano sufficientemente vicini al valore vero affinchè l'algoritmo di minimizzazione vada a convergenza correttamente, e ciò ci porta a scartare il primo metodo, poco stabile con valori iniziali distanti dal valore vero. Anche il terzo metodo presenta delle criticità aggiuntive rispetto al secondo: in primo luogo una sottrazione di dati a bassa statisca può facilmente portare ad avere canali a contenuto negativo (privo di significato fisico), in secondo luogo\dots
 
-L'adozione del secondo metodo richiede la scelta del canale (valore di ritardo temporale) dal quale far iniziare il fit della porzione di \textit{baseline}, si è quindi proceduto a eseguire uno studio sistematico dei risultati al variare di questo estremo inferiore.
+L'adozione del secondo metodo richiede la scelta del canale (valore di ritardo temporale) dal quale far iniziare il fit della porzione di \textit{baseline}, si è quindi proceduto a eseguire uno studio sistematico dei risultati al variare di questo estremo inferiore confrontando le medie su più simulazioni (figura \ref{baselinestart}).
+%
 \begin{figure}
-\input{img/tprofile}
+  \begin{adjustbox}{width=\linewidth}
+    \input{img/tprofile}
+  \end{adjustbox}
+  \caption{Studio della ricostruzione della \emph{baseline} $b$ al variare del punto di inizio del fit costante di tipo \texttt{pol0}: in alto i valori ottenuti (la linea rossa rappresenta il valore vero) e in basso i rispettivi errori. Le barre di errore rappresentano la deviazione standard del campione di simulazioni utilizzato}\label{baselinestart}
 \end{figure}
 %
 %
@@ -408,8 +412,4 @@ L'adozione del secondo metodo richiede la scelta del canale (valore di ritardo t
 %\setcounter{secnumdepth}{0}
 \include{analApp}
 \include{imgEff}
-%
-%
-%
-%
 \end{document}
