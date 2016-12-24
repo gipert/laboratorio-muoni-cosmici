@@ -366,20 +366,23 @@ La prima versione del metodo MC prevede la simulazione di spettri costituiti da 
 I metodi testati per la stima della \textit{baseline} sono i seguenti:
 \begin{enumerate}
  \item media aritmetica dei contenuti dei bin dell'istogramma \lstinline{baseline};
- \item fit con il metodo del $\chi^2$ utilizzando la funzione \lstinline{pol0} (\lstinline{baseline.Fit("pol0","R")});
- \item metodo della maximum likelihood utilizzando la funzione \newline \lstinline{pol0} (\lstinline{baseline.Fit("pol0","LR")}).
+ \item fit con il metodo del $\chi^2$ utilizzando la funzione \lstinline{pol0} (\lstinline{baseline.Fit("pol0")});
+ \item metodo della maximum likelihood utilizzando la funzione \newline \lstinline{pol0} (\lstinline{baseline.Fit("pol0","L")}).
 \end{enumerate}
 %
 \begin{figure}[H]
- \centerline{\includegraphics[scale=0.75]{img/baseline_sim_500.pdf}}
- \caption{Distribuzioni delle stime della \textit{baseline} con i tre metodi differenti, sia per i valori sia per gli errori (500 simulazioni). La \textit{baseline} generata in queste simulazioni ha altezza 10.}
- \label{fig::baseline_500}
+ \centerline{%
+ \begin{adjustbox}{width=\linewidth+1cm}
+ \input{img/baseline}
+ %\centerline{\includegraphics[scale=0.75]{img/baseline_sim_500.pdf}}
+ \end{adjustbox}}
+ \caption{Distribuzioni delle stime della \textit{baseline} con i tre metodi differenti, sia per i valori sia per gli errori (500 simulazioni). La \textit{baseline} generata in queste simulazioni ha altezza 10.}\label{fig::baseline_500}
 \end{figure}
 %
 In figura \ref{fig::baseline_500} è riportato un esempio delle distribuzioni dei valori e degli errori derivanti da simulazioni multiple, stimati con i tre metodi. La linea rossa verticale nei grafici in alto indica il valore vero della \textit{baseline}, ossia il valore con cui sono stati simulati gli spettri, quindi il valore che dovrebbe essere restituito dall'analisi. Come si può notare, la distribuzione dei valori estratta con fit \lstinline{pol0} di tipo $\chi^2$ non è centrata attorno al valore atteso. In questo caso, infatti, la baseline è sistematicamente sottostimata, poichè:
 \begin{enumerate}
  \item il metodo dei minimi quadrati non funziona correttamente per il fit di un istogramma con bin a bassa statistica, per i quali l'assegnazione di errore di tipo poissoniano (cioè la radice del conteggio) presenta delle criticità, in particolare per contenuti nulli;
- \item il fit di una \lstinline{pol0} corrisponde esattamente ad una media pesata, nella quale i bin con statistica minore hanno un peso maggiore, con conseguenti valori sottostimati della \textit{baseline}\footnote{Media pesata ed errore:
+ \item il fit di una \lstinline{pol0} con il metodo del $\chi^2$ corrisponde esattamente ad una media pesata, nella quale i bin con statistica minore hanno un peso maggiore, con conseguenti valori sottostimati della \textit{baseline}\footnote{Media pesata ed errore:
 $$\bar{b}=\frac{\sum_{i=1}^N b_i/\sigma_i^2}{\sum_{i=1}^N 1/\sigma_i^2};
 \hspace{1cm} \sigma_{\bar{b}}=\frac{1}{\sum_{i=1}^N1/\sigma_i^2}$$}.
  
@@ -389,24 +392,26 @@ Gli spettri relativi agli errori statistici sulla \textit{baseline} sono utili p
 %
 \subsection{Simulazione del fondo e del primo esponenziale}
 Una seconda versione del Metodo Montecarlo prevede di studiare una distribuzione contenente un termine costante e un termine esponenziale. 
-\[Ae^{-\frac{t}{\tau}}+b\]
+\[f(t;A,\tau,b)=Ae^{-\frac{t}{\tau}}+b\]
 Per la costruzione delle distribuzioni si è scelto di generare indipendentemente la distribuzione uniforme con \lstinline{TRandom3::Uniform} e la distribuzione esponenziale con \lstinline{TRandom3::Exp} per poi sommarle. Avendo stabilito che il metodo della maximum likelihood è il più stabile e predittivo si sono studiati diversi approcci al fit della distribuzione:
 \begin{enumerate}
-  \item Fit diretto con la funzione completa;
-  \item Fit di tipo \lstinline{pol0} della parte finale dello spettro per la stima di $b$, utilizzata in secondo luogo per inizializzare il fit con la funzione completa;
-  \item Fit di tipo \lstinline{pol0} della parte finale dello spettro per la stima di $b$, sottrazione della componente costante della distribuzione e successivo fit puramente esponenziale.
+  \item Fit diretto con la funzione completa impostando $\tau$ al valore vero e lasciando $A$ e $b$ non inizializzati;
+  \item Fit di tipo \lstinline{pol0} della parte finale dello spettro per la stima di $b$, utilizzata in secondo luogo per inizializzare il corrispondente parametro nel fit con la funzione completa del metodo precedente;
+  \item Fit di tipo \lstinline{pol0} della parte finale dello spettro per la stima di $b$, quindi sottrazione della componente costante della distribuzione e successivo fit puramente esponenziale.
 \end{enumerate}
-Dei tre metodi il secondo si è rivelato il più stabile; un fit a tre parametri, infatti, necessita di valori di partenza che siano sufficientemente vicini al valore vero affinchè l'algoritmo di minimizzazione vada a convergenza correttamente, e ciò ci porta a scartare il primo metodo, poco stabile con valori iniziali distanti dal valore vero. Anche il terzo metodo presenta delle criticità aggiuntive rispetto al secondo: in primo luogo una sottrazione di dati a bassa statisca può facilmente portare ad avere canali a contenuto negativo (privo di significato fisico), in secondo luogo\dots
+Dei tre metodi il secondo si è rivelato il più stabile; un fit a tre parametri, infatti, necessita di valori di partenza che siano sufficientemente vicini al valore vero affinchè l'algoritmo di minimizzazione vada a convergenza correttamente, e ciò ci porta a scartare il primo metodo, poco stabile con valori iniziali distanti dal valore vero. Anche il terzo metodo presenta delle criticità aggiuntive rispetto al secondo: in primo luogo una sottrazione di dati a bassa statisca può facilmente portare ad avere canali a contenuto negativo (privo di significato fisico), in secondo luogo, come si può notare dalla figura \ref{baselinestart}, il fit della \textit{baseline} sovrastima il valore di $b$ e perciò la sottrazione non può essere considerata corretta.
 
 L'adozione del secondo metodo richiede la scelta del canale (valore di ritardo temporale) dal quale far iniziare il fit della porzione di \textit{baseline}, si è quindi proceduto a eseguire uno studio sistematico dei risultati al variare di questo estremo inferiore confrontando le medie su più simulazioni (figura \ref{baselinestart}).
 %
-\begin{figure}
-  \begin{adjustbox}{width=\linewidth}
+\begin{figure}[h]
+  \centerline{%
+  \begin{adjustbox}{width=\linewidth+1cm}
     \input{img/tprofile}
-  \end{adjustbox}
-  \caption{Studio della ricostruzione della \emph{baseline} $b$ al variare del punto di inizio del fit costante di tipo \texttt{pol0}: in alto i valori ottenuti (la linea rossa rappresenta il valore vero) e in basso i rispettivi errori. Le barre di errore rappresentano la deviazione standard del campione di simulazioni utilizzato}\label{baselinestart}
+  \end{adjustbox}}
+  \caption{Studio della ricostruzione della \textit{baseline} $b$ al variare del punto di inizio del fit costante di tipo \texttt{pol0}: in alto i valori ottenuti (la linea rossa rappresenta il valore vero) e in basso i rispettivi errori. Le barre di errore rappresentano la deviazione standard del campione di 100 simulazioni utilizzato. I dati utilizzati nella generazione corrispondono a 5 settimane di acquisizione.}\label{baselinestart}
 \end{figure}
 %
+#####£/(@¶#)ù!!!!! Analisi dei grafici e scelta fatta\ldots 
 %
 \appendix
 %\setcounter{secnumdepth}{0}

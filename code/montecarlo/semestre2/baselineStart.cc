@@ -66,7 +66,7 @@ int main( int argc, char* argv[] ) {
         return 0;
     }
 
-    float B          = std::stof(args[1]); // valore tipico per 1 settimana: 2 (circa)
+    float B          = std::stof(args[1]); // valore tipico per 1 settimana: 1 (circa)
     double tau	     = std::stof(args[2]); // valore vero = 429 canali
 	double integrale = std::stof(args[3]); // valore tipico per 1 settimana: 70000 (circa)
 	double taucorto  = std::stof(args[4]); // valore vero = 172 canali (circa)
@@ -102,13 +102,12 @@ int main( int argc, char* argv[] ) {
     if ( midValue-range/2 < 0 || midValue+range/2 > 4096 ) { std::cout << "Hai esagerato. Termino..." << std::endl; return 0; }
 
     // ciclo delle simulazioni
-    std::cout << "Run: ";
     ProgressBar bar(Nsim);
     bar.Init();
     for(int j=0; j<Nsim; j++)
     {
         bar.Update(j);
-        for( int i = 0; i < Nsim; i++ ) {
+        for( int i = 0; i < 100; i++ ) {
             
             r.SetSeed(i+1);
     	

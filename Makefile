@@ -18,8 +18,8 @@ code/montecarlo/semestre2/main : code/montecarlo/semestre2/main.cc code/montecar
 code/montecarlo/semestre2/montecarloSingle : code/montecarlo/semestre2/montecarlo_singleNSim.cc $(BARPATH)progressbar.cc
 	$(CC) $(INCLUDE) -I$(BARPATH) -o $@ $^ $(LIB)
 
-code/montecarlo/semestre2/montecarlo_modifiedforbaseline : code/montecarlo/semestre2/montecarlo_modifiedforbaseline.cc
-	$(CC) $(INCLUDE) -o $@ $^ $(LIB)
+code/montecarlo/semestre2/montecarlo_modifiedforbaseline : code/montecarlo/semestre2/montecarlo_modifiedforbaseline.cc $(BARPATH)progressbar.cc
+	$(CC) $(INCLUDE) -I$(BARPATH) -o $@ $^ $(LIB)
 
 code/analysis/lifetimeAnalysis : code/analysis/lifetime_nocalib_bkgr_sub.cc
 	$(CC) $(INCLUDE) -o $@ $^ $(LIB)
