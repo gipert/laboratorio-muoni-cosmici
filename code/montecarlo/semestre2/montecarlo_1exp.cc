@@ -25,13 +25,14 @@
 #include "TStyle.h"
 #include "TGraphErrors.h"
 
+#include "../../ProgressBar/progressbar.h"
+
 // questi valori andranno poi aggiustati (inizio istogramma, inizio baseline, fine istogramma)
-#define	Begin     160	// inizio istogramma
-#define StartBase 2538	// punto dell'istogramma in cui comincia la baseline
+#define	Begin     18	// inizio istogramma
+#define StartBase 2600	// punto dell'istogramma in cui comincia la baseline
 #define End       3904	// fine istogramma
 #define Nsim      500   // numero simulazioni
-#define beginFit  160	// inizio fit esponenziale
-
+#define beginFit  18	// inizio fit esponenziale
 
 TRandom3 r;
 int counts;
@@ -58,7 +59,7 @@ int main( int argc, char* argv[] ) {
                   << "MonteCarlo per la misura della vita media dei muoni cosmici in alluminio." << std::endl
                   << "Autori: Mattia Faggin, Davide Piras, Luigi Pertoldi" << std::endl << std::endl
                   << "Utilizzo:" << std::endl 
-                  << "    $ ./montecarlo [Baseline] [tau] [A] [rebinFactor]" << std::endl << std::endl;
+                  << "    $ ./montecarlo [Baseline] [tau] [Integrale] [rebinFactor]" << std::endl << std::endl;
         return 0;
     }
 
@@ -70,8 +71,10 @@ int main( int argc, char* argv[] ) {
 
     float B       = std::stof(args[1]);
     double tau	  = std::stoi(args[2]);
-    double A	  = std::stoi(args[3]);
+    double integrale  = std::stoi(args[3]);
     int RebFactor = std::stoi(args[4]);
+
+    double A = (-integrale/tau)*1/(exp(-End/tau)-exp(Begin/tau));
 
     TApplication Root("App",&argc,argv); 
     gStyle->SetOptStat(0);
@@ -116,13 +119,18 @@ int main( int argc, char* argv[] ) {
     fitFunc2.SetParName(1,"tau");
     fitFunc2.SetParName(2,"B");
 
+    std::string canName = "Simulazione MC (" + std::to_string(Nsim) + " simulazioni)";
+    TCanvas can( "METODO1", (canName + " METODO 1").c_str(), 1200 , 700 );
+    can.Divide(3,2);
+    can.cd(1);
+
     // ciclo delle simulazioni
-    std::cout << "Run: ";
+    ProgressBar bar(Nsim);
+    bar.Init();
     for(int k=0; k<Nsim; k++)
     {
-	if ( k % 10 == 0 ) std::cout << k*100/Nsim << "%" << std::flush;
-        else std::cout << "." << std::flush;
-        r.SetSeed(k+1);
+	    bar.Update(k);
+        r.SetSeed(0);
     	// simulazione della baseline
     	TH1D baseline("baseline","baseline",4096,0,4096);
     	for ( int k = 0; k < B*(End-Begin); k++ )
@@ -132,10 +140,13 @@ int main( int argc, char* argv[] ) {
     	// rebin 
     	baseline.Rebin(RebFactor);
     	//simulazione esponenziale
-   	TH1D exponential("exponential","exponential",4096,0,4096);
-    	for ( int k = 0; k < A*tau; k++ )
+       	TH1D exponential("exponential","exponential",4096,0,4096);
+       	double val = 0;
+        for ( int k = 0; k < A*tau*exp(-Begin/tau); k++ )
     	{
-		exponential.Fill(r.Exp(tau));
+            val = r.Exp(tau);
+            while (val<Begin || val>End) val = r.Exp(tau);
+		    exponential.Fill(val);
     	}
     	// rebin 
     	exponential.Rebin(RebFactor);
@@ -148,7 +159,7 @@ int main( int argc, char* argv[] ) {
 	fitFunc.SetParameter(1,tau);
 	//fitFunc.SetParameter(2,B);
 
-////////////////// FIT UNICO //////////////////// 
+///////////////// FIT UNICO //////////////////// 
       total.Fit("fitFunc","RLQN");
 /////////////////////////////////////////////////        
         
@@ -192,20 +203,20 @@ int main( int argc, char* argv[] ) {
     distRange rFitErrBL2   = getRange(vFitErrBL2);
 
     // creo gli istogrammi delle distribuzioni METODO 1
-    TH1D hFitTauL 	    ( "hFitTauL" 	, "Likelihood (#tau)", 100, rFitTauL.minimo, rFitTauL.massimo );
-    TH1D hFitAL   	    ( "hFitAL"   	, "Likelihood (A)"   , 100, rFitAL.minimo, rFitAL.massimo );
-    TH1D hFitBL   	    ( "hFitBL"   	, "Likelihood (B)"   , 100, rFitBL.minimo, rFitBL.massimo );
-    TH1D hFitErrBL 	    ( "hFitErrBL"   , "Likelihood (B)"   , 100, rFitErrBL.minimo, rFitErrBL.massimo); 
-    TH1D hFitErrTauL 	( "hFitErrTauL" , "Likelihood (#tau)", 100, rFitErrTauL.minimo, rFitErrTauL.massimo); 
-    TH1D hFitErrAL   	( "hFitErrAL"   , "Likelihood (A)"   , 100, rFitErrAL.minimo, rFitErrAL.massimo); 
+    TH1D hFitTauL 	    ( "hFitTauL" 	, "#tau", 100, rFitTauL.minimo, rFitTauL.massimo );
+    TH1D hFitAL   	    ( "hFitAL"   	, "A"   , 100, rFitAL.minimo, rFitAL.massimo );
+    TH1D hFitBL   	    ( "hFitBL"   	, "B"   , 100, rFitBL.minimo, rFitBL.massimo );
+    TH1D hFitErrBL 	    ( "hFitErrBL"   , "Errori #sigma_{B}"   , 100, rFitErrBL.minimo, rFitErrBL.massimo); 
+    TH1D hFitErrTauL 	( "hFitErrTauL" , "Errori #sigma_{#tau}", 100, rFitErrTauL.minimo, rFitErrTauL.massimo); 
+    TH1D hFitErrAL   	( "hFitErrAL"   , "Errori #sigma_{A}"   , 100, rFitErrAL.minimo, rFitErrAL.massimo); 
 
     // creo gli istogrammi delle distribuzioni METODO 2
-    TH1D hFitTauL2 	    ( "hFitTauL2" 	 , "Likelihood (#tau)", 100, rFitTauL2.minimo, rFitTauL2.massimo );
-    TH1D hFitAL2   	    ( "hFitAL2"   	 , "Likelihood (A)"   , 100, rFitAL2.minimo, rFitAL2.massimo );
-    TH1D hFitBL2   	    ( "hFitBL2"   	 , "Likelihood (B)"   , 100, rFitBL2.minimo, rFitBL2.massimo );
-    TH1D hFitErrBL2 	( "hFitErrBL2"   , "Likelihood (B)"   , 100, rFitErrBL2.minimo, rFitErrBL2.massimo); 
-    TH1D hFitErrTauL2 	( "hFitErrTauL2" , "Likelihood (#tau)", 100, rFitErrTauL2.minimo, rFitErrTauL2.massimo); 
-    TH1D hFitErrAL2   	( "hFitErrAL2"   , "Likelihood (A)"   , 100, rFitErrAL2.minimo, rFitErrAL2.massimo); 
+    TH1D hFitTauL2 	    ( "hFitTauL2" 	 , "#tau", 100, rFitTauL2.minimo, rFitTauL2.massimo );
+    TH1D hFitAL2   	    ( "hFitAL2"   	 , "A"   , 100, rFitAL2.minimo, rFitAL2.massimo );
+    TH1D hFitBL2   	    ( "hFitBL2"   	 , "B"   , 100, rFitBL2.minimo, rFitBL2.massimo );
+    TH1D hFitErrBL2 	( "hFitErrBL2"   , "Errori #sigma_{B}"   , 100, rFitErrBL2.minimo, rFitErrBL2.massimo); 
+    TH1D hFitErrTauL2 	( "hFitErrTauL2" , "Errori #sigma_{#tau}", 100, rFitErrTauL2.minimo, rFitErrTauL2.massimo); 
+    TH1D hFitErrAL2   	( "hFitErrAL2"   , "Errori #sigma_{A}"   , 100, rFitErrAL2.minimo, rFitErrAL2.massimo); 
 
     // riempio gli istogrammi METODO 1
     for ( int i = 0; i < Nsim; i++ ) {        
@@ -229,21 +240,20 @@ int main( int argc, char* argv[] ) {
 
     std::cout << std::endl 
 	      << "---------------------------------------------------------------------------------" 
-	      << "\n./montecarlo.out " << B << " " << tau << " " << A << " " << RebFactor <<std::endl 
-	      << "\nEventi totali   " << B*(End-Begin) + A*tau
+	      << "\n./montecarlo.out " << B << " " << tau << " " << integrale << " " << RebFactor <<std::endl 
+	      << "\nEventi totali   " << integrale
 	      << "\nEventi baseline " << B*(End-Begin)
-	      << "\nEventi exp      " << A*tau
+	      << "\nEventi exp      " << integrale - B*(End-Begin)
 	      << "\nValori in INPUT:"
 	      << "\n	Baseline  " << B
 	      << "\n	tau       " << tau
-	      << "\n	A	  " << A
+	      << "\n	Integrale " << integrale
 	      << "\n	RebFactor " << RebFactor << std::endl
           << "\nSimulazioni MC effettuate:                         "  << Nsim
 	      << "\nIntervallo di generazione:                         [" << Begin     << ", " << End << "]"
           << "\nIntervallo di fit METODO 1:                        [" << beginFit  << ", " << End << "]" 
 	      << "\nIntervallo di fit baseline METODO 2:               [" << StartBase << ", " << End << "]"
 	      << "\nIntervallo di fit complessivo (B fixed) METODO 2:  [" << beginFit  << ", " << End << "]" << std::endl;
-    std::string canName = "Simulazione MC (" + std::to_string(Nsim) + " simulazioni)";
 
     // fit gaussiani delle distribuzioni METODO 1
     std::cout<<"\n METODO 1" << std::endl;
@@ -253,9 +263,7 @@ int main( int argc, char* argv[] ) {
     fitGaus(hFitErrTauL);
     fitGaus(hFitErrAL);
     fitGaus(hFitErrBL);
-    TCanvas can( "METODO1", (canName + " METODO 1").c_str(), 1200 , 700 );
-    can.Divide(3,2);
-    can.cd(1);
+
         hFitTauL.Draw();
         TLine lTau(tau,0,tau,hFitTauL.GetMaximum());
 	lTau.SetLineColor(kRed);
@@ -290,17 +298,20 @@ int main( int argc, char* argv[] ) {
     can2.cd(1);
         hFitTauL2.Draw();
         TLine lTau2(tau,0,tau,hFitTauL2.GetMaximum());
-	lTau2.SetLineColor(kRed);
+	    lTau2.SetLineColor(kGreen+3);
+        lTau2.SetLineWidth(3);
         lTau2.Draw();
     can2.cd(2);
         hFitAL2.Draw();
         TLine lA2(A,0,A,hFitAL2.GetMaximum());
-	lA2.SetLineColor(kRed);
+	    lA2.SetLineColor(kGreen+3);
+        lA2.SetLineWidth(3);
         lA2.Draw();
     can2.cd(3);
         hFitBL2.Draw();
         TLine lB2(B,0,B,hFitBL2.GetMaximum());
-	lB2.SetLineColor(kRed);
+	    lB2.SetLineColor(kGreen+3);
+        lB2.SetLineWidth(3);
         lB2.Draw();
     can2.cd(4);
         hFitErrTauL2.Draw();
