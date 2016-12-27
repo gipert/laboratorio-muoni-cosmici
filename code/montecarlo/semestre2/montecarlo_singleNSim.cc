@@ -30,10 +30,10 @@
 #include "../../ProgressBar/progressbar.h"
 
 // questi valori andranno poi aggiustati (inizio istogramma, inizio baseline, fine istogramma)
-#define	Begin     0	    // inizio istogramma
+#define	Begin     18    // inizio istogramma
 #define StartBase 2600	// punto dell'istogramma in cui comincia la baseline --> FISSATO dai test su fit pol0 della baseline (baselineStart.cc)
 #define End       3904	// fine istogramma
-#define Nsim      500   // numero simulazioni
+#define Nsim      1     // numero simulazioni
 #define beginFit  860	// inizio fit esponenziale dei muoni lunghi
 
 struct distRange{
@@ -96,8 +96,8 @@ int main( int argc, char* argv[] ) {
 	double taucorto  = std::stof(args[4]); // valore vero = 172 canali (circa)
 	double R         = std::stof(args[5]); // valore vero: 1.261
 	int RebFactor    = std::stoi(args[6]);
-	double A         = (integrale - B*(End - Begin)) / (tau + taucorto / R);
-    double Aminus    = A/R;
+	double Aminus    = (integrale - B*(End - Begin)) / ( R*tau*exp(-Begin/tau) + taucorto*exp(-Begin/taucorto) );
+    double A         = Aminus*R;
 	
 	TApplication Root("App",&argc,argv);
 	
@@ -182,7 +182,7 @@ int main( int argc, char* argv[] ) {
     	baseline.Rebin(RebFactor);
     	//simulazione primo esponenziale
    	    TH1D exponential("exponential","exponential",4096,0,4096);
-    	for ( int k = 0; k < A*tau; k++ )
+    	for ( int k = 0; k < A*tau*exp(-Begin/tau); k++ )
     	{
     	    val = r.Exp(tau);
     	    while (val<Begin || val>End) val = r.Exp(tau);
@@ -196,7 +196,7 @@ int main( int argc, char* argv[] ) {
 
 		//simulazione secondo esponenziale
 		TH1D exponential2("exponential2", "exponential2", 4096, 0, 4096);
-		for (int k = 0; k < A*taucorto/R; k++)
+		for (int k = 0; k < Aminus*taucorto*exp(-Begin/taucorto); k++)
 		{
 		    entina = r.Exp(taucorto);
 		    while (entina<Begin || entina>End) entina = r.Exp(taucorto);
