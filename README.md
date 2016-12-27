@@ -44,10 +44,13 @@ Contents:
 * `efficiency/`
     * `eff.cc`:    macro ROOT per il plot delle efficienze
     * `*.txt`:     data files per ogni PMT
-* `calibration/`
+* `TAC/`
     * `cal.C` :    macro ROOT per calibrare i TAC
-    * `TAC_437/`:   dati calibrazione per il TAC nr. 437
-    * `TAC_467/`:   dati calibrazione per il TAC nr. 467
+    * `openADC.cc` : programma per visualizzare gli spettri prodotti dal multicanale
+    * `TAC_437/`:   dati calibrazione per il TAC nr. 437 (1° semestre)
+        * `semestre2/` : dati calibrazione rifatta nel secondo semestre
+	    * `rumore/` : prove di start/stop artificiale del secondo semestre
+    * `TAC_467/`:   dati calibrazione per il TAC nr. 467 e start/stop artificiale (1° semestre)
 * `analysis/`
     * `lifetime_nocalib_bkgr_sub.cc` : programma per l'analisi (parziale 1° semestre)
     * `analisiFinale.cc` : programma per l'analisi (finale 2° semestre)
@@ -64,6 +67,11 @@ Contents:
         * `montecarlo_SingleNsim.cc` : simulazione montecarlo completa
         * `montecarlo.cc` : funzione-simulazione montecarlo completa adatta all'iterazione in `main.cc`
         * `main.cc` : matrice di simulazioni
+* `luce_buio_slabs/`
+    * `luce_buio.cc` : crea il grafico conteggi di ogni PMT con luce e buio
+* `simulazione_circuiti/` : simulazione coincidenze tra circuiti di start e di stop
+
+`Foto_Pb/` : Foto disposizione piombo prima della rimozione
 
 Collaborative Git:
 -----------------
@@ -98,6 +106,9 @@ Nota Bene:
 * Se vi siete accorti che avete fatto una cazzata nell'ultimo commit e volete tornare indietro potete:
     * `$ git reset HEAD~` : annulla il commit
     * `$ git revert HEAD~` : crea un nuovo commit in cui eliminate le modifiche dell'ultimo
+* Ricordatevi di eliminare anche in locale la branch che avete eliminato in remoto, git non lo fa automaticamente!
+    * `$ git branch --list` : vedere le branch esistenti
+    * `$ git branch -d branch_name` : elimina la branch
 
 La procedura di cui sopra è un esempio dei tanti modi in cui si possono proporre modifiche ad un progetto, `git` è un
 programma molto esteso, sbizzarritevi! Potete creare più branches, potete lavorare sulla vostra versione nella vostra
