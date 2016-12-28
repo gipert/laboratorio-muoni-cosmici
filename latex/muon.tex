@@ -392,14 +392,17 @@ Gli spettri relativi agli errori statistici sulla \textit{baseline} sono utili p
 %
 \subsection{Simulazione del fondo e del primo esponenziale}
 Una seconda versione del Metodo Montecarlo prevede di studiare una distribuzione contenente un termine costante e un termine esponenziale. 
-\[f(t;A,\tau,b)=Ae^{-\frac{t}{\tau}}+b\]
+\begin{equation}
+ f(t;A,\tau,b)=Ae^{-\frac{t}{\tau}}+b
+ \label{eq::exp_plus_base}
+\end{equation}
 Per la costruzione delle distribuzioni si è scelto di generare indipendentemente la distribuzione uniforme con \lstinline{TRandom3::Uniform} e la distribuzione esponenziale con \lstinline{TRandom3::Exp} per poi sommarle. Avendo stabilito che il metodo della maximum likelihood è il più stabile e predittivo si sono studiati diversi approcci al fit della distribuzione:
 \begin{enumerate}
   \item Fit diretto con la funzione completa impostando $\tau$ al valore vero e lasciando $A$ e $b$ non inizializzati;
   \item Fit di tipo \lstinline{pol0} della parte finale dello spettro per la stima di $b$, utilizzata in secondo luogo per inizializzare il corrispondente parametro nel fit con la funzione completa del metodo precedente;
   \item Fit di tipo \lstinline{pol0} della parte finale dello spettro per la stima di $b$, quindi sottrazione della componente costante della distribuzione e successivo fit puramente esponenziale.
 \end{enumerate}
-Dei tre metodi il secondo si è rivelato il più stabile; un fit a tre parametri, infatti, necessita di valori di partenza che siano sufficientemente vicini al valore vero affinchè l'algoritmo di minimizzazione vada a convergenza correttamente, e ciò ci porta a scartare il primo metodo, poco stabile con valori iniziali distanti dal valore vero. Anche il terzo metodo presenta delle criticità aggiuntive rispetto al secondo: in primo luogo una sottrazione di dati a bassa statisca può facilmente portare ad avere canali a contenuto negativo (privo di significato fisico), in secondo luogo, come si può notare dalla figura \ref{baselinestart}, il fit della \textit{baseline} sovrastima il valore di $b$ e perciò la sottrazione non può essere considerata corretta.
+Dei tre metodi il secondo si è rivelato il più stabile; un fit a tre parametri, infatti, necessita di valori di partenza che siano sufficientemente vicini al valore vero affinchè l'algoritmo di massimizzazione della likelihood vada a convergenza correttamente, e ciò ci porta a scartare il primo metodo, poco stabile con valori iniziali distanti dal valore vero. Anche il terzo metodo presenta delle criticità aggiuntive rispetto al secondo: in primo luogo una sottrazione di dati a bassa statisca può facilmente portare ad avere canali a contenuto negativo (privo di significato fisico), in secondo luogo, come si può notare dalla figura \ref{baselinestart}, il fit della \textit{baseline} sovrastima il valore di $b$ e perciò la sottrazione non può essere considerata corretta.
 
 L'adozione del secondo metodo richiede la scelta del canale (valore di ritardo temporale) dal quale far iniziare il fit della porzione di \textit{baseline}, si è quindi proceduto a eseguire uno studio sistematico dei risultati al variare di questo estremo inferiore confrontando le medie su più simulazioni (figura \ref{baselinestart}).
 %
@@ -408,11 +411,103 @@ L'adozione del secondo metodo richiede la scelta del canale (valore di ritardo t
   \begin{adjustbox}{width=\linewidth+1cm}
     \input{img/tprofile}
   \end{adjustbox}}
-  \caption{Studio della ricostruzione della \textit{baseline} $b$ al variare del punto di inizio del fit costante di tipo \texttt{pol0}: in alto i valori ottenuti (la linea rossa rappresenta il valore vero) e in basso i rispettivi errori. Le barre di errore rappresentano la deviazione standard del campione di 100 simulazioni utilizzato. I dati utilizzati nella generazione corrispondono a 5 settimane di acquisizione.}\label{baselinestart}
+  \caption{Studio della ricostruzione della \textit{baseline} $b$ al variare del punto di inizio del fit costante di tipo \texttt{pol0}: in alto i valori ottenuti (la linea rossa rappresenta il valore vero) e in basso i rispettivi errori. Le barre di errore rappresentano la deviazione standard del campione di 100 simulazioni utilizzato. I dati utilizzati nella generazione corrispondono a (5 settimane??? La baseline per 5 settimane non è 1...) 1 settimana di acquisizione.}\label{baselinestart}
 \end{figure}
 %
-#####£/(@¶#)ù!!!!! Analisi dei grafici e scelta fatta\ldots 
+%#####£/(@¶#)ù!!!!! Analisi dei grafici e scelta fatta\ldots 
 %
+
+\subsection{Simulazione del fondo e di entrambi gli esponenziali}
+Il Metodo Montecarlo prevede ora di studiare una distribuzione contenente un termine costante di \textit{baseline} e due esponenziali:
+\begin{equation}
+ f(t;A_+,\tau^+,A_-,\tau^-)=A_-e^{-\frac{t}{\tau^-}}+A_+e^{-\frac{t}{\tau^+}}+b
+ \label{eq::funzione_fit_finale}
+\end{equation}
+La distribuzione esponenziale relativa ai $\mu^-$ si genera con \lstinline{TRandom3::Exp} separatamente da quella dell'esponenziale dei $\mu^+$ e della \textit{baseline} (vedi sezione precedente), quindi le due distribuzioni si sommano in un unico istogramma. 
+
+L'adozione del metodo 2 descritto in precedenza prevede uno studio accurato del canale (ie: ritardo temporale) dal quale cominciare il fit della funzione $A_+e^{-\frac{t}{\tau^+}}+b$. 
+\begin{figure}[h]
+  \centerline{%
+  \begin{adjustbox}{width=\linewidth+1cm}
+    \includegraphics{img/Fitbegin_5week_100sim}
+  \end{adjustbox}}
+  \caption{Studio della stima di $\tau_+$ (espresso in canali) al variare del punto di inizio del fit $A_+e^{-\frac{t}{\tau^+}}+b$. La linea rossa rappresenta il valore vero impostato nella simulazione. Le barre d'errore rappresentano la deviazione standard del campione di 100 simulazioni utilizzate. I dati utilizzati nella generazione corrispondono a 5 settimane di acquisizione.}
+  \label{fig::tauplusstart}
+\end{figure}
+Come riportato in figura \ref{fig::tauplusstart}, il fit \textit{baseline}+esponenziale produce un valore di $\tau^+$ che è sempre sottostimato rispetto al valore vero. Perciò, non essendovi alcun caso particolare, come estremo inferiore di fit di questa funzione si è scelto un valore in canali corrispondente a $5\tau^-$, al quale la popolazione di $\mu^-$ è pressochè assente.
+
+In conclusione, il metodo di fit messo a punto prevede i seguenti step:
+\begin{enumerate}
+ \item fit \lstinline{pol0} della coda dello spettro ed estrazione del valore preliminare $B$ per la \textit{baseline};
+ \item definizione della funzione \lstinline{TH1 f1} corrispondente alla formula \ref{eq::exp_plus_base}. Si setta il parametro $b$ al valore derivante dal fit del punto precedente (\lstinline{f1.SetParameter("b",B)}), quindi si effettua il fit dell'istogramma con \lstinline{f1} a partire da un ritardo di $5\tau^-$, ottenendo le stime intermedie $\tau^*$ e $B^*$ per i parametri $\tau^+$ e \textit{baseline} rispettivamente;
+ \item si definisce la funzione complessiva di fit \lstinline{TH1 f} corrispondente alla formula \ref{eq::funzione_fit_finale}, si settano i parametri $\tau^+$ e \textit{baseline} ai valori $\tau^*$ e $B^*$ e, infine, si fitta l'istogramma con la funzione \lstinline{f}, estraendo i valori definitivi dei parametri. 
+\end{enumerate}
+\begin{figure}
+\centering
+ \includegraphics[scale=0.6]{img/example_single_spectrum}
+ \caption{Esempio di istogramma simulato con statistica associata ad 1 settimana di acquisizione (\textit{baseline} $\sim 1$).}
+ \label{fig::esempio_spettro_simulato}
+\end{figure}
+%
+%
+%
+\subsection{Test multipli del metodo di fit}
+La generazione degli spettri utilizza i seguenti parametri di input:
+$$\tau^+,\tau^-,R,b,I$$
+dove $I$ è l'integrale della distribuzione. Questi parametri sono tra loro legati dalle seguenti relazioni:
+\begin{equation}
+ \begin{cases}
+  I = \int_{t^0}^\infty f(t) = A_-\tau^-e^{-t^0/\tau^-} + A_+\tau^+e^{-t^0/\tau^+} + br \\
+  R = \frac{A^+}{A^-} \\
+ \end{cases}
+ \label{eq::condizioni_parametri}
+\end{equation}
+dove 
+\begin{itemize}
+ \item $f(t) = dN/dt$ corrisponde alla formula \ref{eq::funzione_fit_finale};
+ \item $t^0$ corrisponde all'istante in cui inizia l'istogramma;
+ \item $r$ è il range dell'istogramma (circa 4000 canali).
+\end{itemize}
+Sino ad ora, si è testato e messo a punto il metodo di fit sulla base di spettri simulati con i valori attesi dei parametri, in particolare $\tau^+ \simeq 2.2 \mu s$ $(\sim 429$ canali $)$, $\tau^- \simeq 0.8 \mu s$ $(\sim 172$ canali $)$ e $R\simeq1.26$. 
+In questa fase si intende testare il metodo su distribuzioni simulate con diversi valori di \textit{input}, senza alcun senso fisico. Lo scopo è quello di avvalorarne la correttezza, verificando cioè che esso sia in grado di resituire in \textit{output} stime dei parametri compatibili con i valori messi in \textit{input} alle simulazioni, evitando che, per esempio, esso restituisca come stime dei parametri quelle sopra elencate seppur con valori in \textit{input} completamente diversi. 
+
+La strategia adottata si sviluppa in due fasi:
+\begin{enumerate}
+ \item fissato un set di parametri di \textit{input}, si generano 500 spettri che vengono poi fittati con il metodo precedentemente descritto. Le stime dei parametri fornite dal fit e i relativi errori vengono immagazzinate all'interno di nuovi istogrammi, i quali ci si aspetta che siano centrati attorno al valore del parametro inserito in \textit{input} alla simulazione. Tali istogrammi vengono riempiti esclusivamente dai fit che, relativamente a ciascun parametro, soddisfano le seguenti condizioni di qualità:
+ \begin{enumerate}
+  \item errore relativo massimo del $20\%$;
+  \item stima compatibile con il valore atteso entro le $3\sigma$. 
+ \end{enumerate}
+ Se il fit di uno spettro non soddisfa almeno una di queste condizioni per almeno uno dei parametri $\tau^+$, $\tau^-$ e $R$ nessuno degli istogrammi viene riempito, quindi non si mantiene memoria della simulazione corrente;
+ Si riporta un esempio in figura \ref{fig::esempio_set_simulazioni};
+ \begin{figure}
+  \centering
+  \includegraphics[scale=0.75]{img/Single_Nsim_distr}
+  \caption{Esempio di distribuzioni dei valori estatti dal fit dei singoli parametri e dei relativi errori, derivanti da 500 simulazioni con parametri settati ai valori fisici. Le linee verdi indicano il valore di ogni parametro messo in \textit{input} alle simulazioni. La statistica relativa ad ogni singolo spettro è comparabile con quella di 1 settimana di acquisizione ($\sim 80000$ eventi, \textit{baseline} $\sim 1$). L'efficienza finale del metodo per questa specifica simulazione è del $96.8\%$.}
+  \label{fig::esempio_set_simulazioni}
+ \end{figure}
+ 
+ \item si ripete la procedura del punto precedente con \textit{samples} da 500 simulazioni ottenuti con parametri di \textit{input} di volta in volta diversi. Ogni \textit{sample} contribuisce all'efficienza complessiva sulla base dei valori di $\tau^+$, $\tau^-$ e $R$ corrispondenti ai centroidi delle distribuzioni dei valori, ai quali, come incertezza, si assegna il centroide della distribuzione degli errori associata. In particolare, le condizioni di qualità che si devono soddisfare sono:  
+ \begin{enumerate}
+  \item errore relativo massimo del $20\%$;
+  \item stima compatibile con il valore atteso entro le $3\sigma$;
+  \item dispersione ($\sigma$) della distribuzione dei valori minore di 2 volte il centroide della distribuzione degli errori. Questo tipo di condizione avvalora la scelta del centroide della distribuzione degli errori come incertezza sul parametro: qualora esso fosse ordini di grandezza inferiore rispetto alla $\sigma$ della distribuzione dei valori, ciò implicherebbe la presenza di una componente di errore non controllata.  
+ \end{enumerate}
+Qualora almeno una di queste condizioni non sia soddisfatta per almeno uno dei parametri $\tau^+$, $\tau^-$ e $R$ il \textit{sample} viene rigettato. In caso contrario, il \textit{sample} si considera valido. 
+\end{enumerate}
+Si è deciso di applicare la procedura descritta facendo variare i valori di \textit{input} dei parametri $\tau^+$, $\tau^-$, $R$ e $I$ (\textit{baseline}) massimo del $50\%$ sopra e sotto il valore fisico, per un totale di $3^4=81$ \textit{samples} rispetto ai quali calcolare l'efficienza. In virtù di questi test, si sono osservate le seguenti criticità:
+\begin{itemize}
+ \item nel caso di \textit{samples} generati con valori di $\tau^+$ e $\tau^-$ ravvicinati, distanti circa di $100$ canali ($0.8 - 0.9 \mu s$), il metodo di fit fallisce, non riuscendo ad andare a convergenza. Questo problema riguarda comunque campioni di dati relativi a spettri senza alcun significato fisico (i muoni "lunghi" e "corti" non sono più tali);
+ \item il parametro $R$ è quello più difficile da stimare correttamente, risultando determinante per rigettare alcuni \textit{samples} per i quali le stime di $\tau^+$ e $\tau^-$ risultano comunque valide.  
+\end{itemize}
+Si è affrontata la prima problematica assicurando che $\tau^+-\tau^->100$ canali, senza però trovare alcun rimedio alla seconda: ogni tentativo di miglioramento del metodo non è riuscito a risolverla (esempio: miglioramento della scelta dei parametri da settare con \lstinline{SetParameter} e setting di parametri aggiuntivi quali $A_+$ e $A_-$ nei fit preliminari).
+Nonostante ciò, i \textit{run} effettuati hanno sancito un'efficienza del metodo di circa $86\%$. 
+
+
+
+
+
+
 \appendix
 %\setcounter{secnumdepth}{0}
 \include{analApp}

@@ -24,13 +24,13 @@
 #include "TText.h"
 #include "TGraphErrors.h"
 #include "TProfile.h"
-#include "progressbar.h"
+#include "../../ProgressBar/progressbar.h"
 
 // ----> VALORI CON CUI GIOCARE <----
 #define StartBase  2600 // inizio del fit baseline, già scelto
 #define	Begin     0	// inizio istogramma
 #define End       3904	// fine istogramma
-#define Nsim      500  // numero punti nel plot
+#define Nsim      100  // numero punti nel plot
 #define beginFit  860	// inizio fit esponenziale -> qui si gioca
 #define range     300*2// intervallo di valori attorno a beginFit (canali)
 
@@ -163,7 +163,7 @@ int main( int argc, char* argv[] ) {
     //total2.Draw();
     
     TCanvas c("c", "Simulations",1200,900);
-    c.Divide(1,3);
+    /*c.Divide(1,3);
     c.cd(1);
     profileB.Draw();
     TLine lB( profileB.GetXaxis()->GetXmin(), B, profileB.GetXaxis()->GetXmax(), B );
@@ -174,7 +174,11 @@ int main( int argc, char* argv[] ) {
 	TLine lA(profileA.GetXaxis()->GetXmin(), A, profileA.GetXaxis()->GetXmax(), A);
 	lA.SetLineColor(kRed);
 	lA.Draw();
-	c.cd(3);
+	c.cd(3);*/
+	profiletau.GetXaxis()->SetTitle("canale");
+	profiletau.GetYaxis()->SetTitle("#tau_{+}");
+	profiletau.SetStats(0);
+	gPad->SetGrid();
 	profiletau.Draw();
 	TLine ltau(profiletau.GetXaxis()->GetXmin(), tau, profiletau.GetXaxis()->GetXmax(), tau);
 	ltau.SetLineColor(kRed);

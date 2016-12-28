@@ -33,7 +33,7 @@
 #define	Begin     18    // inizio istogramma
 #define StartBase 2600	// punto dell'istogramma in cui comincia la baseline --> FISSATO dai test su fit pol0 della baseline (baselineStart.cc)
 #define End       3904	// fine istogramma
-#define Nsim      1     // numero simulazioni
+#define Nsim      500   // numero simulazioni
 #define beginFit  860	// inizio fit esponenziale dei muoni lunghi
 
 struct distRange{
