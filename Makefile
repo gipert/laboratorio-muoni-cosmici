@@ -27,7 +27,7 @@ code/montecarlo/semestre2/montecarlo_modifiedforbaseline : code/montecarlo/semes
 code/analysis/lifetimeAnalysis : code/analysis/lifetime_nocalib_bkgr_sub.cc
 	$(CC) $(INCLUDE) -o $@ $^ $(LIB)
 
-code/calibration/openADC : code/calibration/openADC.cc
+code/TAC/openADC : code/TAC/openADC.cc
 	$(CC) $(INCLUDE) -o $@ $^ $(LIB)
 
 code/montecarlo/semestre2/baselineStart : code/montecarlo/semestre2/baselineStart.cc $(BARPATH)progressbar.cc
