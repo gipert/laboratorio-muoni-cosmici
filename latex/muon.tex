@@ -149,66 +149,26 @@ $$\sigma_\epsilon=\sqrt{ \left(\frac{\partial\epsilon}{\partial (T\wedge PMT)}\s
 dove $\sigma_T = \sqrt{T}$.
 
 %
-\subsection{Misure di differenze temporali}
+\subsection{Misure di differenze temporali}\label{tac}
 L'acquisizione della curva di decadimento dei muoni necessita di una procedura per la misura di intervalli temporali tramite un modulo Time to Amplitude Converter (TAC) e un modulo Analog to Digital Converter (ADC) per la conversione digitale. Le proprietà desiderate della catena elettronica devono essere opportunamente verificate prima di eseguire una procedura di calibrazione che permetta di associare un canale del multicanale ad un ben preciso valore temporale.
 
-Inizialmente si è verificato il corretto comportamento della catena TAC + ADC rispetto a una distribuzione uniforme di ritardi temporali, ovvero generando due treni di segnali scorrelati da mandare in input alle entrate di START e STOP del TAC; ci si aspetta dalla raccolta di un numero statisticamente rilevante di dati una distribuzione perfettamente piatta. L'apparato dispone di due modelli differenti di TAC, nr.~437 e nr.~467: in figura \ref{rumore1} è possibile osservare i risultati di una prima acquisizione.
+Inizialmente si è verificato il corretto comportamento della catena TAC + ADC rispetto a una distribuzione uniforme di ritardi temporali, ovvero generando due treni di segnali scorrelati da mandare in input alle entrate di START e STOP del TAC; ci si aspetta dalla raccolta di un numero statisticamente rilevante di dati una distribuzione perfettamente piatta. Per l'esperimento si è scelto di utilizzare il TAC nr.~437: in figura \ref{rumore1} è possibile osservare i risultati di una prima acquisizione.
 %
 \begin{figure}[h]
-	\centerline{
-		\subfloat[Nr.~437]
-		{\includegraphics[scale=0.374]{img/bkg_sx.pdf}}
-		\subfloat[Nr.~467]
-		{\includegraphics[scale=0.374]{img/bkg_dx1.pdf}}}
-		\caption{Prima analisi dello spettro di ritardi temporali generati uniformemente; si nota nella figura (b) la presenza di un picco di eventi indesiderato nei pressi del canale 700.}
-		\label{rumore1}
+  \centering  
+  \begin{adjustbox}{width=10cm}
+    \input{img/bkg437}
+  \end{adjustbox}%\includegraphics[scale=0.374]{img/bkg_sx.pdf}}
+  \caption{Prima analisi dello spettro di ritardi temporali generati uniformemente; si nota la presenza di un eccesso di eventi indesiderato nell'intervallo $[2200,2700]$ (è stato applicato un rebin di un fattore 12 per evidenziare meglio la situazione).}
+  \label{rumore1}
 \end{figure}
 %
 
-Il TAC nr.~437 non sembra presentare problemi, tranne che per il picco all'inizio dello spettro di cui non si è scoperta l'origine, ma che non influisce sulla raccolta dati. Il nr.~467 invece esibisce un picco di eventi inaspettato riconducibile a un problema di cattivo accoppiamento di impedenze di uscita del TAC e di ingresso dell'ADC; dopo aver modificato l'impedenza di uscita del TAC tramite un connettore BNC a ``T'' chiuso da un lato su 50 $\Omega$ lo spettro risulta uniforme (figura \ref{rumore2}).
+Il TAC nr.~437 sembra presentare due problemi, un picco all'inizio dello spettro di cui non si è scoperta l'origine, ma che non influisce sulla raccolta dati e un eccesso di eventi nell'intervallo $[2200,2700]$. Questo secondo problema di origine anch'essa ignota rappresenta invece un potenziale fattore di disturbo per l'analisi dati, Un possibile approccio alla risoluzione verrà presentato in sezione ???.
 
-%
-\begin{figure}[]
-	\centering
-	\includegraphics[scale=0.45]{img/bkg_dx2.pdf}
-	\caption{Spettro finale per il TAC nr.~467.}
-	\label{rumore2}
-\end{figure}
-%
-Dopo questa prima fase si è verificato che il TAC nr.~467 non erogasse più di 5 V (il massimo valore di tensione convertibile dall'ADC) in corrispondenza di un ritardo di 20 $\mu$s e nello stesso modo si è impostato il fondoscala del nr.~437. Si è proceduto quindi a verificare la linearità della catena elettronica TAC + ADC e ottenere quindi una calibrazione temporale dello spettro registrato dal multicanale: tramite due copie del segnale di un impulsatore opportunamente discriminato fornite in input al TAC, separate da una distanza temporale variabile nel range $[0 \ \mu \mbox{s},20 \ \mu \mbox{s}]$, si sono registrati i relativi valori di tensione erogati e il canale corrispondente (vedi appendice B, figure \ref{time_tens} e \ref{chan_time}).
-%
-%
-%\begin{figure}[h]
-%	\centerline{
-%		\includegraphics[scale=0.8]{img/time_tens_437.pdf}}
-%	\caption{Valori di tensione erogati del TAC nr.~437.}
-%	\label{tt437}
-%\end{figure}
-%
-%\begin{figure}[h]
-%	\centerline{
-%		\includegraphics[scale=0.8]{img/time_tens_467.pdf}}
-%	\caption{Valori di tensione erogati del TAC nr.~467.}
-%	\label{tt467}
-%\end{figure}
-%
-%\begin{figure}[h]
-%	\centerline{
-%		\includegraphics[scale=0.8]{img/chan_time_437.pdf}}
-%	\caption{Calibrazione canale - tempo per il TAC nr.~437.}
-%	\label{ct437}
-%\end{figure}
-%
-%\begin{figure}[h]
-%	\centerline{
-%		\includegraphics[scale=0.8]{img/chan_time_467.pdf}}
-%	\caption{Calibrazione canale - tempo per il TAC nr.~467.}
-%	\label{ct467}
-%\end{figure}
-%
-Con i fondoscala impostati come descritto in precedenza, i TAC nr.~437 e nr.~467 erogano rispettivamente per valori del ritardo compresi tra 60 ns e 20 $\mu$s segnali nei range di tensione $[0.211 \ \mbox{V}, 5.070 \ \mbox{V}]$ e $[0.003 \ \mbox{V}, 4.670 \ \mbox{V}]$. Ciò introduce una complicazione nell'utilizzo del TAC nr.~467: infatti  0.003 V sono troppo pochi per essere rivelati dall'ADC (la soglia inferiore di lettura è all'incirca di 30 mV, corrispondente ad un ritardo di ben 650 ns) e quindi c'è una vasta classe di ritardi che non è visibile dalla catena elettronica. Per risolvere il problema è possibile ad esempio aggiungere sistematicamente ai segnali in input un ritardo temporale noto superiore o uguale a 650 ns affinchè l'ADC sia in grado di rivelare qualsiasi valore del ritardo, per quanto piccolo, e poi tenerne conto in fase di calibrazione degli spettri. 
+Dopo questa prima fase si è verificato che il TAC  non erogasse più di 5 V (il massimo valore di tensione convertibile dall'ADC) in corrispondenza di un ritardo di 20 $\mu$s. Si è proceduto quindi a verificare la linearità della catena elettronica TAC + ADC e ottenere quindi una calibrazione temporale dello spettro registrato dal multicanale: tramite due copie del segnale di un impulsatore opportunamente discriminato fornite in input al TAC, separate da una distanza temporale variabile nel range $[0 \ \mu \mbox{s},20 \ \mu \mbox{s}]$, si sono registrati i relativi valori di tensione erogati e il canale corrispondente (si veda appendice B, figure \ref{time_tens} e \ref{chan_time}).
 
-Per i risultati esposti di seguito, è stato utilizzato solamente il TAC nr.~437.
+Con il fondoscala impostato come descritto in precedenza, il TAC eroga per valori del ritardo compresi tra 60 ns e 20 $\mu$s segnali nei range di tensione $[0.211 \ \mbox{V}, 5.070 \ \mbox{V}]$.
 %
 %
 \section{Operazioni preliminari alla presa dati}
@@ -288,16 +248,18 @@ Si sono quindi raccolti i dati di varie coincidenze, prima senza e poi sovrappon
 \subsection{Costruzione del circuito}
 A questo punto, dopo tutte le verifiche necessarie, e dopo aver ripetuto le prove di luce-buio\footnote{Si è notato un eccesso di segnale proveniente da una zona della \emph{slab} superiore, subito risolto con dello scotch isolante.}, si sono costruiti i circuiti di START e di STOP, per la rivelazione dei muoni cosmici. Si rende però necessario fare una premessa: potendo utilizzare nella costruzione del circuito segnali negati o di veto, dopo alcune prove si è optato per la seconda possibilità, avendo cura di temporizzare bene le coincidenze, ossia facendo in modo che il segnale di veto rendesse effettivamente cieco l'apparato. In questo passaggio il segnale di veto è stato ritardato e allargato cosicchè contenesse il segnale del PMT in coincidenza.
 
-Per il segnale di START, corrispondente al muone che entra dall'alto e non esce dalla \emph{scatola}, si è partiti considerando varie possibilità; il miglior compromesso, che generasse un segnale sufficientemente pulito ma con una rate di conteggio non troppo bassa, si è rivelato essere il segnale S1 $\wedge$ S2  $\wedge$ $\overline{\mbox{S5}\vee \mbox{L} \vee \mbox{R}}$ , la cui rate in coincidenza è 6.6 Hz.
-Il segnale di STOP corrisponde invece all'avvenuto decadimento e rivelazione dell'elettrone emesso, ed è stato scelto essere (S3 $\veebar$ S4)  $\wedge$ $\overline{\mbox{S1} \vee \mbox{S5}\vee \mbox{L} \vee \mbox{R}}$, con rate 38.1 Hz (schemi in figura \ref{scemi}).
+Per il segnale di START, corrispondente al muone che entra dall'alto e non esce dalla \emph{scatola}, si è partiti considerando varie possibilità; il miglior compromesso, che generasse un segnale sufficientemente pulito ma con una frequenza di conteggio non troppo bassa, si è rivelato essere il segnale S1 $\wedge$ S2  $\wedge$ $\overline{\mbox{S5}\vee \mbox{L} \vee \mbox{R}}$ , la cui frequenza in coincidenza è 6.6 Hz.
+Il segnale di STOP corrisponde invece all'avvenuto decadimento e rivelazione dell'elettrone emesso, ed è stato scelto essere (S3 $\veebar$ S4)  $\wedge$ $\overline{\mbox{S1} \vee \mbox{S5}\vee \mbox{L} \vee \mbox{R}}$, con frequenza 38.1 Hz (schemi in figura \ref{scemi}).
 
-\begin{figure}[H]
+A questo punto, con i segnali START e STOP fisici si sono ripetute i test di uniformità descritti alla sezione \ref{tac} utilizzando START artificiale con STOP fisico e viceversa. Si riscontra lo stesso eccesso di eventi attorno al canale 2500 individuato durante la caratterizzazione del TAC.
+%
+\begin{figure}[h]
 	\centering
 	\include{Scemi}
 	\caption{Schema dei circuiti di START e di STOP. Si noti che nel circuito di STOP si è utilizzato un segnale di XOR, ossia il veto ha una componente che rende cieco l'apparato quando entrambe le \emph{slab} S3 e S4 rivelano un evento; ciò viene utilizzato per cercare di incrementare la probabilità che il segnale di STOP non sia dato da un evento spurio, assumendo che una volta decaduto il muone l'elettrone si fermi alla prima \emph{slab} che incontra.}
 	\label{scemi}
 \end{figure}
-
+%
 \section{Analisi dati preliminare}
 Dopo aver impostato il circuito come illustrato precedentemente, si è proceduto all'acquisizione dei dati relativi al ritardo che intercorre tra il passaggio del muone cosmico attraverso l'apparato di START e l'uscita dell'elettrone di decadimento attraverso lo STOP.
 
@@ -327,7 +289,7 @@ Per quanto riguarda il rapporto numerico $N^+/N^-$ tra le due popolazioni, la st
 \[\frac{A^+}{A^-}= \bigg ( \frac{\tau^+}{\tau^-} \bigg )  ^{-1} \frac{N^+}{N^-} \bigg ( \frac{\Gamma_d}{\Gamma_d+\Gamma_c} \bigg )^{-1}e^{t^*\left(\frac{1}{\tau^+}-\frac{1}{\tau^-}\right)}\sim\frac{N^+}{N^-}\]
 dove $\Gamma_d$ e $\Gamma_c$ sono rispettivamente le larghezze parziali di decadimento e cattura per entrambe le popolazioni, mentre il termine esponenziale è stato aggiunto per tenere conto del fatto che l'apparato è cieco per un tempo $t^* \sim 150$ ns precedente allo zero.
 %
-\begin{figure}[H]
+\begin{figure}[h!]
 \centering
 \subfloat[][{Eventi raccolti.}]
 {\includegraphics[width=1\textwidth]{img/Spettro_rebin12.pdf}} \\
@@ -338,7 +300,7 @@ dove $\Gamma_d$ e $\Gamma_c$ sono rispettivamente le larghezze parziali di decad
 \end{figure}
 %
 In figura \ref{fig::histo} viene riportato il grafico degli eventi raccolti, dove l'istogramma ha un numero di bin ridotto di un fattore 12 rispetto a quello originale, appunto per ridurre le fluttuazioni statistiche in maniera ottimale. I risultati derivanti da questa analisi sono riportati in tabella \ref{results}.
-\begin{table}[H]
+\begin{table}[h!]
 	\centering
 	\begin{tabular}{ccccc}
 		\toprule
@@ -353,7 +315,7 @@ In figura \ref{fig::histo} viene riportato il grafico degli eventi raccolti, dov
 	\label{results}
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
+\cleardoublepage
 \section{Simulazione MonteCarlo e analisi dati}
 Lo scopo di questa fase dell'esperimento consiste nella ricerca e messa a punto di un metodo sperimentale di analisi degli spettri raccolti. Il lavoro si suddivide in due step:
 \begin{enumerate}

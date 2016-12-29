@@ -117,7 +117,7 @@ void openADC( std::string fileName , int rebin) {
 	
 	data->Rebin(rebinFactor); // rebin histograms
 
-	TCanvas * can = new TCanvas( "ADCdataCan" , "Adc data" , 1500 , 600);
+	TCanvas * can = new TCanvas( "ADCdataCan" , "Adc data" , 1);
 	can->cd();
 	//can->SetLogy();
 	data->Draw();

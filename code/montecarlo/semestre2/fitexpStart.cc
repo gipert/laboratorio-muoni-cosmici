@@ -30,7 +30,7 @@
 #define StartBase  2600 // inizio del fit baseline, già scelto
 #define	Begin     0	// inizio istogramma
 #define End       3904	// fine istogramma
-#define Nsim      100  // numero punti nel plot
+#define Nsim      30  // numero punti nel plot
 #define beginFit  860	// inizio fit esponenziale -> qui si gioca
 #define range     300*2// intervallo di valori attorno a beginFit (canali)
 
@@ -106,7 +106,7 @@ int main( int argc, char* argv[] ) {
     for(int j=0; j<Nsim; j++)
     {
         bar.Update(j);
-        for( int i = 0; i < Nsim; i++ ) {
+        for( int i = 0; i < 100; i++ ) {
             
             r.SetSeed(i+1);
 			// simulazione della baseline
