@@ -26,13 +26,17 @@
 #include "TProfile.h"
 #include "../../ProgressBar/progressbar.h"
 
+double m = 5.12162E-03;
+double q = -7.6994E-01;
+
 // ----> VALORI CON CUI GIOCARE <----
-#define StartBase  2600 // inizio del fit baseline, già scelto
-#define	Begin     0	// inizio istogramma
+#define StartBase  2600// inizio del fit baseline, già scelto
+#define	Begin     18	// inizio istogramma
 #define End       3904	// fine istogramma
-#define Nsim      30  // numero punti nel plot
+#define Nsim      30 // numero punti nel plot
 #define beginFit  860	// inizio fit esponenziale -> qui si gioca
 #define range     300*2// intervallo di valori attorno a beginFit (canali)
+
 
 TRandom3 r;
 int counts;
@@ -66,8 +70,9 @@ int main( int argc, char* argv[] ) {
 	double integrale = std::stof(args[3]); // valore tipico per 1 settimana: 70000 (circa)
 	double taucorto  = std::stof(args[4]); // valore vero = 172 canali (circa)
 	double R         = std::stof(args[5]); // valore vero: 1.261
-	int RebFactor    = std::stoi(args[6]);
-	double A         = (integrale - B*(End - Begin)) / (tau + taucorto / R);
+	int RebFactor = std::stoi(args[6]);
+	double Aminus = (integrale - B*(End - Begin)) / (R*tau*exp(-Begin / tau) + taucorto*exp(-Begin / taucorto));
+	double A = Aminus*R;
 
     TApplication Root("App",&argc,argv); 
 
@@ -85,15 +90,15 @@ int main( int argc, char* argv[] ) {
     
     TProfile profileB("profileB","TProfile baseline",range,beginFit-range/2,beginFit+range/2,"s");
     TProfile profileA("profileA","TProfile Aplus",range,beginFit-range/2,beginFit+range/2,"s");
-	TProfile profiletau("profiletau", "TProfile tau", range, beginFit - range / 2, beginFit + range / 2, "s");
+	TProfile profiletau("profiletau", "Ricostruzione #tau_{+} con TProfile", range, (beginFit - range / 2)*m+q, (beginFit + range / 2)*m+q, "s");
     profileB.SetMinimum(B-1);
     profileB.SetMaximum(B+1);
 	profileA.SetMinimum(A - 50);
 	profileA.SetMaximum(A + 50);
-	profiletau.SetMinimum(tau - 10);
-	profiletau.SetMaximum(tau + 10);
+	profiletau.SetMinimum((tau - 22)*m);
+	profiletau.SetMaximum((tau + 5)*m);
 
-    if ( beginFit-range/2 < 0 || beginFit+range/2 > 4096 ) { std::cout << "Hai esagerato. Termino..." << std::endl; return 0; }
+    //if ( beginFit-range/2 < 0 || beginFit+range/2 > 4096 ) { std::cout << "Hai esagerato. Termino..." << std::endl; return 0; }
 
 	// ciclo delle simulazioni
 	double val = 0;
@@ -119,12 +124,15 @@ int main( int argc, char* argv[] ) {
 			baseline.Rebin(RebFactor);
 			//simulazione primo esponenziale
 			TH1D exponential("exponential", "exponential", 4096, 0, 4096);
-			for (int k = 0; k < A*tau; k++)
+			for (int k = 0; k < A*tau*exp(-Begin / tau); k++)
 			{
 				val = r.Exp(tau);
 				while (val<Begin || val>End) val = r.Exp(tau);
 				exponential.Fill(val);
 			}
+			// rebin 
+			exponential.Rebin(RebFactor);
+
 			// rebin 
 			exponential.Rebin(RebFactor);
         
@@ -133,7 +141,7 @@ int main( int argc, char* argv[] ) {
 
 			//simulazione secondo esponenziale
 			TH1D exponential2("exponential2", "exponential2", 4096, 0, 4096);
-			for (int k = 0; k < A*taucorto / R; k++)
+			for (int k = 0; k < Aminus*taucorto*exp(-Begin / taucorto); k++)
 			{
 				entina = r.Exp(taucorto);
 				while (entina<Begin || entina>End) entina = r.Exp(taucorto);
@@ -154,7 +162,7 @@ int main( int argc, char* argv[] ) {
 			total2.Fit("fitFunc2", "LQN", "", Startfit, End);
 	        profileB.Fill(Startfit,fitFunc2.GetParameter(2));
 			profileA.Fill(Startfit, fitFunc2.GetParameter(0));
-			profiletau.Fill(Startfit, fitFunc2.GetParameter(1));
+			profiletau.Fill(Startfit*m+q, fitFunc2.GetParameter(1)*m);
 
         }
               Startfit -= range/Nsim;
@@ -175,12 +183,12 @@ int main( int argc, char* argv[] ) {
 	lA.SetLineColor(kRed);
 	lA.Draw();
 	c.cd(3);*/
-	profiletau.GetXaxis()->SetTitle("canale");
-	profiletau.GetYaxis()->SetTitle("#tau_{+}");
+	profiletau.GetXaxis()->SetTitle("Ritardo [#mu s]");
+	profiletau.GetYaxis()->SetTitle("#tau_{+} [#mu s]");
 	profiletau.SetStats(0);
 	gPad->SetGrid();
 	profiletau.Draw();
-	TLine ltau(profiletau.GetXaxis()->GetXmin(), tau, profiletau.GetXaxis()->GetXmax(), tau);
+	TLine ltau(profiletau.GetXaxis()->GetXmin(), tau*m, profiletau.GetXaxis()->GetXmax(), tau*m);
 	ltau.SetLineColor(kRed);
 	ltau.Draw();
     

@@ -364,7 +364,7 @@ Per la costruzione delle distribuzioni si è scelto di generare indipendentement
   \item Fit di tipo \lstinline{pol0} della parte finale dello spettro per la stima di $b$, utilizzata in secondo luogo per inizializzare il corrispondente parametro nel fit con la funzione completa del metodo precedente;
   \item Fit di tipo \lstinline{pol0} della parte finale dello spettro per la stima di $b$, quindi sottrazione della componente costante della distribuzione e successivo fit puramente esponenziale.
 \end{enumerate}
-Dei tre metodi il secondo si è rivelato il più stabile; un fit a tre parametri, infatti, necessita di valori di partenza che siano sufficientemente vicini al valore vero affinchè l'algoritmo di massimizzazione della likelihood vada a convergenza correttamente, e ciò ci porta a scartare il primo metodo, poco stabile con valori iniziali distanti dal valore vero. Anche il terzo metodo presenta delle criticità aggiuntive rispetto al secondo: in primo luogo una sottrazione di dati a bassa statisca può facilmente portare ad avere canali a contenuto negativo (privo di significato fisico), in secondo luogo, come si può notare dalla figura \ref{baselinestart}, il fit della \textit{baseline} sovrastima il valore di $b$ e perciò la sottrazione non può essere considerata corretta.
+Dei tre metodi il secondo si è rivelato il più stabile; un fit a tre parametri, infatti, necessita di valori di partenza che siano sufficientemente vicini al valore vero affinchè l'algoritmo di massimizzazione della likelihood vada a convergenza correttamente, e ciò ci porta a scartare il primo metodo, poco stabile con valori iniziali distanti dal valore vero. Anche il terzo metodo presenta delle criticità aggiuntive rispetto al secondo: in primo luogo una sottrazione di dati a bassa statistica può facilmente portare ad avere canali a contenuto negativo (privo di significato fisico), in secondo luogo, come si può notare dalla figura \ref{baselinestart}, il fit della \textit{baseline} sovrastima il valore di $b$ e perciò la sottrazione non può essere considerata corretta.
 
 L'adozione del secondo metodo richiede la scelta del canale (valore di ritardo temporale) dal quale far iniziare il fit della porzione di \textit{baseline}, si è quindi proceduto a eseguire uno studio sistematico dei risultati al variare di questo estremo inferiore confrontando le medie su più simulazioni (figura \ref{baselinestart}).
 %
@@ -391,9 +391,9 @@ L'adozione del metodo 2 descritto in precedenza prevede uno studio accurato del 
 \begin{figure}[h]
   \centerline{%
   \begin{adjustbox}{width=\linewidth+1cm}
-    \includegraphics{img/Fitbegin_5week_100sim}
+    \input{img/fitbegin_5week_100sim}
   \end{adjustbox}}
-  \caption{Studio della stima di $\tau_+$ (espresso in canali) al variare del punto di inizio del fit $A_+e^{-\frac{t}{\tau^+}}+b$. La linea rossa rappresenta il valore vero impostato nella simulazione. Le barre d'errore rappresentano la deviazione standard del campione di 100 simulazioni utilizzate. I dati utilizzati nella generazione corrispondono a 5 settimane di acquisizione.}
+  \caption{Studio della stima di $\tau_+$ al variare del punto di inizio del fit $A_+e^{-\frac{t}{\tau^+}}+b$. La linea rossa rappresenta il valore vero impostato nella simulazione. Le barre d'errore rappresentano la deviazione standard del campione di 100 simulazioni utilizzate. I dati utilizzati nella generazione corrispondono a 5 settimane di acquisizione.}
   \label{fig::tauplusstart}
 \end{figure}
 Come riportato in figura \ref{fig::tauplusstart}, il fit \textit{baseline}+esponenziale produce un valore di $\tau^+$ che è sempre sottostimato rispetto al valore vero. Perciò, non essendovi alcun caso particolare, come estremo inferiore di fit di questa funzione si è scelto un valore in canali corrispondente a $5\tau^-$, al quale la popolazione di $\mu^-$ è pressochè assente.
