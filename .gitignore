@@ -9,6 +9,7 @@ latex/muon.pdf
 *.out
 *.gz
 *.lot
+*.new
 code/efficiency/eff.workflow
 code/efficiency/*.pdf
 code/TAC/openADC
