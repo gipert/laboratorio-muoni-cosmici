@@ -253,6 +253,16 @@ int main ( int argc , char** argv ) {
     leg.AddEntry("drawFit2","A_{-}e^{-t/#tau_{-}}+A_{+}e^{-t/#tau_{+}}+B per #mu^{+}");
     //leg.Draw("same");
     //c.SaveAs("spectrumFit_cal.pdf");
+    
+    TCanvas c1( "c1", "Residui",1);
+    c1.cd();
+    TH1D res( "res" , "" , 4096, min, max );
+    for ( int i = 1; i <= 4096 ; i++ ) {
+        res.SetBinContent( i, histo_cal.GetBinContent(i) - drawFit0.Eval(histo_cal.GetBinCenter(i)) );
+        res.SetBinError(i, histo_cal.GetBinError(i));
+    }
+    
+    res.Draw("E1");
     app.Run();
 
     return 0;
