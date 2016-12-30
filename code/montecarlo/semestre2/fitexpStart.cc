@@ -187,7 +187,7 @@ int main( int argc, char* argv[] ) {
 	profiletau.GetYaxis()->SetTitle("#tau_{+} [#mu s]");
 	profiletau.SetStats(0);
 	gPad->SetGrid();
-	profiletau.Draw();
+	profiletau.Draw("E1");
 	TLine ltau(profiletau.GetXaxis()->GetXmin(), tau*m, profiletau.GetXaxis()->GetXmax(), tau*m);
 	ltau.SetLineColor(kRed);
 	ltau.Draw();
