@@ -366,19 +366,16 @@ Per la costruzione delle distribuzioni si è scelto di generare indipendentement
 \end{enumerate}
 Dei tre metodi il secondo si è rivelato il più stabile; un fit a tre parametri, infatti, necessita di valori di partenza che siano sufficientemente vicini al valore vero affinchè l'algoritmo di massimizzazione della likelihood vada a convergenza correttamente, e ciò ci porta a scartare il primo metodo, poco stabile con valori iniziali distanti dal valore vero. Anche il terzo metodo presenta delle criticità aggiuntive rispetto al secondo: in primo luogo una sottrazione di dati a bassa statistica può facilmente portare ad avere canali a contenuto negativo (privo di significato fisico), in secondo luogo, come si può notare dalla figura \ref{baselinestart}, il fit della \textit{baseline} sovrastima il valore di $b$ e perciò la sottrazione non può essere considerata corretta.
 
-L'adozione del secondo metodo richiede la scelta del canale (valore di ritardo temporale) dal quale far iniziare il fit della porzione di \textit{baseline}, si è quindi proceduto a eseguire uno studio sistematico dei risultati al variare di questo estremo inferiore confrontando le medie su più simulazioni (figura \ref{baselinestart}).
+L'adozione del secondo metodo richiede la scelta del canale (valore di ritardo temporale) dal quale far iniziare il fit della porzione di \textit{baseline}, si è quindi proceduto a eseguire uno studio sistematico dei risultati al variare di questo estremo inferiore confrontando le medie su più simulazioni (figura \ref{baselinestart}). Dal grafico è evidente come la riscostruzione sia più precisa ma meno accurata per piccoli valori e di come la situazione si inverta per grandi valori. A priori si potrebbe scegliere un valore che rappresenti la media tra queste due situazioni, ma a posteriori, studiando la ricostruzione di $b$ e $\tau^+$ dopo il fit esponenziale del metodo 2, si è verificato con varie prove come la scelta di questo valore iniziale sia del tutto ininfluente.
 %
 \begin{figure}[h]
   \centerline{%
   \begin{adjustbox}{width=\linewidth+1cm}
     \input{img/tprofile}
   \end{adjustbox}}
-  \caption{Studio della ricostruzione della \textit{baseline} $b$ al variare del punto di inizio del fit costante di tipo \texttt{pol0}: in alto i valori ottenuti (la linea rossa rappresenta il valore vero) e in basso i rispettivi errori. Le barre di errore rappresentano la deviazione standard del campione di 100 simulazioni utilizzato. I dati utilizzati nella generazione corrispondono a (5 settimane??? La baseline per 5 settimane non è 1...) 1 settimana di acquisizione.}\label{baselinestart}
+  \caption{Studio della ricostruzione della \textit{baseline} $b$ al variare del punto di inizio del fit costante di tipo \texttt{pol0}: in alto i valori ottenuti (la linea rossa rappresenta il valore vero) e in basso i rispettivi errori. Le barre di errore rappresentano la deviazione standard del campione di 100 simulazioni utilizzato. I dati utilizzati nella generazione corrispondono a 1 settimana di acquisizione.}\label{baselinestart}
 \end{figure}
 %
-%#####£/(@¶#)ù!!!!! Analisi dei grafici e scelta fatta\ldots 
-%
-
 \subsection{Simulazione del fondo e di entrambi gli esponenziali}
 Il Metodo Montecarlo prevede ora di studiare una distribuzione contenente un termine costante di \textit{baseline} e due esponenziali:
 \begin{equation}
@@ -391,7 +388,7 @@ L'adozione del metodo 2 descritto in precedenza prevede uno studio accurato del 
 \begin{figure}[h]
   \centerline{%
   \begin{adjustbox}{width=\linewidth+1cm}
-    \input{img/fitbegin_5week_100sim}
+    %\input{img/fitbegin_5week_100sim}
   \end{adjustbox}}
   \caption{Studio della stima di $\tau_+$ al variare del punto di inizio del fit $A_+e^{-\frac{t}{\tau^+}}+b$. La linea rossa rappresenta il valore vero impostato nella simulazione. Le barre d'errore rappresentano la deviazione standard del campione di 100 simulazioni utilizzate. I dati utilizzati nella generazione corrispondono a 5 settimane di acquisizione.}
   \label{fig::tauplusstart}
@@ -406,7 +403,10 @@ In conclusione, il metodo di fit messo a punto prevede i seguenti step:
 \end{enumerate}
 \begin{figure}
 \centering
- \includegraphics[scale=0.6]{img/example_single_spectrum}
+ %\includegraphics[scale=0.6]{img/example_single_spectrum}
+ \begin{adjustbox}{width=\linewidth}
+   \input{img/single}
+ \end{adjustbox}
  \caption{Esempio di istogramma simulato con statistica associata ad 1 settimana di acquisizione (\textit{baseline} $\sim 1$).}
  \label{fig::esempio_spettro_simulato}
 \end{figure}

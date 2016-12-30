@@ -148,7 +148,7 @@ double q = -7.6994E-01;
    profileB->GetZaxis()->SetTitleSize(0.035);
    profileB->GetZaxis()->SetTitleFont(42);
    profileB->Draw("E1");
-   TLine *line = new TLine(1538,1,3538,1);
+   TLine *line = new TLine(1538*m+q,1,3538*m+q,1);
 
    ci = TColor::GetColor("#ff0000");
    line->SetLineColor(ci);
