@@ -26,8 +26,9 @@
 #include "TLegend.h"
 
 // calibration parameters
-double m = 5.12162E-03;
-double q = -7.6994E-07;
+double m 	= 5.12162E-03;
+double errm 	= 8.90761E-06;
+double q 	= -7.6994E-07;
 // min & max histogram
 double min = 0*m + q;
 double max = 4096*m + q;
@@ -187,11 +188,13 @@ int main ( int argc , char** argv ) {
     double RErr        = R * sqrt( AplusErr*AplusErr/(Aplus*Aplus) + AminusErr*AminusErr/(Aminus*Aminus));
     
     // calibration
-    tauLong *= m;
-    tauShort *= m;
+    tauLongErr   = sqrt( pow(tauLong*errm,2)  + pow(m*tauLongErr,2) );
+    tauShortErr  = sqrt( pow(tauShort*errm,2) + pow(m*tauShortErr,2) );
+    tauLong     *= m;
+    tauShort    *= m;
  
-    tauLongErr *= m;
-    tauShortErr *= m;
+    //tauLongErr *= m;
+    //tauShortErr *= m;
 
     double compTauPlus  = fabs(tauLong-TauPlus)/sqrt( pow(tauLongErr,2) + pow(errTauPlus,2) );
     double compTauMinus = fabs(tauShort-TauMinus)/sqrt( pow(tauShortErr,2) + pow(errTauMinus,2) );
