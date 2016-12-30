@@ -120,8 +120,8 @@ int main ( int argc , char** argv ) {
     // REBIN
     data.Rebin(rebin);
 
-    //TApplication app("app", &argc, argv);
-    TCanvas c( "c", "Analisi Dati", 1200 , 700);
+    TApplication app("app", &argc, argv);
+    TCanvas c( "c", "Analisi Dati", 1);
     c.cd();
     c.SetGrid();
 
@@ -220,7 +220,14 @@ int main ( int argc , char** argv ) {
         histo_cal.SetBinContent(k,data.GetBinContent(k));
     }    
     data.Draw();
-    c.SaveAs("spectrumFit.pdf");
+    //c.SaveAs("spectrumFit.pdf");
+    TF1 drawFit0 ("drawFit0", "[0]*TMath::Exp(-x/[1])+[2]*TMath::Exp(-x/[3])+[4]", midBase*m+q, end*m+q );
+    drawFit0.SetParameter(0,Aminus);
+    drawFit0.SetParameter(1,tauShort);
+    drawFit0.SetParameter(2,Aplus);
+    drawFit0.SetParameter(3,tauLong);
+    drawFit0.SetParameter(4,B);
+    drawFit0.SetLineColor(kGreen);
     TF1 drawFit1 ("drawFit1", "[0]*TMath::Exp(-x/[1])+[2]*TMath::Exp(-x/[3])+[4]", begin*m +q, midExp*m +q);
     drawFit1.SetParameter(0,Aminus);
     drawFit1.SetParameter(1,tauShort);
@@ -238,14 +245,15 @@ int main ( int argc , char** argv ) {
     //histo_cal.Fit("drawFit2","LQ");
     drawFit2.SetLineColor(kYellow);
     histo_cal.Draw();
+    drawFit0.Draw("same");
     drawFit1.Draw("same");
     drawFit2.Draw("same");
     TLegend leg (0.5,0.7,0.9,0.9);
     leg.AddEntry("drawFit1","A_{-}e^{-t/#tau_{-}}+A_{+}e^{-t/#tau_{+}}+B per #mu^{-}");
     leg.AddEntry("drawFit2","A_{-}e^{-t/#tau_{-}}+A_{+}e^{-t/#tau_{+}}+B per #mu^{+}");
-    leg.Draw("same");
-    c.SaveAs("spectrumFit_cal.pdf");
-    //app.Run();
+    //leg.Draw("same");
+    //c.SaveAs("spectrumFit_cal.pdf");
+    app.Run();
 
     return 0;
 }

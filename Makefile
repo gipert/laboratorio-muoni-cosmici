@@ -46,4 +46,4 @@ latex/muon.pdf : latex/muon.tex latex/imgEff.tex latex/draw.tex latex/analApp.te
 .PHONY : all clean
 
 clean :
-	rm $(EXEC)
+	-rm $(EXEC)
