@@ -388,7 +388,7 @@ L'adozione del metodo 2 descritto in precedenza prevede uno studio accurato del 
 \begin{figure}[h]
   \centerline{%
   \begin{adjustbox}{width=\linewidth+1cm}
-    %\input{img/fitbegin_5week_100sim}
+    \input{img/fitbegin_5week_100sim}
   \end{adjustbox}}
   \caption{Studio della stima di $\tau_+$ al variare del punto di inizio del fit $A_+e^{-\frac{t}{\tau^+}}+b$. La linea rossa rappresenta il valore vero impostato nella simulazione. Le barre d'errore rappresentano la deviazione standard del campione di 100 simulazioni utilizzate. I dati utilizzati nella generazione corrispondono a 5 settimane di acquisizione.}
   \label{fig::tauplusstart}
@@ -400,14 +400,13 @@ In conclusione, il metodo di fit messo a punto prevede i seguenti step:
  \item fit \lstinline{pol0} della coda dello spettro ed estrazione del valore preliminare $B$ per la \textit{baseline};
  \item definizione della funzione \lstinline{TH1 f1} corrispondente alla formula \ref{eq::exp_plus_base}. Si setta il parametro $b$ al valore derivante dal fit del punto precedente (\lstinline{f1.SetParameter("b",B)}), quindi si effettua il fit dell'istogramma con \lstinline{f1} a partire da un ritardo di $5\tau^-$, ottenendo le stime intermedie $\tau^*$ e $B^*$ per i parametri $\tau^+$ e \textit{baseline} rispettivamente;
  \item si definisce la funzione complessiva di fit \lstinline{TH1 f} corrispondente alla formula \ref{eq::funzione_fit_finale}, si settano i parametri $\tau^+$ e \textit{baseline} ai valori $\tau^*$ e $B^*$ e, infine, si fitta l'istogramma con la funzione \lstinline{f}, estraendo i valori definitivi dei parametri. 
-\end{enumerate}
-\begin{figure}
-\centering
- %\includegraphics[scale=0.6]{img/example_single_spectrum}
- \begin{adjustbox}{width=\linewidth}
-   \input{img/single}
- \end{adjustbox}
- \caption{Esempio di istogramma simulato con statistica associata ad 1 settimana di acquisizione (\textit{baseline} $\sim 1$).}
+\end{enumerate}  
+\begin{figure}[h]
+ \centerline{%
+  \begin{adjustbox}{width=\linewidth+1cm}
+ \input{img/example_single_spectrum}
+   \end{adjustbox}}
+ \caption{Esempio di istogramma simulato con statistica associata a 5 settimane di acquisizione (\textit{baseline} $\sim 5$).}
  \label{fig::esempio_spettro_simulato}
 \end{figure}
 %
