@@ -404,10 +404,15 @@ In conclusione, il metodo di fit messo a punto prevede i seguenti step:
  \item definizione della funzione \lstinline{TH1 f1} corrispondente alla formula \ref{eq::exp_plus_base}. Si setta il parametro $b$ al valore derivante dal fit del punto precedente (\lstinline{f1.SetParameter("b",B)}), quindi si effettua il fit dell'istogramma con \lstinline{f1} a partire da un ritardo di $5\tau^-$, ottenendo le stime intermedie $\tau^*$ e $B^*$ per i parametri $\tau^+$ e \textit{baseline} rispettivamente;
  \item si definisce la funzione complessiva di fit \lstinline{TH1 f} corrispondente alla formula \ref{eq::funzione_fit_finale}, si settano i parametri $\tau^+$ e \textit{baseline} ai valori $\tau^*$ e $B^*$ e, infine, si fitta l'istogramma con la funzione \lstinline{f}, estraendo i valori definitivi dei parametri. 
 \end{enumerate}
-\begin{figure}
-\centering
- \includegraphics[scale=0.6]{img/example_single_spectrum}
- \caption{Esempio di istogramma simulato con statistica associata ad 1 settimana di acquisizione (\textit{baseline} $\sim 1$).}
+
+  
+  
+\begin{figure}[h]
+ \centerline{%
+  \begin{adjustbox}{width=\linewidth+1cm}
+ \input{img/example_single_spectrum}
+   \end{adjustbox}}
+ \caption{Esempio di istogramma simulato con statistica associata a 5 settimane di acquisizione (\textit{baseline} $\sim 5$).}
  \label{fig::esempio_spettro_simulato}
 \end{figure}
 %
