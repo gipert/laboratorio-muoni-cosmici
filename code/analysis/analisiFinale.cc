@@ -19,9 +19,12 @@
 
 #include "TH1D.h"
 #include "TCanvas.h"
+#include "TPad.h"
 #include "TFitResult.h"
 #include "TFitResultPtr.h"
 #include "TF1.h"
+#include "TStyle.h"
+#include "TLine.h"
 #include "TApplication.h"
 #include "TLegend.h"
 
@@ -121,15 +124,23 @@ int main ( int argc , char** argv ) {
     data.Rebin(rebin);
 
     TApplication app("app", &argc, argv);
+    gStyle->SetOptStat(0);
     TCanvas c( "c", "Analisi Dati", 1);
-    c.cd();
-    c.SetGrid();
+    
+    TPad pad1("pad1","pad1",0,0.25,1,1);
+    pad1.SetBottomMargin(0);
+    pad1.Draw();
+    TPad pad2("pad2","pad2",0,0,1,0.25);
+    pad2.SetTopMargin(0);
+    pad2.Draw();
+    pad1.cd();
+    pad1.SetGrid();
 
 /* =========== FIT ============ */
     
     // define variables
     int begin = 168-shift;
-    int end = 4096-shift;
+    int end = 4053-shift;
     
     int midBase = 2600;
     int midExp = 860;
@@ -214,7 +225,6 @@ int main ( int argc , char** argv ) {
     TH1D histo_cal("histo_cal" , "#mu^{#pm} spectrum" , 4096 , min, max);
     histo_cal.SetYTitle("dN/dx");
     histo_cal.SetXTitle("Delay (#mus)");
-    histo_cal.SetStats(false);
     for(int k=1; k<=4096; k++)
     {
         histo_cal.SetBinContent(k,data.GetBinContent(k));
@@ -244,6 +254,8 @@ int main ( int argc , char** argv ) {
     drawFit2.SetParameter(4,B);
     //histo_cal.Fit("drawFit2","LQ");
     drawFit2.SetLineColor(kYellow);
+    histo_cal.SetNdivisions(511);
+    histo_cal.SetMinimum(0.001);
     histo_cal.Draw();
     drawFit0.Draw("same");
     drawFit1.Draw("same");
@@ -254,15 +266,29 @@ int main ( int argc , char** argv ) {
     //leg.Draw("same");
     //c.SaveAs("spectrumFit_cal.pdf");
     
-    TCanvas c1( "c1", "Residui",1);
-    c1.cd();
+    pad2.cd();
     TH1D res( "res" , "" , 4096, min, max );
-    for ( int i = 1; i <= 4096 ; i++ ) {
+    for ( int i = 1; i <= end ; i++ ) {
         res.SetBinContent( i, histo_cal.GetBinContent(i) - drawFit0.Eval(histo_cal.GetBinCenter(i)) );
         res.SetBinError(i, histo_cal.GetBinError(i));
     }
-    
-    res.Draw("E1");
+   
+    res.GetYaxis()->SetNdivisions(509);
+    res.GetYaxis()->SetLabelSize(0.1);
+    res.GetXaxis()->SetNdivisions(511);
+    res.GetXaxis()->SetLabelSize(0.1);
+    res.SetMarkerStyle(8);
+    res.SetMarkerSize(0.2);
+    res.SetMarkerColor(kBlue+2);
+    res.GetYaxis()->SetRangeUser(-100,100);
+    res.SetMaximum(99.999);
+    res.Draw("P");
+
+    TLine lineres(0,0,max,0);
+    lineres.SetLineColor(kRed);
+    lineres.SetLineWidth(1);
+    lineres.Draw();
+
     app.Run();
 
     return 0;
