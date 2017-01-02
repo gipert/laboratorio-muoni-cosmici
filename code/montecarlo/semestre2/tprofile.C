@@ -1,5 +1,9 @@
 void tprofile()
 {
+
+double m = 5.12162E-03;
+double q = -7.6994E-01;
+
 //=========Macro generated from canvas: c/Simulations
 //=========  (Sat Dec 24 17:14:37 2016) by ROOT version6.09/01
    TCanvas *c = new TCanvas("c", "Simulations",199,53,980,590);
@@ -27,7 +31,7 @@ void tprofile()
    c_1->SetFrameBorderMode(0);
    c_1->SetFrameBorderMode(0);
    
-   TProfile *profileB = new TProfile("profileB","Ricostruzione baseline b (TProfile)",2000,1538,3538,"s");
+   TProfile *profileB = new TProfile("profileB","Ricostruzione baseline b (TProfile)",2000,1538*m+q,3538*m+q,"s");
    profileB->SetBinEntries(1,100);
    profileB->SetBinEntries(67,100);
    profileB->SetBinEntries(133,100);
@@ -126,7 +130,7 @@ void tprofile()
    TColor *color; // for color definition with alpha
    ci = TColor::GetColor("#000099");
    profileB->SetLineColor(ci);
-   profileB->GetXaxis()->SetTitle("canale");
+   profileB->GetXaxis()->SetTitle("Ritardo [#mus]");
    profileB->GetXaxis()->SetLabelFont(42);
    profileB->GetXaxis()->SetLabelSize(0.07);
    profileB->GetXaxis()->SetTitleSize(0.08);
@@ -144,7 +148,7 @@ void tprofile()
    profileB->GetZaxis()->SetTitleSize(0.035);
    profileB->GetZaxis()->SetTitleFont(42);
    profileB->Draw("E1");
-   TLine *line = new TLine(1538,1,3538,1);
+   TLine *line = new TLine(1538*m+q,1,3538*m+q,1);
 
    ci = TColor::GetColor("#ff0000");
    line->SetLineColor(ci);
@@ -178,7 +182,7 @@ void tprofile()
    c_2->SetFrameBorderMode(0);
    c_2->SetFrameBorderMode(0);
    
-   TProfile *profileErrB = new TProfile("profileErrB","Incertezza #sigma_{b} (TProfile)",2000,1538,3538,"s");
+   TProfile *profileErrB = new TProfile("profileErrB","Incertezza #sigma_{b} (TProfile)",2000,1538*m+q,3538*m+q,"s");
    profileErrB->SetBinEntries(1,100);
    profileErrB->SetBinEntries(67,100);
    profileErrB->SetBinEntries(133,100);
@@ -275,7 +279,7 @@ void tprofile()
 
    ci = TColor::GetColor("#000099");
    profileErrB->SetLineColor(ci);
-   profileErrB->GetXaxis()->SetTitle("canale");
+   profileErrB->GetXaxis()->SetTitle("Ritardo [#mus]");
    profileErrB->GetXaxis()->SetLabelFont(42);
    profileErrB->GetXaxis()->SetLabelSize(0.07);
    profileErrB->GetXaxis()->SetTitleSize(0.08);

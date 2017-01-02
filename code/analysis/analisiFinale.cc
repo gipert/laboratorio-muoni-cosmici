@@ -19,15 +19,19 @@
 
 #include "TH1D.h"
 #include "TCanvas.h"
+#include "TPad.h"
 #include "TFitResult.h"
 #include "TFitResultPtr.h"
 #include "TF1.h"
+#include "TStyle.h"
+#include "TLine.h"
 #include "TApplication.h"
 #include "TLegend.h"
 
 // calibration parameters
-double m = 5.12162E-03;
-double q = -7.6994E-07;
+double m 	= 5.12162E-03;
+double errm 	= 8.90761E-06;
+double q 	= -7.6994E-07;
 // min & max histogram
 double min = 0*m + q;
 double max = 4096*m + q;
@@ -119,16 +123,24 @@ int main ( int argc , char** argv ) {
     // REBIN
     data.Rebin(rebin);
 
-    //TApplication app("app", &argc, argv);
-    TCanvas c( "c", "Analisi Dati", 1200 , 700);
-    c.cd();
-    c.SetGrid();
+    TApplication app("app", &argc, argv);
+    gStyle->SetOptStat(0);
+    TCanvas c( "c", "Analisi Dati", 1);
+    
+    TPad pad1("pad1","pad1",0,0.25,1,1);
+    pad1.SetBottomMargin(0);
+    pad1.Draw();
+    TPad pad2("pad2","pad2",0,0,1,0.25);
+    pad2.SetTopMargin(0);
+    pad2.Draw();
+    pad1.cd();
+    pad1.SetGrid();
 
 /* =========== FIT ============ */
     
     // define variables
     int begin = 168-shift;
-    int end = 4096-shift;
+    int end = 4053-shift;
     
     int midBase = 2600;
     int midExp = 860;
@@ -187,11 +199,13 @@ int main ( int argc , char** argv ) {
     double RErr        = R * sqrt( AplusErr*AplusErr/(Aplus*Aplus) + AminusErr*AminusErr/(Aminus*Aminus));
     
     // calibration
-    tauLong *= m;
-    tauShort *= m;
+    tauLongErr   = sqrt( pow(tauLong*errm,2)  + pow(m*tauLongErr,2) );
+    tauShortErr  = sqrt( pow(tauShort*errm,2) + pow(m*tauShortErr,2) );
+    tauLong     *= m;
+    tauShort    *= m;
  
-    tauLongErr *= m;
-    tauShortErr *= m;
+    //tauLongErr *= m;
+    //tauShortErr *= m;
 
     double compTauPlus  = fabs(tauLong-TauPlus)/sqrt( pow(tauLongErr,2) + pow(errTauPlus,2) );
     double compTauMinus = fabs(tauShort-TauMinus)/sqrt( pow(tauShortErr,2) + pow(errTauMinus,2) );
@@ -211,13 +225,19 @@ int main ( int argc , char** argv ) {
     TH1D histo_cal("histo_cal" , "#mu^{#pm} spectrum" , 4096 , min, max);
     histo_cal.SetYTitle("dN/dx");
     histo_cal.SetXTitle("Delay (#mus)");
-    histo_cal.SetStats(false);
     for(int k=1; k<=4096; k++)
     {
         histo_cal.SetBinContent(k,data.GetBinContent(k));
     }    
     data.Draw();
-    c.SaveAs("spectrumFit.pdf");
+    //c.SaveAs("spectrumFit.pdf");
+    TF1 drawFit0 ("drawFit0", "[0]*TMath::Exp(-x/[1])+[2]*TMath::Exp(-x/[3])+[4]", midBase*m+q, end*m+q );
+    drawFit0.SetParameter(0,Aminus);
+    drawFit0.SetParameter(1,tauShort);
+    drawFit0.SetParameter(2,Aplus);
+    drawFit0.SetParameter(3,tauLong);
+    drawFit0.SetParameter(4,B);
+    drawFit0.SetLineColor(kGreen);
     TF1 drawFit1 ("drawFit1", "[0]*TMath::Exp(-x/[1])+[2]*TMath::Exp(-x/[3])+[4]", begin*m +q, midExp*m +q);
     drawFit1.SetParameter(0,Aminus);
     drawFit1.SetParameter(1,tauShort);
@@ -234,15 +254,42 @@ int main ( int argc , char** argv ) {
     drawFit2.SetParameter(4,B);
     //histo_cal.Fit("drawFit2","LQ");
     drawFit2.SetLineColor(kYellow);
+    histo_cal.SetNdivisions(511);
+    histo_cal.SetMinimum(0.001);
     histo_cal.Draw();
+    drawFit0.Draw("same");
     drawFit1.Draw("same");
     drawFit2.Draw("same");
     TLegend leg (0.5,0.7,0.9,0.9);
     leg.AddEntry("drawFit1","A_{-}e^{-t/#tau_{-}}+A_{+}e^{-t/#tau_{+}}+B per #mu^{-}");
     leg.AddEntry("drawFit2","A_{-}e^{-t/#tau_{-}}+A_{+}e^{-t/#tau_{+}}+B per #mu^{+}");
-    leg.Draw("same");
-    c.SaveAs("spectrumFit_cal.pdf");
-    //app.Run();
+    //leg.Draw("same");
+    //c.SaveAs("spectrumFit_cal.pdf");
+    
+    pad2.cd();
+    TH1D res( "res" , "" , 4096, min, max );
+    for ( int i = 1; i <= end ; i++ ) {
+        res.SetBinContent( i, histo_cal.GetBinContent(i) - drawFit0.Eval(histo_cal.GetBinCenter(i)) );
+        res.SetBinError(i, histo_cal.GetBinError(i));
+    }
+   
+    res.GetYaxis()->SetNdivisions(509);
+    res.GetYaxis()->SetLabelSize(0.1);
+    res.GetXaxis()->SetNdivisions(511);
+    res.GetXaxis()->SetLabelSize(0.1);
+    res.SetMarkerStyle(8);
+    res.SetMarkerSize(0.2);
+    res.SetMarkerColor(kBlue+2);
+    res.GetYaxis()->SetRangeUser(-100,100);
+    res.SetMaximum(99.999);
+    res.Draw("P");
+
+    TLine lineres(0,0,max,0);
+    lineres.SetLineColor(kRed);
+    lineres.SetLineWidth(1);
+    lineres.Draw();
+
+    app.Run();
 
     return 0;
 }
