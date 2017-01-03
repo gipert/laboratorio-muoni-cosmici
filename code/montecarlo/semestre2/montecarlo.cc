@@ -357,7 +357,7 @@ std::vector<bool> montecarlo( float B, double tau, double integrale, double tauc
     pErr = fitGaus(hFitErrBL2);
     
     // DRAW
-    TFile f("matrix_canvas.root","UPDATE");
+    TFile f("matrix_canvas50.root","UPDATE");
     
     std::ostringstream strs;
     strs << B << tau << integrale << taucorto << R << RebFactor;

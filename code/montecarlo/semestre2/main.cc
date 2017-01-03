@@ -51,16 +51,24 @@ int main( int argc, char* argv[] ) {
    //                 [k]   Integrale
    
    
-    TFile f("matrix_canvas.root","UPDATE");
+    TFile f("matrix_canvas50.root","RECREATE");
     f.Close();
     
     int progress = 1;
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
     std::chrono::steady_clock::time_point end;
+    
+    /*
+        Run1 : +-10% --> TauL = 388,430,472     TauS = 155,172,189   R = 1.13,1.26,1.39
+        Run2 : +-20% --> TauL = +-86,           TauS = +-34,         R = +- 0.25
+        Run3 : +-30% --> TauL = +-129           TauS = +- 52 ,       R = +- 0.38
+        
+        Run4 : +-50% --> TauL = +-215           TauS = +- 86 ,       R = +- 
+    */
 
-    for ( int tauL = 430; tauL < 700; tauL+=100 ) {
-        for ( int tauS = 82; tauS < 270; tauS+=90 ) {
-            for ( double R = 0.621; R < 2; R+=0.6 ) {
+    for ( int tauL = 215; tauL < 650; tauL+=215 ) {
+        for ( int tauS = 86; tauS < 300; tauS+=86 ) {
+            for ( double R = 0.63; R < 2; R+=0.63 ) {
                 for ( int I = 80000; I < 410000; I+=160000 ) {
                     int B = I/80000;
                     std::cout << "\nB=" << B << "   tauL=" << tauL << "   tauS=" << tauS << "   I=" << I << "   R=" << R << std::endl;
