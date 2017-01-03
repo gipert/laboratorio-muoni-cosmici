@@ -158,7 +158,7 @@ void eff( std::string file_name ) {
     ///////////////// DRAW //////////////////
     
     // draw efficiency graph
-    TCanvas* can = new TCanvas( "can" , "PMT Efficiency and Counts" , 0 , 500 , 1050 , 725 );
+    TCanvas* can = new TCanvas( "can" , "PMT Efficiency and Counts", 1500 , 700 );
     //TCanvas* can = new TCanvas( "can" , "PMT Efficiency and Counts" , 0 , 500 , 650 , 725 );
 
     //TCanvas* can = new TCanvas( "can" , "PMT Efficiency and Counts" ,1000 , 500 , 2050 , 725 );	// AppleTV extended screen

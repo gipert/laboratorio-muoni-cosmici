@@ -481,8 +481,15 @@ In conclusione si può tranquillamente assumere l'operazione di rebinning come i
 Il campione di dati corrisponde agli eventi raccolti in 33 giorni di acquisizione, per un totale di 375241 eventi. Per prima cosa si è utilizzata la calibrazione del TAC per stabilire il punto di inizio dello spettro (in canali) e poter quindi traslare l'istogramma di conseguenza. La procedura di fitting attuata su uno spettro la cui origine dei tempi è non fisica avrebbe infatti richiesto l'aggiunta nella formula sperimentale del rapporto $R$ (come in (\ref{eq:R})) di un fattore
 \[e^{t^*\left(\frac{1}{\tau^+}-\frac{1}{\tau^-}\right)}\;,\]
 con $t^*$ corrispondente alla nuova origine dei tempi, per compensare la mancata normalizzazione. Dopo questa operazione lo spettro presenta dati dal canale 18 al canale 3903, intervallo in cui è stato applicato l'algoritmo di fitting. I risultati sono presentati in tabella \ref{risultatiFinali} e in figura \ref{fig:finale}.
+
+L'ultimo punto lasciato in sospeso è la questione, menzionata alla sezione \ref{tac}, dell'eccesso di eventi registrato con le coincidenze artificiali nel range $[2200,2700]$. Dall'istogramma finale non si notano surplus di eventi nel suddetto range, in ogni caso sono stati tentati due approcci per tenerne conto nell'analisi dati:
+\begin{enumerate}
+  \item \textbf{Esclusione dal fit:} Si è costruita una funzione di fitting alternativa definita a tratti tramite \lstinline{TF1::RejectPoint()} che esclude i punti dal calcolo della likelihood;
+  \item \textbf{Errori aumentati:} Si è provato a attribuire errori maggiori ai punti nel range, ad esempio il doppio rispetto all'errore poissoniano standard.
+\end{enumerate}
+Nessuno dei due metodi ha portato a un miglioramento significativo dei risultati finali.
 %
-\begin{table}[b]
+\begin{table}[h]
 	\centering
 	\begin{tabular}{cccc}
 		\toprule
@@ -497,21 +504,19 @@ con $t^*$ corrispondente alla nuova origine dei tempi, per compensare la mancata
 	\label{risultatiFinali}
 \end{table}
 %
-
-L'ultimo punto lasciato in sospeso è la questione, menzionata alla sezione \ref{tac}, dell'eccesso di eventi registrato con le coincidenze artificiali nel range $[2200,2700]$. Dall'istogramma finale non si notano surplus di eventi nel suddetto range, in ogni caso sono stati tentati due approcci per tenerne conto nell'analisi dati:
-\begin{enumerate}
-  \item \textbf{Esclusione dal fit:} Si è costruita una funzione di fitting alternativa definita a tratti tramite \lstinline{TF1::RejectPoint()} che esclude i punti dal calcolo della likelihood;
-  \item \textbf{Errori aumentati:} Si è provato a attribuire errori maggiori ai punti nel range, ad esempio il doppio rispetto all'errore poissoniano standard.
-\end{enumerate}
-Nessuno dei due metodi ha portato a un miglioramento significativo dei risultati finali.
-%\begin{figure}[h]
-%  \centering
-%  \begin{adjustbox}{width=\linewidth}
-%    \input{img/finale}
-%  \end{adjustbox}
-%\caption{Risultato del fit}
-%\label{fig:finale}
-%\end{figure}
+\begin{figure}[h]
+  \centering
+  \includestandalone[width=\linewidth+1cm]{img/finale}
+  \caption{Risultato del fit}
+  \label{fig:finale}
+\end{figure}
+%
+\begin{figure}[h]
+  \centering
+  \includestandalone[width=\linewidth+1cm]{img/notused/finaleres}
+  \caption{Risultato del fit, in basso il grafico dei residui.}
+  \label{fig:finale}
+\end{figure}
 %
 \section{Discussione dei risultati}
 Ma va in mona va\dots
