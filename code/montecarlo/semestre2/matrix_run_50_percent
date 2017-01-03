@@ -1,0 +1,1847 @@
+B=1   tauL=215   tauS=86   I=80000   R=0.63
+Simulazione 1/81 [##################################################] 100%
+hFitTauL2:         [205.71, 225.186]
+hFitTauShortL2:    [78.7908, 93.832]
+hFitBL2:           [0.95592, 1.03902]
+hFitRL2:           [0.508953, 0.767866]
+hFitErrTauL2:      [3.25322, 5.12512]
+hFitErrTauShortL2: [2.73259, 3.57611]
+hFitErrBL2:        [0.0194926, 0.0209648]
+hFitErrRL2:        [0.0351112, 0.0549671]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={1,1,1,1}
+Time = 2.63333 minuti
+
+B=3   tauL=215   tauS=86   I=240000   R=0.63
+Simulazione 2/81 [##################################################] 100%
+hFitTauL2:         [209.58, 221.011]
+hFitTauShortL2:    [81.7185, 90.8244]
+hFitBL2:           [2.91887, 3.06141]
+hFitRL2:           [0.560373, 0.70934]
+hFitErrTauL2:      [2.09036, 2.72158]
+hFitErrTauShortL2: [1.66445, 1.99269]
+hFitErrBL2:        [0.0350772, 0.0359929]
+hFitErrRL2:        [0.0222963, 0.0286307]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={2,2,2,2}
+Time = 5.65 minuti
+
+B=5   tauL=215   tauS=86   I=400000   R=0.63
+Simulazione 3/81 [##################################################] 100%
+hFitTauL2:         [210.992, 218.963]
+hFitTauShortL2:    [82.7503, 90.1693]
+hFitBL2:           [4.92979, 5.08877]
+hFitRL2:           [0.57102, 0.690775]
+hFitErrTauL2:      [1.68553, 2.09888]
+hFitErrTauShortL2: [1.31346, 1.46927]
+hFitErrBL2:        [0.0452166, 0.04622]
+hFitErrRL2:        [0.0176557, 0.0210713]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={3,3,3,3}
+Time = 8.81667 minuti
+
+B=1   tauL=215   tauS=86   I=80000   R=1.26
+Simulazione 4/81 [##################################################] 100%
+hFitTauL2:         [207.592, 224.412]
+hFitTauShortL2:    [74.4913, 97.576]
+hFitBL2:           [0.968128, 1.04042]
+hFitRL2:           [0.990021, 1.578]
+hFitErrTauL2:      [2.67091, 4.5169]
+hFitErrTauShortL2: [4.15965, 6.72076]
+hFitErrBL2:        [0.0200339, 0.020955]
+hFitErrRL2:        [0.0751561, 0.141591]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={4,4,4,4}
+Time = 11.6167 minuti
+
+B=3   tauL=215   tauS=86   I=240000   R=1.26
+Simulazione 5/81 [##################################################] 100%
+hFitTauL2:         [210.56, 219.894]
+hFitTauShortL2:    [78.8422, 93.8413]
+hFitBL2:           [2.93787, 3.06751]
+hFitRL2:           [1.10452, 1.47512]
+hFitErrTauL2:      [1.72546, 2.40785]
+hFitErrTauShortL2: [2.65777, 3.30818]
+hFitErrBL2:        [0.0351845, 0.0360763]
+hFitErrRL2:        [0.0470131, 0.0719401]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={5,5,5,5}
+Time = 14.6 minuti
+
+B=5   tauL=215   tauS=86   I=400000   R=1.26
+Simulazione 6/81 [##################################################] 100%
+hFitTauL2:         [211.577, 219.007]
+hFitTauShortL2:    [80.0331, 92.1376]
+hFitBL2:           [4.91429, 5.07285]
+hFitRL2:           [1.1327, 1.39451]
+hFitErrTauL2:      [1.36643, 1.81028]
+hFitErrTauShortL2: [2.02128, 2.48955]
+hFitErrBL2:        [0.0455326, 0.0464004]
+hFitErrRL2:        [0.0371623, 0.0486445]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={6,6,6,6}
+Time = 17.95 minuti
+
+B=1   tauL=215   tauS=86   I=80000   R=1.89
+Simulazione 7/81 [##################################################] 100%
+hFitTauL2:         [208.467, 223.747]
+hFitTauShortL2:    [69.7369, 106.093]
+hFitBL2:           [0.966674, 1.0425]
+hFitRL2:           [1.38676, 2.51604]
+hFitErrTauL2:      [0.800283, 5.15656]
+hFitErrTauShortL2: [3.5071, 8.73955]
+hFitErrBL2:        [0.0196596, 0.021037]
+hFitErrRL2:        [0.0363466, 0.254474]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={7,7,7,7}
+Time = 20.6 minuti
+
+B=3   tauL=215   tauS=86   I=240000   R=1.89
+Simulazione 8/81 [##################################################] 100%
+hFitTauL2:         [210.615, 219.689]
+hFitTauShortL2:    [76.2182, 97.8784]
+hFitBL2:           [2.93057, 3.05685]
+hFitRL2:           [1.58966, 2.27688]
+hFitErrTauL2:      [1.5267, 2.52656]
+hFitErrTauShortL2: [3.5156, 4.8044]
+hFitErrBL2:        [0.0350303, 0.0369846]
+hFitErrRL2:        [0.0813414, 0.135305]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={8,8,8,8}
+Time = 23.65 minuti
+
+B=5   tauL=215   tauS=86   I=400000   R=1.89
+Simulazione 9/81 [##################################################] 100%
+hFitTauL2:         [211.706, 218.86]
+hFitTauShortL2:    [78.1126, 94.1451]
+hFitBL2:           [4.90964, 5.07628]
+hFitRL2:           [1.66196, 2.11638]
+hFitErrTauL2:      [1.23145, 1.77907]
+hFitErrTauShortL2: [2.83018, 3.55718]
+hFitErrBL2:        [0.045573, 0.0465131]
+hFitErrRL2:        [0.0679902, 0.092954]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={9,9,9,9}
+Time = 26.95 minuti
+
+B=1   tauL=215   tauS=172   I=80000   R=0.63
+Simulazione 10/81 [##################################################] 100%
+hFitTauL2:         [188.181, 198.545]
+hFitTauShortL2:    [188.181, 200.218]
+hFitBL2:           [0.982836, 1.0363]
+hFitRL2:           [-1.913, 0]
+hFitErrTauL2:      [7.99443, 22.4815]
+hFitErrTauShortL2: [8.63553, 27.5871]
+hFitErrBL2:        [0.0193258, 0.0208545]
+hFitErrRL2:        [-0.339, 0]
+
+p 0   pErr 4
+Sigma troppo grande rispetto all'errore (1.06446>-199.942)
+p 0   pErr 0
+Sigma troppo grande rispetto all'errore (1.59825>-94.7477)
+p 4   pErr 4
+Errore relativo troppo grande (1.47403>0.2)
+vOut    ={0,0,0,0}
+vCounter={9,9,9,9}
+Time = 30.0333 minuti
+
+B=3   tauL=215   tauS=172   I=240000   R=0.63
+Simulazione 11/81 [##################################################] 100%
+hFitTauL2:         [0, 10]
+hFitTauShortL2:    [0, 10]
+hFitBL2:           [0, 10]
+hFitRL2:           [0, 10]
+hFitErrTauL2:      [0, 10]
+hFitErrTauShortL2: [0, 10]
+hFitErrBL2:        [0, 10]
+hFitErrRL2:        [0, 10]
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+vOut    ={0,0,0,0}
+vCounter={9,9,9,9}
+Time = 33.7667 minuti
+
+B=5   tauL=215   tauS=172   I=400000   R=0.63
+Simulazione 12/81 [##################################################] 100%
+hFitTauL2:         [0, 10]
+hFitTauShortL2:    [0, 10]
+hFitBL2:           [0, 10]
+hFitRL2:           [0, 10]
+hFitErrTauL2:      [0, 10]
+hFitErrTauShortL2: [0, 10]
+hFitErrBL2:        [0, 10]
+hFitErrRL2:        [0, 10]
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+vOut    ={0,0,0,0}
+vCounter={9,9,9,9}
+Time = 36.15 minuti
+
+B=1   tauL=215   tauS=172   I=80000   R=1.26
+Simulazione 13/81 [##################################################] 100%
+hFitTauL2:         [0, 10]
+hFitTauShortL2:    [0, 10]
+hFitBL2:           [0, 10]
+hFitRL2:           [0, 10]
+hFitErrTauL2:      [0, 10]
+hFitErrTauShortL2: [0, 10]
+hFitErrBL2:        [0, 10]
+hFitErrRL2:        [0, 10]
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+vOut    ={0,0,0,0}
+vCounter={9,9,9,9}
+Time = 38.3667 minuti
+
+B=3   tauL=215   tauS=172   I=240000   R=1.26
+Simulazione 14/81 [##################################################] 100%
+hFitTauL2:         [0, 10]
+hFitTauShortL2:    [0, 10]
+hFitBL2:           [0, 10]
+hFitRL2:           [0, 10]
+hFitErrTauL2:      [0, 10]
+hFitErrTauShortL2: [0, 10]
+hFitErrBL2:        [0, 10]
+hFitErrRL2:        [0, 10]
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+vOut    ={0,0,0,0}
+vCounter={9,9,9,9}
+Time = 41.7833 minuti
+
+B=5   tauL=215   tauS=172   I=400000   R=1.26
+Simulazione 15/81 [##################################################] 100%
+hFitTauL2:         [0, 10]
+hFitTauShortL2:    [0, 10]
+hFitBL2:           [0, 10]
+hFitRL2:           [0, 10]
+hFitErrTauL2:      [0, 10]
+hFitErrTauShortL2: [0, 10]
+hFitErrBL2:        [0, 10]
+hFitErrRL2:        [0, 10]
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+vOut    ={0,0,0,0}
+vCounter={9,9,9,9}
+Time = 48.1 minuti
+
+B=1   tauL=215   tauS=172   I=80000   R=1.89
+Simulazione 16/81 [##################################################] 100%
+hFitTauL2:         [199.034, 211.87]
+hFitTauShortL2:    [195.732, 212.758]
+hFitBL2:           [0.972773, 1.0394]
+hFitRL2:           [-1.8969, 0]
+hFitErrTauL2:      [5.48363, 24.618]
+hFitErrTauShortL2: [9.52653, 37.61]
+hFitErrBL2:        [0.0195831, 0.0228447]
+hFitErrRL2:        [-0.33168, 0]
+
+p 0   pErr 0
+p 0   pErr 4
+Sigma troppo grande rispetto all'errore (0.822335>-174.706)
+p 4   pErr 0
+Compatibilità troppo grande (3.64955>3)
+vOut    ={1,0,0,0}
+vCounter={10,9,9,9}
+Time = 50.8667 minuti
+
+B=3   tauL=215   tauS=172   I=240000   R=1.89
+Simulazione 17/81 [##################################################] 100%
+hFitTauL2:         [0, 10]
+hFitTauShortL2:    [0, 10]
+hFitBL2:           [0, 10]
+hFitRL2:           [0, 10]
+hFitErrTauL2:      [0, 10]
+hFitErrTauShortL2: [0, 10]
+hFitErrBL2:        [0, 10]
+hFitErrRL2:        [0, 10]
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+vOut    ={0,0,0,0}
+vCounter={10,9,9,9}
+Time = 53.6167 minuti
+
+B=5   tauL=215   tauS=172   I=400000   R=1.89
+Simulazione 18/81 [##################################################] 100%
+hFitTauL2:         [0, 10]
+hFitTauShortL2:    [0, 10]
+hFitBL2:           [0, 10]
+hFitRL2:           [0, 10]
+hFitErrTauL2:      [0, 10]
+hFitErrTauShortL2: [0, 10]
+hFitErrBL2:        [0, 10]
+hFitErrRL2:        [0, 10]
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+vOut    ={0,0,0,0}
+vCounter={10,9,9,9}
+Time = 58.8 minuti
+
+B=1   tauL=215   tauS=258   I=80000   R=0.63
+Simulazione 19/81 [##################################################] 100%
+hFitTauL2:         [0, 10]
+hFitTauShortL2:    [0, 10]
+hFitBL2:           [0, 10]
+hFitRL2:           [0, 10]
+hFitErrTauL2:      [0, 10]
+hFitErrTauShortL2: [0, 10]
+hFitErrBL2:        [0, 10]
+hFitErrRL2:        [0, 10]
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+vOut    ={0,0,0,0}
+vCounter={10,9,9,9}
+Time = 61.1167 minuti
+
+B=3   tauL=215   tauS=258   I=240000   R=0.63
+Simulazione 20/81 [##################################################] 100%
+hFitTauL2:         [238.731, 248.404]
+hFitTauShortL2:    [235.038, 251.884]
+hFitBL2:           [2.98691, 3.10851]
+hFitRL2:           [-1.75865, 0]
+hFitErrTauL2:      [9.43293, 27.857]
+hFitErrTauShortL2: [16.1969, 47.9379]
+hFitErrBL2:        [0.0357809, 0.0396654]
+hFitErrRL2:        [-0.226471, 0]
+
+p 0   pErr 0
+Sigma troppo grande rispetto all'errore (5.21787>-108.539)
+p 0   pErr 0
+Sigma troppo grande rispetto all'errore (11.7641>-143.397)
+p 0   pErr 0
+Sigma troppo grande rispetto all'errore (0.029552>-0.415208)
+vOut    ={0,0,0,0}
+vCounter={10,9,9,9}
+Time = 63.5333 minuti
+
+B=5   tauL=215   tauS=258   I=400000   R=0.63
+Simulazione 21/81 [##################################################] 100%
+hFitTauL2:         [0, 10]
+hFitTauShortL2:    [0, 10]
+hFitBL2:           [0, 10]
+hFitRL2:           [0, 10]
+hFitErrTauL2:      [0, 10]
+hFitErrTauShortL2: [0, 10]
+hFitErrBL2:        [0, 10]
+hFitErrRL2:        [0, 10]
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+vOut    ={0,0,0,0}
+vCounter={10,9,9,9}
+Time = 66.4667 minuti
+
+B=1   tauL=215   tauS=258   I=80000   R=1.26
+Simulazione 22/81 [##################################################] 100%
+hFitTauL2:         [232.675, 242.239]
+hFitTauShortL2:    [232.679, 248.336]
+hFitBL2:           [0.978961, 1.04451]
+hFitRL2:           [-1.87676, 0]
+hFitErrTauL2:      [6.36487, 32.1384]
+hFitErrTauShortL2: [7.79169, 43.2974]
+hFitErrBL2:        [0.0203857, 0.0226522]
+hFitErrRL2:        [-0.330448, 0]
+
+p 0   pErr 0
+p 0   pErr 4
+Sigma troppo grande rispetto all'errore (0.807885>-175.088)
+p 0   pErr 0
+vOut    ={1,0,1,0}
+vCounter={11,9,10,9}
+Time = 69.0167 minuti
+
+B=3   tauL=215   tauS=258   I=240000   R=1.26
+Simulazione 23/81 [##################################################] 100%
+hFitTauL2:         [0, 10]
+hFitTauShortL2:    [0, 10]
+hFitBL2:           [0, 10]
+hFitRL2:           [0, 10]
+hFitErrTauL2:      [0, 10]
+hFitErrTauShortL2: [0, 10]
+hFitErrBL2:        [0, 10]
+hFitErrRL2:        [0, 10]
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+vOut    ={0,0,0,0}
+vCounter={11,9,10,9}
+Time = 71.3333 minuti
+
+B=5   tauL=215   tauS=258   I=400000   R=1.26
+Simulazione 24/81 [##################################################] 100%
+hFitTauL2:         [0, 10]
+hFitTauShortL2:    [0, 10]
+hFitBL2:           [0, 10]
+hFitRL2:           [0, 10]
+hFitErrTauL2:      [0, 10]
+hFitErrTauShortL2: [0, 10]
+hFitErrBL2:        [0, 10]
+hFitErrRL2:        [0, 10]
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+vOut    ={0,0,0,0}
+vCounter={11,9,10,9}
+Time = 75.9 minuti
+
+B=1   tauL=215   tauS=258   I=80000   R=1.89
+Simulazione 25/81 [##################################################] 100%
+hFitTauL2:         [223.145, 251.265]
+hFitTauShortL2:    [219.501, 244.629]
+hFitBL2:           [0.968905, 1.05077]
+hFitRL2:           [-1.64531, 0]
+hFitErrTauL2:      [5.87719, 26.6275]
+hFitErrTauShortL2: [8.64309, 42.0173]
+hFitErrBL2:        [0.0201868, 0.0228978]
+hFitErrRL2:        [-0.216951, 2.70085]
+
+p 0   pErr 4
+Sigma troppo grande rispetto all'errore (0.924942>-274.101)
+p 0   pErr 0
+Sigma troppo grande rispetto all'errore (0.948403>-312.261)
+p 0   pErr 4
+Compatibilità troppo grande (7.78382>3)
+vOut    ={0,0,0,0}
+vCounter={11,9,10,9}
+Time = 79.3 minuti
+
+B=3   tauL=215   tauS=258   I=240000   R=1.89
+Simulazione 26/81 [##################################################] 100%
+hFitTauL2:         [0, 10]
+hFitTauShortL2:    [0, 10]
+hFitBL2:           [0, 10]
+hFitRL2:           [0, 10]
+hFitErrTauL2:      [0, 10]
+hFitErrTauShortL2: [0, 10]
+hFitErrBL2:        [0, 10]
+hFitErrRL2:        [0, 10]
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+vOut    ={0,0,0,0}
+vCounter={11,9,10,9}
+Time = 82.0667 minuti
+
+B=5   tauL=215   tauS=258   I=400000   R=1.89
+Simulazione 27/81 [##################################################] 100%
+hFitTauL2:         [0, 10]
+hFitTauShortL2:    [0, 10]
+hFitBL2:           [0, 10]
+hFitRL2:           [0, 10]
+hFitErrTauL2:      [0, 10]
+hFitErrTauShortL2: [0, 10]
+hFitErrBL2:        [0, 10]
+hFitErrRL2:        [0, 10]
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+vOut    ={0,0,0,0}
+vCounter={11,9,10,9}
+Time = 85.4833 minuti
+
+B=1   tauL=430   tauS=86   I=80000   R=0.63
+Simulazione 28/81 [##################################################] 100%
+hFitTauL2:         [418.41, 440.636]
+hFitTauShortL2:    [78.8889, 92.5745]
+hFitBL2:           [0.931433, 1.06588]
+hFitRL2:           [0.588205, 0.680846]
+hFitErrTauL2:      [3.88128, 4.5759]
+hFitErrTauShortL2: [2.26961, 2.78172]
+hFitErrBL2:        [0.0277276, 0.0296582]
+hFitErrRL2:        [0.014575, 0.0175139]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={12,10,11,10}
+Time = 88 minuti
+
+B=3   tauL=430   tauS=86   I=240000   R=0.63
+Simulazione 29/81 [##################################################] 100%
+hFitTauL2:         [423.645, 436.198]
+hFitTauShortL2:    [82.2263, 90.5391]
+hFitBL2:           [2.86588, 3.10719]
+hFitRL2:           [0.604327, 0.656396]
+hFitErrTauL2:      [1.7186, 2.53695]
+hFitErrTauShortL2: [1.35036, 1.55986]
+hFitErrBL2:        [0.0465907, 0.0504661]
+hFitErrRL2:        [0.0058374, 0.00965013]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={13,11,12,11}
+Time = 90.7833 minuti
+
+B=5   tauL=430   tauS=86   I=400000   R=0.63
+Simulazione 30/81 [##################################################] 100%
+hFitTauL2:         [425.1, 434.704]
+hFitTauShortL2:    [83.0635, 89.0092]
+hFitBL2:           [4.83609, 5.15729]
+hFitRL2:           [0.611219, 0.651675]
+hFitErrTauL2:      [1.32452, 1.96017]
+hFitErrTauShortL2: [1.07228, 1.18484]
+hFitErrBL2:        [0.0601266, 0.0661416]
+hFitErrRL2:        [0.00447325, 0.00746663]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={14,12,13,12}
+Time = 93.85 minuti
+
+B=1   tauL=430   tauS=86   I=80000   R=1.26
+Simulazione 31/81 [##################################################] 100%
+hFitTauL2:         [419.575, 441.42]
+hFitTauShortL2:    [75.231, 98.3108]
+hFitBL2:           [0.926812, 1.06052]
+hFitRL2:           [1.15509, 1.40654]
+hFitErrTauL2:      [3.36725, 4.39773]
+hFitErrTauShortL2: [3.44279, 5.41559]
+hFitErrBL2:        [0.0279111, 0.0305658]
+hFitErrRL2:        [0.036827, 0.0515778]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={15,13,14,13}
+Time = 96.3833 minuti
+
+B=3   tauL=430   tauS=86   I=240000   R=1.26
+Simulazione 32/81 [##################################################] 100%
+hFitTauL2:         [424.328, 436.172]
+hFitTauShortL2:    [79.493, 93.4255]
+hFitBL2:           [2.86815, 3.10777]
+hFitRL2:           [1.1968, 1.3343]
+hFitErrTauL2:      [2.0519, 2.46818]
+hFitErrTauShortL2: [2.28083, 2.78019]
+hFitErrBL2:        [0.0472118, 0.0533558]
+hFitErrRL2:        [0.0224406, 0.0265806]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={16,14,15,14}
+Time = 99.55 minuti
+
+B=5   tauL=430   tauS=86   I=400000   R=1.26
+Simulazione 33/81 [##################################################] 100%
+hFitTauL2:         [425.231, 434.236]
+hFitTauShortL2:    [80.9392, 91.6117]
+hFitBL2:           [4.83556, 5.15598]
+hFitRL2:           [1.21549, 1.31463]
+hFitErrTauL2:      [1.61325, 1.8195]
+hFitErrTauShortL2: [1.79322, 2.09626]
+hFitErrBL2:        [0.0605509, 0.0689664]
+hFitErrRL2:        [0.0176999, 0.0201246]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={17,15,16,15}
+Time = 102.567 minuti
+
+B=1   tauL=430   tauS=86   I=80000   R=1.89
+Simulazione 34/81 [##################################################] 100%
+hFitTauL2:         [421.442, 440.504]
+hFitTauShortL2:    [70.8046, 105.849]
+hFitBL2:           [0.923573, 1.06894]
+hFitRL2:           [1.6893, 2.21021]
+hFitErrTauL2:      [3.22074, 4.76115]
+hFitErrTauShortL2: [4.90832, 9.0906]
+hFitErrBL2:        [0.0274157, 0.0305677]
+hFitErrRL2:        [0.0686917, 0.107406]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={18,16,17,16}
+Time = 104.983 minuti
+
+B=3   tauL=430   tauS=86   I=240000   R=1.89
+Simulazione 35/81 [##################################################] 100%
+hFitTauL2:         [424.721, 435.892]
+hFitTauShortL2:    [77.6236, 95.5023]
+hFitBL2:           [2.86252, 3.11486]
+hFitRL2:           [1.76871, 2.03893]
+hFitErrTauL2:      [1.96258, 2.34033]
+hFitErrTauShortL2: [3.05142, 4.06068]
+hFitErrBL2:        [0.0488403, 0.0514705]
+hFitErrRL2:        [0.0430572, 0.0540137]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={19,17,18,17}
+Time = 108.133 minuti
+
+B=5   tauL=430   tauS=86   I=400000   R=1.89
+Simulazione 36/81 [##################################################] 100%
+hFitTauL2:         [0, 10]
+hFitTauShortL2:    [0, 10]
+hFitBL2:           [0, 10]
+hFitRL2:           [0, 10]
+hFitErrTauL2:      [0, 10]
+hFitErrTauShortL2: [0, 10]
+hFitErrBL2:        [0, 10]
+hFitErrRL2:        [0, 10]
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+vOut    ={0,0,0,0}
+vCounter={19,17,18,17}
+Time = 111.417 minuti
+
+B=1   tauL=430   tauS=172   I=80000   R=0.63
+Simulazione 37/81 [##################################################] 100%
+hFitTauL2:         [406.088, 457.424]
+hFitTauShortL2:    [155.736, 188.696]
+hFitBL2:           [0.919506, 1.08061]
+hFitRL2:           [0.491035, 0.824165]
+hFitErrTauL2:      [2.11201, 14.4452]
+hFitErrTauShortL2: [3.02411, 8.6448]
+hFitErrBL2:        [0.0263349, 0.0334004]
+hFitErrRL2:        [0.00824961, 0.0750627]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={20,18,19,18}
+Time = 113.7 minuti
+
+B=3   tauL=430   tauS=172   I=240000   R=0.63
+Simulazione 38/81 [##################################################] 100%
+hFitTauL2:         [415.297, 444.82]
+hFitTauShortL2:    [163.083, 182.988]
+hFitBL2:           [2.88134, 3.1222]
+hFitRL2:           [0.544659, 0.726312]
+hFitErrTauL2:      [5.36119, 7.29166]
+hFitErrTauShortL2: [3.68695, 4.4966]
+hFitErrBL2:        [0.0520081, 0.0565122]
+hFitErrRL2:        [0.0255221, 0.0361434]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={21,19,20,19}
+Time = 116.433 minuti
+
+B=5   tauL=430   tauS=172   I=400000   R=0.63
+Simulazione 39/81 [##################################################] 100%
+hFitTauL2:         [418.18, 441.119]
+hFitTauShortL2:    [164.506, 180.121]
+hFitBL2:           [4.84178, 5.13714]
+hFitRL2:           [0.564067, 0.706183]
+hFitErrTauL2:      [4.26818, 5.50822]
+hFitErrTauShortL2: [2.96569, 3.36071]
+hFitErrBL2:        [0.0673972, 0.0721137]
+hFitErrRL2:        [0.0212013, 0.0261623]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={22,20,21,20}
+Time = 119.267 minuti
+
+B=1   tauL=430   tauS=172   I=80000   R=1.26
+Simulazione 40/81 [##################################################] 100%
+hFitTauL2:         [410.285, 454.142]
+hFitTauShortL2:    [145.486, 204.725]
+hFitBL2:           [0.899757, 1.08779]
+hFitRL2:           [0.915131, 1.7375]
+hFitErrTauL2:      [6.28243, 14.6487]
+hFitErrTauShortL2: [9.1763, 14.5389]
+hFitErrBL2:        [0.0294963, 0.0346409]
+hFitErrRL2:        [0.0798448, 0.165427]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={23,21,22,21}
+Time = 121.65 minuti
+
+B=3   tauL=430   tauS=172   I=240000   R=1.26
+Simulazione 41/81 [##################################################] 100%
+hFitTauL2:         [418.973, 442.006]
+hFitTauShortL2:    [154.151, 193.212]
+hFitBL2:           [2.86505, 3.13301]
+hFitRL2:           [1.04925, 1.4694]
+hFitErrTauL2:      [4.13519, 6.84513]
+hFitErrTauShortL2: [5.62871, 7.59919]
+hFitErrBL2:        [0.0522876, 0.0571206]
+hFitErrRL2:        [0.054509, 0.080167]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={24,22,23,22}
+Time = 124.317 minuti
+
+B=5   tauL=430   tauS=172   I=400000   R=1.26
+Simulazione 42/81 [##################################################] 100%
+hFitTauL2:         [420.898, 439.554]
+hFitTauShortL2:    [159.729, 183.781]
+hFitBL2:           [4.83233, 5.16391]
+hFitRL2:           [1.11947, 1.42744]
+hFitErrTauL2:      [3.38468, 4.68881]
+hFitErrTauShortL2: [4.59052, 5.83111]
+hFitErrBL2:        [0.0674972, 0.0731973]
+hFitErrRL2:        [0.0451979, 0.0616842]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={25,23,24,23}
+Time = 127.1 minuti
+
+B=1   tauL=430   tauS=172   I=80000   R=1.89
+Simulazione 43/81 [##################################################] 100%
+hFitTauL2:         [411.348, 451.695]
+hFitTauShortL2:    [133.507, 220.258]
+hFitBL2:           [0.922878, 1.07246]
+hFitRL2:           [1.31088, 2.63716]
+hFitErrTauL2:      [5.61228, 15.5836]
+hFitErrTauShortL2: [12.1299, 22.9311]
+hFitErrBL2:        [0.0290792, 0.0358821]
+hFitErrRL2:        [0.147506, 0.348582]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={26,24,25,24}
+Time = 129.483 minuti
+
+B=3   tauL=430   tauS=172   I=240000   R=1.89
+Simulazione 44/81 [##################################################] 100%
+hFitTauL2:         [419.785, 441.886]
+hFitTauShortL2:    [150.045, 193.413]
+hFitBL2:           [2.88105, 3.13254]
+hFitRL2:           [1.5399, 2.24896]
+hFitErrTauL2:      [3.70863, 6.38214]
+hFitErrTauShortL2: [7.8252, 10.8455]
+hFitErrBL2:        [0.0520528, 0.0579371]
+hFitErrRL2:        [0.0975565, 0.152846]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={27,25,26,25}
+Time = 132.117 minuti
+
+B=5   tauL=430   tauS=172   I=400000   R=1.89
+Simulazione 45/81 [##################################################] 100%
+hFitTauL2:         [422.668, 439.421]
+hFitTauShortL2:    [154.379, 191.192]
+hFitBL2:           [4.83128, 5.1664]
+hFitRL2:           [1.61299, 2.2023]
+hFitErrTauL2:      [3.07062, 4.88014]
+hFitErrTauShortL2: [6.10121, 8.75846]
+hFitErrBL2:        [0.068294, 0.0745027]
+hFitErrRL2:        [0.0787982, 0.122353]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={28,26,27,26}
+Time = 135 minuti
+
+B=1   tauL=430   tauS=258   I=80000   R=0.63
+Simulazione 46/81 [##################################################] 100%
+hFitTauL2:         [0, 10]
+hFitTauShortL2:    [0, 10]
+hFitBL2:           [0, 10]
+hFitRL2:           [0, 10]
+hFitErrTauL2:      [0, 10]
+hFitErrTauShortL2: [0, 10]
+hFitErrBL2:        [0, 10]
+hFitErrRL2:        [0, 10]
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+vOut    ={0,0,0,0}
+vCounter={28,26,27,26}
+Time = 138.3 minuti
+
+B=3   tauL=430   tauS=258   I=240000   R=0.63
+Simulazione 47/81 [##################################################] 100%
+hFitTauL2:         [399.076, 438.268]
+hFitTauShortL2:    [225.877, 254.009]
+hFitBL2:           [2.92021, 3.05701]
+hFitRL2:           [0.605423, 1.25741]
+hFitErrTauL2:      [10.3601, 16.4477]
+hFitErrTauShortL2: [10.0017, 13.8461]
+hFitErrBL2:        [0.0525556, 0.0581671]
+hFitErrRL2:        [0.116668, 0.229276]
+
+p 0   pErr 0
+Compatibilità troppo grande (6.82998>3)
+Sigma troppo grande rispetto all'errore (78.0403>28.1759)
+p 0   pErr 0
+p 0   pErr 0
+Sigma troppo grande rispetto all'errore (0.436214>0.340002)
+vOut    ={0,1,0,0}
+vCounter={28,27,27,26}
+Time = 141.767 minuti
+
+B=5   tauL=430   tauS=258   I=400000   R=0.63
+Simulazione 48/81 [##################################################] 100%
+hFitTauL2:         [402.685, 453.001]
+hFitTauShortL2:    [231.049, 266.621]
+hFitBL2:           [4.84671, 5.16829]
+hFitRL2:           [0.457371, 1.11932]
+hFitErrTauL2:      [3.30702, 17.908]
+hFitErrTauShortL2: [2.86148, 11.8937]
+hFitErrBL2:        [0.0642884, 0.0820693]
+hFitErrRL2:        [0.0192577, 0.17884]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={29,28,28,27}
+Time = 145.483 minuti
+
+B=1   tauL=430   tauS=258   I=80000   R=1.26
+Simulazione 49/81 [##################################################] 100%
+hFitTauL2:         [0, 10]
+hFitTauShortL2:    [0, 10]
+hFitBL2:           [0, 10]
+hFitRL2:           [0, 10]
+hFitErrTauL2:      [0, 10]
+hFitErrTauShortL2: [0, 10]
+hFitErrBL2:        [0, 10]
+hFitErrRL2:        [0, 10]
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+vOut    ={0,0,0,0}
+vCounter={29,28,28,27}
+Time = 148.7 minuti
+
+B=3   tauL=430   tauS=258   I=240000   R=1.26
+Simulazione 50/81 [##################################################] 100%
+hFitTauL2:         [407.234, 442.833]
+hFitTauShortL2:    [209.08, 259.512]
+hFitBL2:           [2.86719, 3.0951]
+hFitRL2:           [1.03341, 2.47364]
+hFitErrTauL2:      [7.4049, 13.8115]
+hFitErrTauShortL2: [14.1619, 19.6024]
+hFitErrBL2:        [0.0538117, 0.0595397]
+hFitErrRL2:        [0.204242, 0.461447]
+
+p 0   pErr 0
+Compatibilità troppo grande (6.24666>3)
+Sigma troppo grande rispetto all'errore (84.3081>18.8609)
+p 0   pErr 0
+Sigma troppo grande rispetto all'errore (35.0709>34.4134)
+p 0   pErr 0
+Sigma troppo grande rispetto all'errore (1.33697>0.653617)
+vOut    ={0,0,0,0}
+vCounter={29,28,28,27}
+Time = 152.167 minuti
+
+B=5   tauL=430   tauS=258   I=400000   R=1.26
+Simulazione 51/81 [##################################################] 100%
+hFitTauL2:         [408.598, 451.693]
+hFitTauShortL2:    [219.432, 277.313]
+hFitBL2:           [4.8311, 5.19485]
+hFitRL2:           [0.808563, 2.272]
+hFitErrTauL2:      [6.24791, 14.5551]
+hFitErrTauShortL2: [11.0233, 17.1325]
+hFitErrBL2:        [0.0708731, 0.0818424]
+hFitErrRL2:        [0.157965, 0.406978]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={30,29,29,28}
+Time = 155.8 minuti
+
+B=1   tauL=430   tauS=258   I=80000   R=1.89
+Simulazione 52/81 [##################################################] 100%
+hFitTauL2:         [0, 10]
+hFitTauShortL2:    [0, 10]
+hFitBL2:           [0, 10]
+hFitRL2:           [0, 10]
+hFitErrTauL2:      [0, 10]
+hFitErrTauShortL2: [0, 10]
+hFitErrBL2:        [0, 10]
+hFitErrRL2:        [0, 10]
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+vOut    ={0,0,0,0}
+vCounter={30,29,29,28}
+Time = 159.117 minuti
+
+B=3   tauL=430   tauS=258   I=240000   R=1.89
+Simulazione 53/81 [##################################################] 100%
+hFitTauL2:         [412.348, 440.034]
+hFitTauShortL2:    [195.994, 253.233]
+hFitBL2:           [2.95565, 3.04635]
+hFitRL2:           [1.56303, 3.68126]
+hFitErrTauL2:      [5.95778, 11.1158]
+hFitErrTauShortL2: [17.1327, 22.5461]
+hFitErrBL2:        [0.053507, 0.0587787]
+hFitErrRL2:        [0.312386, 0.678549]
+
+p 0   pErr 0
+Sigma troppo grande rispetto all'errore (84.6869>-5.41417)
+p 0   pErr 0
+Sigma troppo grande rispetto all'errore (163.189>39.698)
+p 0   pErr 0
+Sigma troppo grande rispetto all'errore (6.18831>0.992531)
+vOut    ={0,0,0,0}
+vCounter={30,29,29,28}
+Time = 163 minuti
+
+B=5   tauL=430   tauS=258   I=400000   R=1.89
+Simulazione 54/81 [##################################################] 100%
+hFitTauL2:         [412.828, 444.45]
+hFitTauShortL2:    [213.253, 270.914]
+hFitBL2:           [4.86862, 5.15388]
+hFitRL2:           [1.35271, 3.42893]
+hFitErrTauL2:      [5.33186, 10.7988]
+hFitErrTauShortL2: [14.3327, 20.7058]
+hFitErrBL2:        [0.0709367, 0.077597]
+hFitErrRL2:        [0.25998, 0.655622]
+
+p 0   pErr 0
+Sigma troppo grande rispetto all'errore (21.4925>16.1425)
+p 0   pErr 0
+p 0   pErr 0
+Sigma troppo grande rispetto all'errore (1.38277>0.922506)
+vOut    ={0,1,0,0}
+vCounter={30,30,29,28}
+Time = 166.833 minuti
+
+B=1   tauL=645   tauS=86   I=80000   R=0.63
+Simulazione 55/81 [##################################################] 100%
+hFitTauL2:         [628.323, 663.6]
+hFitTauShortL2:    [78.6688, 93.4475]
+hFitBL2:           [0.846311, 1.13927]
+hFitRL2:           [0.592865, 0.670853]
+hFitErrTauL2:      [5.62816, 6.88585]
+hFitErrTauShortL2: [2.3437, 2.95871]
+hFitErrBL2:        [0.0456454, 0.051117]
+hFitErrRL2:        [0.0137538, 0.016436]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={31,31,30,29}
+Time = 169.683 minuti
+
+B=3   tauL=645   tauS=86   I=240000   R=0.63
+Simulazione 56/81 [##################################################] 100%
+hFitTauL2:         [635.423, 656.022]
+hFitTauShortL2:    [81.8232, 90.31]
+hFitBL2:           [2.74127, 3.19703]
+hFitRL2:           [0.609414, 0.653291]
+hFitErrTauL2:      [3.30292, 3.80458]
+hFitErrTauShortL2: [1.43888, 1.6312]
+hFitErrBL2:        [0.0771583, 0.0856601]
+hFitErrRL2:        [0.00814694, 0.00912298]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={32,32,31,30}
+Time = 172.867 minuti
+
+B=5   tauL=645   tauS=86   I=400000   R=0.63
+Simulazione 57/81 [##################################################] 100%
+hFitTauL2:         [636.793, 653.027]
+hFitTauShortL2:    [82.802, 89.1598]
+hFitBL2:           [4.74415, 5.29404]
+hFitRL2:           [0.614144, 0.649838]
+hFitErrTauL2:      [2.26366, 2.94798]
+hFitErrTauShortL2: [0.995812, 1.24922]
+hFitErrBL2:        [0.0972654, 0.112131]
+hFitErrRL2:        [0.00616296, 0.00701579]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={33,33,32,31}
+Time = 176.283 minuti
+
+B=1   tauL=645   tauS=86   I=80000   R=1.26
+Simulazione 58/81 [##################################################] 100%
+hFitTauL2:         [628.23, 664.745]
+hFitTauShortL2:    [74.0852, 101.671]
+hFitBL2:           [0.878821, 1.18531]
+hFitRL2:           [1.15197, 1.3965]
+hFitErrTauL2:      [5.36154, 6.78968]
+hFitErrTauShortL2: [3.97785, 5.79582]
+hFitErrBL2:        [0.0463493, 0.0520514]
+hFitErrRL2:        [0.0382258, 0.0527268]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={34,34,33,32}
+Time = 179.467 minuti
+
+B=3   tauL=645   tauS=86   I=240000   R=1.26
+Simulazione 59/81 [##################################################] 100%
+hFitTauL2:         [636.04, 655.747]
+hFitTauShortL2:    [79.0923, 94.4933]
+hFitBL2:           [2.7369, 3.25049]
+hFitRL2:           [1.19176, 1.32747]
+hFitErrTauL2:      [3.18925, 3.90856]
+hFitErrTauShortL2: [2.04561, 3.07562]
+hFitErrBL2:        [0.0823026, 0.0920886]
+hFitErrRL2:        [0.0220825, 0.0280303]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={35,35,34,33}
+Time = 183.383 minuti
+
+B=5   tauL=645   tauS=86   I=400000   R=1.26
+Simulazione 60/81 [##################################################] 100%
+hFitTauL2:         [637.308, 652.724]
+hFitTauShortL2:    [80.4364, 92.7361]
+hFitBL2:           [4.69955, 5.27122]
+hFitRL2:           [1.21781, 1.31799]
+hFitErrTauL2:      [2.44959, 2.819]
+hFitErrTauShortL2: [1.94278, 2.38536]
+hFitErrBL2:        [0.103596, 0.115988]
+hFitErrRL2:        [0.0185395, 0.0214273]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={36,36,35,34}
+Time = 187.733 minuti
+
+B=1   tauL=645   tauS=86   I=80000   R=1.89
+Simulazione 61/81 [##################################################] 100%
+hFitTauL2:         [629.93, 660.146]
+hFitTauShortL2:    [70.9247, 111.381]
+hFitBL2:           [0.858577, 1.10966]
+hFitRL2:           [1.67748, 2.21488]
+hFitErrTauL2:      [5.08236, 6.74836]
+hFitErrTauShortL2: [5.30922, 9.66087]
+hFitErrBL2:        [0.0467618, 0.0539971]
+hFitErrRL2:        [0.071463, 0.12084]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={37,37,36,35}
+Time = 190.9 minuti
+
+B=3   tauL=645   tauS=86   I=240000   R=1.89
+Simulazione 62/81 [##################################################] 100%
+hFitTauL2:         [637.431, 653.538]
+hFitTauShortL2:    [78.0041, 95.058]
+hFitBL2:           [2.76292, 3.19351]
+hFitRL2:           [1.75938, 2.03481]
+hFitErrTauL2:      [3.14042, 3.66777]
+hFitErrTauShortL2: [3.3846, 4.45798]
+hFitErrBL2:        [0.0832678, 0.0886627]
+hFitErrRL2:        [0.0461028, 0.0580988]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={38,38,37,36}
+Time = 195.2 minuti
+
+B=5   tauL=645   tauS=86   I=400000   R=1.89
+Simulazione 63/81 [##################################################] 100%
+hFitTauL2:         [0, 10]
+hFitTauShortL2:    [0, 10]
+hFitBL2:           [0, 10]
+hFitRL2:           [0, 10]
+hFitErrTauL2:      [0, 10]
+hFitErrTauShortL2: [0, 10]
+hFitErrBL2:        [0, 10]
+hFitErrRL2:        [0, 10]
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+vOut    ={0,0,0,0}
+vCounter={38,38,37,36}
+Time = 199.25 minuti
+
+B=1   tauL=645   tauS=172   I=80000   R=0.63
+Simulazione 64/81 [##################################################] 100%
+hFitTauL2:         [614.021, 681.36]
+hFitTauShortL2:    [155.043, 188.278]
+hFitBL2:           [0.81159, 1.15401]
+hFitRL2:           [0.558146, 0.719905]
+hFitErrTauL2:      [10.1222, 14.5669]
+hFitErrTauShortL2: [5.25626, 6.74175]
+hFitErrBL2:        [0.0500769, 0.0604519]
+hFitErrRL2:        [0.0224534, 0.0310323]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={39,39,38,37}
+Time = 201.75 minuti
+
+B=3   tauL=645   tauS=172   I=240000   R=0.63
+Simulazione 65/81 [##################################################] 100%
+hFitTauL2:         [630.402, 663.353]
+hFitTauShortL2:    [163.273, 181.868]
+hFitBL2:           [2.68723, 3.28186]
+hFitRL2:           [0.589415, 0.677524]
+hFitErrTauL2:      [6.27956, 7.55335]
+hFitErrTauShortL2: [3.19219, 3.72381]
+hFitErrBL2:        [0.0897891, 0.0982155]
+hFitErrRL2:        [0.013654, 0.0166159]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={40,40,39,38}
+Time = 204.5 minuti
+
+B=5   tauL=645   tauS=172   I=400000   R=0.63
+Simulazione 66/81 [##################################################] 100%
+hFitTauL2:         [632.257, 658.445]
+hFitTauShortL2:    [164.882, 179.771]
+hFitBL2:           [4.67151, 5.29849]
+hFitRL2:           [0.597569, 0.664454]
+hFitErrTauL2:      [4.93895, 5.78915]
+hFitErrTauShortL2: [2.51669, 2.81909]
+hFitErrBL2:        [0.116923, 0.126269]
+hFitErrRL2:        [0.0108172, 0.0123714]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={41,41,40,39}
+Time = 207.367 minuti
+
+B=1   tauL=645   tauS=172   I=80000   R=1.26
+Simulazione 67/81 [##################################################] 100%
+hFitTauL2:         [619.958, 676.269]
+hFitTauShortL2:    [144.513, 205.259]
+hFitBL2:           [0.843398, 1.14131]
+hFitRL2:           [1.08206, 1.45927]
+hFitErrTauL2:      [8.45268, 13.8735]
+hFitErrTauShortL2: [8.38281, 12.7029]
+hFitErrBL2:        [0.0512784, 0.0619715]
+hFitErrRL2:        [0.0503453, 0.0797495]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={42,42,41,40}
+Time = 209.867 minuti
+
+B=3   tauL=645   tauS=172   I=240000   R=1.26
+Simulazione 68/81 [##################################################] 100%
+hFitTauL2:         [629.692, 662.857]
+hFitTauShortL2:    [158.351, 186.811]
+hFitBL2:           [2.74736, 3.23435]
+hFitRL2:           [1.15952, 1.36961]
+hFitErrTauL2:      [5.45649, 7.06508]
+hFitErrTauShortL2: [5.27175, 6.68709]
+hFitErrBL2:        [0.0918987, 0.102943]
+hFitErrRL2:        [0.0313283, 0.0414819]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={43,43,42,41}
+Time = 212.683 minuti
+
+B=5   tauL=645   tauS=172   I=400000   R=1.26
+Simulazione 69/81 [##################################################] 100%
+hFitTauL2:         [635.389, 657.204]
+hFitTauShortL2:    [160.586, 183.413]
+hFitBL2:           [4.63275, 5.27219]
+hFitRL2:           [1.18703, 1.34588]
+hFitErrTauL2:      [4.28169, 5.30993]
+hFitErrTauShortL2: [4.15667, 5.01435]
+hFitErrBL2:        [0.119286, 0.130424]
+hFitErrRL2:        [0.0247945, 0.0307359]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={44,44,43,42}
+Time = 215.65 minuti
+
+B=1   tauL=645   tauS=172   I=80000   R=1.89
+Simulazione 70/81 [##################################################] 100%
+hFitTauL2:         [622.616, 676.623]
+hFitTauShortL2:    [136.401, 211.586]
+hFitBL2:           [0.826136, 1.16125]
+hFitRL2:           [1.56428, 2.27937]
+hFitErrTauL2:      [7.90397, 14.6146]
+hFitErrTauShortL2: [10.8579, 22.0477]
+hFitErrBL2:        [0.0511807, 0.0660139]
+hFitErrRL2:        [0.0859786, 0.202079]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={45,45,44,43}
+Time = 217.817 minuti
+
+B=3   tauL=645   tauS=172   I=240000   R=1.89
+Simulazione 71/81 [##################################################] 100%
+hFitTauL2:         [632.159, 660.215]
+hFitTauShortL2:    [154.598, 193.935]
+hFitBL2:           [2.71299, 3.22624]
+hFitRL2:           [1.70164, 2.11678]
+hFitErrTauL2:      [4.99598, 7.0976]
+hFitErrTauShortL2: [6.97875, 9.46513]
+hFitErrBL2:        [0.0926635, 0.104975]
+hFitErrRL2:        [0.0575734, 0.0814449]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={46,46,45,44}
+Time = 219.917 minuti
+
+B=5   tauL=645   tauS=172   I=400000   R=1.89
+Simulazione 72/81 [##################################################] 100%
+hFitTauL2:         [633.962, 657.562]
+hFitTauShortL2:    [154.921, 190.364]
+hFitBL2:           [4.59528, 5.34115]
+hFitRL2:           [1.74862, 2.04995]
+hFitErrTauL2:      [3.9292, 5.20869]
+hFitErrTauShortL2: [5.46005, 7.12354]
+hFitErrBL2:        [0.11969, 0.133509]
+hFitErrRL2:        [0.0451803, 0.0589485]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={47,47,46,45}
+Time = 221.433 minuti
+
+B=1   tauL=645   tauS=258   I=80000   R=0.63
+Simulazione 73/81 [##################################################] 100%
+hFitTauL2:         [596.065, 710.544]
+hFitTauShortL2:    [226.671, 289.277]
+hFitBL2:           [0.830887, 1.13348]
+hFitRL2:           [0.440473, 0.887692]
+hFitErrTauL2:      [17.183, 38.6799]
+hFitErrTauShortL2: [10.5124, 15.6655]
+hFitErrBL2:        [0.0536905, 0.0824285]
+hFitErrRL2:        [0.0536365, 0.10057]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={48,48,47,46}
+Time = 222.733 minuti
+
+B=3   tauL=645   tauS=258   I=240000   R=0.63
+Simulazione 74/81 [##################################################] 100%
+hFitTauL2:         [611.354, 681.006]
+hFitTauShortL2:    [239.255, 278.149]
+hFitBL2:           [2.66919, 3.27941]
+hFitRL2:           [0.506133, 0.779038]
+hFitErrTauL2:      [11.6818, 19.6868]
+hFitErrTauShortL2: [6.73773, 8.41616]
+hFitErrBL2:        [0.1002, 0.128702]
+hFitErrRL2:        [0.0358103, 0.0506413]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={49,49,48,47}
+Time = 224.167 minuti
+
+B=5   tauL=645   tauS=258   I=400000   R=0.63
+Simulazione 75/81 [##################################################] 100%
+hFitTauL2:         [619.675, 671.903]
+hFitTauShortL2:    [242.861, 272.964]
+hFitBL2:           [4.56009, 5.39219]
+hFitRL2:           [0.539482, 0.73093]
+hFitErrTauL2:      [2.03256, 13.6243]
+hFitErrTauShortL2: [2.1695, 6.29423]
+hFitErrBL2:        [0.0942113, 0.157976]
+hFitErrRL2:        [0.00401924, 0.0378599]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={50,50,49,48}
+Time = 225.717 minuti
+
+B=1   tauL=645   tauS=258   I=80000   R=1.26
+Simulazione 76/81 [##################################################] 100%
+hFitTauL2:         [601.514, 699.142]
+hFitTauShortL2:    [208.48, 303.906]
+hFitBL2:           [0.80937, 1.16109]
+hFitRL2:           [0.832382, 1.87525]
+hFitErrTauL2:      [12.7766, 36.1353]
+hFitErrTauShortL2: [16.0414, 27.2669]
+hFitErrBL2:        [0.0548943, 0.0871765]
+hFitErrRL2:        [0.104936, 0.249296]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={51,51,50,49}
+Time = 227.017 minuti
+
+B=3   tauL=645   tauS=258   I=240000   R=1.26
+Simulazione 77/81 [##################################################] 100%
+hFitTauL2:         [618.585, 675.095]
+hFitTauShortL2:    [230.382, 287.65]
+hFitBL2:           [2.6497, 3.31689]
+hFitRL2:           [0.999067, 1.58167]
+hFitErrTauL2:      [9.16332, 16.6668]
+hFitErrTauShortL2: [10.3325, 13.8451]
+hFitErrBL2:        [0.0989698, 0.131201]
+hFitErrRL2:        [0.078422, 0.113613]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={52,52,51,50}
+Time = 228.417 minuti
+
+B=5   tauL=645   tauS=258   I=400000   R=1.26
+Simulazione 78/81 [##################################################] 100%
+hFitTauL2:         [624.917, 668.326]
+hFitTauShortL2:    [234.928, 284.47]
+hFitBL2:           [4.59369, 5.31408]
+hFitRL2:           [1.04705, 1.49491]
+hFitErrTauL2:      [7.41337, 12.2176]
+hFitErrTauShortL2: [8.45183, 10.4542]
+hFitErrBL2:        [0.135176, 0.168069]
+hFitErrRL2:        [0.0605317, 0.0848805]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={53,53,52,51}
+Time = 229.9 minuti
+
+B=1   tauL=645   tauS=258   I=80000   R=1.89
+Simulazione 79/81 [##################################################] 100%
+hFitTauL2:         [609.701, 698.711]
+hFitTauShortL2:    [199.468, 309.504]
+hFitBL2:           [0.805098, 1.13559]
+hFitRL2:           [1.19702, 2.93869]
+hFitErrTauL2:      [11.1695, 33.6475]
+hFitErrTauShortL2: [20.4951, 37.52]
+hFitErrBL2:        [0.0519447, 0.0862308]
+hFitErrRL2:        [0.188507, 0.520469]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={54,54,53,52}
+Time = 231.183 minuti
+
+B=3   tauL=645   tauS=258   I=240000   R=1.89
+Simulazione 80/81 [##################################################] 100%
+hFitTauL2:         [620.751, 678.489]
+hFitTauShortL2:    [218.045, 299.793]
+hFitBL2:           [2.58964, 3.30479]
+hFitRL2:           [1.41062, 2.53186]
+hFitErrTauL2:      [7.85685, 18.2739]
+hFitErrTauShortL2: [13.8835, 23.5361]
+hFitErrBL2:        [0.101756, 0.147542]
+hFitErrRL2:        [0.136612, 0.282705]
+
+p 0   pErr 0
+p 0   pErr 0
+p 0   pErr 0
+vOut    ={1,1,1,1}
+vCounter={55,55,54,53}
+Time = 232.583 minuti
+
+B=5   tauL=645   tauS=258   I=400000   R=1.89
+Simulazione 81/81 [##################################################] 100%
+hFitTauL2:         [0, 10]
+hFitTauShortL2:    [0, 10]
+hFitBL2:           [0, 10]
+hFitRL2:           [0, 10]
+hFitErrTauL2:      [0, 10]
+hFitErrTauShortL2: [0, 10]
+hFitErrBL2:        [0, 10]
+hFitErrRL2:        [0, 10]
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+
+p -1   pErr -1
+Tau+ fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+Tau- fit failed. Bool set to 'false'.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+p -1   pErr -1
+R fit failed. Bool set to 'false.
+Fit fallito(p=-1).
+
+Fit fallito(p=-1).
+
+vOut    ={0,0,0,0}
+vCounter={55,55,54,53}
+Time = 234.3 minuti
+Efficienza tau+: 67.9012%
+Efficienza tau-: 67.9012%
+Efficienza R   : 66.6667%
+Efficienza Tot : 65.4321%
+
