@@ -7,6 +7,7 @@
 							% twoside, oneside = fronteretro o no
 							% landscape = foglio orizzontale
 								
+\usepackage[mode=buildnew]{standalone}
 \usepackage[binding=5mm]{layaureo}			% Layout più espanso preimpostato (bindings = spazio rilegatura)
 %\usepackage[options]{geometry}             		% Layout completamente configurabile
 							
@@ -156,9 +157,7 @@ Inizialmente si è verificato il corretto comportamento della catena TAC + ADC r
 %
 \begin{figure}[h]
   \centering  
-  \begin{adjustbox}{width=10cm}
-    \input{img/bkg437}
-  \end{adjustbox}%\includegraphics[scale=0.374]{img/bkg_sx.pdf}}
+  \includestandalone[width=10cm]{img/bkg437}
   \caption{Prima analisi dello spettro di ritardi temporali generati uniformemente; si nota la presenza di un eccesso di eventi indesiderato nell'intervallo $[2200,2700]$ (è stato applicato un rebin di un fattore 12 per evidenziare meglio la situazione).}
   \label{rumore1}
 \end{figure}
@@ -337,11 +336,7 @@ I metodi testati per la stima della \textit{baseline} sono i seguenti:
 \end{enumerate}
 %
 \begin{figure}[H]
- \centerline{%
- \begin{adjustbox}{width=\linewidth+1cm}
- \input{img/baseline}
- %\centerline{\includegraphics[scale=0.75]{img/baseline_sim_500.pdf}}
- \end{adjustbox}}
+ \centerline{\includestandalone[width=\linewidth+1cm]{img/baseline}}
  \caption{Distribuzioni delle stime della \textit{baseline} con i tre metodi differenti, sia per i valori sia per gli errori (500 simulazioni). La \textit{baseline} generata in queste simulazioni ha altezza 10.}\label{fig::baseline_500}
 \end{figure}
 %
@@ -373,10 +368,7 @@ Dei tre metodi il secondo si è rivelato il più stabile; un fit a tre parametri
 L'adozione del secondo metodo richiede la scelta del canale (valore di ritardo temporale) dal quale far iniziare il fit della porzione di \textit{baseline}, si è quindi proceduto a eseguire uno studio sistematico dei risultati al variare di questo estremo inferiore confrontando le medie su più simulazioni (figura \ref{baselinestart}). Dal grafico è evidente come la riscostruzione sia più precisa ma meno accurata per piccoli valori e di come la situazione si inverta per grandi valori. A priori si potrebbe scegliere un valore che rappresenti la media tra queste due situazioni, ma a posteriori, studiando la ricostruzione di $b$ e $\tau^+$ dopo il fit esponenziale del metodo 2, si è verificato con varie prove come la scelta di questo valore iniziale sia del tutto ininfluente.
 %
 \begin{figure}[h]
-  \centerline{%
-  \begin{adjustbox}{width=\linewidth+1cm}
-    \input{img/tprofile}
-  \end{adjustbox}}
+  \centerline{\includestandalone[width=\linewidth+1cm]{img/tprofile}}
   \caption{Studio della ricostruzione della \textit{baseline} $b$ al variare del punto di inizio del fit costante di tipo \texttt{pol0}: in alto i valori ottenuti (la linea rossa rappresenta il valore vero) e in basso i rispettivi errori. Le barre di errore rappresentano la deviazione standard del campione di 100 simulazioni utilizzato. I dati utilizzati nella generazione corrispondono a 1 settimana di acquisizione.}\label{baselinestart}
 \end{figure}
 %
@@ -390,10 +382,7 @@ La distribuzione esponenziale relativa ai $\mu^-$ si genera con \lstinline{TRand
 
 L'adozione del metodo 2 descritto in precedenza prevede uno studio accurato del canale (ie: ritardo temporale) dal quale cominciare il fit della funzione $A_+e^{-\frac{t}{\tau^+}}+b$. 
 \begin{figure}[h]
-  \centerline{%
-  \begin{adjustbox}{width=\linewidth+1cm}
-    \input{img/fitbegin_5week_100sim}
-  \end{adjustbox}}
+  \centerline{\includestandalone[width=\linewidth+1cm]{img/fitbegin_5week_100sim}}
   \caption{Studio della stima di $\tau_+$ al variare del punto di inizio del fit $A_+e^{-\frac{t}{\tau^+}}+b$. La linea rossa rappresenta il valore vero impostato nella simulazione. Le barre d'errore rappresentano la deviazione standard del campione di 100 simulazioni utilizzate. I dati utilizzati nella generazione corrispondono a 5 settimane di acquisizione.}
   \label{fig::tauplusstart}
 \end{figure}
@@ -404,17 +393,13 @@ In conclusione, il metodo di fit messo a punto prevede i seguenti step:
  \item fit \lstinline{pol0} della coda dello spettro ed estrazione del valore preliminare $B$ per la \textit{baseline};
  \item definizione della funzione \lstinline{TH1 f1} corrispondente alla formula \ref{eq::exp_plus_base}. Si setta il parametro $b$ al valore derivante dal fit del punto precedente (\lstinline{f1.SetParameter("b",B)}), quindi si effettua il fit dell'istogramma con \lstinline{f1} a partire da un ritardo di $5\tau^-$, ottenendo le stime intermedie $\tau^*$ e $B^*$ per i parametri $\tau^+$ e \textit{baseline} rispettivamente;
  \item si definisce la funzione complessiva di fit \lstinline{TH1 f} corrispondente alla formula \ref{eq::funzione_fit_finale}, si settano i parametri $\tau^+$ e \textit{baseline} ai valori $\tau^*$ e $B^*$ e, infine, si fitta l'istogramma con la funzione \lstinline{f}, estraendo i valori definitivi dei parametri. 
+%
 \end{enumerate}  
 \begin{figure}[h]
- \centerline{%
-  \begin{adjustbox}{width=\linewidth+1cm}
- \input{img/example_single_spectrum}
-   \end{adjustbox}}
+ \centerline{\includestandalone[width=\linewidth+1cm]{img/example_single_spectrum}}
  \caption{Esempio di istogramma simulato con statistica associata a 5 settimane di acquisizione (\textit{baseline} $\sim 5$).}
  \label{fig::esempio_spettro_simulato}
 \end{figure}
-%
-%
 %
 \subsection{Test multipli del metodo di fit}
 La generazione degli spettri utilizza i seguenti parametri di input:
@@ -504,14 +489,12 @@ L'ultimo punto lasciato in sospeso è la questione, menzionata alla sezione \ref
   \item \textbf{Errori aumentati:} Si è provato a attribuire errori maggiori ai punti nel range, ad esempio il doppio rispetto all'errore poissoniano standard.
 \end{enumerate}
 Nessuno dei due metodi ha portato a un miglioramento significativo dei risultati finali.
-%\begin{figure}[h]
-%  \centering
-%  \begin{adjustbox}{width=\linewidth}
-%    \input{img/finale}
-%  \end{adjustbox}
-%\caption{Risultato del fit}
-%\label{fig:finale}
-%\end{figure}
+\begin{figure}[h]
+  \centering
+  \includestandalone[width=\linewidth+1cm]{img/finale}
+  \caption{Risultato del fit}
+  \label{fig:finale}
+\end{figure}
 %
 \section{Discussione dei risultati}
 Ma va in mona va\dots
