@@ -42,8 +42,9 @@ OK - Sezione3: baseline + exp + exp -> test inizio fit esponenziale long
 - Sezione4: modifica dei parametri (NO REBIN) ... matrice dei parametri...
    OK 1) SetParameter con valori falsi, input veri
    OK 2) SetParameter con valori veri, input falsi
-   - un po' di efficienza per un run, commenti --> facciamo un grafico?
    OK - Parlare del REBIN
+   - Sostituire grafico con 5 run con grafico solo 1o run
+   - Mettere grafico con i 5 run +-10,20,30,40,50% 
 
 - Sezione5: fittare gli spettri raccolti in 5 settimane
   - shift indietro e t*, attenzione a non far incazzare Guglielmi >:-( 

@@ -30,7 +30,7 @@ void eff_matrix ()
         TR      ->GetXaxis()->SetNdivisions(5);
         Ttot    ->GetXaxis()->SetNdivisions(5);
 	
-	for (int k=0; k<5; k++)
+	for (int k=0; k<1; k++)
 	{
 	        Tplus   ->SetBinContent(k+1,effTauPlus[k]);
 	        Tminus  ->SetBinContent(k+1,effTauMinus[k]);
