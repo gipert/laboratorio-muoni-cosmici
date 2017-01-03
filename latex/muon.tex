@@ -261,6 +261,7 @@ A questo punto, con i segnali START e STOP fisici si sono ripetute i test di uni
 \end{figure}
 %
 \section{Analisi dati preliminare}
+\label{analPrelim}
 Dopo aver impostato il circuito come illustrato precedentemente, si è proceduto all'acquisizione dei dati relativi al ritardo che intercorre tra il passaggio del muone cosmico attraverso l'apparato di START e l'uscita dell'elettrone di decadimento attraverso lo STOP.
 
 I dati consistono di tre acquisizioni, per un totale di circa 75000 eventi, riguardanti due popolazioni differenti di muoni\footnote{Dati presi da K.A. Olive \emph{et al.} (Particle Data Group), Chin. Phys. C, \textbf{38}, 090001 (2014) and 2015 update.}:
@@ -466,15 +467,22 @@ Si è deciso di applicare la procedura descritta facendo variare i valori di \te
 Si è affrontata la prima problematica assicurando che $\tau^+-\tau^->100$ canali, senza però trovare alcun rimedio alla seconda: ogni tentativo di miglioramento del metodo non è riuscito a risolverla (esempio: miglioramento della scelta dei parametri da settare con \lstinline{SetParameter} e setting di parametri aggiuntivi quali $A_+$ e $A_-$ nei fit preliminari).
 Nonostante ciò, i \textit{run} effettuati hanno sancito un'efficienza del metodo di circa $86\%$. 
 %
+\subsection{Rebin}
+Prendiamo in considerazione l'idea di applicare un'operazione di \textit{rebinning} (ovvero la fusion di un certo numero di canali, specificato dal \textit{fattore di rebin}, atta alla creazione di un unico bin che ha come larghezza la somma dei precedenti) all'istogramma dei dati, originariamente costituito da 4096 canali, prima dell'operazione di fitting. Il metodo era stato adottato in precedenza (Sez.~\ref{analPrelim}) nell'ambito dell'analisi dati preliminare, e sembrava dare stabilità e maggiore precisione ai risultati del fit. La conseguenza principale del rebinning è infatti quella di smorzare le fluttuazioni statistiche, e perciò l'efficacia dell'operazione ai fini del processo di analisi dati deve essere sistematicamente investigata.
+
+Innanzitutto si è applicato l'algoritmo a simulazioni Monte Carlo convergenti e accurate con valori del fattore di rebin pari a 2, 4, 8, 16, non riscontrando miglioramenti evidenti nella ricostruzione dei paramentri di fit. Si è quindi proceduto a verificare l'eventualità in cui un'operazione di rebinning possa rendere convergente un fit non convergente, attestando anche in questo frangente una sostanziale ininfluenza del metodo.
+
+In conclusione si può tranquillamente assumere l'operazione di rebinning come ininfluente ai fini dell'analisi dati.
+%
 \section{Analisi dello spettro reale}
-\begin{figure}[h]
-  \centering
-  \begin{adjustbox}{width=\linewidth}
-    \input{img/finale}
-  \end{adjustbox}
-\caption{Risultato del fit}
-\label{fig:finale}
-\end{figure}
+%\begin{figure}[h]
+%  \centering
+%  \begin{adjustbox}{width=\linewidth}
+%    \input{img/finale}
+%  \end{adjustbox}
+%\caption{Risultato del fit}
+%\label{fig:finale}
+%\end{figure}
 %
 \appendix
 %\setcounter{secnumdepth}{0}
