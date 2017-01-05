@@ -39,7 +39,7 @@ code/montecarlo/semestre2/expStart : code/montecarlo/semestre2/fitexpStart.cc $(
 latex/muon.pdf : latex/muon.tex latex/imgEff.tex latex/draw.tex latex/analApp.tex latex/Scemi.tex
 	cd latex && \
 	mkdir -p log && \
-	pdflatex -interaction=nonstopmode -output-directory=log muon.tex && \
+	pdflatex -interaction=nonstopmode -shell-escape -output-directory=log muon.tex && \
 	cp log/muon.pdf . && \
 	cd ..
 
