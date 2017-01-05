@@ -29,3 +29,5 @@ code/analysis/analisiFinale
 code/analysis/spectrumFit.pdf
 code/analysis/spectrumFit_cal.pdf
 code/montecarlo/semestre2/conf.txt
+latex/img/*.aux
+latex/img/*.log
