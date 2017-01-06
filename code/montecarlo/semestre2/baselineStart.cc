@@ -18,11 +18,13 @@
 #include "TApplication.h"
 #include "TH1F.h"
 #include "TCanvas.h"
+#include "TPad.h"
 #include "TRandom3.h"
 #include "TFitResult.h"
 #include "TFitResultPtr.h"
 #include "TF1.h"
 #include "TLine.h"
+#include "TStyle.h"
 #include "TText.h"
 #include "TGraphErrors.h"
 #include "TProfile.h"
@@ -34,7 +36,7 @@
 
 #define	Begin     0	// inizio istogramma
 #define End       3904	// fine istogramma
-#define Nsim      100   // numero punti nel plot
+#define Nsim      30 // numero punti nel plot
 #define beginFit  860	// inizio fit esponenziale
 
 TRandom3 r;
@@ -64,7 +66,7 @@ int main( int argc, char* argv[] ) {
         return 0;
     }
 
-    float B          = std::stof(args[1]); // valore tipico per 1 settimana: 2 (circa)
+    float B          = std::stof(args[1]); // valore tipico per 1 settimana: 1 (circa)
     double tau	     = std::stof(args[2]); // valore vero = 429 canali
 	double integrale = std::stof(args[3]); // valore tipico per 1 settimana: 70000 (circa)
 	double taucorto  = std::stof(args[4]); // valore vero = 172 canali (circa)
@@ -73,6 +75,7 @@ int main( int argc, char* argv[] ) {
 	double A         = (integrale - B*(End - Begin)) / (tau + taucorto / R);
 
     TApplication Root("App",&argc,argv); 
+    gStyle->SetOptStat(0);
 
     std::vector<double> vFitBL2;
     std::vector<double> vFitErrBL2;
@@ -84,21 +87,27 @@ int main( int argc, char* argv[] ) {
     int StartBase = midValue;
     StartBase    -= range/2;
     
-    TProfile profileB("profileB","TProfile baseline pol0",range,midValue-range/2,midValue+range/2,"s");
-    TProfile profileErrB("profileErrB","TProfile #sigma_{B} pol0",range,midValue-range/2,midValue+range/2,"s");
-    profileB.SetMinimum(B-1);
-    profileB.SetMaximum(B+1);
+    TCanvas c("c", "Simulations",1200,900);
+    TProfile profileB("profileB","Ricostruzione baseline b (TProfile)",range,midValue-range/2,midValue+range/2,"s");
+        profileB.SetMinimum(B-0.2);
+        //profileB.SetMaximum(B+0.8);
+        profileB.GetXaxis()->SetTitle("canale");
+        profileB.GetYaxis()->SetTitle("baseline");
+    TProfile profileErrB("profileErrB","Incertezza #sigma_{b} (TProfile)",range,midValue-range/2,midValue+range/2,"s");
+        profileErrB.SetMinimum(0.02);
+        //profileErrB.SetMaximum(0.045);
+        profileErrB.GetXaxis()->SetTitle("canale");
+        profileErrB.GetYaxis()->SetTitle("errore");
 
     if ( midValue-range/2 < 0 || midValue+range/2 > 4096 ) { std::cout << "Hai esagerato. Termino..." << std::endl; return 0; }
 
     // ciclo delle simulazioni
-    std::cout << "Run: ";
     ProgressBar bar(Nsim);
     bar.Init();
     for(int j=0; j<Nsim; j++)
     {
         bar.Update(j);
-        for( int i = 0; i < Nsim; i++ ) {
+        for( int i = 0; i < 100; i++ ) {
             
             r.SetSeed(i+1);
     	
@@ -134,17 +143,18 @@ int main( int argc, char* argv[] ) {
             StartBase += range/Nsim;
     }
     
-    total.Draw();
-    
-    TCanvas c("c", "Simulations",1200,900);
     c.Divide(1,2);
     c.cd(1);
-    profileB.Draw();
+    gPad->SetGrid();
+    profileB.Draw("E1");
     TLine l10( profileB.GetXaxis()->GetXmin(), B, profileB.GetXaxis()->GetXmax(), B );
     l10.SetLineColor(kRed);
     l10.Draw();
     c.cd(2);
-    profileErrB.Draw();
+    gPad->SetGrid();
+    profileErrB.Draw("E1");
+
+    c.SaveAs("baselineStart.cc.pdf");
     
     /*TCanvas can("can", "StartBase Analisys",1200,900);
     can.Divide(1,2);

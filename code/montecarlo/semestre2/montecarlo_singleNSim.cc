@@ -30,11 +30,16 @@
 #include "../../ProgressBar/progressbar.h"
 
 // questi valori andranno poi aggiustati (inizio istogramma, inizio baseline, fine istogramma)
-#define	Begin     0	    // inizio istogramma
+#define	Begin     18    // inizio istogramma
 #define StartBase 2600	// punto dell'istogramma in cui comincia la baseline --> FISSATO dai test su fit pol0 della baseline (baselineStart.cc)
 #define End       3904	// fine istogramma
-#define Nsim      500   // numero simulazioni
+#define Nsim      1000   // numero simulazioni
 #define beginFit  860	// inizio fit esponenziale dei muoni lunghi
+
+double m = 5.12162E-03;
+double sm = 8.90761E-06;
+double q = -7.6994E-01;
+double sq = 1.58546E-03;
 
 struct distRange{
     double minimo;
@@ -96,8 +101,8 @@ int main( int argc, char* argv[] ) {
 	double taucorto  = std::stof(args[4]); // valore vero = 172 canali (circa)
 	double R         = std::stof(args[5]); // valore vero: 1.261
 	int RebFactor    = std::stoi(args[6]);
-	double A         = (integrale - B*(End - Begin)) / (tau + taucorto / R);
-    double Aminus    = A/R;
+	double Aminus    = (integrale - B*(End - Begin)) / ( R*tau*exp(-Begin/tau) + taucorto*exp(-Begin/taucorto) );
+    double A         = Aminus*R;
 	
 	TApplication Root("App",&argc,argv);
 	
@@ -182,7 +187,7 @@ int main( int argc, char* argv[] ) {
     	baseline.Rebin(RebFactor);
     	//simulazione primo esponenziale
    	    TH1D exponential("exponential","exponential",4096,0,4096);
-    	for ( int k = 0; k < A*tau; k++ )
+    	for ( int k = 0; k < A*tau*exp(-Begin/tau); k++ )
     	{
     	    val = r.Exp(tau);
     	    while (val<Begin || val>End) val = r.Exp(tau);
@@ -196,7 +201,7 @@ int main( int argc, char* argv[] ) {
 
 		//simulazione secondo esponenziale
 		TH1D exponential2("exponential2", "exponential2", 4096, 0, 4096);
-		for (int k = 0; k < A*taucorto/R; k++)
+		for (int k = 0; k < Aminus*taucorto*exp(-Begin/taucorto); k++)
 		{
 		    entina = r.Exp(taucorto);
 		    while (entina<Begin || entina>End) entina = r.Exp(taucorto);
@@ -319,25 +324,25 @@ int main( int argc, char* argv[] ) {
     distRange rFitErrRL2        = getRange(vFitErrRL2); 
         std::cout << "hFitErrRL2:        [" << rFitErrRL2.minimo << ", " << rFitErrRL2.massimo << "]" << std::endl;
 
-    // creo gli istogrammi delle distribuzioni METODO 2
-    TH1D hFitTauL2 	       ( "hFitTauL2" 	     , "#tau_{+}"          , 40, rFitTauL2.minimo        , rFitTauL2.massimo*1.01 );
-    TH1D hFitTauShortL2    ( "hFitTauShortL2"    , "#tau_{-}"          , 40, rFitTauShortL2.minimo   , rFitTauShortL2.massimo*1.01 );
+    // creo gli istogrammi delle distribuzioni METODO 2 calibrandoli
+    TH1D hFitTauL2 	       ( "hFitTauL2" 	     , "#tau_{+}"          , 40, rFitTauL2.minimo*m        , (rFitTauL2.massimo*m)*1.01 );
+    TH1D hFitTauShortL2    ( "hFitTauShortL2"    , "#tau_{-}"          , 40, rFitTauShortL2.minimo*m   , (rFitTauShortL2.massimo*m)*1.01 );
     TH1D hFitBL2   	       ( "hFitBL2"   	     , "B"                 , 40, rFitBL2.minimo          , rFitBL2.massimo*1.01 );
     TH1D hFitRL2           ( "hFitRL2"           , "R"                 , 40, rFitRL2.minimo          , rFitRL2.massimo*1.01 );   
  
-    TH1D hFitErrTauL2 	   ( "hFitErrTauL2"      , "#tau_{+} - errori" , 40, rFitErrTauL2.minimo     , rFitErrTauL2.massimo*1.01); 
-    TH1D hFitErrTauShortL2 ( "hFitErrTauShortL2" , "#tau_{-} - errori" , 40, rFitErrTauShortL2.minimo, rFitErrTauShortL2.massimo*1.01); 
+    TH1D hFitErrTauL2 	   ( "hFitErrTauL2"      , "#tau_{+} - errori" , 40, sqrt(pow(rFitErrTauL2.minimo*m,2)+pow(rFitTauL2.minimo*sm,2)) , sqrt(pow(rFitErrTauL2.massimo*m,2)+pow(rFitTauL2.massimo*sm,2))*1.01); 
+    TH1D hFitErrTauShortL2 ( "hFitErrTauShortL2" , "#tau_{-} - errori" , 40, sqrt(pow(rFitErrTauShortL2.minimo*m,2)+pow(rFitTauShortL2.minimo*sm,2)),sqrt(pow(rFitErrTauShortL2.massimo*m,2)+pow(rFitTauShortL2.massimo*sm,2))*1.01); 
     TH1D hFitErrBL2 	   ( "hFitErrBL2"        , "B - errori"        , 40, rFitErrBL2.minimo       , rFitErrBL2.massimo*1.01);
     TH1D hFitErrRL2 	   ( "hFitErrRL2"        , "R - errori"        , 40, rFitErrRL2.minimo       , rFitErrRL2.massimo*1.01);
 
     // riempio gli istogrammi METODO 2
-    for ( int i = 0; i < vFitTauL2.size(); i++ )       hFitTauL2.Fill(vFitTauL2[i]);
-    for ( int i = 0; i < vFitTauShortL2.size(); i++ )  hFitTauShortL2.Fill(vFitTauShortL2[i]);
+    for ( int i = 0; i < vFitTauL2.size(); i++ )       hFitTauL2.Fill(vFitTauL2[i]*m);
+    for ( int i = 0; i < vFitTauShortL2.size(); i++ )  hFitTauShortL2.Fill(vFitTauShortL2[i]*m);
     for ( int i = 0; i < vFitBL2.size(); i++ )         hFitBL2.Fill(vFitBL2[i]);
     for ( int i = 0; i < vFitRL2.size(); i++ )         hFitRL2.Fill(vFitRL2[i]);
        
-    for ( int i = 0; i < vFitErrTauL2.size(); i++ )      hFitErrTauL2.Fill(vFitErrTauL2[i]);
-    for ( int i = 0; i < vFitErrTauShortL2.size(); i++ ) hFitErrTauShortL2.Fill(vFitErrTauShortL2[i]);
+    for ( int i = 0; i < vFitErrTauL2.size(); i++ )      hFitErrTauL2.Fill(sqrt(pow(vFitErrTauL2[i]*m,2)+pow(vFitTauL2[i]*sm,2)));
+    for ( int i = 0; i < vFitErrTauShortL2.size(); i++ ) hFitErrTauShortL2.Fill(sqrt(pow(vFitErrTauShortL2[i]*m,2)+pow(vFitTauShortL2[i]*sm,2)));
     for ( int i = 0; i < vFitErrBL2.size(); i++ )        hFitErrBL2.Fill(vFitErrBL2[i]);
     for ( int i = 0; i < vFitErrRL2.size(); i++ )        hFitErrRL2.Fill(vFitErrRL2[i]);
     
@@ -393,13 +398,13 @@ int main( int argc, char* argv[] ) {
     can2.Divide(4,2);
     can2.cd(1);
         hFitTauL2.Draw();
-        TLine lTau2(tau,0,tau,hFitTauL2.GetMaximum());
+        TLine lTau2(tau*m,0,tau*m,hFitTauL2.GetMaximum());
 	    lTau2.SetLineColor(kGreen+3);
 	    lTau2.SetLineWidth(3);
         lTau2.Draw();
     can2.cd(2);
         hFitTauShortL2.Draw();
-        TLine lTauShort2(taucorto,0,taucorto,hFitTauShortL2.GetMaximum());
+        TLine lTauShort2(taucorto*m,0,taucorto*m,hFitTauShortL2.GetMaximum());
 	    lTauShort2.SetLineColor(kGreen+3);
 	    lTauShort2.SetLineWidth(3);
         lTauShort2.Draw();

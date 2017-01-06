@@ -1,7 +1,7 @@
 *.swp
 .DS_store
 log
-./*.pdf
+latex/muon.pdf
 *.aux
 *.toc
 *.lof
@@ -9,9 +9,10 @@ log
 *.out
 *.gz
 *.lot
+*.new
 code/efficiency/eff.workflow
 code/efficiency/*.pdf
-code/calibration/openADC
+code/TAC/openADC
 code/montecarlo/semestre2/plot.pdf
 code/montecarlo/semestre2/savedfits.root
 code/montecarlo/semestre2/montecarlo
@@ -21,8 +22,12 @@ code/montecarlo/semestre2/montecarlo_modifiedforbaseline
 code/montecarlo/semestre2/montecarlo_parallel
 code/montecarlo/semestre2/montecarlo_parallel.cc
 code/montecarlo/semestre2/baselineStart
+code/montecarlo/semestre2/expStart
+code/montecarlo/semestre2/montecarlo1exp
 code/analysis/lifetimeAnalysis
 code/analysis/analisiFinale
 code/analysis/spectrumFit.pdf
 code/analysis/spectrumFit_cal.pdf
 code/montecarlo/semestre2/conf.txt
+latex/img/*.aux
+latex/img/*.log
