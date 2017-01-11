@@ -160,7 +160,7 @@ Inizialmente si è verificato il corretto comportamento della catena TAC + ADC r
 \begin{figure}[h]
   \centering  
   \includestandalone[width=10cm]{img/bkg437}
-  \caption{Prima analisi dello spettro di ritardi temporali con START e STOP artificiali scorrelati; si nota la presenza di un eccesso di eventi indesiderato nell'intervallo $[2200,2700]$ (è stato applicato un rebin di un fattore 12 per evidenziare meglio la situazione).}
+  \caption{Prima analisi dello spettro di ritardi temporali con START e STOP artificiali scorrelati; si nota la presenza di un eccesso di eventi indesiderato nell'intervallo $[2200,2700]$ (è stato applicato un emph{rebin} di un fattore 12 per evidenziare meglio la situazione).}
   \label{rumore1}
 \end{figure}
 %
@@ -283,8 +283,8 @@ Queste due popolazioni vanno ovviamente considerate in maniera separata, sapendo
 L'analisi dati si svolge in base ai seguenti step:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{enumerate}
-	\item si definisce un istogramma con 4096 canali, nel quale inserire tutta la statistica raccolta, assegnando a ciascun bin un contenuto pari alla somma dei contenuti del medesimo canale delle varie acquisizioni (in questo caso 3);
-	\item si stima il fondo come la media tra i contenuti dei bin a partire da quello che, in base alla calibrazione, coincide con $t\sim 4\tau^+$, e tale valore si sottrae al contenuto di ciascun bin;
+	\item si definisce un istogramma con 4096 canali, nel quale inserire tutta la statistica raccolta, assegnando a ciascun \emph{bin} un contenuto pari alla somma dei contenuti del medesimo canale delle varie acquisizioni (in questo caso 3);
+	\item si stima il fondo come la media tra i contenuti dei \emph{bin} a partire da quello che, in base alla calibrazione, coincide con $t\sim 4\tau^+$, e tale valore si sottrae al contenuto di ciascun \emph{bin};
 	\item si definisce la funzione $f(t)=Ae^{-t/\tau}$, dove la variabile indipendente $t$ e $\tau$ si riferiscono a grandezze in canali; quindi si esegue un fit dell'istogramma nella regione dei soli $\mu^+$. Questa operazione permette di ricavare sia la vita media $\tau^+$ sia il parametro $A^+$ dei $\mu^+$; 
 	\item al contenuto di ciascun canale dell'istogramma si sottrae il valore assunto dalla funzione suddetta in corrispondenza del centroide di ciascun canale, in modo tale da ricavare la distribuzione dei soli $\mu^-$;
 	\item si effettua il fit dell'istogramma risultante, ricavando i parametri relativi ai $\mu^-$.
@@ -360,7 +360,7 @@ Lo scopo di questa fase dell'esperimento consiste nella ricerca e messa a punto 
 La prima versione del metodo MC prevede la simulazione di spettri costituiti da solo rumore di fondo (avente una distribuzione uniforme su tutto lo spettro che da ora in avanti chameremo anche \textit{baseline}), attraverso la generazione uniforme di numeri casuali (\lstinline{TRandom3::Uniform(double Begin,double End)}). 
 I metodi testati per la stima della \textit{baseline} sono i seguenti:
 \begin{enumerate}
- \item media aritmetica dei contenuti dei bin dell'istogramma \lstinline{baseline};
+ \item media aritmetica dei contenuti dei \emph{bin} dell'istogramma \lstinline{baseline};
  \item fit con il metodo del $\chi^2$ utilizzando la funzione \lstinline{pol0} (\lstinline{baseline.Fit("pol0")});
  \item metodo della maximum likelihood utilizzando la funzione \newline \lstinline{pol0} (\lstinline{baseline.Fit("pol0","L")}).
 \end{enumerate}
@@ -372,8 +372,8 @@ I metodi testati per la stima della \textit{baseline} sono i seguenti:
 %
 In figura~\ref{fig::baseline_500} è riportato un esempio delle distribuzioni dei valori e degli errori derivanti da simulazioni multiple, stimati con i tre metodi. La linea rossa verticale nei grafici in alto indica il valore vero della \textit{baseline}, ossia il valore con cui sono stati simulati gli spettri, quindi il valore che dovrebbe essere restituito dall'analisi. Come si può notare, la distribuzione dei valori estratta con fit \lstinline{pol0} di tipo $\chi^2$ non è centrata attorno al valore atteso. In questo caso, infatti, la baseline è sistematicamente sottostimata, poichè:
 \begin{enumerate}
- \item il metodo dei minimi quadrati non funziona correttamente per il fit di un istogramma con bin a bassa statistica, per i quali l'assegnazione di errore di tipo poissoniano (cioè la radice del conteggio) presenta delle criticità, in particolare per contenuti nulli;
- \item il fit di una \lstinline{pol0} con il metodo del $\chi^2$ corrisponde esattamente ad una media pesata, nella quale i bin con statistica minore hanno un peso maggiore, con conseguenti valori sottostimati della \textit{baseline}\footnote{Media pesata ed errore:
+ \item il metodo dei minimi quadrati non funziona correttamente per il fit di un istogramma con \emph{bin} a bassa statistica, per i quali l'assegnazione di errore di tipo poissoniano (cioè la radice del conteggio) presenta delle criticità, in particolare per contenuti nulli;
+ \item il fit di una \lstinline{pol0} con il metodo del $\chi^2$ corrisponde esattamente ad una media pesata, nella quale i \emph{bin} con statistica minore hanno un peso maggiore, con conseguenti valori sottostimati della \textit{baseline}\footnote{Media pesata ed errore:
 $$\bar{b}=\frac{\sum_{i=1}^N b_i/\sigma_i^2}{\sum_{i=1}^N 1/\sigma_i^2};
 \hspace{1cm} \sigma_{\bar{b}}=\frac{1}{\sum_{i=1}^N1/\sigma_i^2}$$}.
  
@@ -507,10 +507,10 @@ Per evidenziare queste criticità, si sono fatti variare i parametri in interval
 \end{figure}
 %
 %
-\subsection{Studio del fattore di rebin} \label{parrebin}
-Durante l'analisi, è stata presa in considerazione l'idea di applicare un'operazione di \textit{rebinning} (ovvero la fusione di un certo numero di canali, specificato dal \textit{fattore di rebin}, atta alla creazione di un unico bin che ha come altezza la somma delle precedenti) all'istogramma dei dati, originariamente costituito da 4096 canali, prima dell'operazione di fitting. Il metodo era stato adottato in precedenza (Sez.~\cref{analPrelim}) nell'ambito dell'analisi dati preliminare, e sembrava dare stabilità e maggiore precisione ai risultati del fit: la conseguenza principale del \textit{rebinning} è infatti quella di smorzare le fluttuazioni statistiche, e perciò l'efficacia dell'operazione ai fini del processo di analisi dei dati deve essere sistematicamente investigata.
+\subsection{Studio del fattore di \emph{rebin}} \label{parrebin}
+Durante l'analisi, è stata presa in considerazione l'idea di applicare un'operazione di \textit{rebinning} (ovvero la fusione di un certo numero di canali, specificato dal \textit{fattore di rebin}, atta alla creazione di un unico \emph{bin} che ha come altezza la somma delle precedenti) all'istogramma dei dati, originariamente costituito da 4096 canali, prima dell'operazione di fitting. Il metodo era stato adottato in precedenza (Sez.~\cref{analPrelim}) nell'ambito dell'analisi dati preliminare, e sembrava dare stabilità e maggiore precisione ai risultati del fit: la conseguenza principale del \textit{rebinning} è infatti quella di smorzare le fluttuazioni statistiche, e perciò l'efficacia dell'operazione ai fini del processo di analisi dei dati deve essere sistematicamente investigata.
 
-Innanzitutto, si è applicato l'algoritmo a simulazioni Monte Carlo convergenti e accurate con valori del fattore di rebin pari a 2, 4, 8, 16, non riscontrando miglioramenti evidenti nella ricostruzione dei paramentri di fit, nonché nella larghezza delle loro distribuzioni. Si è quindi proceduto a verificare l'eventualità in cui un'operazione di \textit{rebinning} possa rendere convergente un fit non convergente, attestando anche in questo frangente una sostanziale ininfluenza del metodo.
+Innanzitutto, si è applicato l'algoritmo a simulazioni Monte Carlo convergenti e accurate con valori del fattore di \emph{rebin} pari a 2, 4, 8, 16, non riscontrando miglioramenti evidenti nella ricostruzione dei paramentri di fit, nonché nella larghezza delle loro distribuzioni. Si è quindi proceduto a verificare l'eventualità in cui un'operazione di \textit{rebinning} possa rendere convergente un fit non convergente, attestando anche in questo frangente una sostanziale ininfluenza del metodo.
 
 In conclusione si può tranquillamente assumere l'operazione di \textit{rebinning} come assolutamente ininfluente ai fini dell'analisi dati.
 %
