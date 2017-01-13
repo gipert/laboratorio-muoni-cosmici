@@ -1,3 +1,6 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\begin{document}
 \begin{tikzpicture}
 \pgfdeclareplotmark{cross} {
 \pgfpathmoveto{\pgfpoint{-0.3\pgfplotmarksize}{\pgfplotmarksize}}
@@ -120,7 +123,7 @@
 \draw [color=c, fill=c] (15.6876,0.997067) rectangle (15.7516,4.01035);
 \definecolor{c}{rgb}{0,0,0};
 \draw [c,line width=0.9] (1.99414,0.997067) -- (17.9912,0.997067);
-\draw [anchor= east] (17.9912,0.439531) node[scale=0.781573, color=c, rotate=0]{Ampiezza del range di variazione dei parametri (\%)};
+\draw [anchor= east] (17.9912,0.439531) node[scale=0.981573, color=c, rotate=0]{Ampiezza del range di variazione dei parametri (\%)};
 \draw [anchor=north] (3.59384,0.870821) node[scale=0.749007, color=c, rotate=0]{10};
 \draw [anchor=north] (6.79326,0.870821) node[scale=0.749007, color=c, rotate=0]{20};
 \draw [anchor=north] (9.99267,0.870821) node[scale=0.749007, color=c, rotate=0]{30};
@@ -330,3 +333,4 @@
 \draw [c,line width=0.9] (14.7091,7) -- (14.7091,7.3695);
 \draw [c,line width=0.9] (14.2242,7) -- (14.2242,7.3695);
 \end{tikzpicture}
+\end{document}

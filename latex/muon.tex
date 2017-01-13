@@ -467,9 +467,7 @@ In questa fase si intende testare il metodo su distribuzioni simulate con divers
 %
 \begin{figure}[b!]
   \centering
-  \begin{adjustbox}{width=\linewidth}
-  \input{img/single}
-  \end{adjustbox}
+  \includestandalone[width=\linewidth]{img/single}
   \caption{Esempio di distribuzioni dei valori estratti dal fit dei singoli parametri e dei relativi errori, derivanti da 500 simulazioni con parametri impostati ai valori fisici; le linee verdi indicano il valore di ogni parametro di \textit{input}. La statistica relativa ad ogni singolo spettro è comparabile con quella di 1 settimana di acquisizione ($ 80000$ eventi, $b\sim1$). L'efficienza finale del metodo per questa specifica simulazione è del $96.8\%$, il che vuol dire che in 16 (su 500) simulazioni almeno uno dei parametri ($\tau^+$, $\tau^-$, $R$) non ha rispettato almeno una condizione di quelle elencate; per questo passaggio, non si è indagato quale parametro o quale condizione fallisse, ritenendosi soddisfatti dall'alta efficienza raggiunta.}
   \label{fig::esempio_set_simulazioni}
  \end{figure}
@@ -500,6 +498,7 @@ Per evidenziare queste criticità, sono stati variati i parametri in intervalli 
 %
 \begin{figure}[H]
   \centering
+  %\includegraphics[width=\linewidth+1cm]{img/matrix_5run.pdf}
   \includestandalone[width=\linewidth+1cm]{img/matrix_5run}
   \caption{Efficienza del metodo per una variazione dei parametri dal $10 \%$ al $50\%$ rispetto al valore fisico; si noti l'andamento decrescente all'aumentare del range di variazione.}
   \label{fig:finalematrix}
