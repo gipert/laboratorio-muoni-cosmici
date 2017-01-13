@@ -59,6 +59,7 @@ stringstyle=\color{orange}}				% Colori delle righe di codice
 \renewcommand{\theta}{\vartheta}			%
 \renewcommand{\rho}{\varrho}				%
 \renewcommand{\phi}{\varphi}				%
+\renewcommand{\d}{\mathrm{d}}
 
 \usepackage{cleveref}					 % Per avere il simbolo di paragrafo come referenza
 \crefname{section}{§}{§§}
@@ -350,65 +351,56 @@ In figura~\ref{fig::histo} viene riportato il grafico degli eventi raccolti, dov
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \cleardoublepage
 \section{Simulazione Monte Carlo e analisi dati}
-Lo scopo di questa fase dell'esperimento consiste nella ricerca e messa a punto di un metodo sperimentale di analisi degli spettri raccolti. Il lavoro si suddivide in due step:
+Lo scopo di questa fase dell'esperimento consiste nella ricerca e messa a punto di un metodo sperimentale di analisi degli spettri raccolti. Il lavoro si suddivide in due passaggi:
 \begin{enumerate}
- \item sviluppare un codice di simulazione Monte Carlo (MC) in ambiente ROOT nel quale si simulano molti spettri di decadimento dei muoni cosmici in un range utile di circa 3900 canali, in accordo con gli spettri acquisiti. Gli istogrammi simulati vengono quindi utilizzati per testare diversi metodi di fit per l'estrazione dei parametri fisici;
- \item utilizzare il metodo di fit stabilito nello step precedente per estrarre $\tau^+$, $\tau^-$ e $R=N^+/N^-$ dagli spettri raccolti.
+ \item sviluppare un codice di simulazione Monte Carlo in ambiente ROOT nel quale si simulano molti spettri di decadimento dei muoni cosmici in un intervallo utile di circa 3900 canali, in accordo con quelli acquisiti. Gli istogrammi simulati vengono quindi utilizzati per studiare diversi metodi di fit per l'estrazione dei parametri fisici;
+ \item utilizzare il metodo di fit stabilito nel passaggio precedente per estrarre $\tau^+$, $\tau^-$ e $R=N^+/N^-$ dagli spettri raccolti.
 \end{enumerate}
 %
 \subsection{Simulazione del fondo}
-La prima versione del metodo MC prevede la simulazione di spettri costituiti da solo rumore di fondo (avente una distribuzione uniforme su tutto lo spettro che da ora in avanti chameremo anche \textit{baseline}), attraverso la generazione uniforme di numeri casuali (\lstinline{TRandom3::Uniform(double Begin,double End)}). 
-I metodi testati per la stima della \textit{baseline} sono i seguenti:
+La prima versione del metodo Monte Carlo prevede la simulazione di spettri costituiti da solo rumore di fondo (detto \textit{baseline}, avente una distribuzione uniforme su tutto l'intervallo), attraverso la generazione uniforme di numeri casuali tramite la funzione \lstinline{TRandom3::Uniform}. I metodi studiati per la stima della \textit{baseline} sono i seguenti:
 \begin{enumerate}
- \item media aritmetica dei contenuti dei \emph{bin} dell'istogramma \lstinline{baseline};
- \item fit con il metodo del $\chi^2$ utilizzando la funzione \lstinline{pol0} (\lstinline{baseline.Fit("pol0")});
- \item metodo della maximum likelihood utilizzando la funzione \newline \lstinline{pol0} (\lstinline{baseline.Fit("pol0","L")}).
+ \item media aritmetica dei contenuti dei \emph{bin} dell'istogramma;
+ \item fit con il metodo del $\chi^2$ utilizzando la funzione \lstinline{pol0} (\lstinline{TH1::Fit("pol0")});
+ \item metodo della \textit{maximum likelihood} utilizzando la funzione \lstinline{pol0} \newline (\lstinline{TH1::Fit("pol0","L")}).
 \end{enumerate}
+
+In figura~\ref{fig::baseline_500} è riportato un esempio delle distribuzioni dei valori e degli errori derivanti da simulazioni multiple, stimati con i tre metodi. La linea rossa verticale nei grafici indica il valore vero della \textit{baseline}, ossia quello con cui sono stati simulati gli spettri, e perciò la stima che dovrebbe essere restituita dall'analisi. Come si può notare, la distribuzione dei valori estratta con fit \lstinline{pol0} con il metodo del $\chi^2$ non è centrata attorno al valore atteso: in questo caso, infatti, la \textit{baseline} è sistematicamente sottostimata, poichè il metodo dei minimi quadrati non funziona correttamente per il fit di un istogramma con \emph{bin} a bassa statistica. Inoltre, il fit di una \lstinline{pol0} con il metodo del $\chi^2$ corrisponde esattamente ad una media pesata, nella quale i \emph{bin} con statistica minore hanno un peso maggiore, con conseguenti valori sottostimati della \textit{baseline}\footnote{Media pesata e relativo errore:
+$$\bar{b}=\frac{\sum_{i=1}^N b_i/\sigma_i^2}{\sum_{i=1}^N 1/\sigma_i^2};
+\hspace{1cm} \sigma_{\bar{b}}=\frac{1}{\sum_{i=1}^N1/\sigma_i^2}$$}. In virtù di queste considerazioni, il metodo di fit del $\chi^2$ è stato scartato. 
+
+Le distribuzioni relative agli errori statistici sulla \textit{baseline} sono utili per controllare che le stime dei valori non abbiano dispersione troppo elevata attorno al valor medio; in altre parole, si effettua il confronto tra la $\sigma$ delle gaussiane dei valori e il centroide $\overline{\sigma_{b}}$ delle gaussiane degli errori, controllando che $\sigma\lesssim \overline{\sigma_{b}}$. Questa condizione risulta soddisfatta nelle simulazioni in esame e garantisce che non si stia introducendo alcuna componente sistematica di errore. Dato che inoltre risulta che il metodo della media ha una dispersione attorno al centroide leggermente più alta rispetto al metodo della \textit{likelihood}, si preferisce da qui in poi l'utilizzo di quest'ultimo.
 %
 \begin{figure}[H]
  \centerline{\includestandalone[width=\linewidth+1cm]{img/baseline}}
- \caption{Distribuzioni delle stime della \textit{baseline} con i tre metodi differenti, sia per i valori sia per gli errori (500 simulazioni). La \textit{baseline} generata in queste simulazioni ha altezza 10.}\label{fig::baseline_500}
+ \caption{Distribuzioni delle stime della \textit{baseline} con i tre metodi differenti, sia per i valori sia per i relativi errori (500 simulazioni). La \textit{baseline} generata in queste simulazioni ha altezza 10 conteggi.}\label{fig::baseline_500}
 \end{figure}
 %
-In figura~\ref{fig::baseline_500} è riportato un esempio delle distribuzioni dei valori e degli errori derivanti da simulazioni multiple, stimati con i tre metodi. La linea rossa verticale nei grafici in alto indica il valore vero della \textit{baseline}, ossia il valore con cui sono stati simulati gli spettri, quindi il valore che dovrebbe essere restituito dall'analisi. Come si può notare, la distribuzione dei valori estratta con fit \lstinline{pol0} di tipo $\chi^2$ non è centrata attorno al valore atteso. In questo caso, infatti, la baseline è sistematicamente sottostimata, poichè:
-\begin{enumerate}
- \item il metodo dei minimi quadrati non funziona correttamente per il fit di un istogramma con \emph{bin} a bassa statistica, per i quali l'assegnazione di errore di tipo poissoniano (cioè la radice del conteggio) presenta delle criticità, in particolare per contenuti nulli;
- \item il fit di una \lstinline{pol0} con il metodo del $\chi^2$ corrisponde esattamente ad una media pesata, nella quale i \emph{bin} con statistica minore hanno un peso maggiore, con conseguenti valori sottostimati della \textit{baseline}\footnote{Media pesata ed errore:
-$$\bar{b}=\frac{\sum_{i=1}^N b_i/\sigma_i^2}{\sum_{i=1}^N 1/\sigma_i^2};
-\hspace{1cm} \sigma_{\bar{b}}=\frac{1}{\sum_{i=1}^N1/\sigma_i^2}$$}.
- 
-\end{enumerate}
-In virtù di queste considerazioni, il metodo di fit del $\chi^2$ è stato dunque scartato. 
-Gli spettri relativi agli errori statistici sulla \textit{baseline} sono utili per controllare che le distribuzioni dei valori non siano troppo disperse. In altre parole, si effettua il confronto tra la $\sigma$ delle gaussiane dei valori e il centroide $\overline{\sigma_{b}}$ delle gaussiane degli errori, controllando che $\sigma\lesssim \overline{\sigma_{b}}$, condizione soddisfatta nelle simulazioni in esame. 
-
-Dato che inoltre risulta che il metodo della media ha una dispersione attorno al centroide leggermente più alta rispetto al metodo della likelihood, si preferisce da qui in poi l'utilizzo di quest'ultimo.
-
-%
 \subsection{Simulazione del fondo e del primo esponenziale} \label{bexp}
-Una seconda versione del metodo Monte Carlo prevede di studiare una distribuzione contenente un termine costante e un termine esponenziale. 
+La fase successiva dello sviluppo del metodo Monte Carlo prevede di studiare una distribuzione contenente un termine costante sommato a un termine esponenziale: 
 \begin{equation}
- f(t;A,\tau,b)=Ae^{-\frac{t}{\tau}}+b .
+ f(t;A,\tau,b)=Ae^{-\frac{t}{\tau}}+b \ .
  \label{eq::exp_plus_base}
 \end{equation}
-Per la costruzione delle distribuzioni si è scelto di generare indipendentemente la distribuzione uniforme con \lstinline{TRandom3::Uniform} e la distribuzione esponenziale con \lstinline{TRandom3::Exp}, per poi sommarle. Avendo stabilito che il metodo della maximum likelihood è il più stabile e predittivo si sono studiati diversi approcci al fit della distribuzione:
+Per la costruzione degli spettri si è scelto di generare indipendentemente la distribuzione uniforme con \lstinline{TRandom3::Uniform} e la distribuzione esponenziale con \lstinline{TRandom3::Exp}, per poi sommarle. Avendo stabilito che il metodo della \textit{maximum likelihood} è il più accurato si sono studiati diversi approcci al fit degli spettri:
 \begin{enumerate}
   \item fit diretto con la funzione completa impostando $\tau$ al valore vero e lasciando $A$ e $b$ non inizializzati;
-  \item fit di tipo \lstinline{pol0} della parte finale dello spettro per la stima di $b$, utilizzata in secondo luogo per inizializzare il corrispondente parametro nel fit con la funzione completa del metodo precedente;
+  \item fit di tipo \lstinline{pol0} della parte finale dello spettro per la stima di $b$, utilizzata in secondo luogo per inizializzare il corrispondente parametro del fit nella funzione completa del metodo precedente;
   \item fit di tipo \lstinline{pol0} della parte finale dello spettro per la stima di $b$, quindi sottrazione della componente costante della distribuzione e successivo fit puramente esponenziale.
 \end{enumerate}
-Dei tre metodi il secondo si è rivelato il più stabile; un fit a tre parametri, infatti, necessita di valori di partenza che siano sufficientemente vicini al valore vero affinchè l'algoritmo di massimizzazione della likelihood vada a convergenza correttamente, e ciò ci porta a scartare il primo metodo, poco stabile con valori iniziali distanti dal valore vero. Anche il terzo metodo presenta delle criticità aggiuntive rispetto al secondo: in primo luogo una sottrazione di dati a bassa statistica può facilmente portare ad avere canali a contenuto negativo (privo di significato fisico); in secondo luogo, come si può notare dalla figura~\ref{baselinestart}, il fit della \textit{baseline} sovrastima il valore di $b$ e perciò la sottrazione porterebbe certamente a un errore sistematico nel fit successivo.
+Dei tre metodi, il secondo si è rivelato il più stabile: un fit a tre parametri come nel primo metodo, infatti, necessita di inizializzare i valori di partenza in modo che siano sufficientemente vicini a quello vero affinchè l'algoritmo di massimizzazione della \textit{likelihood} vada a convergenza correttamente; ciò porta a preferirgli il secondo metodo, più stabile con valori iniziali distanti dal valore vero. Anche il terzo metodo presenta delle criticità rispetto al secondo: in primo luogo, una sottrazione di dati può facilmente portare ad avere canali a contenuto negativo (privi di significato fisico); in secondo luogo, come si può notare dalla figura~\ref{baselinestart}, il fit della \textit{baseline} sovrastima il valore di $b$ e perciò la sottrazione potrebbe comportare un errore sistematico nel fit successivo.
 
-L'adozione del secondo metodo richiede la scelta del canale (valore di ritardo temporale) dal quale far iniziare il fit della porzione di \textit{baseline}: si è quindi proceduto a eseguire uno studio sistematico dei risultati al variare di questo estremo inferiore, confrontando le medie su più simulazioni (figura~\ref{baselinestart}). Dal grafico è evidente come la riscostruzione sia più precisa ma meno accurata per piccoli valori e di come la situazione si inverta per grandi valori. A priori si potrebbe scegliere un valore che rappresenti la via di mezzo tra queste due situazioni, ma a posteriori, studiando la ricostruzione di $b$ e $\tau^+$ dopo il fit esponenziale del metodo 2, si è verificato con varie prove come la scelta di questo valore iniziale sia del tutto ininfluente sulla bontà della convergenza ai parametri impostati in input.
+L'adozione del secondo metodo richiede la scelta del canale (valore di ritardo temporale) dal quale far iniziare il fit della porzione di \textit{baseline}: si è quindi proceduto a eseguire uno studio sistematico dei risultati al variare di questo estremo inferiore, confrontando le medie su più simulazioni (figura~\ref{baselinestart}). Dal grafico è evidente come la riscostruzione sia più precisa, ma meno accurata, per piccoli valori dell'estremo, e di come la situazione si inverta per grandi valori di esso. A priori si potrebbe scegliere un valore che rappresenti la via di mezzo tra queste due situazioni, ma a posteriori, studiando la ricostruzione di $b$ e $\tau^+$ dopo il fit esponenziale del metodo 2, si è verificato con varie prove come la scelta di questo valore iniziale sia del tutto ininfluente sulla bontà della convergenza ai parametri impostati in \textit{input}.
 %
 \begin{figure}[h]
   \centerline{\includestandalone[width=\linewidth+1cm]{img/tprofile}}
-  \caption{Studio della ricostruzione della \textit{baseline} $b$ al variare del punto di inizio del fit costante di tipo \texttt{pol0}: in alto i valori ottenuti (la linea rossa rappresenta il valore vero) e in basso i rispettivi errori. Le barre di errore rappresentano la deviazione standard del campione di 100 simulazioni utilizzato. I dati utilizzati nella generazione corrispondono a 1 settimana di acquisizione.}\label{baselinestart}
+  \caption{Studio della ricostruzione della \textit{baseline} $b$ al variare del punto di inizio del fit di tipo \texttt{pol0}: in alto i valori ottenuti (la linea rossa rappresenta il valore vero) e in basso i rispettivi errori. Le barre di errore rappresentano la deviazione standard del campione di 100 simulazioni. I dati utilizzati nella generazione corrispondono a 1 settimana di acquisizione.}\label{baselinestart}
 \end{figure}
 %
 \subsection{Simulazione del fondo e di entrambi gli esponenziali}
 Il metodo Monte Carlo prevede ora di studiare una distribuzione contenente un termine costante di \textit{baseline} e due esponenziali:
 \begin{equation}
- f(t;A_+,\tau^+,A_-,\tau^-, b)=A_-e^{-\frac{t}{\tau^-}}+A_+e^{-\frac{t}{\tau^+}}+b
+ f(t;A_+,\tau^+,A_-,\tau^-, b)=A_-e^{-\frac{t}{\tau^-}}+A_+e^{-\frac{t}{\tau^+}}+b\ .
  \label{eq::funzione_fit_finale}
 \end{equation}
 La distribuzione esponenziale relativa ai $\mu^-$ viene generata con \lstinline{TRandom3::Exp} separatamente da quella dell'esponenziale dei $\mu^+$ e della \textit{baseline}, sommando infine le distribuzioni in un unico istogramma, come nel paragrafo~\cref{bexp}. 
@@ -419,37 +411,35 @@ L'adozione del metodo 2 descritto in precedenza prevede uno studio accurato del 
   \caption{Studio della stima di $\tau_+$ al variare del punto di inizio del fit $A_+e^{-\frac{t}{\tau^+}}+b$. La linea rossa rappresenta il valore vero impostato nella simulazione. Le barre d'errore rappresentano la deviazione standard del campione di 100 simulazioni utilizzate. I dati utilizzati nella generazione corrispondono a 5 settimane di acquisizione.}
   \label{fig::tauplusstart}
 \end{figure}
-Come riportato in figura~\ref{fig::tauplusstart}, il fit \textit{baseline}+esponenziale produce un valore di $\tau^+$ che è sempre sottostimato rispetto al valore vero: perciò, non essendovi alcun caso particolare, come estremo inferiore di fit di questa funzione si è scelto un valore in canali corrispondente a $5\tau^-  {\raise.17ex\hbox{$\scriptstyle\sim$}} \  4.4  \ \mu s$, dopo il quale la popolazione di $\mu^+$ è pressochè assente.
+Come riportato in figura~\ref{fig::tauplusstart}, questo fit produce un valore di $\tau^+$ che è sempre sottostimato rispetto al valore vero: tuttavia, dato che si è verificato come la scelta di questo estremo non influenzi il fit successivo (comprendente anche il secondo esponenziale), si è scelto un valore in canali corrispondente a $5\tau^-\sim4.4\ \mu$s, dopo il quale la popolazione di $\mu^+$ è pressochè assente.
 
-Iil metodo di fit messo a punto prevede i seguenti step:
+Il metodo di fit messo a punto prevede i seguenti passaggi:
 \begin{enumerate}
- \item fit (\lstinline{pol0}) della coda dello spettro con estrazione del valore preliminare $B$ per la \textit{baseline};
- \item definizione della funzione \lstinline{TH1 f1} corrispondente alla formula~\ref{eq::exp_plus_base}, \emph{setting} del parametro $b$ al valore derivante dal fit del punto precedente (\lstinline{f1.SetParameter("b",B)}) e realizzazione del fit dell'istogramma con \lstinline{f1} a partire da un ritardo di $5\tau^-$ (in questo modo si ottengono le stime intermedie $\widetilde{\tau}$  e $\widetilde{B}$ per i parametri $\tau^+$ e \textit{baseline}, rispettivamente);
- \item definizione della funzione complessiva di fit \lstinline{TH1 f} corrispondente alla formula~\ref{eq::funzione_fit_finale}, \emph{setting} dei parametri $\tau^+$ e \textit{baseline} ai valori  $\widetilde{\tau}$  e $\widetilde{B}$ e, infine, fit dell'istogramma con la funzione \lstinline{f}, con estrazione dei valori definitivi dei parametri. 
+ \item fit di tipo \lstinline{pol0} della coda dello spettro con estrazione del valore preliminare $B$ per la \textit{baseline};
+ \item definizione della funzione corrispondente alla formula~\ref{eq::exp_plus_base}, inizializzazione del parametro $b$ al valore $B$ derivante dal fit del punto precedente (\lstinline{TF1::SetParameter("b",B)}) e realizzazione del fit dell'istogramma a partire da un ritardo di $5\tau^-$ (in questo modo si ottengono le stime intermedie $\widetilde{\tau}$  e $\widetilde{B}$ per i parametri $\tau^+$ e $b$, rispettivamente);
+ \item definizione della funzione complessiva di fit corrispondente alla formula~\ref{eq::funzione_fit_finale},inizializzazione dei parametri $\tau^+$ e $b$ ai valori  $\widetilde{\tau}$ e $\widetilde{B}$ e, infine, fit dell'istogramma, con estrazione dei valori definitivi dei parametri. 
 %
 \end{enumerate}  
-Concludendo, la generazione degli spettri utilizza i seguenti parametri di input:
-$$\tau^+,\tau^-,R,b,I$$
-dove $I$ è l'integrale della distribuzione. Questi parametri sono tra loro legati dalle seguenti relazioni:
-\begin{equation}
- \begin{cases}
-  I = \int\limits_{t_0}^\infty f(t) = A_-\tau^-e^{-t_0 / \tau^-} + A_+\tau^+e^{-t_0 / \tau^+} + b\cdot r \\
-  R = \frac{A^+}{A^-} \\
- \end{cases}
- \label{eq::condizioni_parametri}
-\end{equation}
+Concludendo, la generazione degli spettri utilizza i parametri di \textit{input} $\{\tau^+,\tau^-,R,b,I\}$, dove $I$ è l'integrale della distribuzione. Questi parametri sono tra loro legati dalle seguenti relazioni:
+\begin{equation*}
+  \begin{cases}
+    I = \int\limits_{t_0}^\infty f(t)dt = A_-\tau^-e^{-t_0 / \tau^-} + A_+\tau^+e^{-t_0 / \tau^+} + b\cdot r \\
+    R = \frac{A^+}{A^-} \\
+  \end{cases}
+  \label{eq::condizioni_parametri}
+\end{equation*}
 dove 
 \begin{itemize}
- \item $f(t) = dN/dt$ corrisponde alla formula~\ref{eq::funzione_fit_finale};
- \item $t_0$ corrisponde all'istante in cui l'istogramma inizia (per una discussione più completa riguardo a questo valore si rimanda al paragrafo~\cref{analisireale};
+ \item $f(t) = \d N/\d t$ corrisponde alla formula~\ref{eq::funzione_fit_finale};
+ \item $t_0$ corrisponde all'istante in cui inizia l'istogramma (per una discussione più completa riguardo a questo valore si rimanda al paragrafo~\cref{analPrelim});
  \item $r$ è il range dell'istogramma (circa 4000 canali);
- \item $I$ e $b$ sono vincolati, in quanto uno sguardo approssimativo allo spettro reale suggerisce che una settimana di acquisizione corrisponde a circa 80000 eventi e a $b \ {\raise.17ex\hbox{$\scriptstyle\sim$}} \ 1 $.
+ \item $I$ e $b$ sono vincolati, in quanto uno sguardo allo spettro reale suggerisce che una settimana di acquisizione corrisponde a circa 80000 eventi e a $b\sim1 $.
 \end{itemize}
-Di seguito viene riportato un esempio di spettro generato e fittato come descritto.
+Di seguito viene riportato un esempio di spettro generato e analizzato come descritto.
 
 \begin{figure}[h]
  \centerline{\includestandalone[width=\linewidth+1cm]{img/example_single_spectrum}}
- \caption{Esempio di istogramma simulato con statistica associata a 5 settimane di acquisizione (\textit{baseline} $\sim 5$) con sovrapposta la funzione di fit corrispondente. I parametri di input $\tau^+$, $\tau^-$ e R sono quelli della letteratura.}
+ \caption{Esempio di istogramma simulato con statistica associata a 5 settimane di acquisizione ($b\sim5$) con sovrapposta la funzione di fit corrispondente. I parametri di input $\tau^+$, $\tau^-$ e $R$ sono quelli della letteratura.}
  \label{fig::esempio_spettro_simulato}
 \end{figure}
 %
