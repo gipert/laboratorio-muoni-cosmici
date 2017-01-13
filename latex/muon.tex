@@ -89,6 +89,15 @@ Luigi Pertoldi \;\,\,[1128283] \texttt{luigi.pertoldi@studenti.unipd.it}
 \listoftables
 %
 \clearpage
+\section{Introduzione}
+L'esperimento si prefigge di registrare il flusso dei muoni cosmici prodotti in atmosfera principalmente dal processo $\pi^+\to\mu^+\nu_\mu$ (e CP coniugato) e studiarne il decadimento in alluminio. All'interno dell'apparato le suddette particelle si comportano in maniera differente in base alla loro carica: i $\mu^+$ decadono unicamente nel canale
+\[\mu^+\to e^+\bar{\nu}_\mu\nu_e\ ,\]
+mentre i $\mu^-$ possono anche incorrere nel processo di formazione di un atomo mesico, sostituendosi cioè all'elettrone, con una conseguente diminuzione della vita media.
+
+Il flusso dei muoni in funzione dell'angolo azimutale $\theta$ segue una legge del tipo 
+\[I(\theta)=I_0\cos^2\theta\ ,\]
+con $I_0\sim130\ \text{m}^{-2}\text{s}^{-1}$ a livello del mare !!!ref PDG.
+%
 \section{Apparato sperimentale}
 La parte dell'apparato addetta alla rivelazione dei raggi cosmici (figura~\ref{appScheme}) consiste di cinque barre (\emph{slab}) di materiale plastico poste parallelamente al terreno ($182 \text{ cm}\times21\text{ cm}\times2.58$ cm), distanti 8 cm tra loro, e altre quattro perpendicolari al terreno poste ai lati ($250\text{ cm}\times21\text{ cm}\times2.58$ cm) a chiusura dell'apparato. Le \emph{slab} centrali sono accoppiate alle estremità a due fotomoltiplicatori e sono intervallate da spessori di alluminio di 2 cm; quelle laterali fanno invece riferimento a un unico fotomoltiplicatore presente a una sola estremità. Uno strato formato da lastre di piombo per un totale di circa 1 t ricopre infine la parte superiore dell'apparato: il loro scopo è minimizzare la presenza di altre particelle meno energetiche oltre ai muoni e di frenare questi ultimi al fine di osservarne il decadimento all'interno dell'apparato.
 %
@@ -161,7 +170,7 @@ Inizialmente si è verificato il corretto comportamento della catena TAC + ADC r
 \begin{figure}[h]
   \centering  
   \includestandalone[width=10cm]{img/bkg437}
-  \caption{Prima analisi dello spettro di ritardi temporali con START e STOP artificiali scorrelati; si nota la presenza di un eccesso di eventi indesiderato nell'intervallo $[2200,2700]$ (è stato applicato un emph{rebin} di un fattore 12 per evidenziare meglio la situazione).}
+  \caption{Prima analisi dello spettro di ritardi temporali con START e STOP artificiali scorrelati; si nota la presenza di un eccesso di eventi indesiderato nell'intervallo $[2200,2700]$ (è stato applicato un \emph{rebin} di un fattore 12 per evidenziare meglio la situazione).}
   \label{rumore1}
 \end{figure}
 %
@@ -444,73 +453,73 @@ Di seguito viene riportato un esempio di spettro generato e analizzato come desc
 \end{figure}
 %
 \subsection{Test multipli del metodo di fit}
+Sino ad ora, si è testato e messo a punto il metodo di fit sulla base di spettri simulati con i valori attesi dei parametri, in particolare $\tau^+  \simeq 2.19  \ \mu s$ $(\sim 429$ canali$)$, $\tau^- \simeq 0.86 \  \mu s$ $(\sim 172$ canali$)$ e $R\simeq1.26$. 
+In questa fase si intende testare il metodo su distribuzioni simulate con diversi valori in \textit{input}, anche senza alcun senso fisico: lo scopo è quello di avvalorarne la correttezza, verificando cioè che esso sia in grado di restituire in \textit{output} stime dei parametri compatibili con i valori in \textit{input}.
 
-Sino ad ora, si è testato e messo a punto il metodo di fit sulla base di spettri simulati con i valori attesi dei parametri, in particolare $\tau^+  \simeq 2.2  \ \mu s$ $(\sim 429$ canali$)$, $\tau^- \simeq 0.8 \  \mu s$ $(\sim 172$ canali$)$ e $R\simeq1.26$. 
-In questa fase si intende testare il metodo su distribuzioni simulate con diversi valori di \textit{input}, anche senza alcun senso fisico: lo scopo è quello di avvalorarne la correttezza, verificando cioè che esso sia in grado di restituire in \textit{output} stime dei parametri compatibili con i valori messi in \textit{input} alle simulazioni. % evitando che, per esempio, esso dia stime dei parametri quelle sopra elencate seppur con valori in \textit{input} completamente diversi. 
-
-La strategia adottata si sviluppa in due fasi:
+\newpage La strategia adottata si sviluppa in due fasi:
 \begin{enumerate}
- \item fissato un set di parametri di \textit{input}, si generano 500 spettri che vengono poi fittati con il metodo precedentemente descritto. Le stime dei parametri fornite dal fit e i relativi errori vengono immagazzinati all'interno di nuovi istogrammi; ci si aspetta che questi siano centrati attorno al valore del parametro inserito in \textit{input} alla simulazione. Tali istogrammi vengono riempiti esclusivamente dai fit che restituiscano stime dei parametri soddisfacenti le seguenti condizioni di qualità:
+ \item fissato un insieme di parametri di \textit{input}, si generano 500 spettri di cui viene in seguito effettuato il fit con il metodo precedentemente descritto. Le stime dei parametri fornite dal fit e i relativi errori vengono immagazzinati all'interno di nuovi istogrammi; ci si aspetta che questi siano centrati attorno al valore del parametro inserito in \textit{input} alla simulazione. Tali istogrammi vengono riempiti esclusivamente dai fit che restituiscono stime dei parametri soddisfacenti le seguenti condizioni di qualità:
  \begin{enumerate}
   \item errore relativo inferiore al $20\%$;
   \item compatibilità con il valore atteso entro le $3\sigma$. 
  \end{enumerate}
- Se le stime del fit di uno spettro non soddisfano almeno una di queste condizioni per almeno uno dei parametri $\tau^+$, $\tau^-$ e $R$, nessuno degli istogrammi viene riempito per quella particolare simulazione, della qualche quindi non si mantiene memoria; si riporta un esempio in figura \ref{fig::esempio_set_simulazioni}.
- \begin{figure}
+ Se le stime del fit di uno spettro non soddisfano almeno una di queste condizioni per almeno uno dei parametri $\tau^+$, $\tau^-$ e $R$, nessuno degli istogrammi viene riempito per quella particolare simulazione; si riporta un esempio in figura \ref{fig::esempio_set_simulazioni}.
+%
+\begin{figure}[b!]
   \centering
   \begin{adjustbox}{width=\linewidth}
   \input{img/single}
   \end{adjustbox}
-  \caption{Esempio di distribuzioni dei valori estatti dal fit dei singoli parametri e dei relativi errori, derivanti da 500 simulazioni con parametri settati ai valori fisici. Le linee verdi indicano il valore di ogni parametro messo in \textit{input} alle simulazioni. La statistica relativa ad ogni singolo spettro è comparabile con quella di 1 settimana di acquisizione ($ 80000$ eventi, \textit{baseline} $\sim 1$). L'efficienza finale del metodo per questa specifica simulazione è del $96.8\%$, il che vuol dire che in 16 (su 500) simulazioni almeno uno dei parametri non ha rispettato almeno una condizione di quelle elencate; per questo passaggio, non si è indagato quale parametro o quale condizione fallisse, ritenendosi soddisfatti dall'alta efficienza raggiunta.}
+  \caption{Esempio di distribuzioni dei valori estratti dal fit dei singoli parametri e dei relativi errori, derivanti da 500 simulazioni con parametri impostati ai valori fisici; le linee verdi indicano il valore di ogni parametro di \textit{input}. La statistica relativa ad ogni singolo spettro è comparabile con quella di 1 settimana di acquisizione ($ 80000$ eventi, $b\sim1$). L'efficienza finale del metodo per questa specifica simulazione è del $96.8\%$, il che vuol dire che in 16 (su 500) simulazioni almeno uno dei parametri ($\tau^+$, $\tau^-$, $R$) non ha rispettato almeno una condizione di quelle elencate; per questo passaggio, non si è indagato quale parametro o quale condizione fallisse, ritenendosi soddisfatti dall'alta efficienza raggiunta.}
   \label{fig::esempio_set_simulazioni}
  \end{figure}
  
- \item Si ripete la procedura del punto precedente con \textit{sample} da 500 simulazioni ottenuti con parametri di \textit{input} di volta in volta diversi. Ogni \textit{sample} contribuisce all'efficienza complessiva sulla base dei valori di $\tau^+$, $\tau^-$ e $R$ corrispondenti ai centroidi delle distribuzioni dei valori, ai quali, come incertezza, si assegna il centroide della distribuzione degli errori associata. In particolare, le condizioni di qualità che si devono soddisfare sono:  
+ \item Si ripete la procedura del punto precedente con campioni di 500 simulazioni ottenuti con parametri di \textit{input} di volta in volta diversi. Ogni campione contribuisce all'efficienza complessiva sulla base delle stime di $\tau^+$, $\tau^-$ e $R$ corrispondenti ai centroidi delle distribuzioni dei valori, ai quali, come incertezza, si assegna il centroide $\sigma$ della rispettiva distribuzione degli errori. In particolare, le condizioni di qualità che devono essere soddisfatte sono:  
  \begin{enumerate}
   \item errore relativo inferiore al $20\%$;
   \item compatibilità con il valore atteso entro le $3\sigma$;
-  \item dispersione ($\sigma$) della distribuzione dei parametri minore di 2 volte il centroide della distribuzione degli errori. Questo tipo di condizione avvalora la scelta del centroide della distribuzione degli errori come incertezza sul parametro: qualora esso fosse ordini di grandezza inferiore rispetto alla $\sigma$ della distribuzione dei valori, ciò implicherebbe la presenza di una componente di errore non controllata ( e sistematica).  
+  \item modulo della differenza tra la dispersione ($\bar{\sigma}$) della distribuzione dei parametri e centroide della distribuzione degli errori inferiore del minore dei due. Questo tipo di condizione permette di controllare la presenza di eventuali errori sistematici qualora $\bar{\sigma}$ fosse ordini di grandezza maggiore rispetto al centroide $\sigma$ della distribuzione degli errori.  
  \end{enumerate}
-Qualora almeno una di queste condizioni non sia soddisfatta per almeno uno dei parametri $\tau^+$, $\tau^-$ e $R$ il \textit{sample} viene rigettato. In caso contrario, il \textit{sample} si considera valido. 
+Qualora almeno una di queste condizioni non sia soddisfatta per almeno uno dei parametri $\tau^+$, $\tau^-$ e $R$ il campione viene rigettato. In caso contrario, si considera valido. 
 \end{enumerate}
-Si è deciso di applicare la procedura descritta facendo variare i valori di \textit{input} dei parametri $\tau^+$, $\tau^-$, $R$ e $I$ (cioè corrispondentemente della \textit{baseline}) del $40\%$ attorno al valore fisico, per un totale di $3^4=81$ \textit{samples} rispetto ai quali calcolare l'efficienza. In virtù di quest test, si è prodotto il seguente grafico:
+Si è deciso di applicare la procedura descritta facendo variare i valori di \textit{input} dei parametri $\tau^+$, $\tau^-$ e $R$ del $40\%$ attorno al valore fisico, considerando statistiche corrispondenti a 1, 3, 5 settimane di acquisizione, per un totale di $3^4=81$ campioni rispetto ai quali calcolare l'efficienza. In virtù di questi \textit{test}, si è prodotto il seguente grafico:
 %
 \begin{figure}[H]
   \centering
-  \includestandalone[width=\linewidth+1cm]{img/notused/matrix_eff40}
-  \caption{Efficienza del metodo per una variazione dei parametri del $40\%$ rispetto al valore fisico; si noti che ciò che più spesso fallisce è la stima di R.}
+  \includestandalone[width=\linewidth]{img/notused/matrix_eff40}
+  \caption{Efficienza del metodo per una variazione dei parametri del $40\%$ rispetto al valore fisico; si noti che ciò che più spesso fallisce è la stima di $R$.}
   \label{fig:finale}
 \end{figure}
 %
 Prestando ulteriore attenzione, si sono osservate alcune criticità:
 \begin{itemize}
- \item nel caso di \textit{samples} generati con valori di $\tau^+$ e $\tau^-$ ravvicinati, distanti circa $0.8 \ \mu s - 0.9 \ \mu s$), il metodo di fit fallisce, non riuscendo ad andare a convergenza. Questo problema riguarda comunque campioni di dati relativi a spettri senza alcun significato fisico (i muoni ``lunghi'' e ``corti'' non sono più tali);
- \item il parametro $R$ è quello più difficile da stimare correttamente, risultando determinante per rigettare alcuni \textit{samples} per i quali le stime di $\tau^+$ e $\tau^-$ risultano comunque valide.  
+ \item nel caso di campioni generati con valori di $\tau^+$ e $\tau^-$ ravvicinati, distanti circa $0.8 \ \mu s - 0.9 \ \mu s$, il metodo di fit fallisce, non riuscendo ad andare a convergenza. Questo problema riguarda comunque campioni di dati relativi a spettri troppo diversi da quelli raccolti (i muoni ``lunghi'' e ``corti'' non sono più tali);
+ \item il parametro $R$ è quello più difficile da stimare correttamente, risultando determinante per rigettare alcuni campioni per i quali le stime di $\tau^+$ e $\tau^-$ sono comunque valide.  
 \end{itemize}
-Per evidenziare queste criticità, si sono fatti variare i parametri in intervalli sempre più estesi (dal $10\%$ al $50\%$), producendo il seguente grafico: appare evidente come l'efficienza peggiori a mano a mano che il range di variazione aumenti, avallando l'ipotesi secondo la quale una efficienza non ottimale sia da ricondursi a parametri troppo distanti dai valori veri (e, per i $\tau$, troppo vicini tra loro) più che a difetti del codice. Rimane comunque evidente che R sia il parametro più problematico: ogni tentativo di miglioramento del metodo, come per esempio l'affinamento della scelta dei parametri da impostare con \lstinline{SetParameter} e l'impostazione di parametri aggiuntivi quali $A_+$ e $A_-$ nei fit preliminari, non è tuttavia riuscito a innalzare l'efficienza.
+Per evidenziare queste criticità, sono stati variati i parametri in intervalli sempre più estesi (dal $10\%$ al $50\%$), producendo il grafico in figura \ref{fig:finalematrix}: appare evidente come l'efficienza peggiori aumentando il range di variazione, avallando l'ipotesi secondo la quale una efficienza non ottimale sia da ricondursi a parametri troppo distanti dai valori veri (e, per i $\tau$, troppo vicini tra loro) più che a difetti del codice. Rimane comunque evidente come $R$ sia il parametro più problematico: ogni tentativo di miglioramento del metodo, come per esempio l'affinamento della scelta dei parametri da impostare con \lstinline{SetParameter} e l'impostazione di parametri aggiuntivi quali $A_+$ e $A_-$ nei fit preliminari, non è tuttavia riuscito a innalzare l'efficienza.
 %
 \begin{figure}[H]
   \centering
   \includestandalone[width=\linewidth+1cm]{img/matrix_5run}
   \caption{Efficienza del metodo per una variazione dei parametri dal $10 \%$ al $50\%$ rispetto al valore fisico; si noti l'andamento decrescente all'aumentare del range di variazione.}
-  \label{fig:finale}
+  \label{fig:finalematrix}
 \end{figure}
 %
 %
 \subsection{Studio del fattore di \emph{rebin}} \label{parrebin}
-Durante l'analisi, è stata presa in considerazione l'idea di applicare un'operazione di \textit{rebinning} (ovvero la fusione di un certo numero di canali, specificato dal \textit{fattore di rebin}, atta alla creazione di un unico \emph{bin} che ha come altezza la somma delle precedenti) all'istogramma dei dati, originariamente costituito da 4096 canali, prima dell'operazione di fitting. Il metodo era stato adottato in precedenza (Sez.~\cref{analPrelim}) nell'ambito dell'analisi dati preliminare, e sembrava dare stabilità e maggiore precisione ai risultati del fit: la conseguenza principale del \textit{rebinning} è infatti quella di smorzare le fluttuazioni statistiche, e perciò l'efficacia dell'operazione ai fini del processo di analisi dei dati deve essere sistematicamente investigata.
+Durante l'analisi è stata presa in considerazione l'idea di applicare un'operazione di \textit{rebinning} (ovvero la fusione di un certo numero di canali adiacenti, specificato dal \textit{fattore di rebin}, atta alla creazione di un unico \emph{bin} che ha come altezza la somma delle precedenti) all'istogramma dei dati, originariamente costituito da 4096 canali, prima dell'applicazione del metodo di fit. Il \textit{rebinning} era stato adottato in precedenza in \cref{analPrelim} nell'ambito dell'analisi dati preliminare, e sembrava dare stabilità e maggiore accuratezza ai risultati del fit: la conseguenza principale del \textit{rebinning} è infatti quella di smorzare le fluttuazioni statistiche, e perciò l'efficacia dell'operazione ai fini del processo di analisi dei dati deve essere sistematicamente investigata.
 
-Innanzitutto, si è applicato l'algoritmo a simulazioni Monte Carlo convergenti e accurate con valori del fattore di \emph{rebin} pari a 2, 4, 8, 16, non riscontrando miglioramenti evidenti nella ricostruzione dei paramentri di fit, nonché nella larghezza delle loro distribuzioni. Si è quindi proceduto a verificare l'eventualità in cui un'operazione di \textit{rebinning} possa rendere convergente un fit non convergente, attestando anche in questo frangente una sostanziale ininfluenza del metodo.
+Innanzitutto, si è applicata l'operazione a simulazioni Monte Carlo convergenti e accurate con valori del fattore di \emph{rebin} pari a 2, 4, 8, 16, non riscontrando miglioramenti evidenti nella ricostruzione dei paramentri di fit, nonché nella larghezza delle loro distribuzioni. Si è quindi proceduto a verificare l'eventualità in cui un'operazione di \textit{rebinning} potesse rendere convergente un fit non convergente, attestando anche in questo frangente una sostanziale ininfluenza del metodo.
 
-In conclusione si può tranquillamente assumere l'operazione di \textit{rebinning} come assolutamente ininfluente ai fini dell'analisi dati.
+In conclusione, si può tranquillamente assumere l'operazione di \textit{rebinning} come assolutamente ininfluente ai fini dell'analisi dati.
 %
 \section{Analisi dello spettro reale} \label{analisireale}
-Il campione di dati corrisponde agli eventi raccolti in 33 giorni di acquisizione, per un totale di 375241 eventi (frequenza $ {\raise.17ex\hbox{$\scriptstyle\sim$}} \ 0.13$ Hz). I risultati sono presentati in tabella \ref{risultatiFinali} e in figura~\ref{fig:finale}.
+Il campione di dati corrisponde agli eventi raccolti in 33 giorni di acquisizione, per un totale di 375241 eventi (frequenza $\sim0.13$ Hz). I risultati sono presentati in tabella \ref{risultatiFinali} e in figura~\ref{fig:finale}.
 
-L'ultimo punto lasciato in sospeso è la questione, menzionata alla sezione \ref{tac}, dell'eccesso di eventi registrato con le coincidenze artificiali nel range $[2200,2700]$ canali; nell'istogramma finale non si nota alcuna sovrabbondanza di eventi nel suddetto range. In ogni caso, sono stati tentati due approcci per tenerne conto nell'analisi dati:
+L'ultimo punto lasciato in sospeso è la questione, menzionata in \cref{tac}, dell'eccesso di eventi registrato con le coincidenze artificiali nel range $[2200,2700]$ canali; nell'istogramma finale non si nota alcuna sovrabbondanza di eventi nel suddetto range. In ogni caso, sono stati tentati due approcci per tenerne conto nell'analisi dati:
 \begin{enumerate}
-  \item \textbf{esclusione dal fit,} ovvero si è costruita una funzione di fit alternativa definita a tratti tramite \lstinline{TF1::RejectPoint} che esclude i punti dal calcolo della likelihood;
-  \item \textbf{errori incrementati,} ovvero si è provato a attribuire errori maggiori ai punti nel range, ad esempio il doppio rispetto all'errore poissoniano standard.
+  \item \textbf{esclusione dal fit,} ovvero si è costruita una funzione di fit alternativa definita a tratti tramite \lstinline{TF1::RejectPoint}, che esclude i punti dal calcolo della \textit{likelihood};
+  \item \textbf{errori incrementati,} ovvero si è provato a attribuire errori maggiori ai punti nell'intervallo, ad esempio il doppio rispetto all'errore poissoniano standard.
 \end{enumerate}
 Nessuno dei due metodi ha portato a un miglioramento significativo dei risultati finali.
 %
@@ -525,22 +534,22 @@ Nessuno dei due metodi ha portato a un miglioramento significativo dei risultati
 		$N^+/N^-$	& $1.80 \pm 0.09$ 	& $1.261 \pm 0.009$ 		& 6.10	\\
 		\bottomrule
 	\end{tabular}
-	\caption{Risultati.}
+	\caption{Risultati del metodo di fit studiato applicato allo spettro reale.}
 	\label{risultatiFinali}
 \end{table}
 %
 \begin{figure}[H]
  \centerline{%
-  \includestandalone[width=\linewidth+2cm]{img/finaleres}}
-  \caption{Risultato del fit, in basso il grafico dei residui.}
+  \includestandalone[width=\linewidth+1.2cm]{img/finaleres}}
+  \caption{In alto, il risultato del fit sullo spettro dei dati acquisiti; in basso, il grafico dei residui.}
   \label{fig:finale}
 \end{figure}
 %
 \section{Discussione dei risultati}
 
-La tabella~\ref{risultatiFinali} mostra come, a fronte di un'ottima compatibilità per i valori dei $\tau$ rispetto a quelli attesi, R risulti notevolmente sovrastimato: avendo già escluso che ciò possa essere in qualche modo influenzato dallo spettro raccolto (o dal metodo di analisi), è stato effettuato un tentativo di analisi dell'energia delle partucelle incidenti.
+La tabella~\ref{risultatiFinali} mostra come, a fronte di un'ottima compatibilità per i valori dei $\tau$ rispetto a quelli attesi, $R$ risulti notevolmente sovrastimato: avendo già escluso che ciò possa essere in qualche modo influenzato dallo spettro raccolto (o dal metodo di fit), è stato effettuato un tentativo di analisi dell'energia delle particelle incidenti.
 
-Infatti, R dipende dall'energia dei muoni incidenti\footnote{T.~K. Gaisser, \emph{Spectrum of cosmic-ray nucleons, kaon production, and the atmospheric muon charge ratio}, Astropart.Phys., \textbf{35}, 801-806 (2012).}, ed è possibile inferire che per avere un valore attorno a 1.6, compatibile con quello ottenuto in tabella~\ref{risultatiFinali}, $E_{\mu} \sim 10$ TeV: tuttavia, per frenare un muone di tale energia con del piombo\footnote{J. Beringer et alii, \emph{Particle Data Group}, PR \textbf{D86}, 010001 (2012)}, prendendo come densità $ \rho_{Pb} = 11.3 $ g/cm$^3$, servirebbero quasi 5 km di spessore, che ovviamente non sono disponibili in laboratorio. Per questo motivo, si scarta anche questa ipotesi. %lasciando aperta l'unica possibilità che tale discrepanza dipenda dall'apparato di raccolta dati, come gli scintillatori
+Infatti, $R$ dipende dall'energia dei muoni incidenti\footnote{T.~K. Gaisser, \emph{Spectrum of cosmic-ray nucleons, kaon production, and the atmospheric muon charge ratio}, Astropart.Phys., \textbf{35}, 801-806 (2012).}, ed è possibile inferire che per avere un valore attorno a 1.6, compatibile con quello ottenuto in tabella~\ref{risultatiFinali}, $E_{\mu} \sim 10$ TeV: tuttavia, per frenare un muone di tale energia con del piombo\footnote{J. Beringer et alii, \emph{Particle Data Group}, PR \textbf{D86}, 010001 (2012).}, prendendo come densità $ \rho_{Pb} = 11.3 $ g/cm$^3$, servirebbero quasi 5 km di spessore a fronte dei 20 cm presenti in laboratorio. Per questo motivo, si scarta anche questa ipotesi. %lasciando aperta l'unica possibilità che tale discrepanza dipenda dall'apparato di raccolta dati, come gli scintillatori
 
 \appendix
 %\setcounter{secnumdepth}{0}
