@@ -8,8 +8,8 @@
 							% landscape = foglio orizzontale
 								
 \usepackage[mode=buildnew]{standalone}
-\usepackage[binding=5mm]{layaureo}			% Layout più espanso preimpostato (bindings = spazio rilegatura)
-%\usepackage[options]{geometry}             		% Layout completamente configurabile
+\usepackage[binding=0mm]{layaureo}			% Layout più espanso preimpostato (bindings = spazio rilegatura)
+%\usepackage[showframe]{geometry}             		% Layout completamente configurabile
 							
 \pagestyle{plain}					% plain (default)     :	stampa i numeri di pagine a piè di pagina nel mezzo. 
 								%		           
@@ -35,7 +35,7 @@
 %\usepackage[parfill]{parskip}    			% Fa cominciare i paragrafi con una riga vuota piuttosto che con un'indentazione
 
 \usepackage{booktabs}					% Linee separatrici per le tabelle
-\usepackage{caption}					% Per mettere la didascalia ben distanziata sopra la tabella
+\usepackage[labelfont=bf]{caption}					% Per mettere la didascalia ben distanziata sopra la tabella
 \captionsetup[table]{position=bottom}			% 
 
 \usepackage{amsmath}					% Questo lo ha messo dede
@@ -60,23 +60,36 @@ stringstyle=\color{orange}}				% Colori delle righe di codice
 \renewcommand{\rho}{\varrho}				%
 \renewcommand{\phi}{\varphi}				%
 \renewcommand{\d}{\mathrm{d}}
-
-\title{\large{Relazione di Laboratorio Avanzato}\\\Huge{Decadimento dei muoni \\ cosmici in alluminio}}
-\date{25 gennaio 2017}
+\usepackage{abstract}
+\renewcommand{\abstractnamefont}{\normalfont\normalsize\bfseries}
 %
 %
 \begin{document}
-\maketitle
+\begin{titlepage}
 \thispagestyle{empty}
+  \begin{center}
+    \includegraphics[width=4cm]{img/logo.pdf} \\
+    \vspace{1cm}
+    \Large{Relazione di Laboratorio Avanzato} \\
+    \vspace{0.2cm}
+    \LARGE{\textbf{DECADIMENTO DEI MUONI\\ COSMICI IN ALLUMINIO}} \\
+    \vspace{0.7cm}
+    \large
+    Mattia Faggin\footnote{[1122479] \texttt{mattia.faggin.1@studenti.unipd.it}},
+    Davide Piras\footnote{[1114287] \texttt{davide.piras@studenti.unipd.it}},
+    Luigi Pertoldi\footnote{[1128283] \texttt{luigi.pertoldi@studenti.unipd.it}} \\
+    \vspace{1.8cm}
+    \textsl{Dipartimento di Fisica ``Galileo Galilei'',} \\
+    26 gennaio 2017
 %
-\vspace{4cm}
-\begin{abstract}
-	Lo scopo dell'esperienza di laboratorio è di caratterizzare e ottimizzare un apparato sperimentale per la rivelazione dei muoni cosmici, consistente nei suoi componenti fondamentali di scintillatori plastici e fotomoltiplicatori, e di studiare il loro decadimento in alluminio anche tramite lo sviluppo di modelli analitici e simulazioni Monte Carlo. Vengono infine riportati i valori sperimentali delle costanti di decadimento $\tau^+$ e $\tau^-$ delle rispettive particelle muoniche, nonchè il rapporto numerico tra le due popolazioni $N^+/N^-$.
-\end{abstract}
-\vspace*{\fill}
-Mattia Faggin \;\,[1122479] \texttt{mattia.faggin.1@studenti.unipd.it} \\
-Davide Piras \;\;\;\:[1114287] \texttt{davide.piras@studenti.unipd.it} \\
-Luigi Pertoldi \;\,\,[1128283] \texttt{luigi.pertoldi@studenti.unipd.it}
+    \vspace{1cm}
+    \begin{abstract}
+      \normalsize
+      \noindent Lo scopo dell'esperienza di laboratorio è di caratterizzare e ottimizzare un apparato sperimentale per la rivelazione dei muoni cosmici, consistente nei suoi componenti fondamentali di scintillatori plastici e fotomoltiplicatori, e di studiare il loro decadimento in alluminio anche tramite lo sviluppo di modelli analitici e simulazioni Monte Carlo. Vengono infine riportati i valori sperimentali delle costanti di decadimento $\tau^+$ e $\tau^-$ delle rispettive particelle muoniche, nonchè il rapporto numerico tra le due popolazioni $N^+/N^-$.
+    \end{abstract}
+  \end{center}
+  %\vspace*{\fill}
+\end{titlepage}
 \cleardoublepage
 %
 \tableofcontents
@@ -95,7 +108,7 @@ Il flusso dei muoni in funzione dell'angolo azimutale $\theta$ segue una legge d
 con $I_0\sim130\ \text{m}^{-2}\text{s}^{-1}$ a livello del mare \cite{pdg2}.
 %
 \section{Apparato sperimentale}
-La parte dell'apparato addetta alla rivelazione dei raggi cosmici (figura~\ref{appScheme}) consiste di cinque barre (\emph{slab}) di materiale plastico poste parallelamente al terreno ($182 \text{ cm}\times21\text{ cm}\times2.58$ cm), distanti 8 cm tra loro, e altre quattro perpendicolari al terreno poste ai lati ($250\text{ cm}\times21\text{ cm}\times2.58$ cm) a chiusura dell'apparato. Le \emph{slab} centrali sono accoppiate alle estremità a due fotomoltiplicatori e sono intervallate da spessori di alluminio di 2 cm; quelle laterali fanno invece riferimento a un unico fotomoltiplicatore presente a una sola estremità. Uno strato formato da lastre di piombo per un totale di circa 1 t ricopre infine la parte superiore dell'apparato: il loro scopo è minimizzare la presenza di altre particelle meno energetiche oltre ai muoni e di frenare questi ultimi al fine di osservarne il decadimento.
+La parte dell'apparato adibita alla rivelazione dei raggi cosmici (figura~\ref{appScheme}) consiste di cinque barre (\emph{slab}) di materiale plastico poste parallelamente al terreno ($182 \text{ cm}\times21\text{ cm}\times2.58$ cm), distanti 8 cm tra loro, e altre quattro perpendicolari al terreno poste ai lati ($250\text{ cm}\times21\text{ cm}\times2.58$ cm, riportate solo nello schema frontale) a chiusura dell'apparato. Le \emph{slab} centrali sono accoppiate alle estremità a due fotomoltiplicatori e sono intervallate da spessori di alluminio di 2 cm; quelle laterali fanno invece riferimento a un unico fotomoltiplicatore presente a una sola estremità. Uno strato formato da lastre di piombo per un totale di circa 1 t ricopre infine la parte superiore dell'apparato: il suo scopo è minimizzare la presenza di altre particelle meno energetiche oltre ai muoni e di frenare questi ultimi al fine di osservarne il decadimento.
 %
 \begin{figure}[h]
 	\centering
@@ -106,16 +119,16 @@ La parte dell'apparato addetta alla rivelazione dei raggi cosmici (figura~\ref{a
 %
 L'alimentazione è regolata da una serie di partitori di tensione reostatici che permettono di gestire singolarmente il voltaggio dei 14 fotomoltiplicatori. Essi fanno riferimento ad un unico generatore (impostato ad un valore di circa 2100 V, corrispondente alla massima tensione disponibile per ogni fototubo), acceso sempre qualche ora prima di qualsiasi presa dati e mantenuto costantemente in funzione durante l'acquisizione degli spettri analizzati in \S\ref{analisireale}, in modo tale da poter lavorare nelle condizioni di maggiore stabilità.
 
-I segnali provenienti dai PMT, a polarità negativa, di circa 250 mV di ampiezza e 40 ns di larghezza, vengono formati da 14 discriminatori, per poter essere poi utilizzati negli altri moduli.
+I segnali provenienti dai PMT, a polarità negativa, di circa 250 mV di ampiezza e 40 ns di larghezza, vengono formati da 14 discriminatori, per poter essere poi inviati agli altri moduli.
 %
 %
 \subsection{Prove di luce - buio}
-Il primo controllo eseguito è stato quello relativo alla sensibilità degli scintillatori rispetto alla radiazione ambientale: per ogni fotomotiplicatore si sono raccolti dei conteggi in presenza di luce o in assenza di essa (coprendo l'apparato con teli assorbenti, oscurando le finestre presenti nella stanza e spegnendo le luci) per verificare l'approssimativa indipendenza dell'apparato dalle due situazioni. Eventuali infiltrazioni esterne nel rivestimento assorbente delle \emph{slab} sono state riparate con dello scotch isolante nero. 
+Il primo controllo eseguito è stato quello relativo alla sensibilità degli scintillatori rispetto alla radiazione ambientale: per ogni fotomotiplicatore si sono raccolti dei conteggi in presenza di luce o in assenza di essa (coprendo l'apparato con teli assorbenti, oscurando le finestre presenti nella stanza e spegnendo le luci) per verificare l'approssimativa indipendenza dell'apparato dalle due condizioni sperimentali. Eventuali infiltrazioni esterne nel rivestimento assorbente delle \emph{slab} sono state riparate con dello scotch isolante nero. 
 %
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.6]{img/luce_buio_100s.pdf}
-	\caption{Situazione alla prima presa dati: è evidente la presenza di qualche difetto  nell'involucro della \emph{slab} a ridosso del fotomoltiplicatore n.~12 che permette l'ingresso della radiazione ambientale.}
+	\caption{Situazione alla prima presa dati, in blu(rosso) i conteggi al buio(luce): è evidente la presenza di qualche difetto nell'involucro della \emph{slab} a ridosso del fotomoltiplicatore n.~12 che permette l'ingresso della radiazione ambientale.}
 \end{figure}
 %
 \subsection{Studio dell'efficienza dei fotomoltiplicatori}
@@ -127,27 +140,23 @@ L'efficienza di rivelazione corrisponde alla quantità
 \[\varepsilon = \frac{T\wedge PMT}{T}\;,\]
 dove $T$ corrisponde al numero di eventi rivelati dal cosiddetto \textit{telescopio}, o \textit{trigger}, mentre $T\wedge PMT$ corrisponde alla quantità di eventi rivelati dal fototubo in esame in coincidenza con il telescopio. Il \emph{trigger} prevede l'utilizzo di due \emph{slab} esterne \linebreak ($G$ = grande, $P$ = piccola) poste in coincidenza di volta in volta con alcuni fototubi dell'apparato, differenti da quello momentaneamente esaminato. 
 
-La disposizione del telescopio influenza notevolmente il numero di eventi $T$ tramite i quali si calcola l'efficienza dei diversi fotomoltiplicatori. Ai fini dell'esperimento, l'unica efficienza interessante è relativa alla rivelazione dei raggi cosmici tramite i consueti processi di eccitazione degli atomi del materiale plastico delle \emph{slab}. 
-Tuttavia, questa procedura è stata disturbata dalla presenza delle guide di luce di raccordo tra un capo della \emph{slab} e il relativo fototubo: 
-avendo a disposizione solo 2 \emph{slab} per formare il telescopio, nel conteggio di trigger entrano, per questioni geometriche, anche quei muoni che attraversano una guida di luce e non le sole \emph{slab}.
+La disposizione del telescopio influenza notevolmente il numero di eventi $T$ tramite i quali si calcola l'efficienza dei diversi fotomoltiplicatori. Ai fini dell'esperimento, l'unica efficienza interessante è relativa alla rivelazione dei raggi cosmici tramite i consueti processi di eccitazione degli atomi del materiale plastico delle \emph{slab}. Tuttavia, questa procedura è stata disturbata dalla presenza delle guide di luce di raccordo tra un capo della \emph{slab} e il relativo fototubo: avendo a disposizione solo due \emph{slab} per formare il telescopio, nel conteggio di trigger entrano, per questioni geometriche, anche quei muoni che attraversano una guida di luce e non le sole \emph{slab}.
 
-In virtù di queste considerazioni, i tracciatori esterni $G$ e $P$ sono stati posizionati sempre parallelamente alle \emph{slab} relative ai PMT esaminati\footnote{$G$ sopra la prima slab, $P$ appoggiata a terra.}: la rivelazione di eventi estranei  
-a quelli di interesse\footnote{Cioè non passanti per ambo le \emph{slab} ma attraverso una guida di luce.} 
-non modifica l'andamento della curva di efficienza, ma solamente i valori assunti dalla stessa, permettendo comunque di individuare il raggiungimento del regime di \emph{plateau}.
+In virtù di queste considerazioni, i tracciatori esterni $G$ e $P$ sono stati posizionati sempre parallelamente alle \emph{slab} relative ai PMT esaminati\footnote{$G$ sopra la prima slab, $P$ appoggiata a terra.}: la rivelazione di eventi estranei a quelli di interesse\footnote{Gli eventi di interesse sono quelli relativi a muoni che non attraversano alcuna guida di luce.} non modifica l'andamento della curva di efficienza, ma solamente i valori assunti dalla stessa, permettendo comunque di individuare il raggiungimento del regime di \emph{plateau}.
 
 In base al PMT studiato, il telescopio corrisponde ad una delle seguenti configurazioni:
 %%%%%%%%%%%%%%%%%%
 \begin{itemize}
-	\item \textbf{configurazione 1}: per lo studio dei PMT numero 1, 2, 5, 6, 7, 8, 9 e 10 i tracciatori $G$ e $P$ sono messi in coincidenza con i PMT numero 3 e 4 (appartenenti alla \emph{slab} più bassa), cioè \[T = G\wedge P \wedge PMT3 \wedge PMT4 \ ;\]
+	\item[] \textbf{configurazione 1}: per lo studio dei PMT numero 1, 2, 5, 6, 7, 8, 9 e 10 i tracciatori $G$ e $P$ sono messi in coincidenza con i PMT numero 3 e 4 (appartenenti alla \emph{slab} più bassa), cioè \[T = G\wedge P \wedge PMT3 \wedge PMT4 \ ;\]
 %
-	\item \textbf{configurazione 2}: per lo studio dei PMT numero 3 e 4 i tracciatori $G$ e $P$ sono messi in coincidenza con i PMT numero 1, 2, 5, 6, cioè \[T = G\wedge P \wedge PMT1 \wedge PMT2 \wedge PMT5 \wedge PMT6 \ ; \]
+	\item[] \textbf{configurazione 2}: per lo studio dei PMT numero 3 e 4 i tracciatori $G$ e $P$ sono messi in coincidenza con i PMT numero 1, 2, 5, 6, cioè \[T = G\wedge P \wedge PMT1 \wedge PMT2 \wedge PMT5 \wedge PMT6 \ ; \]
 %
-	\item \textbf{configurazione 3}: le \emph{slab} laterali sono state momentaneamente tolte dalla loro posizione originale per essere appoggiate, sovrapposte nella stessa direzione e alternate in verso, su sgabelli di eguale altezza. In questo modo, per lo studio dei PMT 11 e 12, posizionati nello stesso verso, i tracciatori $G$, appoggiato sopra la prima delle quattro \emph{slab}, e $P$, appoggiato a terra, sono stati messi in coincidenza con i PMT numero 13 e 14, anch'essi orientati nello stesso verso, opposto ai precedenti. In questo caso: \[T = G\wedge P \wedge PMT13 \wedge PMT14 \ ;\]
+	\item[] \textbf{configurazione 3}: le \emph{slab} laterali sono state momentaneamente tolte dalla loro posizione originale per essere appoggiate, sovrapposte nella stessa direzione e alternate in verso, su sgabelli di eguale altezza. In questo modo, per lo studio dei PMT 11 e 12, posizionati nello stesso verso, i tracciatori $G$, appoggiato sopra la prima delle quattro \emph{slab}, e $P$, appoggiato a terra, sono stati messi in coincidenza con i PMT numero 13 e 14, anch'essi orientati nello stesso verso, opposto ai precedenti. In questo caso: \[T = G\wedge P \wedge PMT13 \wedge PMT14 \ ;\]
 %
-	\item \textbf{configurazione 4}: questa configurazione coincide con la numero 3, a patto di invertire i ruoli dei PMT 11 e 12 con quelli dei PMT 13 e 14. 
+	\item[] \textbf{configurazione 4}: questa configurazione coincide con la numero 3, a patto di invertire i ruoli dei PMT 11 e 12 con quelli dei PMT 13 e 14. 
 \end{itemize}
 %%%%%%%%%%%%%%%%%%%
-In appendice sono riportati i grafici relativi allo studio di tutti i 14 fotomoltiplicatori, sia per quanto riguarda la stima delle efficienze da vicino e da lontano, sia per quanto riguarda i conteggi da vicino.
+In appendice sono riportati i grafici relativi allo studio di tutti i 14 fotomoltiplicatori, sia per quanto riguarda la stima delle efficienze da vicino e da lontano (Ovvero con il telescopio posizionato in un punto, sempre lungo la \textit{slab}, più vicino o più lontano possibile rispetto al PMT), sia per quanto riguarda i conteggi da vicino.
 
 Al numero di eventi in coincidenza $T\wedge PMT$ è assegnata un'incertezza seguente la distribuzione binomiale, di cui si conosce la formula della varianza.  
 Si ha allora che 
@@ -163,51 +172,66 @@ L'acquisizione della curva di decadimento dei muoni necessita di una procedura p
 %
 \begin{figure}[b!]
   \centering  
-  \includestandalone[width=10cm]{img/bkg437}
-  \caption{Prima analisi dello spettro di ritardi temporali con START e STOP artificiali scorrelati; si nota la presenza di un eccesso di eventi indesiderato nell'intervallo $[2200,2700]$ (è stato applicato un \emph{rebin} di un fattore 12 per evidenziare meglio la situazione).}
+  \includestandalone[width=\linewidth]{img/bkg437}
+  \caption{Prima analisi dello spettro di ritardi temporali con START e STOP artificiali scorrelati; si nota la presenza di un eccesso di eventi indesiderato nell'intervallo $[2200,2700]$ canali (è stato applicato un \emph{rebin} di un fattore 12 per evidenziare meglio la situazione).}
   \label{rumore1}
 \end{figure}
 %
 
-Inizialmente si è verificato il corretto comportamento della catena TAC + ADC rispetto a una distribuzione uniforme di ritardi temporali, ovvero generando due treni di segnali artificiali scorrelati da mandare in input alle entrate di START e STOP del TAC; ci si aspetta dalla raccolta di un numero statisticamente rilevante di dati una distribuzione perfettamente piatta. Per l'esperimento si è scelto di utilizzare il TAC n.~437 disponibile in laboratorio: in figura~\ref{rumore1} è possibile osservare i risultati di una prima acquisizione.
+Inizialmente si è verificato il corretto comportamento della catena TAC+ADC rispetto a una distribuzione uniforme di ritardi temporali, ovvero generando due treni di segnali artificiali scorrelati da mandare in input alle entrate di START e STOP del TAC; ci si aspetta dalla raccolta di un numero statisticamente rilevante di dati una distribuzione perfettamente piatta. Per l'esperimento si è scelto di utilizzare il TAC n.~437 disponibile in laboratorio: in figura~\ref{rumore1} è possibile osservare i risultati di una prima acquisizione.
 
-Il TAC n.~437 sembra presentare due problemi, un picco all'inizio dello spettro di cui non si è scoperta l'origine, ma che non influisce sulla raccolta dati e un eccesso di eventi nell'intervallo $[2200,2700]$. Questo secondo problema, di origine anch'essa ignota, rappresenta invece un potenziale fattore di disturbo per l'analisi dati, Un possibile approccio alla risoluzione verrà presentato in \S\ref{analisireale}.
+Il modulo sembra presentare due problemi, un picco all'inizio dello spettro di cui non si è scoperta l'origine, ma che non influisce sulla raccolta dati e un eccesso di eventi nell'intervallo $[2200,2700]$ canali (Gli stessi problemi sono stati riscontrati con START fisico e STOP artificiale e viceversa, si veda \S\ref{circuito}). Questo secondo problema, di origine anch'essa ignota, rappresenta invece un potenziale fattore di disturbo per l'analisi dati, Un possibile approccio alla risoluzione verrà presentato in \S\ref{analisireale}.
 
-Dopo questa prima fase si è verificato che il TAC  non erogasse più di 5 V (il massimo valore di tensione convertibile dall'ADC) in corrispondenza di un ritardo di 20 $\mu$s. Si è proceduto quindi a verificare la linearità della catena elettronica TAC + ADC e a ottenere una calibrazione temporale dello spettro registrato dal multicanale: tramite due copie del segnale di un impulsatore opportunamente discriminato fornite in input al TAC, separate da una distanza temporale variabile nel range $[0 \ \mu \mbox{s},20 \ \mu \mbox{s}]$, si sono registrati i relativi valori di tensione erogati e il canale corrispondente (per i grafici delle calibrazioni si veda appendice B, figure~\ref{time_tens} e~\ref{chan_time}).
+Dopo questa prima fase si è verificato che il TAC non erogasse più di 5 V (il massimo valore di tensione convertibile dall'ADC) in corrispondenza di un ritardo di 20 $\mu$s. Si è proceduto quindi a verificare la linearità della catena elettronica TAC+ADC e a ottenere una calibrazione temporale dello spettro registrato dal multicanale: tramite due copie del segnale di un impulsatore opportunamente discriminato fornite in \textit{input} al TAC, separate da una distanza temporale variabile nell'intervallo $[0 \ \mu \mbox{s},20 \ \mu \mbox{s}]$, si sono registrati i relativi valori di tensione erogati e il canale corrispondente (per i grafici e i valori delle calibrazioni si veda appendice B, figure~\ref{time_tens} e~\ref{chan_time}).
 
-Con il fondoscala impostato come descritto in precedenza, il TAC eroga per valori del ritardo compresi tra 60 ns e 20 $\mu$s segnali nei range di tensione $[0.211 \ \mbox{V}, 5.070 \ \mbox{V}]$.
+Con il fondoscala impostato come descritto in precedenza, il TAC eroga per valori del ritardo compresi tra 60 ns e 20 $\mu$s segnali nell'intervallo di tensione $[0.211 \ \mbox{V}, 5.070 \ \mbox{V}]$.
 %
 %
 \section{Operazioni preliminari alla presa dati}
 \subsection{Conteggi in coincidenza}
-La fase di studio successiva consiste nel raccogliere i conteggi in coincidenza tra varie \emph{slab} e conseguentemente ottimizzare i valori di tensione applicata ai fotomoltiplicatori al fine di ottenere valori consistenti tra loro e in linea con le previsioni teoriche (vedi appendice A). 
-Innanzitutto, si sono scelti i seguenti valori di tensione dei PMT: 
-\begin{table}[H]
+La fase di studio successiva consiste nel raccogliere i conteggi in coincidenza tra varie \emph{slab} e conseguentemente ottimizzare i valori di tensione applicata ai fotomoltiplicatori al fine di ottenere valori consistenti tra loro e in linea con le previsioni teoriche (si veda in tal proposito l'appendice A). 
+Innanzitutto, si sono scelti i valori di tensione dei PMT (riportati in tabella \ref{HV_counts}) 
+%
+\begin{table}[b]
 		\centering
-	\begin{tabular}{ccc}
+	\begin{tabular}{ccc|ccc}
 		\toprule
-		PMT	&	HV [V]	&	Frequenza [Hz]\\	
+		PMT	&	HV [V]	&	Frequenza [Hz]	&PMT	&	HV [V]	&	Frequenza [Hz]\\	
 		\midrule
-		1	&	1860	&	109	\\
-		2	&	1940	&	91	\\
-		3	&	1930	&	100	\\
-		4	&	1920	&	121	\\
-		5	&	1890	&	121	\\
-		6	&	1950	&	105	\\
-		7	&	1770	&	123	\\
-		8	&	1890	&	173	\\
-		9	&	1670	&	128	\\
-		10	&	1810	&	101	\\
-		11	&	1750	&	124	\\
-		12	&	1840	&	82	\\
-		13	&	1960	&	86	\\
-		14	&	1800	&	197	\\
+		1	&	1860	&	109	&8	&	1890	&	173\\
+		2	&	1940	&	91	&9	&	1670	&	128\\
+		3	&	1930	&	100	&10	&	1810	&	101\\
+		4	&	1920	&	121	&11	&	1750	&	124\\
+		5	&	1890	&	121	&12	&	1840	&	82 \\
+		6	&	1950	&	105	&13	&	1960	&	86 \\
+		7	&	1770	&	123	&14	&	1800	&	197\\
 		\bottomrule
 	\end{tabular}
-	\caption{Tensione finale applicata ai fotomoltiplicatori e relativo numero di conteggi con il piombo posizionato; l'incertezza associata a ciascuna frequenza è di 1 Hz. Le tensioni scelte garantiscono la condizione di \emph{plateau} da distante rispetto al fototubo. Nel corso dei mesi tali tensioni e frequenze sono state costantemente monitorate, oscillando sempre entro le incertezze.}
+%	\begin{tabular}{ccc}
+%		\toprule
+%		PMT	&	HV [V]	&	Frequenza [Hz]\\	
+%		\midrule
+%		1	&	1860	&	109	\\
+%		2	&	1940	&	91	\\
+%		3	&	1930	&	100	\\
+%		4	&	1920	&	121	\\
+%		5	&	1890	&	121	\\
+%		6	&	1950	&	105	\\
+%		7	&	1770	&	123	\\
+%		8	&	1890	&	173	\\
+%		9	&	1670	&	128	\\
+%		10	&	1810	&	101	\\
+%		11	&	1750	&	124	\\
+%		12	&	1840	&	82	\\
+%		13	&	1960	&	86	\\
+%		14	&	1800	&	197	\\
+%		\bottomrule
+%	\end{tabular}
+	\caption{Tensione finale applicata ai fotomoltiplicatori e relativo numero di conteggi con il piombo posizionato; l'incertezza associata a ciascuna frequenza è di 1 Hz. Le tensioni scelte garantiscono la condizione di \emph{plateau} da distante rispetto al fototubo. Nel corso dei mesi tali tensioni e frequenze sono state costantemente monitorate.}
 	\label{HV_counts}
 \end{table}
-Si sono quindi raccolti i dati di varie coincidenze, prima senza e poi sovrapponendo il piombo, per testare la diminuzione di eventi rivelati in presenza delle lastre, e verificare che la geometria dell'apparato fosse consistente con il numero di eventi raccolti. I simboli L e R indicano rispettivamente L $= 14 \vee 11 $ e R $= 12 \vee 13$, e insieme alla coppia di PMT 3 e PMT 4 (cioè, S5) formano la cosiddetta \emph{scatola}, utile per i circuiti di START e STOP, analizzati nel paragrafo successivo.
+%
+e si sono quindi raccolti i dati di varie coincidenze, prima senza e poi sovrapponendo il piombo, per testare la diminuzione di eventi rivelati in presenza delle lastre, e verificare che il numero di eventi raccolti fosse consistente con quanto atteso dalla geometria dell'apparato (si veda appendice A). I simboli L e R indicano rispettivamente L $= 14 \vee 11 $ e R $= 12 \vee 13$, e insieme alla coppia di PMT 3 e PMT 4 (cioè, S5) formano la cosiddetta \emph{scatola}, utile per i circuiti di START e STOP, analizzati nel paragrafo successivo.
 %
 \begin{table}[H]
 	\centering
@@ -241,21 +265,14 @@ Si sono quindi raccolti i dati di varie coincidenze, prima senza e poi sovrappon
 		\bottomrule
 	\end{tabular}
 	\caption{Coincidenze. 
-	Si noti che nell'ultima misura si è utilizzato il veto per negare il segnale, 
-	in quanto esso è risultato più efficiente dell'uscita negata dei discriminatori 
-	nell'individuare il segnale voluto: talvolta, infatti, l'uscita negata dei discriminatori non forniva in uscita il segnale desiderato, 
-	probabilmente a causa di un malfunzionamento dei moduli o di un problema nella temporizzazione dei segnali. Per ovviare a ciò, con riferimento all'ultima coincidenza,
-	si è messo il segnale $S5\vee L\vee R$ (opportunamente temporizzato)
-	nell'ingresso di veto del discriminatore del 
-	segnale $S1$: qualora il veto sia attivo, l'output 
-	risulta nullo.}
+	Si noti che nell'ultima misura si è utilizzato il veto per negare il segnale, in quanto esso è risultato più efficiente dell'uscita negata dei discriminatori nell'individuare il segnale voluto: talvolta, infatti, l'uscita negata dei discriminatori non forniva in uscita il segnale desiderato, probabilmente a causa di un malfunzionamento dei moduli o di un problema nella temporizzazione dei segnali. Per ovviare a ciò, con riferimento all'ultima coincidenza, si è messo il segnale S5 $\vee$ L $\vee$ R (opportunamente temporizzato) nell'ingresso di veto del discriminatore del segnale S1: qualora il veto sia attivo, l'\textit{output} risulta nullo.}
 	\label{coincidenze}
 \end{table}
 %
-\subsection{Costruzione del circuito}
-A questo punto, dopo tutte le verifiche necessarie, e dopo aver ripetuto le prove di luce-buio\footnote{Si è notato un eccesso di segnale proveniente da una zona della \emph{slab} superiore, subito risolto con del nastro isolante.}, si sono costruiti i circuiti di START e di STOP, per la rivelazione dei muoni cosmici. Si rende però necessario fare una premessa: potendo utilizzare nella costruzione del circuito segnali negati o di veto, dopo alcune prove si è optato per la seconda possibilità, avendo cura di temporizzare bene le coincidenze, ossia facendo in modo che il segnale di veto, se presente, rendesse effettivamente cieco l'apparato. In questo passaggio il segnale di veto è stato ritardato e allargato cosicchè contenesse il segnale del PMT in coincidenza.
+\subsection{Costruzione del circuito}\label{circuito}
+A questo punto, dopo tutte le verifiche necessarie, e dopo aver ripetuto le prove di luce-buio\footnote{Si è notato un eccesso di segnale proveniente da una zona della \emph{slab} superiore, subito risolto con del nastro isolante.}, si sono costruiti i circuiti di START e di STOP, per la rivelazione dei muoni cosmici. Si rende necessario fare una premessa: potendo utilizzare nella costruzione del circuito segnali negati o di veto, dopo alcune prove si è optato per la seconda possibilità, avendo cura di temporizzare bene le coincidenze, ossia facendo in modo che il segnale di veto, se presente, rendesse effettivamente cieco l'apparato. In questo passaggio il segnale di veto è stato ritardato e allargato cosicchè contenesse il segnale del PMT in coincidenza.
 
-Per il segnale di START, corrispondente al muone che entra dall'alto e non esce dalla scatola, si è partiti considerando varie possibilità; il miglior compromesso, che generasse un segnale sufficientemente pulito ma con una frequenza di conteggio non troppo bassa, si è rivelato essere il segnale S1 $\wedge$ S2  $\wedge$ $\overline{\mbox{S5}\vee \mbox{L} \vee \mbox{R}}$ , la cui frequenza in coincidenza è 6.6 Hz.
+Per il segnale di START, corrispondente al muone che entra dall'alto e non esce dalla scatola, si è partiti considerando varie possibilità; il miglior compromesso, che generasse un segnale sufficientemente privo di rumore ma con una frequenza di conteggio non troppo bassa, si è rivelato essere il segnale S1 $\wedge$ S2  $\wedge$ $\overline{\mbox{S5}\vee \mbox{L} \vee \mbox{R}}$ , la cui frequenza in coincidenza è 6.6 Hz.
 Il segnale di STOP corrisponde invece all'avvenuto decadimento e rivelazione dell'elettrone emesso, ed è stato scelto essere (S3 $\veebar$ S4)  $\wedge$ $\overline{\mbox{S1} \vee \mbox{S5}\vee \mbox{L} \vee \mbox{R}}$, con frequenza 38.1 Hz (schemi in figura~\ref{scemi}).
 
 A questo punto, con i segnali START e STOP fisici si sono ripetute i test di uniformità descritti alla sezione~\ref{tac} utilizzando START artificiale con STOP fisico e viceversa. Si riscontra lo stesso eccesso di eventi attorno al canale 2500 individuato durante la caratterizzazione del TAC.
@@ -267,31 +284,30 @@ A questo punto, con i segnali START e STOP fisici si sono ripetute i test di uni
 	\label{scemi}
 \end{figure}
 %
-\section{Analisi dati preliminare}
-\label{analPrelim}
-Dopo aver impostato il circuito come illustrato precedentemente, si è proceduto all'acquisizione dei dati relativi al ritardo che intercorre tra il passaggio del muone cosmico rivelato dallo START e l'uscita dell'elettrone di decadimento rivelato dallo STOP.
+\section{Analisi dati preliminare}\label{analPrelim}
+Dopo aver impostato il circuito come illustrato precedentemente, si è proceduto all'acquisizione dei dati relativi al ritardo che intercorre tra il passaggio del muone rivelato dallo START e l'uscita dell'elettrone di decadimento rivelato dallo STOP.
 
 I dati consistono di tre acquisizioni, per un totale di circa 75000 eventi, riguardanti due popolazioni differenti di muoni:
 \begin{itemize}
   \item i $\mu^+$, tali che $\mbox{Br}(\mu^+ \to e^+\nu_e\overline{\nu}_\mu)\simeq 100 \%$ e aventi una vita media \linebreak $\tau^+=(2.1969811 \pm 0.0000022)\;\mu\mbox{s}$ \cite{pdg};
-  \item i $\mu^-$, i quali però si comportano in maniera differente. Essi, infatti, oltre a decadere nel canale $\mu^-\to e^-\overline{\nu}_e\nu_\mu$, possono sostituirsi ad un elettrone degli atomi del mezzo, formando un atomo muonico in uno stato metastabile che favorisce il processo di cattura $\mu^-+p\to n+\nu_\mu $, con $p$ protone del nucleo del mezzo. Questo implica una diminuzione della vita media per i $\mu^-$ al valore $\tau^-=(0.8646 \pm 0.0012) \ \mu \mbox{s}$ \cite{al}.
+  \item i $\mu^-$, i quali però si comportano in maniera differente. Essi, infatti, oltre a decadere nel canale $\mu^-\to e^-\overline{\nu}_e\nu_\mu$, possono sostituirsi ad un elettrone degli atomi del mezzo, formando un atomo mesico in uno stato metastabile che favorisce il processo di cattura $\mu^-p\to n\nu_\mu $, con $p$ protone del nucleo del mezzo. Questo implica una diminuzione della vita media per i $\mu^-$ al valore $\tau^-=(0.8646 \pm 0.0012) \ \mu \mbox{s}$ \cite{al}.
 \end{itemize}
 
-I vari contributi possono essere convogliati nella seguente formula, che modellizza lo spettro che si ottiene tramite l'ADC:
- \[  \frac{dN}{dt} = A^+ e^{-t/\tau^+} + A^- e^{-t/\tau^-} + \mbox{\emph{b\;.}} \]
+I vari contributi possono essere convogliati nella seguente formula, che modellizza lo spettro ottenuto tramite l'ADC:
+ \[\frac{dN}{dt} = A^+ e^{-t/\tau^+} + A^- e^{-t/\tau^-} + \mbox{\emph{b\;.}} \]
 Queste due popolazioni vanno ovviamente considerate in maniera separata, sapendo che lo spettro raccolto prevede una prima parte relativa ai $\mu^-$ (per $t\lesssim4\tau^-$), una seconda parte relativa ai soli $\mu^+$ (per $4\tau^-\lesssim t\lesssim 4\tau^+$) ed infine puro fondo $b$ (per $t\gtrsim4\tau^+$), distinguibili grazie alla calibrazione temporale del sistema TAC+ADC.
 
-L'analisi dati si svolge in base ai seguenti step:
+L'analisi dati consiste nei seguenti passaggi:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{enumerate}
 	\item si definisce un istogramma con 4096 canali, nel quale inserire tutta la statistica raccolta, assegnando a ciascun \emph{bin} un contenuto pari alla somma dei contenuti del medesimo canale delle varie acquisizioni (in questo caso 3);
 	\item si stima il fondo come la media tra i contenuti dei \emph{bin} a partire da quello che, in base alla calibrazione, coincide con $t\sim 4\tau^+$, e tale valore si sottrae al contenuto di ciascun \emph{bin};
 	\item si definisce la funzione $f(t)=Ae^{-t/\tau}$, dove la variabile indipendente $t$ e $\tau$ si riferiscono a grandezze in canali; quindi si esegue un fit dell'istogramma nella regione dei soli $\mu^+$. Questa operazione permette di ricavare sia la vita media $\tau^+$ sia il parametro $A^+$ dei $\mu^+$; 
 	\item al contenuto di ciascun canale dell'istogramma si sottrae il valore assunto dalla funzione suddetta in corrispondenza del centroide di ciascun canale, in modo tale da ricavare la distribuzione dei soli $\mu^-$;
-	\item si effettua il fit dell'istogramma risultante, ricavando i parametri relativi ai $\mu^-$.
+	\item si effettua il fit dell'istogramma risultante, sempre con una funzione del tipo $f(t)=Ae^{-\frac{t}{\tau}}$ ricavando i parametri relativi ai $\mu^-$.
 \end{enumerate}
-%%%%%%%%%%%%%mico %%%%%%%%%%%%%%%%%
-Questo procedimento presenta tuttavia un aspetto critico, da mettere a punto nella seconda parte dell'esperienza: il fit della regione relativa ai $\mu^+$ riguarda canali dell'istogramma con bassa statistica e questo provoca una notevole fluttuazione dei risultati, in particolare al variare del fattore di \emph{rebin} (il quale verrà studiato in maniera più approfondita nel \S\ref{parrebin}).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Questo procedimento presenta tuttavia un aspetto critico, da mettere a punto nella seconda parte dell'esperienza: il fit della regione relativa ai $\mu^+$ riguarda canali dell'istogramma con bassa statistica e questo provoca una notevole fluttuazione dei risultati, in particolare al variare del fattore di \emph{rebin} (il cui effetto verrà studiato in maniera più approfondita nel \S\ref{parrebin}).
 
 Per quanto riguarda il rapporto numerico $N^+/N^-$ tra le due popolazioni, la stima è stata ottenuta tramite la seguente formula: 
 \begin{equation}
@@ -301,11 +317,10 @@ Per quanto riguarda il rapporto numerico $N^+/N^-$ tra le due popolazioni, la st
 dove $\Gamma_d$ e $\Gamma_c$ sono rispettivamente le larghezze parziali di decadimento e cattura per entrambe le popolazioni. 
 Si noti che nel nostro caso si è deciso di utilizzare la calibrazione del TAC per stabilire il punto di inizio dell'istogramma (che corrisponde al canale 150), mentre il primo canale dello spettro è in corrispondenza del canale 168; di conseguenza, si è traslato l'istogramma di 150 canali, notando che i 18  rimanenti corrispondono a un intervallo di circa 100 ns in cui l'apparato è cieco.
 Lavorando in canali, la procedura di fit attuata su uno spettro che non cominci dal canale corrispondente a un ritardo nullo avrebbe richiesto l'aggiunta, nella formula sperimentale \ref{eq:R}, di un fattore
-\[e^{t^*\left(\frac{1}{\tau^+}-\frac{1}{\tau^-}\right)}\;,\]
+\[\exp\left[t^*\left(\frac{1}{\tau^+}-\frac{1}{\tau^-}\right)\right]\ ,\]
 con $t^*$ relativo  al canale corrispondente a un ritardo nullo.
 
 Dopo questa operazione lo spettro presenta dati dal canale 18 al canale 3903, intervallo in cui è stato applicato l'algoritmo di fit. 
-
 %
 \begin{figure}[h!]
 \centering
@@ -317,6 +332,7 @@ Dopo questa operazione lo spettro presenta dati dal canale 18 al canale 3903, in
 \label{fig::histo}
 \end{figure}
 %
+
 In figura~\ref{fig::histo} viene riportato il grafico degli eventi raccolti, dove l'istogramma ha un numero di \emph{bin} ridotto di un fattore 12 rispetto a quello originale per ridurre le fluttuazioni statistiche in maniera ottimale. I risultati derivanti da questa analisi sono riportati in tabella~\ref{results}.
 %
 \begin{table}[H]
@@ -330,7 +346,7 @@ In figura~\ref{fig::histo} viene riportato il grafico degli eventi raccolti, dov
 		$N^+/N^-$	& $1.5 \pm 0.1$ 	& $1.261 \pm 0.009$ 		& 2.38	\\
 		\bottomrule
 	\end{tabular}
-	\caption{Risultati dell'analisi preliminare. Valore di $R$ da \cite{R}.}
+	\caption{Risultati dell'analisi preliminare. Valore atteso di $R$ da \cite{R}.}
 	\label{results}
 \end{table}
 %
@@ -350,10 +366,10 @@ In figura~\ref{fig::histo} viene riportato il grafico degli eventi raccolti, dov
 %\end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \cleardoublepage
-\section{Simulazione Monte Carlo e analisi dati}
+\section{Simulazioni Monte Carlo}
 Lo scopo di questa fase dell'esperimento consiste nella ricerca e messa a punto di un metodo sperimentale di analisi degli spettri raccolti. Il lavoro si suddivide in due passaggi:
 \begin{enumerate}
- \item sviluppare un codice di simulazione Monte Carlo in ambiente ROOT nel quale si simulano molti spettri di decadimento dei muoni cosmici in un intervallo utile di circa 3900 canali, in accordo con quelli acquisiti. Gli istogrammi simulati vengono quindi utilizzati per studiare diversi metodi di fit per l'estrazione dei parametri fisici;
+ \item sviluppare un codice di simulazione Monte Carlo in ambiente ROOT \cite{root} nel quale si simulano molti spettri di decadimento dei muoni cosmici in un intervallo utile di circa 3900 canali, in accordo con quelli acquisiti. Gli istogrammi simulati vengono quindi utilizzati per studiare diversi metodi di fit per l'estrazione dei parametri fisici;
  \item utilizzare il metodo di fit stabilito nel passaggio precedente per estrarre $\tau^+$, $\tau^-$ e $R=N^+/N^-$ dagli spettri raccolti.
 \end{enumerate}
 %
@@ -365,7 +381,7 @@ La prima versione del metodo Monte Carlo prevede la simulazione di spettri costi
  \item metodo della \textit{maximum likelihood} utilizzando la funzione \lstinline{pol0} \newline (\lstinline{TH1::Fit("pol0","L")}).
 \end{enumerate}
 
-In figura~\ref{fig::baseline_500} è riportato un esempio delle distribuzioni dei valori e degli errori derivanti da simulazioni multiple, stimati con i tre metodi. La linea rossa verticale nei grafici indica il valore vero della \textit{baseline}, ossia quello con cui sono stati simulati gli spettri, e perciò la stima che dovrebbe essere restituita dall'analisi. Come si può notare, la distribuzione dei valori estratta con fit \lstinline{pol0} con il metodo del $\chi^2$ non è centrata attorno al valore atteso: in questo caso, infatti, la \textit{baseline} è sistematicamente sottostimata, poichè il metodo dei minimi quadrati non funziona correttamente per il fit di un istogramma con \emph{bin} a bassa statistica. Inoltre, il fit di una \lstinline{pol0} con il metodo del $\chi^2$ corrisponde esattamente ad una media pesata, nella quale i \emph{bin} con statistica minore hanno un peso maggiore, con conseguenti valori sottostimati della \textit{baseline}\footnote{Media pesata e relativo errore:
+In figura \ref{fig::baseline_500} è riportato un esempio delle distribuzioni dei valori e degli errori derivanti da simulazioni multiple, stimati con i tre metodi. La linea verde verticale nei grafici indica il valore vero della \textit{baseline}, ossia quello con cui sono stati simulati gli spettri, e perciò la stima che dovrebbe essere restituita dall'analisi. Come si può notare, la distribuzione dei valori estratta con fit \lstinline{pol0} con il metodo del $\chi^2$ non è centrata attorno al valore atteso: in questo caso, infatti, la \textit{baseline} è sistematicamente sottostimata, poichè il metodo dei minimi quadrati non funziona correttamente per il fit di un istogramma con \emph{bin} a bassa statistica aventi come errore la radice del contenuto. Inoltre, il fit di una \lstinline{pol0} con il metodo del $\chi^2$ corrisponde esattamente ad una media pesata, nella quale i \emph{bin} con statistica minore hanno un peso maggiore, con conseguenti valori sottostimati della \textit{baseline}\footnote{Media pesata e relativo errore:
 $$\bar{b}=\frac{\sum_{i=1}^N b_i/\sigma_i^2}{\sum_{i=1}^N 1/\sigma_i^2};
 \hspace{1cm} \sigma_{\bar{b}}=\frac{1}{\sum_{i=1}^N1/\sigma_i^2}$$}. In virtù di queste considerazioni, il metodo di fit del $\chi^2$ è stato scartato. 
 
@@ -405,8 +421,8 @@ Il metodo Monte Carlo prevede ora di studiare una distribuzione contenente un te
 \end{equation}
 La distribuzione esponenziale relativa ai $\mu^-$ viene generata con \lstinline{TRandom3::Exp} separatamente da quella dell'esponenziale dei $\mu^+$ e della \textit{baseline}, sommando infine le distribuzioni in un unico istogramma, come nel paragrafo \S\ref{bexp}. 
 
-L'adozione del metodo 2 descritto in precedenza prevede uno studio accurato del canale (i.e. del ritardo temporale) dal quale cominciare il fit della funzione $A_+e^{-\frac{t}{\tau^+}}+b$. 
-\begin{figure}[h]
+L'adozione del metodo 2 descritto in precedenza prevede uno studio accurato del canale (quindi del ritardo temporale) dal quale cominciare il fit della funzione $A_+e^{-\frac{t}{\tau^+}}+b$. 
+\begin{figure}[b!]
   \centerline{\includestandalone[width=\linewidth+1cm]{img/fitbegin_5week_100sim}}
   \caption{Studio della stima di $\tau_+$ al variare del punto di inizio del fit $A_+e^{-\frac{t}{\tau^+}}+b$. La linea rossa rappresenta il valore vero impostato nella simulazione. Le barre d'errore rappresentano la deviazione standard del campione di 100 simulazioni utilizzate. I dati utilizzati nella generazione corrispondono a 5 settimane di acquisizione.}
   \label{fig::tauplusstart}
@@ -415,9 +431,9 @@ Come riportato in figura~\ref{fig::tauplusstart}, questo fit produce un valore d
 
 Il metodo di fit messo a punto prevede i seguenti passaggi:
 \begin{enumerate}
- \item fit di tipo \lstinline{pol0} della coda dello spettro con estrazione del valore preliminare $B$ per la \textit{baseline};
+ \item fit di tipo \lstinline{pol0} della coda dello spettro con estrazione del valore preliminare (denotato $B$) per la \textit{baseline};
  \item definizione della funzione corrispondente alla formula~\ref{eq::exp_plus_base}, inizializzazione del parametro $b$ al valore $B$ derivante dal fit del punto precedente (\lstinline{TF1::SetParameter("b",B)}) e realizzazione del fit dell'istogramma a partire da un ritardo di $5\tau^-$ (in questo modo si ottengono le stime intermedie $\widetilde{\tau}$  e $\widetilde{B}$ per i parametri $\tau^+$ e $b$, rispettivamente);
- \item definizione della funzione complessiva di fit corrispondente alla formula~\ref{eq::funzione_fit_finale},inizializzazione dei parametri $\tau^+$ e $b$ ai valori  $\widetilde{\tau}$ e $\widetilde{B}$ e, infine, fit dell'istogramma, con estrazione dei valori definitivi dei parametri. 
+ \item definizione della funzione complessiva di fit corrispondente alla formula~\ref{eq::funzione_fit_finale}, inizializzazione dei parametri $\tau^+$ e $b$ ai valori  $\widetilde{\tau}$ e $\widetilde{B}$ e, infine, fit dell'istogramma, con estrazione dei valori definitivi dei parametri. 
 %
 \end{enumerate}  
 Concludendo, la generazione degli spettri utilizza i parametri di \textit{input} $\{\tau^+,\tau^-,R,b,I\}$, dove $I$ è l'integrale della distribuzione. Questi parametri sono tra loro legati dalle seguenti relazioni:
@@ -432,14 +448,14 @@ dove
 \begin{itemize}
  \item $f(t) = \d N/\d t$ corrisponde alla formula~\ref{eq::funzione_fit_finale};
  \item $t_0$ corrisponde all'istante in cui inizia l'istogramma (per una discussione più completa riguardo a questo valore si rimanda al paragrafo \S\ref{analPrelim});
- \item $r$ è il range dell'istogramma (circa 4000 canali);
+ \item $r$ è l'intervallo di definizione dell'istogramma (circa 4000 canali);
  \item $I$ e $b$ sono vincolati, in quanto uno sguardo allo spettro reale suggerisce che una settimana di acquisizione corrisponde a circa 80000 eventi e a $b\sim1 $.
 \end{itemize}
 Di seguito viene riportato un esempio di spettro generato e analizzato come descritto.
 
 \begin{figure}[h]
  \centerline{\includestandalone[width=\linewidth+1cm]{img/example_single_spectrum}}
- \caption{Esempio di istogramma simulato con statistica associata a 5 settimane di acquisizione ($b\sim5$) con sovrapposta la funzione di fit corrispondente. I parametri di input $\tau^+$, $\tau^-$ e $R$ sono quelli della letteratura.}
+ \caption{Esempio di istogramma simulato con statistica associata a 5 settimane di acquisizione ($b\sim5$) con sovrapposta la funzione di fit corrispondente. I parametri di \textit{input} $\tau^+$, $\tau^-$ e $R$ sono quelli della letteratura.}
  \label{fig::esempio_spettro_simulato}
 \end{figure}
 %
@@ -450,10 +466,10 @@ In questa fase si intende testare il metodo su distribuzioni simulate con divers
 \newpage La strategia adottata si sviluppa in due fasi:
 \begin{enumerate}
  \item fissato un insieme di parametri di \textit{input}, si generano 500 spettri di cui viene in seguito effettuato il fit con il metodo precedentemente descritto. Le stime dei parametri fornite dal fit e i relativi errori vengono immagazzinati all'interno di nuovi istogrammi; ci si aspetta che questi siano centrati attorno al valore del parametro inserito in \textit{input} alla simulazione. Tali istogrammi vengono riempiti esclusivamente dai fit che restituiscono stime dei parametri soddisfacenti le seguenti condizioni di qualità:
- \begin{enumerate}
+ \begin{itemize}
   \item errore relativo inferiore al $20\%$;
   \item compatibilità con il valore atteso entro le $3\sigma$. 
- \end{enumerate}
+ \end{itemize}
  Se le stime del fit di uno spettro non soddisfano almeno una di queste condizioni per almeno uno dei parametri $\tau^+$, $\tau^-$ e $R$, nessuno degli istogrammi viene riempito per quella particolare simulazione; si riporta un esempio in figura \ref{fig::esempio_set_simulazioni}.
 %
 \begin{figure}[b!]
@@ -464,28 +480,28 @@ In questa fase si intende testare il metodo su distribuzioni simulate con divers
  \end{figure}
  
  \item Si ripete la procedura del punto precedente con campioni di 500 simulazioni ottenuti con parametri di \textit{input} di volta in volta diversi. Ogni campione contribuisce all'efficienza complessiva sulla base delle stime di $\tau^+$, $\tau^-$ e $R$ corrispondenti ai centroidi delle distribuzioni dei valori, ai quali, come incertezza, si assegna il centroide $\sigma$ della rispettiva distribuzione degli errori. In particolare, le condizioni di qualità che devono essere soddisfatte sono:  
- \begin{enumerate}
+ \begin{itemize}
   \item errore relativo inferiore al $20\%$;
   \item compatibilità con il valore atteso entro le $3\sigma$;
   \item modulo della differenza tra la dispersione ($\bar{\sigma}$) della distribuzione dei parametri e centroide della distribuzione degli errori inferiore del minore dei due. Questo tipo di condizione permette di controllare la presenza di eventuali errori sistematici qualora $\bar{\sigma}$ fosse ordini di grandezza maggiore rispetto al centroide $\sigma$ della distribuzione degli errori.  
- \end{enumerate}
+ \end{itemize}
 Qualora almeno una di queste condizioni non sia soddisfatta per almeno uno dei parametri $\tau^+$, $\tau^-$ e $R$ il campione viene rigettato. In caso contrario, si considera valido. 
 \end{enumerate}
-Si è deciso di applicare la procedura descritta facendo variare i valori di \textit{input} dei parametri $\tau^+$, $\tau^-$ e $R$ del $40\%$ attorno al valore fisico, considerando statistiche corrispondenti a 1, 3, 5 settimane di acquisizione, per un totale di $3^4=81$ campioni rispetto ai quali calcolare l'efficienza. In virtù di questi \textit{test}, si è prodotto il seguente grafico:
+Si è deciso di applicare la procedura descritta facendo variare i valori di \textit{input} dei parametri $\tau^+$, $\tau^-$ e $R$ del $40\%$ attorno al valore fisico, considerando statistiche corrispondenti a 1, 3, 5 settimane di acquisizione, per un totale di $3^4=81$ campioni rispetto ai quali calcolare l'efficienza; in virtù di questi \textit{test}, si è prodotto il grafico in figura \ref{fig:eff1}.
 %
-\begin{figure}[H]
+\begin{figure}[b!]
   \centering
   \includestandalone[width=\linewidth]{img/matrix_eff40}
   \caption{Efficienza del metodo per una variazione dei parametri del $40\%$ rispetto al valore fisico; si noti che ciò che più spesso fallisce è la stima di $R$.}
-  \label{fig:finale}
+  \label{fig:eff1}
 \end{figure}
 %
 Prestando ulteriore attenzione, si sono osservate alcune criticità:
 \begin{itemize}
- \item nel caso di campioni generati con valori di $\tau^+$ e $\tau^-$ ravvicinati, distanti circa $0.8 \ \mu s - 0.9 \ \mu s$, il metodo di fit fallisce, non riuscendo ad andare a convergenza. Questo problema riguarda comunque campioni di dati relativi a spettri troppo diversi da quelli raccolti (i muoni ``lunghi'' e ``corti'' non sono più tali);
+ \item nel caso di campioni generati con valori di $\tau^+$ e $\tau^-$ ravvicinati, distanti circa $0.8 \ \mu s - 0.9 \ \mu s$, il metodo di fit fallisce, non riuscendo ad andare a convergenza. Questo problema riguarda comunque campioni di dati relativi a spettri troppo diversi da quelli raccolti (le vite medie ``lunghe'' e ``corte'' non sono più tali);
  \item il parametro $R$ è quello più difficile da stimare correttamente, risultando determinante per rigettare alcuni campioni per i quali le stime di $\tau^+$ e $\tau^-$ sono comunque valide.  
 \end{itemize}
-Per evidenziare queste criticità, sono stati variati i parametri in intervalli sempre più estesi (dal $10\%$ al $50\%$), producendo il grafico in figura \ref{fig:finalematrix}: appare evidente come l'efficienza peggiori aumentando il range di variazione, avallando l'ipotesi secondo la quale una efficienza non ottimale sia da ricondursi a parametri troppo distanti dai valori veri (e, per i $\tau$, troppo vicini tra loro) più che a difetti del codice. Rimane comunque evidente come $R$ sia il parametro più problematico: ogni tentativo di miglioramento del metodo, come per esempio l'affinamento della scelta dei parametri da impostare con \lstinline{SetParameter} e l'impostazione di parametri aggiuntivi quali $A_+$ e $A_-$ nei fit preliminari, non è tuttavia riuscito a innalzare l'efficienza.
+Per evidenziare queste criticità, sono stati variati i parametri in intervalli sempre più estesi (dal $10\%$ al $50\%$), producendo il grafico in figura \ref{fig:finalematrix}: appare evidente come l'efficienza peggiori aumentando il range di variazione, avallando l'ipotesi secondo la quale una efficienza non ottimale sia da ricondursi a parametri troppo distanti dai valori veri (e, per i $\tau$, troppo vicini tra loro) più che a difetti del codice. Rimane comunque evidente come $R$ sia il parametro più problematico: ogni tentativo di miglioramento del metodo, come per esempio l'affinamento della scelta dei parametri da impostare con \lstinline{TF1::SetParameter} e l'impostazione di parametri aggiuntivi quali $A_+$ e $A_-$ nei fit preliminari, non è tuttavia riuscito a innalzare l'efficienza.
 %
 \begin{figure}[H]
   \centering
@@ -506,12 +522,12 @@ In conclusione, si può tranquillamente assumere l'operazione di \textit{rebinni
 \section{Analisi dello spettro reale} \label{analisireale}
 Il campione di dati corrisponde agli eventi raccolti in 33 giorni di acquisizione, per un totale di 375241 eventi (frequenza $\sim0.13$ Hz). I risultati sono presentati in tabella \ref{risultatiFinali} e in figura~\ref{fig:finale}.
 
-L'ultimo punto lasciato in sospeso è la questione, menzionata in \S\ref{tac}, dell'eccesso di eventi registrato con le coincidenze artificiali nel range $[2200,2700]$ canali; nell'istogramma finale non si nota alcuna sovrabbondanza di eventi nel suddetto range. In ogni caso, sono stati tentati due approcci per tenerne conto nell'analisi dati:
+L'ultimo punto lasciato in sospeso è la questione, menzionata in \S\ref{tac}, dell'eccesso di eventi registrato con le coincidenze artificiali nell'intervallo $[2200,2700]$ canali; nell'istogramma finale non si nota alcuna sovrabbondanza di eventi nel suddetto intervallo. In ogni caso, sono stati tentati due approcci per tenerne conto nell'analisi dati:
 \begin{enumerate}
   \item \textbf{esclusione dal fit,} ovvero si è costruita una funzione di fit alternativa definita a tratti tramite \lstinline{TF1::RejectPoint}, che esclude i punti dal calcolo della \textit{likelihood};
   \item \textbf{errori incrementati,} ovvero si è provato a attribuire errori maggiori ai punti nell'intervallo, ad esempio il doppio rispetto all'errore poissoniano standard.
 \end{enumerate}
-Nessuno dei due metodi ha portato a un miglioramento significativo dei risultati finali.
+Nessuno dei due metodi ha portato a differenze osservabili nei risultati finali.
 %
 \begin{table}[H]
 	\centering
@@ -562,5 +578,9 @@ A. Grossheim \emph{et al.}, \emph{Decay of negative muons bound in $^{27}$Al}, P
 %
 \bibitem{pb}
 T.~K. Gaisser, \emph{Spectrum of cosmic-ray nucleons, kaon production, and the atmospheric muon charge ratio}, Astropart.~Phys., \textbf{35}, 801-806 (2012).
+%
+\bibitem{root}
+R.~Brun and F.~Rademakers, \emph{ROOT - An Object Oriented Data Analysis Framework, Nucl.~Inst.~Meth.} A 389 (1997) 81.
+%
 \end{thebibliography}
 \end{document}
