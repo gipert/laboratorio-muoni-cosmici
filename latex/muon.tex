@@ -68,7 +68,10 @@ stringstyle=\color{orange}}				% Colori delle righe di codice
 \begin{titlepage}
 \thispagestyle{empty}
   \begin{center}
-    \includegraphics[width=4cm]{img/logo.pdf} \\
+    \includegraphics[width=3.5cm]{img/logo.pdf}%
+    %\hspace{0.5cm}%
+    %\includegraphics[width=3.5cm]{img/logodipneg.pdf}
+    \\
     \vspace{1cm}
     \Large{Relazione di Laboratorio Avanzato} \\
     \vspace{0.2cm}
@@ -79,7 +82,8 @@ stringstyle=\color{orange}}				% Colori delle righe di codice
      Luigi Pertoldi\footnote{[1128283] \texttt{luigi.pertoldi@studenti.unipd.it}}, 
      Davide Piras\footnote{[1114287] \texttt{davide.piras@studenti.unipd.it}} \\
     \vspace{1.8cm}
-    \textsl{Dipartimento di Fisica ``Galileo Galilei''} \\
+    \textsl{Università degli Studi di Padova} \\
+    \textsl{Dipartimento di Fisica e Astronomia ``Galileo Galilei''} \\
     26 gennaio 2017
 %
     \vspace{1cm}
@@ -414,7 +418,7 @@ L'adozione del secondo metodo richiede la scelta del canale (valore di ritardo t
   \caption{Studio della ricostruzione della \textit{baseline} $b$ al variare del punto di inizio del fit di tipo \texttt{pol0}: in alto i valori ottenuti (la linea rossa rappresenta il valore vero) e in basso i rispettivi errori. Le barre di errore rappresentano la deviazione standard del campione di 100 simulazioni. I dati utilizzati nella generazione corrispondono a 1 settimana di acquisizione.}\label{baselinestart}
 \end{figure}
 %
-\subsection{Simulazione del fondo e di entrambi gli esponenziali}
+\subsection{Simulazione del fondo e di entrambi gli esponenziali}\label{bexpexp}
 Il metodo Monte Carlo prevede ora di studiare una distribuzione contenente un termine costante di \textit{baseline} e due esponenziali:
 \begin{equation}
  f(t;A_+,\tau^+,A_-,\tau^-, b)=A_-e^{-\frac{t}{\tau^-}}+A_+e^{-\frac{t}{\tau^+}}+b\ .
@@ -530,7 +534,14 @@ L'ultimo punto lasciato in sospeso è la questione, menzionata nel \S\ref{tac}, 
 \end{enumerate}
 Nessuno dei due metodi ha portato a differenze osservabili nei risultati finali.
 %
-\begin{table}[H]
+\section{Discussione dei risultati}
+
+La tabella~\ref{risultatiFinali} mostra come, a fronte di un'ottima compatibilità per i valori dei $\tau$ rispetto a quelli attesi, $R$ risulti notevolmente sovrastimato: avendo già escluso che ciò possa essere in qualche modo influenzato dallo spettro raccolto (o dal metodo di fit), è stato effettuato un tentativo di analisi dell'energia delle particelle incidenti.
+
+Infatti, $R$ dipende dall'energia dei muoni incidenti \cite{pb}, ed è possibile inferire che per arrivare ad avere un valore attorno a 1.6, compatibile con quello ottenuto in tabella~\ref{risultatiFinali}, $E_{\mu} \sim 10$ TeV: tuttavia, per frenare un muone di tale energia con del piombo \cite{pdg}, prendendo come densità $ \rho_{Pb} = 11.3 $ g/cm$^3$, servirebbero quasi 5 km di spessore, a fronte dei 20 cm presenti in laboratorio. Per questo motivo, si scarta anche questa ipotesi. %lasciando aperta l'unica possibilità che tale discrepanza dipenda dall'apparato di raccolta dati, come gli scintillatori
+%
+\newpage
+\begin{table}[h]
 	\centering
 	\begin{tabular}{cccc}
 		\toprule
@@ -545,19 +556,13 @@ Nessuno dei due metodi ha portato a differenze osservabili nei risultati finali.
 	\label{risultatiFinali}
 \end{table}
 %
-\begin{figure}[H]
+\begin{figure}[h]
  \centerline{%
   \includestandalone[width=\linewidth+1.2cm]{img/finaleres}}
-  \caption{In alto, il risultato del fit sullo spettro dei dati acquisiti; in basso, il grafico dei residui.}
+  \caption{In alto, il risultato del fit sullo spettro dei dati acquisiti; in basso, il grafico dei residui. I colori indicano i diversi intervalli di ritardo temporale corrispondenti ai passaggi del metodo di analisi adottato (come descritto nel \S\ref{bexpexp}).}
   \label{fig:finale}
 \end{figure}
 %
-\section{Discussione dei risultati}
-
-La tabella~\ref{risultatiFinali} mostra come, a fronte di un'ottima compatibilità per i valori dei $\tau$ rispetto a quelli attesi, $R$ risulti notevolmente sovrastimato: avendo già escluso che ciò possa essere in qualche modo influenzato dallo spettro raccolto (o dal metodo di fit), è stato effettuato un tentativo di analisi dell'energia delle particelle incidenti.
-
-Infatti, $R$ dipende dall'energia dei muoni incidenti \cite{pb}, ed è possibile inferire che per arrivare ad avere un valore attorno a 1.6, compatibile con quello ottenuto in tabella~\ref{risultatiFinali}, $E_{\mu} \sim 10$ TeV: tuttavia, per frenare un muone di tale energia con del piombo \cite{pdg}, prendendo come densità $ \rho_{Pb} = 11.3 $ g/cm$^3$, servirebbero quasi 5 km di spessore, a fronte dei 20 cm presenti in laboratorio. Per questo motivo, si scarta anche questa ipotesi. %lasciando aperta l'unica possibilità che tale discrepanza dipenda dall'apparato di raccolta dati, come gli scintillatori
-
 \appendix
 %\setcounter{secnumdepth}{0}
 \include{analApp}
