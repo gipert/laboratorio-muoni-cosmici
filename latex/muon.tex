@@ -325,21 +325,11 @@ Lavorando in canali, la procedura di fit attuata su uno spettro che non cominci 
 con $t^*$ relativo  al canale corrispondente a un ritardo nullo.
 
 Dopo questa operazione lo spettro presenta dati dal canale 18 al canale 3903, intervallo in cui è stato applicato l'algoritmo di fit. 
-%
-\begin{figure}[h!]
-\centering
-\subfloat[][{Eventi raccolti.}]
-{\includegraphics[width=1\textwidth]{img/Spettro_rebin12.pdf}} \\
-\subfloat[][{Istogrammi sovrapposti}.]
-{\includegraphics[width=1\textwidth]{img/histo_sovrapposti.pdf}} \\
-\caption{Istogrammi dei dati raccolti e analizzati secondo quanto spiegato precedentemente, con un coefficiente di \emph{rebin} 12.}
-\label{fig::histo}
-\end{figure}
-%
 
 In figura~\ref{fig::histo} viene riportato il grafico degli eventi raccolti, dove l'istogramma ha un numero di \emph{bin} diviso per un fattore 12 rispetto a quello originale per ridurre le fluttuazioni statistiche in maniera ottimale; i risultati derivanti da questa analisi sono riportati in tabella~\ref{results}.
 %
-\begin{table}[H]
+\newpage
+\begin{table}[p]
 	\centering
 	\begin{tabular}{cccc}
 		\toprule
@@ -354,20 +344,16 @@ In figura~\ref{fig::histo} viene riportato il grafico degli eventi raccolti, dov
 	\label{results}
 \end{table}
 %
-%\begin{table}[h!]
-%	\centering
-%	\begin{tabular}{ccccc}
-%		\toprule
-%		& Misura [$\mu$s]	&	Valore atteso [$\mu$s]	 & Compatibilità & Differenza [$\mu$s]	\\	
-%		\midrule
-%		$\tau^+$	&	$2.20\pm 0.05$ & $2.1969811 \pm 0.0000022$ & 0.16 & 0.0072134	\\
-%		$\tau^-$	&	$0.870\pm 0.007$ & $0.88 \pm 0.01$ & 0.80 & 0.01	\\
-%		$N^+/N^-$	&	$1.5 \pm 0.1$ & $1.261 \pm 0.009$ & 1.95 & 0.20	\\
-%		\bottomrule
-%	\end{tabular}
-%	\caption{Risultati dei fit (rebin 12).}
-%	\label{results}
-%\end{table}
+\begin{figure}[p]
+\centering
+\subfloat[][{Eventi raccolti.}]
+{\includegraphics[width=\textwidth]{img/Spettro_rebin12.pdf}} \\
+\subfloat[][{Istogrammi sovrapposti}.]
+{\includegraphics[width=\textwidth-1.5cm]{img/histo_sovrapposti.pdf}} \\
+\caption{Istogrammi dei dati raccolti e analizzati secondo quanto spiegato precedentemente, con un coefficiente di \emph{rebin} 12.}
+\label{fig::histo}
+\end{figure}
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \cleardoublepage
 \section{Simulazioni Monte Carlo}
@@ -427,11 +413,13 @@ Il metodo Monte Carlo prevede ora di studiare una distribuzione contenente un te
 La distribuzione esponenziale relativa ai $\mu^-$ viene generata con \lstinline{TRandom3::Exp} separatamente da quella dell'esponenziale dei $\mu^+$ e della \textit{baseline}, sommando infine le distribuzioni in un unico istogramma, come nel \S\ref{bexp}. 
 
 L'adozione del metodo 2 descritto in precedenza prevede uno studio accurato del canale (quindi del ritardo temporale) dal quale cominciare il fit della funzione $A_+e^{-\frac{t}{\tau^+}}+b$. 
+%
 \begin{figure}[b!]
   \centerline{\includestandalone[width=\linewidth+1cm]{img/fitbegin_5week_100sim}}
   \caption{Studio della stima di $\tau_+$ al variare del punto di inizio del fit $A_+e^{-\frac{t}{\tau^+}}+b$. La linea rossa rappresenta il valore vero impostato nella simulazione. Le barre d'errore rappresentano la deviazione standard del campione di 100 simulazioni utilizzate. I dati utilizzati nella generazione corrispondono a 5 settimane di acquisizione.}
   \label{fig::tauplusstart}
 \end{figure}
+%
 Come riportato in figura~\ref{fig::tauplusstart}, questo fit produce un valore di $\tau^+$ che è sempre sottostimato rispetto al valore vero: tuttavia, dato che si è verificato come la scelta di questo estremo non influenzi il fit successivo (comprendente anche il secondo esponenziale), si è scelto un valore in canali corrispondente a $5\tau^-\sim4.4\ \mu$s, dopo il quale la popolazione di $\mu^-$ è pressochè assente.
 
 Il metodo di fit messo a punto prevede i seguenti passaggi:
@@ -541,7 +529,7 @@ La tabella~\ref{risultatiFinali} mostra come, a fronte di un'ottima compatibilit
 Infatti, $R$ dipende dall'energia dei muoni incidenti \cite{pb}, ed è possibile inferire che per arrivare ad avere un valore attorno a 1.6, compatibile con quello ottenuto in tabella~\ref{risultatiFinali}, $E_{\mu} \sim 10$ TeV: tuttavia, per frenare un muone di tale energia con del piombo \cite{pdg}, prendendo come densità $ \rho_{Pb} = 11.3 $ g/cm$^3$, servirebbero quasi 5 km di spessore, a fronte dei 20 cm presenti in laboratorio. Per questo motivo, si scarta anche questa ipotesi. %lasciando aperta l'unica possibilità che tale discrepanza dipenda dall'apparato di raccolta dati, come gli scintillatori
 %
 \newpage
-\begin{table}[h]
+\begin{table}[p]
 	\centering
 	\begin{tabular}{cccc}
 		\toprule
@@ -556,9 +544,9 @@ Infatti, $R$ dipende dall'energia dei muoni incidenti \cite{pb}, ed è possibile
 	\label{risultatiFinali}
 \end{table}
 %
-\begin{figure}[h]
+\begin{figure}[p]
  \centerline{%
-  \includestandalone[width=\linewidth+1.2cm]{img/finaleres}}
+  \includestandalone[width=\linewidth+1.2cm,keepaspectratio]{img/finaleres}}
   \caption{In alto, il risultato del fit sullo spettro dei dati acquisiti; in basso, il grafico dei residui. I colori indicano i diversi intervalli di ritardo temporale corrispondenti ai passaggi del metodo di analisi adottato (come descritto nel \S\ref{bexpexp}).}
   \label{fig:finale}
 \end{figure}
