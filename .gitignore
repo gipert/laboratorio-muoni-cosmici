@@ -1,7 +1,6 @@
 *.swp
-.DS_store
+*.DS_store
 log
-latex/muon.pdf
 *.aux
 *.toc
 *.lof
@@ -31,3 +30,4 @@ code/analysis/spectrumFit_cal.pdf
 code/montecarlo/semestre2/conf.txt
 latex/img/*.aux
 latex/img/*.log
+Foto_Pb/
